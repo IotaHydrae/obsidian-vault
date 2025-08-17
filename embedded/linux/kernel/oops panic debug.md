@@ -112,6 +112,34 @@ The above is the call trace — the list of functions being called just before t
 
 The `Code` is a hex-dump of the section of machine code that was being run at the time the Oops occurred.
 
+## Debugging an Oops dump
+
+The first step is to load the offending module into the GDB debugger, as follows:
+
+|   |
+|---|
+|`[root@DELL-RnD-India oops]# gdb oops.ko`<br><br>`GNU gdb (GDB) Fedora (7.1-18.fc13)`<br><br>`Reading symbols from /code/oops/oops.ko...done.`<br><br>`(gdb) add-symbol-file oops.o 0xffffffffa03e1000`<br><br>`add symbol table from file "oops.o" at`<br><br>    `.text_addr = 0xffffffffa03e1000`|
+
+Next, add the symbol file to the debugger. The `add-symbol-file` command’s first argument is `oops.o` and the second argument is the address of the text section of the module. You can obtain this address from `/sys/module/oops/sections/.init.text` (where `oops` is the module name):
+
+|   |
+|---|
+|`(gdb) add-symbol-file oops.o 0xffffffffa03e1000`<br><br>`add symbol table from file "oops.o" at`<br><br>    `.text_addr = 0xffffffffa03e1000`<br><br>`(y or n) y`<br><br>`Reading symbols from /code/oops/oops.o...done.`|
+
+From the `RIP` instruction line, we can get the name of the offending function, and disassemble it.
+
+|   |
+|---|
+|`(gdb) disassemble my_oops_init`<br><br>`Dump of assembler code for function my_oops_init:`<br><br>   `0x0000000000000038 <+0>:    push   %rbp`<br><br>   `0x0000000000000039 <+1>:    mov    $0x0,%rdi`<br><br>   `0x0000000000000040 <+8>:    xor    %eax,%eax`<br><br>   `0x0000000000000042 <+10>:    mov    %rsp,%rbp`<br><br>   `0x0000000000000045 <+13>:    callq  0x4a <my_oops_init+18>`<br><br>   `0x000000000000004a <+18>:    movl   $0x0,0x0`<br><br>   `0x0000000000000055 <+29>:    xor    %eax,%eax`<br><br>   `0x0000000000000057 <+31>:    leaveq`<br><br>   `0x0000000000000058 <+32>:    retq`<br><br>`End of assembler dump.`|
+
+Now, to pin point the actual line of offending code, we add the starting address and the offset. The offset is available in the same `RIP` instruction line. In our case, we are adding `0x0000000000000038 + 0x012 =  0x000000000000004a`. This points to the `movl` instruction.
+
+|   |
+|---|
+|`(gdb) list *0x000000000000004a`<br><br>`0x4a is in my_oops_init (/code/oops/oops.c:6).`<br><br>`1    #include <linux/kernel.h>`<br><br>`2    #include <linux/module.h>`<br><br>`3    #include <linux/init.h>`<br><br>`4`    <br><br>`5    static void create_oops() {`<br><br>`6        *(int *)0 = 0;`<br><br>`7    }`|
+
+This gives the code of the offending function.
+
 ### References
 
-https://www.opensourceforu.com/2011/01/understanding-a-kernel-oops/
+The [kerneloops.org](http://www.kerneloops.org/) website can be used to pick up a lot of Oops messages to debug. The Linux kernel documentation directory has information about Oops — `kernel/Documentation/oops-tracing.txt`. This, and numerous other online resources, were used while creating this article.
