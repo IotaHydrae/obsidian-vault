@@ -1,1 +1,1 @@
-**tinydrm** drivers use drm simple pipe 
+**tinydrm** drivers use drm simple pipe driver
