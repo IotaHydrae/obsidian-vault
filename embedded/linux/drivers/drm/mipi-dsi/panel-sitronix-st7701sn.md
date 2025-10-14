@@ -9,7 +9,7 @@
 Differences between ST7701 and ST7701SN:
 - Low power consumption
 
-mipi-dsi 2-lane mode
+
 
 ### Example MIPI DSI panel dts overlay
 
@@ -74,7 +74,7 @@ and you will see something like this in `dmesg`
 [  320.127504] /panel_dsi@0: Fixed dependency cycle(s) with /soc/dsi@7e700000
 ```
 
-also if you want that change be saved by adding this to your `config.txt`
+also if you want the change to be saved, add this to your `config.txt`
 
 ```
 dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80
