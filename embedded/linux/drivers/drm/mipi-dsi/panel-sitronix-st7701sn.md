@@ -64,7 +64,7 @@ sudo cp vc4-kms-dsi-boe-zv039wvq-n80.dtbo /boot/firmware/overlays/
 sudo dtoverlay vc4-kms-dsi-boe-zv039wvq-n80
 ```
 
-and you will see someting like this in `dmesg`
+and you will see something like this in `dmesg`
 
 ```
 [  320.126427] OF: overlay: WARNING: memory leak will occur if overlay removed, property: /soc/dsi@7e700000/status     
@@ -75,6 +75,8 @@ and you will see someting like this in `dmesg`
 ```
 
 ### Some details that may be helpful
+
+some related DTS nodes from `bcm283x.dtsi`
 
 ```
 i2c0: i2c@7e205000 {
