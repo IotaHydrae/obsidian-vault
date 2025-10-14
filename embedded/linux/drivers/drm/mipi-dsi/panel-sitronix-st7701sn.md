@@ -9,7 +9,7 @@
 Differences between ST7701 and ST7701SN:
 - Low power consumption
 
-
+First, you need to draw a PCB board to convert the panel interface(usually FPC cable) to the DSI interface on the Raspberry  Pi. In addition
 
 ### Example MIPI DSI panel dts overlay
 
