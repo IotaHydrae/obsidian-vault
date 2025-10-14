@@ -11,35 +11,49 @@ Differences between ST7701 and ST7701SN:
 
 mipi-dsi 2-lane mode
 
-```
-i2c0: i2c@7e205000 {
-	compatible = "brcm,bcm2835-i2c";
-	reg = <0x7e205000 0x200>;
-	interrupts = <2 21>;
-	clocks = <&clocks BCM2835_CLOCK_VPU>;
-	#address-cells = <1>;
-	#size-cells = <0>;
-	status = "disabled";
-};
+### Example MIPI DSI panel dts overlay
 
-dsi1: dsi@7e700000 {
-	compatible = "brcm,bcm2835-dsi1";
-	reg = <0x7e700000 0x8c>;
-	interrupts = <2 12>;
-	#address-cells = <1>;
-	#size-cells = <0>;
-	#clock-cells = <1>;
+```c
+/dts-v1/;
+/plugin/;
 
-	clocks = <&clocks BCM2835_PLLD_DSI1>,
-		 <&clocks BCM2835_CLOCK_DSI1E>,
-		 <&clocks BCM2835_CLOCK_DSI1P>;
-	clock-names = "phy", "escape", "pixel";
+/ {
+	compatible = "brcm,bcm2835";
 
-	clock-output-names = "dsi1_byte",
-				 "dsi1_ddr2",
-				 "dsi1_ddr";
+	fragment@0 {
+		target = <&dsi1>;
+		__overlay__ {
+			#address-cells = <1>;
+			#size-cells = <0>;
+			status = "okay";
+			port {
+				dsi_out: endpoint {
+					remote-endpoint = <&panel_in>;
+				};
+			};
 
-	status = "disabled";
+
+		};
+	};
+
+	fragment@1 {
+		target-path = "/";
+		__overlay__ {
+			panel: panel_dsi@0 {
+				reg = <0>;
+				compatible = "goldenmorning,t397b5-c24-02";
+				// backlight = <&backlight>;
+				reset-gpios = <&gpio 1 0>;  // SCL0 - I2C0_CSI_DSI
+
+				port {
+					panel_in: endpoint {
+						data-lanes = <2>;
+						remote-endpoint = <&dsi_out>;
+					};
+				};
+			};
+		};
+	};
 };
 ```
 
