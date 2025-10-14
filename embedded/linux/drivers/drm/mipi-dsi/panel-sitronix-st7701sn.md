@@ -14,6 +14,8 @@ First, you need to design a PCB to convert the panel interface (usually an FPC c
 Here is an example interface adapter board
 
 ![[3D_T397B5-C24-02-V1-CM5-IO-Adapter-Board_2025-10-14.png]]
+
+
 ### Example MIPI DSI panel dts overlay
 
 ```c
