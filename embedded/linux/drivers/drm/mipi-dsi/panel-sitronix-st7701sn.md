@@ -74,9 +74,14 @@ and you will see something like this in `dmesg`
 [  320.127504] /panel_dsi@0: Fixed dependency cycle(s) with /soc/dsi@7e700000
 ```
 
+also if you want that change be saved by adding this to your `config.txt`
+
+```
+dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80
+```
 ### Some details that may be helpful
 
-some related DTS nodes from `bcm283x.dtsi`
+Related DTS nodes from `bcm283x.dtsi`
 
 ```
 i2c0: i2c@7e205000 {
