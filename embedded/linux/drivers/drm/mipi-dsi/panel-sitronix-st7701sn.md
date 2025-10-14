@@ -12,6 +12,8 @@ Differences between ST7701 and ST7701SN:
 First, you need to design a PCB to convert the panel interface (usually an FPC cable) to the DSI interface on the Raspberry Pi. Additionally, the PCB must also provide power to the panel driver and backlight.
 
 Here is an example interface adapter board
+
+![[3D_T397B5-C24-02-V1-CM5-IO-Adapter-Board_2025-10-14.png]]
 ### Example MIPI DSI panel dts overlay
 
 ```c
