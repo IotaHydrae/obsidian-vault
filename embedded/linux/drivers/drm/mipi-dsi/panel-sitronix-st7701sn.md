@@ -15,6 +15,7 @@ Here is an example interface adapter board
 
 ![[3D_T397B5-C24-02-V1-CM5-IO-Adapter-Board_2025-10-14.png]]
 
+You can find the DSI interface on the Raspberry Pi as shown below:
 
 ### Example MIPI DSI panel dts overlay
 
