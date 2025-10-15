@@ -100,7 +100,7 @@ dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80
 ctx->panel.prepare_prev_first = true;
 ```
 
-
+![[WIN_20251016_04_11_52_Pro.jpg]]
 ### Some details that may be helpful
 
 Related DTS nodes from `bcm283x.dtsi`
