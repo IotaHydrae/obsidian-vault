@@ -88,7 +88,17 @@ dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80
 
 ### Some important settings of mipi dsi driver
 
-
+```c
+/**
+ * @prepare_prev_first:
+ *
+ * The previous controller should be prepared first, before the prepare
+ * for the panel is called. This is largely required for DSI panels
+ * where the DSI host controller should be initialised to LP-11 before
+ * the panel is powered up.
+ */
+ctx->panel.prepare_prev_first = true;
+```
 ### Some details that may be helpful
 
 Related DTS nodes from `bcm283x.dtsi`
