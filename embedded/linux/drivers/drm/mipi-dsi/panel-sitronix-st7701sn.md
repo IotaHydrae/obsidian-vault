@@ -85,6 +85,10 @@ also if you want the change to be saved, add this to your `config.txt`
 ```
 dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80
 ```
+
+### Some important settings of mipi dsi driver
+
+
 ### Some details that may be helpful
 
 Related DTS nodes from `bcm283x.dtsi`
