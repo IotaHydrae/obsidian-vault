@@ -8,4 +8,12 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 ## 2. 将公钥复制到树莓派
 
-### 2
+### 2.1 使用命令
+
+### 2.2 手动拷贝
+
+在你的windows机器上查看公钥内容，并复制
+
+```bash
+cat ~/.ssh/id_ed25519.pub
+```
