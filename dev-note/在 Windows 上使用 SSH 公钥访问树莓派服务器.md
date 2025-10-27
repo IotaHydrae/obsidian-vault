@@ -12,7 +12,7 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 ### 2.2 手动拷贝
 
-将你的 windows  机器上的公钥文件复制到树莓派上，这一步需要输入密码进行验证
+将你的 windows  机器上的公钥文件复制到树莓派上，这一步仍需输入密码进行验证
 
 ```bash
 scp ~/.ssh/id_ed25519.pub pi@192.168.50.100:~/
