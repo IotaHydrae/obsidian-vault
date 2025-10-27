@@ -12,8 +12,23 @@ ssh-keygen -t ed25519 -C "your_email@example.com"
 
 ### 2.2 手动拷贝
 
-在你的windows机器上查看公钥内容，并复制
+在你的windows机器上将公钥文件复制到树莓派上
 
 ```bash
-cat ~/.ssh/id_ed25519.pub
+scp ~/.ssh/id_ed25519.pub pi@192.168.50.100
+```
+
+登录到树莓派，执行如下命令
+
+```bash
+cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
+
+### 3. 修改 Windows 上的 ssh config文件
+```c
+Host 192.168.50.100
+  HostName 192.168.50.100
+  User pi
+  IdentityFile ~/.ssh/id_ed25519
 ```
