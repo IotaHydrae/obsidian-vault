@@ -36,3 +36,5 @@ Host 192.168.50.100
   User pi
   IdentityFile ~/.ssh/id_ed25519
 ```
+
+## 4. 验证 SSH 公钥连接
