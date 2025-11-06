@@ -219,3 +219,31 @@ view parameters:
 cat /sys/module/st7735r/parameters/brightness
 echo 100 | sudo tee /sys/module/st7735r/parameters/brightness
 ```
+
+### module_param_call
+
+```c
+static int brightness = 50;
+
+static int set_brightness(const char *val, const struct kernel_param *kp)
+{
+    int ret, new_val;
+    ret = kstrtoint(val, 0, &new_val);
+    if (ret)
+        return ret;
+
+    pr_info("brightness changed: %d -> %d\n", brightness, new_val);
+    
+    update_panel_brightness(new_val);
+
+    brightness = new_val;
+    return 0;
+}
+
+static int get_brightness(char *buffer, const struct kernel_param *kp)
+{
+    return scnprintf(buffer, PAGE_SIZE, "%d", brightness);
+}
+
+module_param_call(brightness, set_brightness, get_brightness, &brightness, 0644);
+```
