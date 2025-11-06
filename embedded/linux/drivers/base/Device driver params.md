@@ -203,13 +203,19 @@ void mipi_dbi_debugfs_init(struct drm_minor *minor)
 ## module param
 
 ```c
-static bool enable_dither = true;
+static int brightness = 128;
 
-module_param(enable_dither, bool, 0644);
-MODULE_PARM_DESC(enable_dither, "Enable dithering");
+module_param(brightness, int, 0644);
+MODULE_PARM_DESC(brightness, "Display brightness level (0-255)");
 ```
 
 When loading a module, you can specify:
 ```bash
-sudo insmod st7305.ko enable_dither=0
+sudo insmod st7735r.ko brightness=200
+```
+
+view parameters:
+```bash
+cat /sys/module/st7735r/parameters/brightness
+echo 100 | sudo tee /sys/module/st7735r/parameters/brightness
 ```
