@@ -199,3 +199,17 @@ void mipi_dbi_debugfs_init(struct drm_minor *minor)
 			    &mipi_dbi_debugfs_command_fops);
 }
 ```
+
+## module param
+
+```c
+static bool enable_dither = true;
+
+module_param(enable_dither, bool, 0644);
+MODULE_PARM_DESC(enable_dither, "Enable dithering");
+```
+
+When loading a module, you can specify:
+```bash
+sudo insmod st7305.ko enable_dither=0
+```
