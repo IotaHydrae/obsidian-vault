@@ -64,6 +64,136 @@ static void st7305_remove(struct spi_device *spi)
 
 ## debugfs
 
-```c
+drm_mipi_dbi.c - kernel 6.12
 
+```c
+static ssize_t mipi_dbi_debugfs_command_write(struct file *file,
+					      const char __user *ubuf,
+					      size_t count, loff_t *ppos)
+{
+	struct seq_file *m = file->private_data;
+	struct mipi_dbi_dev *dbidev = m->private;
+	u8 val, cmd = 0, parameters[64];
+	char *buf, *pos, *token;
+	int i, ret, idx;
+
+	if (!drm_dev_enter(&dbidev->drm, &idx))
+		return -ENODEV;
+
+	buf = memdup_user_nul(ubuf, count);
+	if (IS_ERR(buf)) {
+		ret = PTR_ERR(buf);
+		goto err_exit;
+	}
+
+	/* strip trailing whitespace */
+	for (i = count - 1; i > 0; i--)
+		if (isspace(buf[i]))
+			buf[i] = '\0';
+		else
+			break;
+	i = 0;
+	pos = buf;
+	while (pos) {
+		token = strsep(&pos, " ");
+		if (!token) {
+			ret = -EINVAL;
+			goto err_free;
+		}
+
+		ret = kstrtou8(token, 16, &val);
+		if (ret < 0)
+			goto err_free;
+
+		if (token == buf)
+			cmd = val;
+		else
+			parameters[i++] = val;
+
+		if (i == 64) {
+			ret = -E2BIG;
+			goto err_free;
+		}
+	}
+
+	ret = mipi_dbi_command_buf(&dbidev->dbi, cmd, parameters, i);
+
+err_free:
+	kfree(buf);
+err_exit:
+	drm_dev_exit(idx);
+
+	return ret < 0 ? ret : count;
+}
+
+static int mipi_dbi_debugfs_command_show(struct seq_file *m, void *unused)
+{
+	struct mipi_dbi_dev *dbidev = m->private;
+	struct mipi_dbi *dbi = &dbidev->dbi;
+	u8 cmd, val[4];
+	int ret, idx;
+	size_t len;
+
+	if (!drm_dev_enter(&dbidev->drm, &idx))
+		return -ENODEV;
+
+	for (cmd = 0; cmd < 255; cmd++) {
+		if (!mipi_dbi_command_is_read(dbi, cmd))
+			continue;
+
+		switch (cmd) {
+		case MIPI_DCS_READ_MEMORY_START:
+		case MIPI_DCS_READ_MEMORY_CONTINUE:
+			len = 2;
+			break;
+		case MIPI_DCS_GET_DISPLAY_ID:
+			len = 3;
+			break;
+		case MIPI_DCS_GET_DISPLAY_STATUS:
+			len = 4;
+			break;
+		default:
+			len = 1;
+			break;
+		}
+
+		seq_printf(m, "%02x: ", cmd);
+		ret = mipi_dbi_command_buf(dbi, cmd, val, len);
+		if (ret) {
+			seq_puts(m, "XX\n");
+			continue;
+		}
+		seq_printf(m, "%*phN\n", (int)len, val);
+	}
+
+	drm_dev_exit(idx);
+
+	return 0;
+}
+
+static int mipi_dbi_debugfs_command_open(struct inode *inode, struct file *file)
+{
+	return single_open(file, mipi_dbi_debugfs_command_show,
+			   inode->i_private);
+}
+
+static const struct file_operations mipi_dbi_debugfs_command_fops = {
+	.owner = THIS_MODULE,
+	.open = mipi_dbi_debugfs_command_open,
+	.read = seq_read,
+	.llseek = seq_lseek,
+	.release = single_release,
+	.write = mipi_dbi_debugfs_command_write,
+};
+
+void mipi_dbi_debugfs_init(struct drm_minor *minor)
+{
+	struct mipi_dbi_dev *dbidev = drm_to_mipi_dbi_dev(minor->dev);
+	umode_t mode = S_IFREG | S_IWUSR;
+
+	if (dbidev->dbi.read_commands)
+		mode |= S_IRUGO;
+	debugfs_create_file("command", mode, minor->debugfs_root, dbidev,
+			    &mipi_dbi_debugfs_command_fops);
+}
 ```
