@@ -43,11 +43,27 @@ static const struct attribute_group st7305_attr_group = {
         .attrs = st7305_attrs
 };
 
-ret = sysfs_create_group(&dev->kobj, &st7305_attr_group);
-	if (ret)
-		dev_err(dev, "Failed to create device attrs\n");
+static int st7305_probe(struct spi_device *spi)
+{
+	...
+	dev_set_drvdata(dev, st7305);
 
-sysfs_remove_group(&st7305->dev->kobj, &st7305_attr_group);
+	ret = sysfs_create_group(&dev->kobj, &st7305_attr_group);
+		if (ret)
+			dev_err(dev, "Failed to create device attrs\n");
+	...
+}
+
+static void st7305_remove(struct spi_device *spi)
+{
+	...
+	sysfs_remove_group(&st7305->dev->kobj, &st7305_attr_group);
+	...
+}
 ```
 
 ## debugfs
+
+```c
+
+```
