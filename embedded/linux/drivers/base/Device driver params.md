@@ -1,5 +1,7 @@
 ## device attribute
 
+kernel 6.12.47
+
 ```c
 static ssize_t dither_type_show(struct device *dev,
                                 struct device_attribute *attr, char *buf)
@@ -64,7 +66,7 @@ static void st7305_remove(struct spi_device *spi)
 
 ## debugfs
 
-drm_mipi_dbi.c - kernel 6.12
+drm_mipi_dbi.c - kernel 6.12.47
 
 ```c
 static ssize_t mipi_dbi_debugfs_command_write(struct file *file,
