@@ -11,4 +11,4 @@ raspinfo | pastebinit
 https://pastebin.com/MCMgFAqa
 ```
 
-把这个lian'jie
+链接中包含 raspinfo 命令打印的结果，**这个链接在生成之后只会30天**
