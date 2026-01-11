@@ -98,3 +98,7 @@ Sometimes you do not have enough information about an I2C device, not even to ca
 ```shell
 echo eeprom 0x50 > /sys/bus/i2c/devices/i2c-3/new_device
 ```
+
+## Reference
+
+[How to instantiate I2C devices — The Linux Kernel documentation](https://www.kernel.org/doc/html/latest/i2c/instantiating-devices.html)
