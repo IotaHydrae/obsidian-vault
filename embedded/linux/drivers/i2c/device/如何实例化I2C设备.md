@@ -1,6 +1,6 @@
 ## Method 1: Declare the I2C devices statically
 
-### Declare the I2C devices via devicetree
+### 1.1 Declare the I2C devices via devicetree
 
 ```c
 i2c1: i2c@400a0000 {
@@ -21,7 +21,7 @@ i2c1: i2c@400a0000 {
 };
 ```
 
-### Declare the I2C devices in board files
+### 1.2 Declare the I2C devices in board files
 
 ```c
 static struct i2c_board_info h4_i2c_board_info[] __initdata = {
@@ -50,6 +50,8 @@ static void __init omap_h4_init(void)
 
 ## Method 2: Instantiate the devices explicitly
 
+### 2.1 i2c_new_client_device
+
 ```c
 static struct i2c_board_info sfe4001_hwmon_info = {
       I2C_BOARD_INFO("max6647", 0x4e),
@@ -64,6 +66,8 @@ int sfe4001_init(struct efx_nic *efx)
       (...)
 }
 ```
+
+### 2.2 i2c_new_scanned_device
 
 ```c
 static const unsigned short normal_i2c[] = { 0x2c, 0x2d, I2C_CLIENT_END };
@@ -87,6 +91,7 @@ static int usb_hcd_nxp_probe(struct platform_device *pdev)
 
 ## Method 3: Probe an I2C bus for certain devices
 
+Sometimes you do not have enough information about an I2C device, not even to call `i2c_new_scanned_device()`. The typical case is hardware monitoring chips on PC mainboards.
 
 ## Method 4: Instantiate from user-space
 
