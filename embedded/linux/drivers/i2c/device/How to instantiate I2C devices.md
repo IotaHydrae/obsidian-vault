@@ -90,3 +90,6 @@ static int usb_hcd_nxp_probe(struct platform_device *pdev)
 
 ## Method 4: Instantiate from user-space
 
+```shell
+echo eeprom 0x50 > /sys/bus/i2c/devices/i2c-3/new_device
+```
