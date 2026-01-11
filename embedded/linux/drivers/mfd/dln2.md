@@ -1,7 +1,32 @@
 https://elixir.bootlin.com/linux/v6.18.4/source/drivers/gpio/gpio-dln2.c
+
+```c
+static struct platform_driver dln2_gpio_driver = {
+	.driver.name	= "dln2-gpio",
+	.probe		= dln2_gpio_probe,
+	.remove		= dln2_gpio_remove,
+};
+
+module_platform_driver(dln2_gpio_driver);
+```
+
 https://elixir.bootlin.com/linux/latest/source/drivers/i2c/busses/i2c-dln2.c
+
+```c
+
+```
+
 https://elixir.bootlin.com/linux/v6.18.4/source/drivers/spi/spi-dln2.c
+
+```c
+
+```
+
 https://elixir.bootlin.com/linux/v6.18.4/source/drivers/iio/adc/dln2-adc.c
+
+```c
+
+```
 
 ```c
 static const struct mfd_cell dln2_devs[] = {
