@@ -55,4 +55,10 @@ static const struct mfd_cell dln2_devs[] = {
 		.pdata_size = sizeof(struct dln2_platform_data),
 	},
 };
+
+	ret = mfd_add_hotplug_devices(dev, dln2_devs, ARRAY_SIZE(dln2_devs));
+	if (ret != 0) {
+		dev_err(dev, "failed to add mfd devices to core\n");
+		goto out_stop_rx;
+	}
 ```
