@@ -103,7 +103,7 @@ impl<T: Connection> Device<T> {
         println!("Reply: {}", reply);
     }
 }
-
+ 
 // Concrete implementation
 #[derive(Debug)]
 struct TcpConnection;
