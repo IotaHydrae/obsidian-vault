@@ -180,3 +180,22 @@ fn main() {
 |Derive macro|`#[derive(MyTrait)]`|High|Medium|Clone, Debug, Serialize, Builder patterns|★★★★☆|
 |Attribute macro|`#[my_attr]`|Very high|Slow|tracing::instrument, sqlx::query!|★★★★★|
 |Function-like proc|`my_macro!(…)`|Very high|Slow|custom syntax, mini-languages|★★★★★|
+
+### Recommendation for most people in 2026
+
+Start with **declarative macros (macro_rules!)** — they cover 70–80% of real-world needs and are much easier to debug.
+
+Only move to procedural macros when you need:
+
+- `#[derive(…)]` on structs/enums
+- `#[custom_attribute]`
+- Completely new syntax that `macro_rules!` can't parse
+
+Which kind would you like to go deeper into?
+
+- Repeating patterns (`$()*`, `$()+`, `$()?`)
+- Hygiene & `$crate`
+- A real mini-DSL (like tiny sql or config builder)
+- Full derive macro walkthrough
+- Debugging macros (`cargo expand`)
+
