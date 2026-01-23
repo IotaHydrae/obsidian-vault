@@ -126,3 +126,47 @@ fn main() {
     // Reply: PONG!
 }
 ```
+
+### 4. Trait Objects (dynamic dispatch – when you need heterogeneous collections)
+
+```rust
+trait Drawable {
+    fn draw(&self);
+}
+
+// Note: object-safe trait (no generics, no Self returns in methods, etc.)
+struct Circle;
+impl Drawable for Circle {
+    fn draw(&self) { println!("○"); }
+}
+
+struct Square;
+impl Drawable for Square {
+    fn draw(&self) { println!("■"); }
+}
+
+fn main() {
+    // Vec of different concrete types → need trait object
+    let shapes: Vec<Box<dyn Drawable>> = vec![
+        Box::new(Circle),
+        Box::new(Square),
+    ];
+
+    for shape in shapes {
+        shape.draw();   // dynamic dispatch (vtable lookup at runtime)
+    }
+    // ○
+    // ■
+}
+```
+
+### Quick Comparison Table: Generics vs Trait Objects
+
+|Feature|Generics (`<T: Trait>`)|Trait Objects (`dyn Trait`)|
+|---|---|---|
+|Dispatch|Static (monomorphization)|Dynamic (vtable)|
+|Performance|Usually faster (inlining possible)|Small overhead (extra pointer + vtable)|
+|Binary size|Larger (code duplicated per type)|Smaller|
+|Heterogeneous collections|No (all elements same concrete type)|Yes (Vec<Box<dyn Trait>> etc.)|
+|Use case|Most library APIs, zero-cost abstraction|GUI widgets, plugins, trait-object heavy code|
+|Object safety required?|No|Yes (many restrictions)|
