@@ -162,11 +162,11 @@ fn main() {
 
 ### Quick Comparison Table: Generics vs Trait Objects
 
-|Feature|Generics (`<T: Trait>`)|Trait Objects (`dyn Trait`)|
-|---|---|---|
-|Dispatch|Static (monomorphization)|Dynamic (vtable)|
-|Performance|Usually faster (inlining possible)|Small overhead (extra pointer + vtable)|
-|Binary size|Larger (code duplicated per type)|Smaller|
-|Heterogeneous collections|No (all elements same concrete type)|Yes (Vec<Box<dyn Trait>> etc.)|
-|Use case|Most library APIs, zero-cost abstraction|GUI widgets, plugins, trait-object heavy code|
-|Object safety required?|No|Yes (many restrictions)|
+| Feature                   | Generics (`<T: Trait>`)                  | Trait Objects (`dyn Trait`)                   |
+| ------------------------- | ---------------------------------------- | --------------------------------------------- |
+| Dispatch                  | Static (monomorphization)                | Dynamic (vtable)                              |
+| Performance               | Usually faster (inlining possible)       | Small overhead (extra pointer + vtable)       |
+| Binary size               | Larger (code duplicated per type)        | Smaller                                       |
+| Heterogeneous collections | No (all elements same concrete type)     | Yes (Vec<Box<dyn Trait>> etc.)                |
+| Use case                  | Most library APIs, zero-cost abstraction | GUI widgets, plugins, trait-object heavy code |
+| Object safety required?   | No                                       | Yes (many restrictions)                       |
