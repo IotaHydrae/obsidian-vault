@@ -89,3 +89,18 @@ schedule_timeout(HZ);               // 在 IRQ 或 softirq 中禁止
 // 不推荐：直接用 jiffies 硬编码（不移植）
 schedule_timeout(100 * HZ);         // 应该用 msecs_to_jiffies
 ```
+
+### 快速对照表
+
+|需求|推荐写法|是否可被信号打断|参数单位|
+|---|---|---|---|
+|普通短延迟（<1s）|`msleep(msecs)`|是|毫秒|
+|必须完整睡眠（不理信号）|`ssleep(secs)` 或 `schedule_timeout_uninterruptible()`|否|秒 / jiffies|
+|需要检查是否被信号打断|`schedule_timeout()` + `TASK_INTERRUPTIBLE`|是|jiffies|
+|无限期等待别人唤醒|`schedule_timeout(MAX_SCHEDULE_TIMEOUT)`|取决于状态|—|
+|高精度纳秒级（现代内核）|`schedule_hrtimeout()` / `usleep_range()`|看具体封装|ns / us|
+### 小结建议优先级
+
+1. 用 `msleep()` / `ssleep()` / `msleep_interruptible()` → 最安全、最清晰
+2. 需要精确控制“是否可打断”或“检查剩余时间” → 用 `schedule_timeout()` + 手动 `set_current_state`
+3. 极少数需要纳秒级 → 考虑 `schedule_hrtimeout()` 或 `usleep_range()`
