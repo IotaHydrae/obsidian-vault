@@ -28,6 +28,8 @@ sudo systemctl start getty@ttyGS0.service
 此时在PC端打开新的串口，windows上通常为`COMx`，波特率为`115200`，回车能看到如下打印：
 
 ```bash
+Armbian 25.11.2 noble ttyGS0
+
 orangepione login:
 ```
 
