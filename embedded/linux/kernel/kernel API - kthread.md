@@ -101,11 +101,11 @@ MODULE_LICENSE("GPL");
 
 ### 快速对照表
 
-|需求|推荐用法|
-|---|---|
-|创建并立即运行|`kthread_run(...)`|
-|只创建、不运行|`kthread_create(...)` + `wake_up_process()`|
-|停止线程|`kthread_stop(task)`|
-|检查是否需要退出|`kthread_should_stop()`|
-|线程内休眠（可被打断）|`msleep()`、`schedule_timeout()`|
-|线程内不可打断休眠|`ssleep()`、`schedule_timeout_uninterruptible()`|
+| 需求          | 推荐用法                                            |
+| ----------- | ----------------------------------------------- |
+| 创建并立即运行     | `kthread_run(...)`                              |
+| 只创建、不运行     | `kthread_create(...)` + `wake_up_process()`     |
+| 停止线程        | `kthread_stop(task)`                            |
+| 检查是否需要退出    | `kthread_should_stop()`                         |
+| 线程内休眠（可被打断） | `msleep()`、`schedule_timeout()`                 |
+| 线程内不可打断休眠   | `ssleep()`、`schedule_timeout_uninterruptible()` |
