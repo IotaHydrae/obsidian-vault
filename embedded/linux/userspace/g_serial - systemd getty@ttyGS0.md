@@ -16,3 +16,12 @@ sudo modprobe g_serial
 ```
 
 2. 启用并启动 getty 服务（systemd 会自动在 /dev/ttyGS0 上跑 login prompt）：
+
+```bash
+sudo systemctl enable getty@ttyGS0.service
+sudo systemctl start getty@ttyGS0.service
+```
+
+- enable 让它开机自启
+- start 立即生效（测试用）
+
