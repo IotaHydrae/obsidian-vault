@@ -26,6 +26,19 @@ sudo systemctl start getty@ttyGS0.service
 - start 立即生效（测试用）
 
 此时在PC端打开新的串口，windows上通常为`COMx`，波特率为`115200`，回车能看到如下打印：
+
 ```bash
 orangepione login:
 ```
+
+3. 配置驱动开机自动加载
+
+`/etc/modules` 添加：
+
+```text
+g_serial
+```
+
+重启测试
+
+### 方式2：把 kernel console 也重定向到 ttyGS0（能看到完整 boot log）
