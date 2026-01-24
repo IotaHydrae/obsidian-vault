@@ -25,3 +25,7 @@ sudo systemctl start getty@ttyGS0.service
 - enable 让它开机自启
 - start 立即生效（测试用）
 
+此时在PC端打开新的串口，windows上通常为`COMx`，波特率为`115200`，回车能看到如下打印：
+```bash
+orangepione login:
+```
