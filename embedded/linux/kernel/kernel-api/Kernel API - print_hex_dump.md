@@ -228,3 +228,10 @@ static uint32_t smu_v11_0_i2c_transmit(struct i2c_adapter *control,
 	...
 }
 ```
+
+## Output Example
+
+```shell
+[  868.757728] data: 36 c8 22 1d 23 79 68 f7 ad 12 21 33 7b aa cc cd
+[  868.757728] data: 20 42 df ee a8 ed cc 01 8a 37 f8 61 f2 c7 e1 b5
+```
