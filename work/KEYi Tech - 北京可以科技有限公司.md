@@ -3,7 +3,7 @@
 
 ## 1. 负责 Loona 机器人显示框架 LVGL 移植适配，硬件2D加速。
 
-基于
+基于LVGL v8 版本
 
 ## 2. 负责 Loona 机器人的 Yocto SDK 工程的搭建
 
