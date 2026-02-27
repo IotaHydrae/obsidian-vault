@@ -7,7 +7,7 @@
 
 ## 2. 负责 Loona 机器人的 Yocto SDK 工程的搭建
 
-基于官方提供的一个最小yocto工程二次开发，在原来的基础上添加了更多的layer，recipe以满足 app 需求，因为yocto版本较低，所以适配高版本
+基于官方提供的一个最小yocto工程二次开发，在原来的基础上添加了更多的layer，recipe以满足 app 需求，因为yocto版本较低，app 需要的某些依赖在高版本的yocto中才加入，所以在适配高版本的recipe，layer等比较困难，好在都完成了。
 
 ## 3. 负责 BSP 的 CI 自动化编译打包流程开发。
 
