@@ -3,7 +3,7 @@
 
 ## 1. 负责 Loona 机器人显示框架 LVGL 移植适配，硬件2D加速。
 
-基于 LVGL v8 版本移植，适配了SoC的 2D 图像填充加速，使用libyuv
+基于 LVGL v8 版本移植，适配了SoC的 2D 加速功能，支持fb/drm。编写了ARGB8888旋转算法，使用libyuv完成rgb到yuv的转换。
 
 ## 2. 负责 Loona 机器人的 Yocto SDK 工程的搭建
 
