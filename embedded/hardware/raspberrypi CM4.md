@@ -41,7 +41,37 @@ Threads fairness:
 #### 2.0 GHz
 
 ```text
+pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
+sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
 
+Running the test with following options:
+Number of threads: 4
+Initializing random number generator from current time
+
+
+Prime numbers limit: 10000
+
+Initializing worker threads...
+
+Threads started!
+
+CPU speed:
+    events per second:  7803.38
+
+General statistics:
+    total time:                          10.0005s
+    total number of events:              78062
+
+Latency (ms):
+         min:                                    0.51
+         avg:                                    0.51
+         max:                                   12.56
+         95th percentile:                        0.51
+         sum:                                39979.49
+
+Threads fairness:
+    events (avg/stddev):           19515.5000/26.46
+    execution time (avg/stddev):   9.9949/0.00
 ```
 
 ### Memory
