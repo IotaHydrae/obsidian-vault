@@ -2,7 +2,7 @@
 
 ### CPU
 
-arm_freq = 1.5GHz
+#### 1.5GHz
 
 ```text
 pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
@@ -37,3 +37,7 @@ Threads fairness:
     events (avg/stddev):           14645.5000/3.84
     execution time (avg/stddev):   9.9945/0.00
 ```
+
+#### 2.0 GHz
+
+### Memory
