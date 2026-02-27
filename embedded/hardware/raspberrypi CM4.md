@@ -40,4 +40,48 @@ Threads fairness:
 
 #### 2.0 GHz
 
+```text
+
+```
+
 ### Memory
+
+```text
+pi@cm4-pi:~ $ sysbench memory run
+sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
+
+Running the test with following options:
+Number of threads: 1
+Initializing random number generator from current time
+
+
+Running memory speed test with the following options:
+  block size: 1KiB
+  total size: 102400MiB
+  operation: write
+  scope: global
+
+Initializing worker threads...
+
+Threads started!
+
+Total operations: 20152878 (2014457.12 per second)
+
+19680.54 MiB transferred (1967.24 MiB/sec)
+
+
+General statistics:
+    total time:                          10.0001s
+    total number of events:              20152878
+
+Latency (ms):
+         min:                                    0.00
+         avg:                                    0.00
+         max:                                    0.24
+         95th percentile:                        0.00
+         sum:                                 4806.83
+
+Threads fairness:
+    events (avg/stddev):           20152878.0000/0.00
+    execution time (avg/stddev):   4.8068/0.00
+```
