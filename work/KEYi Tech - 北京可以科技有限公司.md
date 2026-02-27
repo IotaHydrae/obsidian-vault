@@ -40,5 +40,5 @@
 
 ## 6. Secure Boot 的开发与测试
 
-### 7.  Homea
+### 7.  HomeAssist 的接入
 
