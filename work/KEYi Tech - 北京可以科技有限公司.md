@@ -42,3 +42,5 @@
 
 ### 7.  HomeAssist 的接入
 
+根据 HomeAssist 的 MQTT 协议标准，编写
+
