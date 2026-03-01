@@ -32,11 +32,13 @@
 
 ## 4. 驱动电源管理，低功耗休眠以及测试工具的开发。
 
-为 linux 上的外设驱动添加 PM 电源管理接口，通过 power/state 发起调用流程
+为 linux 上的外设驱动添加 PM 电源管理接口，通过 power/state 发起调用流程。添加PM接口的驱动包括但不限于：Display，电机，MCU等。
+
+编写的压力测试工具yong
 
 ## 5. OTA 功能的开发
 
-在 SoC 厂提供的 OTA 方案上修改，使用 recovery 模式进行升级
+在 SoC 厂提供的 OTA 方案上修改，使用 recovery 模式进行升级，APP检测到recovery模式会自动下载新的OTA包的app文件，升级逻辑由APP开发人员编写。
 
 ## 6. Secure Boot 的开发与测试
 
