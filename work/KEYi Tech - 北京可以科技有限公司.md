@@ -40,7 +40,9 @@
 
 ## 6. Secure Boot 的开发与测试
 
+通过自定义的 RSA 密钥，dui
+
 ### 7.  HomeAssist 的接入
 
-根据 HomeAssist 的 MQTT 协议标准，编写
+根据 HomeAssist 的 MQTT 协议标准，编写订阅发布逻辑，注册设备，提供设备状态等数据。
 
