@@ -64,6 +64,41 @@ static void st7305_remove(struct spi_device *spi)
 }
 ```
 
+```c
+static ssize_t
+name_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	return sprintf(buf, "%s\n", dev->type == &i2c_client_type ?
+		       to_i2c_client(dev)->name : to_i2c_adapter(dev)->name);
+}
+static DEVICE_ATTR_RO(name);
+
+static ssize_t
+modalias_show(struct device *dev, struct device_attribute *attr, char *buf)
+{
+	struct i2c_client *client = to_i2c_client(dev);
+	int len;
+
+	len = of_device_modalias(dev, buf, PAGE_SIZE);
+	if (len != -ENODEV)
+		return len;
+
+	len = acpi_device_modalias(dev, buf, PAGE_SIZE - 1);
+	if (len != -ENODEV)
+		return len;
+
+	return sprintf(buf, "%s%s\n", I2C_MODULE_PREFIX, client->name);
+}
+static DEVICE_ATTR_RO(modalias);
+
+static struct attribute *i2c_dev_attrs[] = {
+	&dev_attr_name.attr,
+	/* modalias helps coldplug:  modprobe $(cat .../modalias) */
+	&dev_attr_modalias.attr,
+	NULL
+};
+ATTRIBUTE_GROUPS(i2c_dev);
+```
 ## debugfs
 
 drm_mipi_dbi.c - kernel 6.12.47
