@@ -30,6 +30,6 @@ struct mcp23016 {
 
 static inline struct mcp23016 *to_mcp23016(struct gpio_chip *gc)
 {
-
+	return container_of(gc, struct mcp23016, chip);
 }
 ```
