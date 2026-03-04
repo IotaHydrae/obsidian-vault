@@ -9,5 +9,23 @@
 `spin_lock_irqsave` 通过**同时执行以下两个操作**来避免这种情况：
 
 1. **禁止本地中断**：防止当前 CPU 被中断打断。
-    
 2. **获取自旋锁**：防止其他 CPU 核心进入临界区。
+
+### 2. 函数原型与用法
+
+```c
+unsigned long flags;
+spin_lock_irqsave(&my_lock, flags);
+
+/* --- 临界区 (Critical Section) --- */
+/* 这里既不会被中断打断，也不会有其他核竞争 */
+
+spin_unlock_irqrestore(&my_lock, flags);
+```
+
+### 3. 核心特点：为什么有 `flags`？
+
+这是它与 `spin_lock_irq` 最本质的区别：
+
+- **状态保存**：`flags` 变量用于保存**当前 CPU 的中断状态**。
+- **嵌套安全**：如果你在已经关闭中断的上下文中调用它，`irqsave` 会记住“中断原本是关着的”。当你调用 `irqrestore` 时，它会根据 `flags` 恢复到关灯状态，而不是盲目地开启中断。这使得它在复杂的函数嵌套调用中非常安全。
