@@ -37,4 +37,19 @@ static int platform_match(struct device *dev, const struct device_driver *drv)
 	/* fall-back to driver name match */
 	return (strcmp(pdev->name, drv->name) == 0);
 }
+
+static const struct platform_device_id *platform_match_id(
+			const struct platform_device_id *id,
+			struct platform_device *pdev)
+{
+	while (id->name[0]) {
+		if (strcmp(pdev->name, id->name) == 0) {
+			pdev->id_entry = id;
+			return id;
+		}
+		id++;
+	}
+	return NULL;
+}
+
 ```
