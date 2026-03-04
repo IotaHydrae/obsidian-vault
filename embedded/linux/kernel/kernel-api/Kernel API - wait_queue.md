@@ -70,3 +70,54 @@ int default_wake_function(wait_queue_entry_t *curr, unsigned mode, int wake_flag
 }
 EXPORT_SYMBOL(default_wake_function);
 ```
+
+## Example
+
+```c
+/* static declare */
+DECLARE_WAIT_QUEUE_HEAD(name);
+
+/* dynamic declare */
+wait_queue_head_t my_wait_queue;
+init_waitqueue_head(&)
+```
+
+`drivers/net/usb/lan78xx.c`
+
+```c
+static void lan78xx_terminate_urbs(struct lan78xx_net *dev)
+{
+	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(unlink_wakeup);
+	DECLARE_WAITQUEUE(wait, current);
+	int temp;
+
+	/* ensure there are no more active urbs */
+	add_wait_queue(&unlink_wakeup, &wait);
+	set_current_state(TASK_UNINTERRUPTIBLE);
+	dev->wait = &unlink_wakeup;
+	temp = unlink_urbs(dev, &dev->txq) + unlink_urbs(dev, &dev->rxq);
+
+	/* maybe wait for deletions to finish. */
+	while (!skb_queue_empty(&dev->rxq) ||
+	       !skb_queue_empty(&dev->txq)) {
+		schedule_timeout(msecs_to_jiffies(UNLINK_TIMEOUT_MS));
+		set_current_state(TASK_UNINTERRUPTIBLE);
+		netif_dbg(dev, ifdown, dev->net,
+			  "waited for %d urb completions", temp);
+	}
+	set_current_state(TASK_RUNNING);
+	dev->wait = NULL;
+	remove_wait_queue(&unlink_wakeup, &wait);
+
+	/* empty Rx done, Rx overflow and Tx pend queues
+	 */
+	while (!skb_queue_empty(&dev->rxq_done)) {
+		struct sk_buff *skb = skb_dequeue(&dev->rxq_done);
+
+		lan78xx_release_rx_buf(dev, skb);
+	}
+
+	skb_queue_purge(&dev->rxq_overflow);
+	skb_queue_purge(&dev->txq_pend);
+}
+```
