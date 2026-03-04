@@ -1,4 +1,35 @@
 
+### wake_up_interruptible
+
+```c
+static int __wake_up_common(struct wait_queue_head *wq_head, unsigned int mode,
+			int nr_exclusive, int wake_flags, void *key)
+{
+	wait_queue_entry_t *curr, *next;
+
+	lockdep_assert_held(&wq_head->lock);
+
+	curr = list_first_entry(&wq_head->head, wait_queue_entry_t, entry);
+
+	if (&curr->entry == &wq_head->head)
+		return nr_exclusive;
+
+	list_for_each_entry_safe_from(curr, next, &wq_head->head, entry) {
+		unsigned flags = curr->flags;
+		int ret;
+
+		ret = curr->func(curr, mode, wake_flags, key);
+		if (ret < 0)
+			break;
+		if (ret && (flags & WQ_FLAG_EXCLUSIVE) && !--nr_exclusive)
+			break;
+	}
+
+	return nr_exclusive;
+}
+```
+### wait_event_interruptible
+
 ```rust
 #define wait_event_interruptible(wq_head, condition)				\
 ({										\
@@ -40,6 +71,8 @@
 __out:	__ret;									\
 })
 ```
+
+### init_wait_entry
 
 ```rust
 void init_wait_entry(struct wait_queue_entry *wq_entry, int flags)
