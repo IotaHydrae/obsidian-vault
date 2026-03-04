@@ -14,6 +14,21 @@ struct resource {
 	const char *name;
 	unsigned long flags;
 };
+
+static struct platform_device dummy_pdev = {
+	.name = "dummy-platform-device",
+	.id = 0,
+	.dev = {
+		.platform_data = NULL,
+	},
+	.resource = needed_resources,
+	.num_re
+};
+```
+
+### via DTS
+
+```c
 ```
 
 ### 获取 resource
@@ -29,4 +44,9 @@ int irq = platform_get_irq(pdev, 0);
 
 ## platform_data
 
-### 获取 platform_
+### 获取 platform_data
+
+```c
+void *dev_get_platdata(const struct device *dev);
+
+```
