@@ -18,12 +18,11 @@ struct resource {
 static struct platform_device dummy_pdev = {
 	.name = "dummy-platform-device",
 	.id = 0,
-	.dev = {
-		.platform_data = NULL,
-	},
+	.dev.platform_data = NULL,
 	.resource = needed_resources,
-	.num_re
+	.num_resources = ARRAY_SIZE(needed_resources),
 };
+platform_device_register(&dummy_pdev);
 ```
 
 ### via DTS
