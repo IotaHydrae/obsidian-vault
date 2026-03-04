@@ -1,3 +1,4 @@
+## resource
 
 ```c
 #define IORESOURCE_IO  0x00000100 /* PCI/ISA IO port */
@@ -15,10 +16,17 @@ struct resource {
 };
 ```
 
+### 获取 resource
+
 ```c
-struct resource *platform_get_resource(struct platform_device *dev,
+struct resource *platform_get_resource(struct platform_device *pdev,
 					unsigned int type, unsigned int num);
-int platform_get_irq()
+int platform_get_irq(struct platform_device *pdev, unsigned int num);
 
 struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+int irq = platform_get_irq(pdev, 0);
 ```
+
+## platform_data
+
+### 获取 platform_
