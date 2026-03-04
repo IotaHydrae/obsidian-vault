@@ -14,3 +14,11 @@ struct resource {
 	unsigned long flags;
 };
 ```
+
+```c
+struct resource *platform_get_resource(struct platform_device *dev,
+					unsigned int type, unsigned int num);
+int platform_get_irq()
+
+struct resource *res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
+```
