@@ -79,7 +79,11 @@ DECLARE_WAIT_QUEUE_HEAD(name);
 
 /* dynamic declare */
 wait_queue_head_t my_wait_queue;
-init_waitqueue_head(&)
+init_waitqueue_head(&my_wait_queue);
+
+int wait_event_interruptible(wait_queue_head_t q, CONDITION);
+
+void wake_up_interruptible(wait_queue_head_t *q);
 ```
 
 `drivers/net/usb/lan78xx.c`
