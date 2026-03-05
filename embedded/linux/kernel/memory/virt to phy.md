@@ -56,3 +56,15 @@ MMU 取出 PTE 中的物理基地址，直接拼接上虚拟地址最后的 12 �
 - **命中 (Hit)：** CPU 首先查 TLB，如果之前访问过，直接出结果，耗时接近 0。
     
 - **缺失 (Miss)：** 才会去内存里进行上述繁琐的 4 级查表（Table Walk），并把结果更新到 TLB 中。
+
+### 6. Linux 内核中的对应
+
+在 Linux 内核源码中，这一套查表逻辑被封装在宏和函数中：
+
+- `pgd_offset(mm, addr)` -> 对应 L0
+    
+- `pud_offset(pgd, addr)` -> 对应 L1
+    
+- `pmd_offset(pud, addr)` -> 对应 L2
+    
+- `pte_offset_kernel(pmd, addr)` -> 对应 L3
