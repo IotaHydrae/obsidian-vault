@@ -109,3 +109,32 @@
 - **Data 和 BSS 通常被合并在同一个 VMA 中**（权限都是 `rw-p`）。
     
 - 内核只需要保证在程序启动时，把 `end_data` 到 `start_brk` 这一块内存通过 `memset` 清零即可。
+
+## switch_mm (ARM64)
+
+```c
+void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
+{
+	unsigned long ttbr1 = read_sysreg(ttbr1_el1);
+	unsigned long asid = ASID(mm);
+	unsigned long ttbr0 = phys_to_ttbr(pgd_phys);
+
+	/* Skip CNP for the reserved ASID */
+	if (system_supports_cnp() && asid)
+		ttbr0 |= TTBR_CNP_BIT;
+
+	/* SW PAN needs a copy of the ASID in TTBR0 for entry */
+	if (IS_ENABLED(CONFIG_ARM64_SW_TTBR0_PAN))
+		ttbr0 |= FIELD_PREP(TTBR_ASID_MASK, asid);
+
+	/* Set ASID in TTBR1 since TCR.A1 is set */
+	ttbr1 &= ~TTBR_ASID_MASK;
+	ttbr1 |= FIELD_PREP(TTBR_ASID_MASK, asid);
+
+	cpu_set_reserved_ttbr0_nosync();
+	write_sysreg(ttbr1, ttbr1_el1);
+	write_sysreg(ttbr0, ttbr0_el1);
+	isb();
+	post_ttbr_update_workaround();
+}
+```
