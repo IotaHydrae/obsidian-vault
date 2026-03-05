@@ -66,3 +66,46 @@
 
 
 ### BSS 段的位置
+
+在现代 Linux 内核中，BSS 段的边界信息被整合到了 **`start_data`** 和 **`end_data`** 以及 **`brk`** 之间。
+
+实际上，内核在 `mm_struct` 中维护的是以下这组字段：
+
+- **`start_code`**, **`end_code`**: 代码段范围。
+    
+- **`start_data`**, **`end_data`**: 数据段范围（通常包含已初始化的数据）。
+    
+- **`start_brk`**: 堆的起始地址。
+    
+- **`brk`**: 当前堆顶地址。
+    
+
+**BSS 段的位置其实就在 `end_data` 和 `start_brk` 之间。**
+
+早期的内核或某些特定架构的补丁确实曾显式定义过 `start_bss`，但在现代通用的 `include/linux/mm_types.h` 定义中，BSS 被视为数据段的延伸。内核加载器（如 ELF loader）在加载程序时，会通过 ELF 文件头获取 BSS 的大小，然后：
+
+1. 将 `end_data` 设置为已初始化数据的末尾。
+    
+2. 将 `start_brk` 设置在 BSS 结束后的位置。
+    
+3. **BSS 段 = `[end_data, start_brk]`**。
+
+### 3. 如何验证？
+
+虽然结构体里没有这两个名字，但你可以通过内核提供的接口或 `/proc` 文件系统看到它们的踪迹。
+
+如果你查看内核导出的 `TASK_SIZE` 相关的宏或者 ELF 加载逻辑（`fs/binfmt_elf.c`），你会看到内核是如何计算并清零这段“数据段之后、堆之前的内存”的。
+
+在 `/proc/[pid]/stat` 文件中，第 23 到 25 个字段分别对应：
+
+- `start_code`
+    
+- `end_code`
+    
+- `start_stack` 而 BSS 的具体信息则隐藏在 `maps` 或 `smaps` 文件的 `[heap]` 之前的匿名映射区里。
+
+很多教科书为了方便理解，会画出独立的 BSS 块并标注 `start_bss`。但在**实现层面**：
+
+- **Data 和 BSS 通常被合并在同一个 VMA 中**（权限都是 `rw-p`）。
+    
+- 内核只需要保证在程序启动时，把 `end_data` 到 `start_brk` 这一块内存通过 `memset` 清零即可。
