@@ -1,4 +1,4 @@
-这个例子试图用mpu的机制，保护
+当你访问总线上不存在的一片内存地址空间时，会触发 HardFault，我们可以利用这个机制，将一个 spi psram 模拟的映射到总线上，只需要在 Hardfault 的处理程序中，保存现场，以及触发 hardfault 的那一条指令，必须向某一个地址写了某个值，读取某个地址的值，我们解析这些指令，就可以在一个wai
 
 https://github.com/IotaHydrae/rpi-pico-lab/blob/main/psram-mpu/main.c
 
