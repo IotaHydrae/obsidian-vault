@@ -4,7 +4,9 @@
 
 #### 1.5GHz
 
-```text
+events per second:  5855.53
+
+```bash
 pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
 sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
 
@@ -40,7 +42,7 @@ Threads fairness:
 
 #### 2.0 GHz
 
-```text
+```bash
 pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
 sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
 
@@ -76,7 +78,9 @@ Threads fairness:
 
 ### Memory
 
-```text
+1967.24 MiB/sec
+
+```bash
 pi@cm4-pi:~ $ sysbench memory run
 sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
 
