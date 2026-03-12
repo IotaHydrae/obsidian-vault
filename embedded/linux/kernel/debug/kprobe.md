@@ -89,5 +89,85 @@ MODULE_LICENSE("GPL");
 ### LivePatch
 
 ```c
+void klp_ftrace_handler(unsigned long ip, unsigned long parent_ip,
+                        struct ftrace_ops *ops, struct pt_regs *regs)
+{
+    // ip 是原函数的地址
+    // 找到对应的新函数地址 (patch_func)
+    struct klp_func *patch_func = find_patch(ip); 
+
+    // 关键：修改现场快照中的 PC
+    regs->pc = (unsigned long)patch_func->new_addr;
+}
+
 
 ```
+
+### args hook
+
+```c
+#include <linux/kernel.h>
+#include <linux/module.h>
+#include <linux/kprobes.h>
+
+// 这是我们的探测点回调函数
+static int handler_pre(struct kprobe *p, struct pt_regs *regs)
+{
+    /*
+     * 在 ARM64 调用约定中：
+     * X0 是第一个参数
+     * X1 是第二个参数
+     */
+    pr_info("<kprobe> 原本的参数 a = %ld\n", regs->regs[0]);
+
+    // 1. 偷偷修改输入参数：把第一个参数改为 100
+    regs->regs[0] = 100;
+
+    // 2. 劫持执行流（高级操作）：
+    // 如果我们想让函数直接返回，不执行原函数体：
+    // regs->pc = regs->regs[30]; // 将 PC 指向 LR (返回地址)，模拟直接返回
+    // regs->regs[0] = 1024;      // 设置返回值为 1024
+    
+    return 0;
+}
+
+static struct kprobe kp = {
+    .symbol_name = "target_function_name", // 你想钩住的函数名
+    .pre_handler = handler_pre,
+};
+
+static int __init kprobe_init(void)
+{
+    int ret = register_kprobe(&kp);
+    if (ret < 0) {
+        pr_err("register_kprobe failed, returned %d\n", ret);
+        return ret;
+    }
+    pr_info("Kprobe 注册成功，位置: %p\n", kp.addr);
+    return 0;
+}
+
+static void __exit kprobe_exit(void)
+{
+    unregister_kprobe(&kp);
+    pr_info("Kprobe 已卸载\n");
+}
+
+module_init(kprobe_init);
+module_exit(kprobe_exit);
+MODULE_LICENSE("GPL");
+```
+
+当我们把这个模块加载进内核后，每当 `target_function_name` 被调用：
+
+1. **触发异常：** CPU 执行到该函数第一条指令时，触发了 Kprobe 预设的断点异常（`brk` 指令）。
+    
+2. **保存现场：** 内核陷入异常处理，将当前的寄存器状态（X0, X1, PC, SP 等）全部压栈，形成 `pt_regs`。
+    
+3. **运行回调：** 我们的 `handler_pre` 被调用，并收到了这个 `pt_regs` 的指针。
+    
+4. **修改内存：** 我们在 `handler_pre` 里执行 `regs->regs[0] = 100`。由于 `regs` 指向的是内核栈上的那块物理内存，我们实际上是修改了**备份好的寄存器快照**。
+    
+5. **恢复现场：** 回调结束后，内核执行异常返回指令。它从栈上把我们修改过的 `100` 加载到了真正的硬件寄存器 `X0` 中。
+    
+6. **继续执行：** CPU 返回到原函数执行。此时，原函数以为传入的参数就是 `100`。
