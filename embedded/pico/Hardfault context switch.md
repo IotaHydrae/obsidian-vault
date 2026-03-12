@@ -1,4 +1,8 @@
-```asm
+这个例子试图用mpu的机制，保护
+
+https://github.com/IotaHydrae/rpi-pico-lab/blob/main/psram-mpu/main.c
+
+```
  asm volatile(
         ".syntax unified    \n\t"
         ".global HardFault_Handler \n\t"
