@@ -10,6 +10,27 @@
 | `Animal` | **Trait 名称** - 指向实现了 `Animal` trait 的任何类型 |
 ## 具体含义
 
+```rust
+trait Animal {
+    fn speak(&self);
+}
+
+struct Dog;
+struct Cat;
+
+impl Animal for Dog {
+    fn speak(&self) {
+        println!("汪汪！");
+    }
+}
+
+impl Animal for Cat {
+    fn speak(&self) {
+        println!("喵喵！");
+    }
+}
+```
+
 **`&dyn Animal` 是一个 Trait 对象引用**，它表示：
 
 - ✅ 指向**任何实现了 `Animal` trait 的类型**
