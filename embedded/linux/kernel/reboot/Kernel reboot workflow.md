@@ -24,4 +24,4 @@ void kernel_restart(char *cmd)
 EXPORT_SYMBOL_GPL(kernel_restart);
 ```
 
-machine_restart 取决于具体架构的实现
+`machine_restart` 取决于具体架构的实现，以 ARM 架构为例，`machine_restart` 会关闭中断，然后调用 `do_kernel_restart`
