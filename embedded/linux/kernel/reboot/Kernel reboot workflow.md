@@ -47,4 +47,4 @@ void do_kernel_restart(char *cmd)
 }
 ```
 
-利用内核的通知机制，向注册进`restart_handler_list`的所有
+利用内核的通知机制，向注册进`restart_handler_list`通知链的所有对象发起调用，简单看下
