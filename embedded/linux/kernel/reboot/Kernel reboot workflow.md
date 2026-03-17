@@ -269,7 +269,55 @@ const struct machine_desc * __init setup_machine_fdt(void *dt_virt)
 }
 ```
 
-这是比较传统的做法，要得到
+这是比较传统的做法，要得到 `mdesc->restart`，你需要在 board-xxx 文件中定义 `DT_MACHINE_START`，这里有一个例子 [`arch/arm/mach-bcm/board_bcm281xx.c`](https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/mach-bcm/board_bcm281xx.c)
+
+```c
+static void bcm281xx_restart(enum reboot_mode mode, const char *cmd)
+{
+	uint32_t val;
+	void __iomem *base;
+	struct device_node *np_wdog;
+
+	np_wdog = of_find_compatible_node(NULL, NULL, "brcm,kona-wdt");
+	if (!np_wdog) {
+		pr_emerg("Couldn't find brcm,kona-wdt\n");
+		return;
+	}
+	base = of_iomap(np_wdog, 0);
+	of_node_put(np_wdog);
+	if (!base) {
+		pr_emerg("Couldn't map brcm,kona-wdt\n");
+		return;
+	}
+
+	/* Enable watchdog with short timeout (244us). */
+	val = readl(base + SECWDOG_OFFSET);
+	val &= SECWDOG_RESERVED_MASK | SECWDOG_WD_LOAD_FLAG_MASK;
+	val |= SECWDOG_EN_MASK | SECWDOG_SRSTEN_MASK |
+		(0x15 << SECWDOG_CLKS_SHIFT) |
+		(0x8 << SECWDOG_COUNT_SHIFT);
+	writel(val, base + SECWDOG_OFFSET);
+
+	/* Wait for reset */
+	while (1);
+}
+
+static void __init bcm281xx_init(void)
+{
+	kona_l2_cache_init();
+}
+
+static const char * const bcm281xx_dt_compat[] = {
+	"brcm,bcm11351",	/* Have to use the first number upstreamed */
+	NULL,
+};
+
+DT_MACHINE_START(BCM281XX_DT, "BCM281xx Broadcom Application Processor")
+	.init_machine = bcm281xx_init,
+	.restart = bcm281xx_restart,
+	.dt_compat = bcm281xx_dt_compat,
+MACHINE_END
+```
 ## 补充
 
 ### struct machine_desc
