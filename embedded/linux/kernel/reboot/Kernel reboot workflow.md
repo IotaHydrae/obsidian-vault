@@ -140,7 +140,7 @@ int unregister_restart_handler(struct notifier_block *nb)
 EXPORT_SYMBOL(unregister_restart_handler);
 ```
 
-根据注释中的说明我们可以得知，`restart_handler` 被调用时需要重启系统。
+根据注释中的说明我们可以得知，`restart_handler` 被调用时需要重启系统。还说了 `notifier_block` 的优先级设置，被注册的f'h
 
 接下来看一下注册 `restart_handler` 的例子
 
