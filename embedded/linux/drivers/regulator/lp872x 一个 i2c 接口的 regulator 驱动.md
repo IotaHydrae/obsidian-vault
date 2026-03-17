@@ -1,5 +1,5 @@
 
-在这个驱动中，你可以了解到 i2c + regmap + regulator 的组合
+在这个驱动中，你可以了解到 i2c + regmap 的使用，以及 regulator 驱动的结构
 
 这是驱动的 regmap_config
 
@@ -16,6 +16,7 @@ static const struct regmap_config lp872x_regmap_config = {
 ```c
 static int lp872x_probe(struct i2c_client *cl)
 {
+	struct lp872x *lp;
 	...
 	lp->regmap = devm_regmap_init_i2c(cl, &lp872x_regmap_config);
 	if (IS_ERR(lp->regmap)) {
@@ -69,4 +70,5 @@ ret = lp872x_read_byte(lp, LP872X_GENERAL_CFG, &val);
 #define LP872X_LDO5_VOUT		0x05
 ```
 
-上面讲的这些就是
+上面讲的这些就是 lp872x 这个驱动程序是如何通过 i2c regmap 读写设备寄存器的，接下来看看 regulator 驱动的部分
+
