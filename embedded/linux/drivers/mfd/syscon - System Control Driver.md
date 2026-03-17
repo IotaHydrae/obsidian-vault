@@ -111,7 +111,7 @@ static struct syscon *of_syscon_register(struct device_node *np, bool check_res)
 }
 ```
 
-在 st_reset_probe 函数中有 `st_restart_syscfg = (struct reset_syscfg *)match->data;`
+在 st_reset_probe 函数中有 `st_restart_syscfg = (struct reset_syscfg *)match->data;`，这里的data就是通过 of_match_device 拿到的
 
 ```c
 static struct reset_syscfg stih407_reset = {
@@ -121,6 +121,18 @@ static struct reset_syscfg stih407_reset = {
 	.mask_rst_msk = BIT(0)
 };
 
+static const struct of_device_id st_reset_of_match[] = {
+	{
+		.compatible = "st,stih407-restart",
+		.data = (void *)&stih407_reset,
+	},
+	{}
+};
+```
+
+然后在具体的 restart 函数中，使用驱动程序自定义的 reset_syscfg 访问对应
+
+```c
 static struct reset_syscfg *st_restart_syscfg;
 
 static int st_restart(struct notifier_block *this, unsigned long mode,
