@@ -146,11 +146,13 @@ EXPORT_SYMBOL(unregister_restart_handler);
 
 `restart_handler` 应该被注册在与架构无关的代码中，例如驱动中。一个典型的用例就是系统的重启能力由看门狗提供。
 
-系统中有可能存在多个 `restart_handler`，举个例子，其中一个负责重启整个系统，另一个只重启cpu。在这种情况下，那些只重启部分硬件的 `restart_handler` 应该以更低的优先级注册，以确保在没有其他重启系统的方法时才运行。
+系统中有可能存在多个 `restart_handler`，举个例子，其中一个负责重启整个系统，另一个只重启cpu。在这种情况下，那些只重启部分硬件的 `restart_handler` 应该以更低的优先级进行注册，以确保在**没有其他重启系统的方法**时才能够运行。
 
 接下来看一下注册 `restart_handler` 的例子
 
-1. [https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163](https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163)
+[https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163](https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163)
+
+如果你的dt提供了
 
 ```c
 static void (*__arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
