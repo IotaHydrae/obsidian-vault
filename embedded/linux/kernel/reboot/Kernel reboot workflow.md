@@ -206,7 +206,7 @@ void __init setup_arch(char **cmdline_p)
 }
 ```
 
-这里有一个疑问，`mdesc->restart` 是如何拿到的？首先通过 `mdesc = setup_machine_fdt(atags_vaddr);` 拿到 arm 架构特定的 machine_desc 结构体
+这里有一个疑问，`mdesc->restart` 是如何拿到的？首先通过 `mdesc = setup_machine_fdt(atags_vaddr);` 拿到 arm 架构特定的 machine_desc 结构体，传入的参数atags_vaddr 是设备树 bin 在内存中的虚拟地址，从 `__atags_pointer` 转换得来，它的值是设备树bin 在内存中的物理地址，由 bootloader设置，保存在 r2 寄存器中。
 
 ## 补充
 
