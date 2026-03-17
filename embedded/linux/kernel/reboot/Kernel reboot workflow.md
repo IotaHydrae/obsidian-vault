@@ -8,6 +8,12 @@ reboot()
          → __arm_pm_restart()
 ```
 
+glibc reboot 函数实现
+
+```c
+
+```
+
 reboot 系统调用
 
 ```c
@@ -23,11 +29,22 @@ SYSCALL_DEFINE4(reboot, int, magic1, int, magic2, unsigned int, cmd,
 		void __user *, arg)
 {
 	...
+	
+	/* Instead of trying to make the power_off code look like
+	 * halt when pm_power_off is not set do it the easy way.
+	 */
+	if ((cmd == LINUX_REBOOT_CMD_POWER_OFF) && !kernel_can_power_off()) {
+		poweroff_fallback_to_halt = true;
+		cmd = LINUX_REBOOT_CMD_HALT;
+	}
+	
 	switch (cmd) {
 	case LINUX_REBOOT_CMD_RESTART:
 		kernel_restart(NULL);
 		break;
+		
 		...
+		
 	case LINUX_REBOOT_CMD_RESTART2:
 		ret = strncpy_from_user(&buffer[0], arg, sizeof(buffer) - 1);
 		if (ret < 0) {
@@ -39,7 +56,9 @@ SYSCALL_DEFINE4(reboot, int, magic1, int, magic2, unsigned int, cmd,
 		kernel_restart(buffer);
 		break;
 		
+		...
 	}
+	
 	...
 }
 ```
