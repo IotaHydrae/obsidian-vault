@@ -368,4 +368,92 @@ struct machine_desc {
 };
 ```
 
-##
+### Rockchip restart handler register
+
+```c
+static void __iomem *rst_base;
+static unsigned int reg_restart;
+static void (*cb_restart)(void);
+static int rockchip_restart_notify(struct notifier_block *this,
+				   unsigned long mode, void *cmd)
+{
+	if (cb_restart)
+		cb_restart();
+
+	writel(0xfdb9, rst_base + reg_restart);
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block rockchip_restart_handler = {
+	.notifier_call = rockchip_restart_notify,
+	.priority = 128,
+};
+
+void
+rockchip_register_restart_notifier(struct rockchip_clk_provider *ctx,
+				   unsigned int reg,
+				   void (*cb)(void))
+{
+	int ret;
+
+	rst_base = ctx->reg_base;
+	reg_restart = reg;
+	cb_restart = cb;
+	ret = register_restart_handler(&rockchip_restart_handler);
+	if (ret)
+		pr_err("%s: cannot register restart handler, %d\n",
+		       __func__, ret);
+}
+EXPORT_SYMBOL_GPL(rockchip_register_restart_notifier);
+```
+
+### STMicroelectronics restart handler register
+
+```c
+static struct reset_syscfg *st_restart_syscfg;
+
+static int st_restart(struct notifier_block *this, unsigned long mode,
+		      void *cmd)
+{
+	/* reset syscfg updated */
+	regmap_update_bits(st_restart_syscfg->regmap,
+			   st_restart_syscfg->offset_rst,
+			   st_restart_syscfg->mask_rst,
+			   0);
+
+	/* unmask the reset */
+	regmap_update_bits(st_restart_syscfg->regmap,
+			   st_restart_syscfg->offset_rst_msk,
+			   st_restart_syscfg->mask_rst_msk,
+			   0);
+
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block st_restart_nb = {
+	.notifier_call = st_restart,
+	.priority = 192,
+};
+
+static int st_reset_probe(struct platform_device *pdev)
+{
+	struct device_node *np = pdev->dev.of_node;
+	const struct of_device_id *match;
+	struct device *dev = &pdev->dev;
+
+	match = of_match_device(st_reset_of_match, dev);
+	if (!match)
+		return -ENODEV;
+
+	st_restart_syscfg = (struct reset_syscfg *)match->data;
+
+	st_restart_syscfg->regmap =
+		syscon_regmap_lookup_by_phandle(np, "st,syscfg");
+	if (IS_ERR(st_restart_syscfg->regmap)) {
+		dev_err(dev, "No syscfg phandle specified\n");
+		return PTR_ERR(st_restart_syscfg->regmap);
+	}
+
+	return register_restart_handler(&st_restart_nb);
+}
+```
