@@ -11,6 +11,22 @@ static const struct regmap_config lp872x_regmap_config = {
 };
 ```
 
+驱动的 probe 函数里 alloc 了一个 i2c regmap
+
+```c
+static int lp872x_probe(struct i2c_client *cl)
+{
+	...
+	lp->regmap = devm_regmap_init_i2c(cl, &lp872x_regmap_config);
+	if (IS_ERR(lp->regmap)) {
+		ret = PTR_ERR(lp->regmap);
+		dev_err(&cl->dev, "regmap init i2c err: %d\n", ret);
+		return ret;
+	}
+	...
+}
+```
+
 然后驱动定义了通过 regmap 的读、写函数
 
 ```c
@@ -40,3 +56,17 @@ static inline int lp872x_write_byte(struct lp872x *lp, u8 addr, u8 data)
 ```c
 ret = lp872x_read_byte(lp, LP872X_GENERAL_CFG, &val);
 ```
+
+这是驱动定义的寄存器的一部分
+
+```c
+/* Registers : LP8720/8725 shared */
+#define LP872X_GENERAL_CFG		0x00
+#define LP872X_LDO1_VOUT		0x01
+#define LP872X_LDO2_VOUT		0x02
+#define LP872X_LDO3_VOUT		0x03
+#define LP872X_LDO4_VOUT		0x04
+#define LP872X_LDO5_VOUT		0x05
+```
+
+上面讲的这些就是
