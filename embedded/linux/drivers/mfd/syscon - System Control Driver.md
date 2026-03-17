@@ -166,3 +166,9 @@ static int st_restart(struct notifier_block *this, unsigned long mode,
 	return NOTIFY_DONE;
 }
 ```
+
+## 补充
+
+### syscon 驱动为什么放在 MFD 子系统
+
+syscon 是一个没有明确功能，但被多个子功能共享的 ”ji'cun'ji
