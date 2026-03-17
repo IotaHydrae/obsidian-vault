@@ -93,6 +93,7 @@ static struct regmap *device_node_get_regmap(struct device_node *np,
 }
 ```
 
+这是一个设备树节点的例子
 
 ```c
 syscfg: syscon@50000000 {
@@ -108,6 +109,18 @@ static struct syscon *of_syscon_register(struct device_node *np, bool check_res)
 	...
 	
 	regmap = regmap_init_mmio(NULL, base, &syscon_config);
+	if (IS_ERR(regmap)) {
+		pr_err("regmap init failed\n");
+		ret = PTR_ERR(regmap);
+		goto err_regmap;
+	}
+	
+	...
+	
+	syscon->regmap = regmap;
+	syscon->np = np;
+	
+	...
 }
 ```
 
@@ -130,7 +143,7 @@ static const struct of_device_id st_reset_of_match[] = {
 };
 ```
 
-然后在具体的 restart 函数中，使用驱动程序自定义的 reset_syscfg 访问对应
+然后在具体的 restart 函数中，使用驱动程序自定义的 reset_syscfg 进行 regmap 访问
 
 ```c
 static struct reset_syscfg *st_restart_syscfg;
