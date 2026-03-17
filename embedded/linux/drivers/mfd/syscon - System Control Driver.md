@@ -1,4 +1,28 @@
 ```c
+static int st_reset_probe(struct platform_device *pdev)
+{
+	struct device_node *np = pdev->dev.of_node;
+	const struct of_device_id *match;
+	struct device *dev = &pdev->dev;
+
+	match = of_match_device(st_reset_of_match, dev);
+	if (!match)
+		return -ENODEV;
+
+	st_restart_syscfg = (struct reset_syscfg *)match->data;
+
+	st_restart_syscfg->regmap =
+		syscon_regmap_lookup_by_phandle(np, "st,syscfg");
+	if (IS_ERR(st_restart_syscfg->regmap)) {
+		dev_err(dev, "No syscfg phandle specified\n");
+		return PTR_ERR(st_restart_syscfg->regmap);
+	}
+
+	return register_restart_handler(&st_restart_nb);
+}
+```
+
+```c
 struct regmap *syscon_regmap_lookup_by_phandle(struct device_node *np,
 					const char *property)
 {
@@ -38,32 +62,4 @@ struct regmap *syscon_node_to_regmap(struct device_node *np)
 	return device_node_get_regmap(np, of_device_is_compatible(np, "syscon"), true);
 }
 EXPORT_SYMBOL_GPL(syscon_node_to_regmap);
-
-static struct regmap *device_node_get_regmap(struct device_node *np,
-					     bool create_regmap,
-					     bool check_res)
-{
-	struct syscon *entry, *syscon = NULL;
-
-	mutex_lock(&syscon_list_lock);
-
-	list_for_each_entry(entry, &syscon_list, list)
-		if (entry->np == np) {
-			syscon = entry;
-			break;
-		}
-
-	if (!syscon) {
-		if (create_regmap)
-			syscon = of_syscon_register(np, check_res);
-		else
-			syscon = ERR_PTR(-EPROBE_DEFER);
-	}
-	mutex_unlock(&syscon_list_lock);
-
-	if (IS_ERR(syscon))
-		return ERR_CAST(syscon);
-
-	return syscon->regmap;
-}
 ```
