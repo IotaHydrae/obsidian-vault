@@ -206,7 +206,7 @@ void __init setup_arch(char **cmdline_p)
 }
 ```
 
-这里有一个疑问，`mdesc->restart` 是如何拿到的？
+这里有一个疑问，`mdesc->restart` 是如何拿到的？首先通过 `mdesc = setup_machine_fdt(atags_vaddr);` 拿到 arm 架构特定的 machine_desc 结构体
 
 ## 补充
 
