@@ -1,4 +1,6 @@
 
+syscon 即 System Control Driver，用来给
+
 ```c
 static int st_reset_probe(struct platform_device *pdev)
 {
@@ -196,5 +198,15 @@ syscon 没有且不主动创建子设备，内核不知道有哪些功能会用�
 
 ## 提问
 
-### 
+### `of_platform_device_create()` 什么时候触发
+
+### `EPROBE_DEFER` 在 driver model 里的传播路径
 ### `regmap` 的锁机制（spinlock vs mutex）
+
+### `syscon` vs `simple-mfd` 的区别
+
+### 为什么 `reset-controller` 有时直接挂在 syscon 上
+
+### `regmap-mmio` 的 cache / lock 实现
+
+### 多个 driver 同时访问 regmap 如何保证一致性
