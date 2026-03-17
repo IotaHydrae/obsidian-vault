@@ -8,6 +8,8 @@ reboot()
          → __arm_pm_restart()
 ```
 
+xi'tong'i'd
+
 ```c
 /**
  *	kernel_restart - reboot the system
@@ -459,6 +461,8 @@ static int st_reset_probe(struct platform_device *pdev)
 ```
 
 ### watchdog driver restart handler side register
+
+如果平台的 watchdog 驱动提供了 restart 接口，则会在看门狗设备注册时，执行如下逻辑
 
 ```c
 static int ___watchdog_register_device(struct watchdog_device *wdd)
