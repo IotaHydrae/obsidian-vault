@@ -171,4 +171,11 @@ static int st_restart(struct notifier_block *this, unsigned long mode,
 
 ### syscon 驱动为什么放在 MFD 子系统
 
-syscon 是一个没有明确功能，但被多个子功能共享的 ”ji'cun'ji
+syscon 是一个没有明确功能，但被多个子功能共享的 ”寄存器集合“，本质上是一个寄存器资源提供者，而不是一个单一功能设备。
+
+MFD 的典型模型是：一个物理设备，内部包含多个逻辑子模块，每个子模块由不同驱动负责。
+举几个例子： 
+- PMIC
+	- regulator
+	- gpio
+	- rtc
