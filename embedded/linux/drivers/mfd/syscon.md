@@ -1,5 +1,5 @@
 
-syscon 即 System Control Driver，用来给
+syscon 即 System Control Driver，用来给一系列 driver 提供统一的寄存器访问机制，例如 clk、reset。
 
 ```c
 static int st_reset_probe(struct platform_device *pdev)
