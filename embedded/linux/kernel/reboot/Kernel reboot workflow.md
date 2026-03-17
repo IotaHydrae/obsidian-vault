@@ -322,6 +322,8 @@ DT_MACHINE_START(BCM281XX_DT, "BCM281xx Broadcom Application Processor")
 	.dt_compat = bcm281xx_dt_compat,
 MACHINE_END
 ```
+
+
 ## 补充
 
 ### struct machine_desc
@@ -365,3 +367,5 @@ struct machine_desc {
 	void			(*restart)(enum reboot_mode, const char *);
 };
 ```
+
+##
