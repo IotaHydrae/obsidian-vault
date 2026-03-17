@@ -47,7 +47,27 @@ void do_kernel_restart(char *cmd)
 }
 ```
 
-利用内核的通知机制，向注册进`restart_handler_list`通知链的所有对象发起调用，简单看下 `restart_handler_list` 的原型和注册、销毁实现
+利用内核的通知机制，向注册进`restart_handler_list`通知链的所有`notifier_block`发起调用
+
+```c
+typedef	int (*notifier_fn_t)(struct notifier_block *nb,
+			unsigned long action, void *data);
+
+// https://elixir.bootlin.com/linux/v6.19.8/source/include/linux/notifier.h#L54
+struct notifier_block {
+	notifier_fn_t notifier_call;
+	struct notifier_block __rcu *next;
+	int priority;
+};
+
+// https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1091
+static struct notifier_block arm_restart_nb = {
+	.notifier_call = arm_restart,
+	.priority = 128,
+};
+```
+
+简单看下 `restart_handler_list` 的原型和注册、销毁实现
 
 [https://elixir.bootlin.com/linux/v6.19.8/source/kernel/reboot.c#L170](https://elixir.bootlin.com/linux/v6.19.8/source/kernel/reboot.c#L170)
 
