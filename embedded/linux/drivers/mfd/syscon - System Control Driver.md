@@ -192,4 +192,9 @@ syscfg: syscon@50000000 {
 - reboot
 - power domain
 
-syscon 没有且不主动创建子设备，内核不知道有哪些功能会用到这块寄存器，让xiao'fei'zhe
+syscon 没有且不主动创建子设备，内核不知道有哪些功能会用到这块寄存器，让 driver 自己通过 phandle 拿 regmap。syscon 不定义协议，只提供访问机制，如何访问应当由 driver 自行决定。
+
+## 提问
+
+### 
+### `regmap` 的锁机制（spinlock vs mutex）
