@@ -118,4 +118,4 @@ int unregister_restart_handler(struct notifier_block *nb)
 EXPORT_SYMBOL(unregister_restart_handler);
 ```
 
-接下来看一下
+接下来看一下 `restart_handler` 的实现
