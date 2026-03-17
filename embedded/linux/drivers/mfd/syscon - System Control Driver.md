@@ -173,9 +173,13 @@ static int st_restart(struct notifier_block *this, unsigned long mode,
 
 syscon 是一个没有明确功能，但被多个子功能共享的 ”寄存器集合“，本质上是一个寄存器资源提供者，而不是一个单一功能设备。
 
-MFD 的典型模型是：一个物理设备，内部包含多个逻辑子模块，每个子模块由不同驱动负责。
-举几个例子： 
-- PMIC
-	- regulator
-	- gpio
-	- rtc
+MFD 的典型模型是：一个物理设备，内部包含多个逻辑子模块，每个子模块由不同驱动负责。举个例子： 一个 PMIC 的驱动通常包含 regulator、gpio、rtc等子模块。这些子模块共享同一块寄存器区域，但在逻辑上是不同功能的驱动。
+
+我们再来看刚才的 syscon 设备树jie
+
+```c
+syscfg: syscon@50000000 {
+    compatible = "syscon";
+    reg = <0x50000000 0x1000>;
+};
+```
