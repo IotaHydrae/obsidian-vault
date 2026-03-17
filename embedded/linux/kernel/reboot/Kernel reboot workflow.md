@@ -140,6 +140,8 @@ int unregister_restart_handler(struct notifier_block *nb)
 EXPORT_SYMBOL(unregister_restart_handler);
 ```
 
+根据注释中的说明我们可以得知，restart_handler
+
 接下来看一下注册 `restart_handler` 的例子
 
 1. [https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163](https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163)
