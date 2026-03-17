@@ -139,3 +139,10 @@ EXPORT_SYMBOL(unregister_restart_handler);
 ```
 
 接下来看一下 `restart_handler` 的实现
+
+```c
+if (mdesc->restart) {
+		__arm_pm_restart = mdesc->restart;
+		register_restart_handler(&arm_restart_nb);
+	}
+```
