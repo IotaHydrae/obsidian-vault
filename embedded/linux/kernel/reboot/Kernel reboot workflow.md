@@ -5,7 +5,7 @@ reboot()
    → do_kernel_restart()
      → atomic_notifier_call_chain()
        → arm_restart_nb
-         → __arm_pm_restart()水水水水水水水水水水水水撒啊啊啊啊啊啊111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+         → __arm_pm_restart()
 ```
 
 ```c
@@ -180,6 +180,20 @@ static struct notifier_block arm_restart_nb = {
 
 void __init setup_arch(char **cmdline_p)
 {
+	const struct machine_desc *mdesc = NULL;
+	void *atags_vaddr = NULL;
+
+	if (__atags_pointer)
+		atags_vaddr = FDT_VIRT_BASE(__atags_pointer);
+
+	setup_processor();
+	if (atags_vaddr) {
+		mdesc = setup_machine_fdt(atags_vaddr);
+		if (mdesc)
+			memblock_reserve(__atags_pointer,
+					 fdt_totalsize(atags_vaddr));
+	}
+
 	...
 	
 	if (mdesc->restart) {
