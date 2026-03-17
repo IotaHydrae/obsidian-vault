@@ -47,6 +47,8 @@ void do_kernel_restart(char *cmd)
 }
 ```
 
+（如果对 `atomic_notifier_call_chain` 实现感兴趣的，可以看这里[https://elixir.bootlin.com/linux/v6.19.8/source/kernel/notifier.c#L217](https://elixir.bootlin.com/linux/v6.19.8/source/kernel/notifier.c#L217)）
+
 利用内核的通知机制，向注册进`restart_handler_list`通知链的所有`notifier_block`发起调用
 
 ```c
@@ -141,6 +143,8 @@ EXPORT_SYMBOL(unregister_restart_handler);
 接下来看一下注册 `restart_handler` 的例子
 
 ```c
+static void (*__arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
+
 if (mdesc->restart) {
 		__arm_pm_restart = mdesc->restart;
 		register_restart_handler(&arm_restart_nb);
