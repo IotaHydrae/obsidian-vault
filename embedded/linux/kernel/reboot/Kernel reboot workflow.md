@@ -144,7 +144,9 @@ EXPORT_SYMBOL(unregister_restart_handler);
 
 还说了 `notifier_block` 的优先级设置，被注册的函数应当立即重启系统，如果有多个函数被注册，则按照优先级决定谁先被调用。
 
-`restart_handler` 应该被注册在与架构无关的代码中，例如驱动中。一个典型的用例就是系统的重启能力
+`restart_handler` 应该被注册在与架构无关的代码中，例如驱动中。一个典型的用例就是系统的重启能力由看门狗提供。
+
+系统中有可能存在多个 `restart_handler`，举个例子，其中一个负责重启整个系统，另一个只重启cpu。在这种情况下，那些只重启
 
 接下来看一下注册 `restart_handler` 的例子
 
