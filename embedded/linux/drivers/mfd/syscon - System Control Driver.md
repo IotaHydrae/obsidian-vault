@@ -175,7 +175,7 @@ syscon 是一个没有明确功能，但被多个子功能共享的 ”寄存器
 
 MFD 的典型模型是：一个物理设备，内部包含多个逻辑子模块，每个子模块由不同驱动负责。举个例子： 一个 PMIC 的驱动通常包含 regulator、gpio、rtc等子模块。这些子模块共享同一块寄存器区域，但在逻辑上是不同功能的驱动。
 
-我们再来看刚才的 syscon 设备树jie
+我们再来看前面的 syscon 设备树节点
 
 ```c
 syscfg: syscon@50000000 {
@@ -183,3 +183,13 @@ syscfg: syscon@50000000 {
     reg = <0x50000000 0x1000>;
 };
 ```
+
+这块寄存器区域可能同时被如下模块调用：
+
+- clock
+- reset controller
+- pinctrl
+- reboot
+- power domain
+
+syscon 没有且不主动创建子设备，内核不知道有哪些功能会用到这块寄存器，让xiao'fei'zhe
