@@ -183,6 +183,7 @@ void __init setup_arch(char **cmdline_p)
 }
 ```
 
+这里有一个疑问，`mdesc->restart` 是如何拿到的？
 ## 补充
 
 ### struct machine_desc
