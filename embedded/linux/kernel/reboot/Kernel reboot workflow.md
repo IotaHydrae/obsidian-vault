@@ -67,7 +67,7 @@ static struct notifier_block arm_restart_nb = {
 };
 ```
 
-简单看下 `restart_handler_list` 的原型和注册、销毁实现
+简单看下 `restart_handler_list` 的原型、注册、销毁实现
 
 [https://elixir.bootlin.com/linux/v6.19.8/source/kernel/reboot.c#L170](https://elixir.bootlin.com/linux/v6.19.8/source/kernel/reboot.c#L170)
 
@@ -138,11 +138,11 @@ int unregister_restart_handler(struct notifier_block *nb)
 EXPORT_SYMBOL(unregister_restart_handler);
 ```
 
-接下来看一下 `restart_handler` 的实现
+接下来看一下注册 `restart_handler` 的例子
 
 ```c
 if (mdesc->restart) {
 		__arm_pm_restart = mdesc->restart;
 		register_restart_handler(&arm_restart_nb);
-	}
+}
 ```
