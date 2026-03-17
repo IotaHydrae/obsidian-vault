@@ -8,15 +8,30 @@ reboot()
          → __arm_pm_restart()
 ```
 
-glibc reboot 函数实现
+glibc reboot 函数实现，glibc/sysdeps/unix/sysv/linux/reboot.c
 
 ```c
-
+/* Call kernel with additional two arguments the syscall requires.  */
+int
+reboot (int howto)
+{
+  return INLINE_SYSCALL (reboot, 3, (int) 0xfee1dead, 672274793, howto);
+}
 ```
 
 reboot 系统调用
 
 ```c
+/*
+ * Magic values required to use _reboot() system call.
+ */
+
+#define	LINUX_REBOOT_MAGIC1	0xfee1dead
+#define	LINUX_REBOOT_MAGIC2	672274793
+#define	LINUX_REBOOT_MAGIC2A	85072278
+#define	LINUX_REBOOT_MAGIC2B	369367448
+#define	LINUX_REBOOT_MAGIC2C	537993216
+
 /*
  * Reboot system call: for obvious reasons only root may call it,
  * and even root needs to set up some magic numbers in the registers
@@ -29,6 +44,7 @@ SYSCALL_DEFINE4(reboot, int, magic1, int, magic2, unsigned int, cmd,
 		void __user *, arg)
 {
 	...
+	
 	
 	/* Instead of trying to make the power_off code look like
 	 * halt when pm_power_off is not set do it the easy way.
