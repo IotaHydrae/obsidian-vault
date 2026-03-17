@@ -457,3 +457,5 @@ static int st_reset_probe(struct platform_device *pdev)
 	return register_restart_handler(&st_restart_nb);
 }
 ```
+
+### Watchdog driver 
