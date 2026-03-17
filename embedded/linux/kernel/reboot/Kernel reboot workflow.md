@@ -142,11 +142,33 @@ EXPORT_SYMBOL(unregister_restart_handler);
 
 接下来看一下注册 `restart_handler` 的例子
 
+1. [https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163](https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/kernel/setup.c#L1163)
+
 ```c
 static void (*__arm_pm_restart)(enum reboot_mode reboot_mode, const char *cmd);
 
-if (mdesc->restart) {
-		__arm_pm_restart = mdesc->restart;
-		register_restart_handler(&arm_restart_nb);
+static int arm_restart(struct notifier_block *nb, unsigned long action,
+		       void *data)
+{
+	__arm_pm_restart(action, data);
+	return NOTIFY_DONE;
+}
+
+static struct notifier_block arm_restart_nb = {
+	.notifier_call = arm_restart,
+	.priority = 128,
+};
+
+void __init setup_arch(char **cmdline_p)
+{
+	...
+	
+	if (mdesc->restart) {
+			__arm_pm_restart = mdesc->restart;
+			register_restart_handler(&arm_restart_nb);
+	}
+	
+	...
+	
 }
 ```
