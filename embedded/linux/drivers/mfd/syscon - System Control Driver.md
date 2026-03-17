@@ -91,12 +91,53 @@ static struct regmap *device_node_get_regmap(struct device_node *np,
 
 	return syscon->regmap;
 }
+```
 
+
+```c
+syscfg: syscon@50000000 {
+    compatible = "syscon";
+    reg = <0x50000000 0x1000>;
+};
+```
+
+```c
 static struct syscon *of_syscon_register(struct device_node *np, bool check_res)
 {
 	struct regmap *regmap;
 	...
 	
 	regmap = regmap_init_mmio(NULL, base, &syscon_config);
+}
+```
+
+在 st_reset_probe 函数中有 `st_restart_syscfg = (struct reset_syscfg *)match->data;`
+
+```c
+static struct reset_syscfg stih407_reset = {
+	.offset_rst = STIH407_SYSCFG_4000,
+	.mask_rst = BIT(0),
+	.offset_rst_msk = STIH407_SYSCFG_4008,
+	.mask_rst_msk = BIT(0)
+};
+
+static struct reset_syscfg *st_restart_syscfg;
+
+static int st_restart(struct notifier_block *this, unsigned long mode,
+		      void *cmd)
+{
+	/* reset syscfg updated */
+	regmap_update_bits(st_restart_syscfg->regmap,
+			   st_restart_syscfg->offset_rst,
+			   st_restart_syscfg->mask_rst,
+			   0);
+
+	/* unmask the reset */
+	regmap_update_bits(st_restart_syscfg->regmap,
+			   st_restart_syscfg->offset_rst_msk,
+			   st_restart_syscfg->mask_rst_msk,
+			   0);
+
+	return NOTIFY_DONE;
 }
 ```
