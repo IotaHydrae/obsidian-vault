@@ -206,7 +206,25 @@ void __init setup_arch(char **cmdline_p)
 }
 ```
 
-这里有一个疑问，`mdesc->restart` 是如何拿到的？首先通过 `mdesc = setup_machine_fdt(atags_vaddr);` 拿到 arm 架构特定的 machine_desc 结构体，传入的参数atags_vaddr 是设备树 bin 在内存中的虚拟地址，从 `__atags_pointer` 转换得来，它的值是设备树bin 在内存中的物理地址，由 bootloader设置，保存在 r2 寄存器中。
+这里有一个疑问，`mdesc->restart` 是如何拿到的？首先通过 `mdesc = setup_machine_fdt(atags_vaddr);` 拿到 arm 架构特定的 `machine_desc` 结构体，传入的参数atags_vaddr 是设备树 bin 在内存中的虚拟地址，从 `__atags_pointer` 转换得来，它的值是设备树bin 在内存中的物理地址，由 bootloader 设置，保存在 r2 寄存器中。
+
+延伸一下设备树 match 的部分
+
+```c
+const struct machine_desc * __init setup_machine_fdt(void *dt_virt)
+{
+	const struct machine_desc *mdesc, *mdesc_best = NULL;
+
+	DT_MACHINE_START(GENERIC_DT, "Generic DT based system")
+		.l2c_aux_val = 0x0,
+		.l2c_aux_mask = ~0x0,
+	MACHINE_END
+	
+	...
+	
+	mdesc = of_flat_dt_match_machine(mdesc_best, arch_get_next_mach);
+}
+```
 
 ## 补充
 
