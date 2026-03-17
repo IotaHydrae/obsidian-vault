@@ -62,4 +62,40 @@ struct regmap *syscon_node_to_regmap(struct device_node *np)
 	return device_node_get_regmap(np, of_device_is_compatible(np, "syscon"), true);
 }
 EXPORT_SYMBOL_GPL(syscon_node_to_regmap);
+
+static struct regmap *device_node_get_regmap(struct device_node *np,
+					     bool create_regmap,
+					     bool check_res)
+{
+	struct syscon *entry, *syscon = NULL;
+
+	mutex_lock(&syscon_list_lock);
+
+	list_for_each_entry(entry, &syscon_list, list)
+		if (entry->np == np) {
+			syscon = entry;
+			break;
+		}
+
+	if (!syscon) {
+		if (create_regmap)
+			syscon = of_syscon_register(np, check_res);
+		else
+			syscon = ERR_PTR(-EPROBE_DEFER);
+	}
+	mutex_unlock(&syscon_list_lock);
+
+	if (IS_ERR(syscon))
+		return ERR_CAST(syscon);
+
+	return syscon->regmap;
+}
+
+static struct syscon *of_syscon_register(struct device_node *np, bool check_res)
+{
+	struct regmap *regmap;
+	...
+	
+	regmap = regmap_init_mmio(NULL, base, &syscon_config);
+}
 ```
