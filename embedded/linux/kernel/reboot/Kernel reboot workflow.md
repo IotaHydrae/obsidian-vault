@@ -146,7 +146,7 @@ EXPORT_SYMBOL(unregister_restart_handler);
 
 `restart_handler` 应该被注册在与架构无关的代码中，例如驱动中。一个典型的用例就是系统的重启能力由看门狗提供。
 
-系统中有可能存在多个 `restart_handler`，举个例子，其中一个负责重启整个系统，另一个只重启cpu。在这种情况下，那些只重启
+系统中有可能存在多个 `restart_handler`，举个例子，其中一个负责重启整个系统，另一个只重启cpu。在这种情况下，那些只重启部分硬件的 `restart_handler` 应该以更低的优先级注册，以确保在没有其他重启系统的方法时才运行。
 
 接下来看一下注册 `restart_handler` 的例子
 
