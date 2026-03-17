@@ -211,6 +211,42 @@ void __init setup_arch(char **cmdline_p)
 延伸一下设备树 match 的部分
 
 ```c
+/*
+ * Set of macros to define architecture features.  This is built into
+ * a table by the linker.
+ */
+#define MACHINE_START(_type,_name)			\
+static const struct machine_desc __mach_desc_##_type	\
+ __used							\
+ __section(".arch.info.init") = {			\
+	.nr		= MACH_TYPE_##_type,		\
+	.name		= _name,
+
+#define MACHINE_END				\
+};
+
+#define DT_MACHINE_START(_name, _namestr)		\
+static const struct machine_desc __mach_desc_##_name	\
+ __used							\
+ __section(".arch.info.init") = {			\
+	.nr		= ~0,				\
+	.name		= _namestr,
+
+#endif
+
+static const void * __init arch_get_next_mach(const char *const **match)
+{
+	static const struct machine_desc *mdesc = __arch_info_begin;
+	const struct machine_desc *m = mdesc;
+
+	if (m >= __arch_info_end)
+		return NULL;
+
+	mdesc++;
+	*match = m->dt_compat;
+	return m;
+}
+
 const struct machine_desc * __init setup_machine_fdt(void *dt_virt)
 {
 	const struct machine_desc *mdesc, *mdesc_best = NULL;
@@ -223,9 +259,17 @@ const struct machine_desc * __init setup_machine_fdt(void *dt_virt)
 	...
 	
 	mdesc = of_flat_dt_match_machine(mdesc_best, arch_get_next_mach);
+	
+	...
+	
+	/* Change machine number to match the mdesc we're using */
+	__machine_arch_type = mdesc->nr;
+	
+	return mdesc;
 }
 ```
 
+这是比较传统的做法，要得到
 ## 补充
 
 ### struct machine_desc
@@ -268,27 +312,4 @@ struct machine_desc {
 	void			(*init_late)(void);
 	void			(*restart)(enum reboot_mode, const char *);
 };
-
-/*
- * Set of macros to define architecture features.  This is built into
- * a table by the linker.
- */
-#define MACHINE_START(_type,_name)			\
-static const struct machine_desc __mach_desc_##_type	\
- __used							\
- __section(".arch.info.init") = {			\
-	.nr		= MACH_TYPE_##_type,		\
-	.name		= _name,
-
-#define MACHINE_END				\
-};
-
-#define DT_MACHINE_START(_name, _namestr)		\
-static const struct machine_desc __mach_desc_##_name	\
- __used							\
- __section(".arch.info.init") = {			\
-	.nr		= ~0,				\
-	.name		= _namestr,
-
-#endif
 ```
