@@ -1,3 +1,4 @@
+
 ```c
 static int st_reset_probe(struct platform_device *pdev)
 {
