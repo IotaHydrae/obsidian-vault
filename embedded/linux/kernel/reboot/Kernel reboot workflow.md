@@ -458,4 +458,37 @@ static int st_reset_probe(struct platform_device *pdev)
 }
 ```
 
-### Watchdog driver 
+### watchdog driver restart handler side register
+
+```c
+static int ___watchdog_register_device(struct watchdog_device *wdd)
+{
+	...
+	
+	if (wdd->ops->restart) {
+		wdd->restart_nb.notifier_call = watchdog_restart_notifier;
+
+		ret = register_restart_handler(&wdd->restart_nb);
+		if (ret)
+			pr_warn("watchdog%d: Cannot register restart handler (%d)\n",
+				wdd->id, ret);
+	}
+	
+	...	
+}
+
+static int watchdog_restart_notifier(struct notifier_block *nb,
+				     unsigned long action, void *data)
+{
+	struct watchdog_device *wdd = container_of(nb, struct watchdog_device,
+						   restart_nb);
+
+	int ret;
+
+	ret = wdd->ops->restart(wdd, action, data);
+	if (ret)
+		return NOTIFY_BAD;
+
+	return NOTIFY_DONE;
+}
+```
