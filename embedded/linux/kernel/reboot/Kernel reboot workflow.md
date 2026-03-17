@@ -8,7 +8,41 @@ reboot()
          → __arm_pm_restart()
 ```
 
-xi'tong'i'd
+reboot 系统调用
+
+```c
+/*
+ * Reboot system call: for obvious reasons only root may call it,
+ * and even root needs to set up some magic numbers in the registers
+ * so that some mistake won't make this reboot the whole machine.
+ * You can also set the meaning of the ctrl-alt-del-key here.
+ *
+ * reboot doesn't sync: do that yourself before calling this.
+ */
+SYSCALL_DEFINE4(reboot, int, magic1, int, magic2, unsigned int, cmd,
+		void __user *, arg)
+{
+	...
+	switch (cmd) {
+	case LINUX_REBOOT_CMD_RESTART:
+		kernel_restart(NULL);
+		break;
+		...
+	case LINUX_REBOOT_CMD_RESTART2:
+		ret = strncpy_from_user(&buffer[0], arg, sizeof(buffer) - 1);
+		if (ret < 0) {
+			ret = -EFAULT;
+			break;
+		}
+		buffer[sizeof(buffer) - 1] = '\0';
+
+		kernel_restart(buffer);
+		break;
+		
+	}
+	...
+}
+```
 
 ```c
 /**
