@@ -256,6 +256,8 @@ const struct machine_desc * __init setup_machine_fdt(void *dt_virt)
 		.l2c_aux_mask = ~0x0,
 	MACHINE_END
 	
+	mdesc_best = &__mach_desc_GENERIC_DT;
+	
 	...
 	
 	mdesc = of_flat_dt_match_machine(mdesc_best, arch_get_next_mach);
@@ -268,6 +270,8 @@ const struct machine_desc * __init setup_machine_fdt(void *dt_virt)
 	return mdesc;
 }
 ```
+
+`of_flat_dt_match_machine` 做的就是根据传入的 `mdesc_best` ，寻找最匹配的
 
 这是比较传统的做法，要得到 `mdesc->restart`，你需要在 board-xxx 文件中定义 `DT_MACHINE_START`，这里有一个例子 [`arch/arm/mach-bcm/board_bcm281xx.c`](https://elixir.bootlin.com/linux/v6.19.8/source/arch/arm/mach-bcm/board_bcm281xx.c)
 
