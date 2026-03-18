@@ -8,7 +8,9 @@
 ollama run qwen2.5-coder:14b
 ```
 
-对于其他显卡，可以使用 （不支持 tools 调用）
+对于显存容量低点的显卡，可以使用 
+
+- deepseek-r1:8b （不支持 tools 调用）
 
 ```shell
 ollama run deepseek-r1:8b
