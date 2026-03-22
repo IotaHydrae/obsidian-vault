@@ -64,3 +64,27 @@ static_call(my_call)();
 
 👉 这里不是函数指针调用，而是一个 **patched call 指令**
 
+## Example
+
+```c
+// 定义
+DEFINE_STATIC_CALL(my_call, default_func);
+
+// 默认函数
+void default_func(void)
+{
+    printk("default\n");
+}
+
+// 新函数
+void new_func(void)
+{
+    printk("new\n");
+}
+
+// 使用
+static_call(my_call)();
+
+// 更新
+static_call_update(my_call, new_func);
+```
