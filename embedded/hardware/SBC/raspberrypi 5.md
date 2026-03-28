@@ -38,7 +38,7 @@ Threads fairness:
 
 ## Memory
 
-### 3677.94 MiB/sec
+### default is 3677.94 MiB/sec
 
 ```zsh
 ❯ sysbench memory run
@@ -79,3 +79,5 @@ Threads fairness:
     events (avg/stddev):           37666358.0000/0.00
     execution time (avg/stddev):   4.9119/0.00
 ```
+
+### SDRAM_BANKLOW=1
