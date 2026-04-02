@@ -26,3 +26,24 @@ struct component_ops {
 		       void *master_data);
 };
 ```
+
+### Example
+
+```c
+static const struct component_ops sun4i_tcon_ops = {
+	.bind	= sun4i_tcon_bind,
+	.unbind	= sun4i_tcon_unbind,
+};
+
+static int sun4i_tcon_probe(struct platform_device *pdev)
+{
+	...
+	
+	return component_add(&pdev->dev, &sun4i_tcon_ops);
+}
+
+static void sun4i_tcon_remove(struct platform_device *pdev)
+{
+	component_del(&pdev->dev, &sun4i_tcon_ops);
+}
+```
