@@ -27,7 +27,9 @@ struct component_ops {
 };
 ```
 
-### Example
+## Example
+
+一个 compoment 例子
 
 ```c
 static const struct component_ops sun4i_tcon_ops = {
