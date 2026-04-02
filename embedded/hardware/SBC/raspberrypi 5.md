@@ -79,5 +79,3 @@ Threads fairness:
     events (avg/stddev):           37666358.0000/0.00
     execution time (avg/stddev):   4.9119/0.00
 ```
-
-### SDRAM_BANKLOW=1
