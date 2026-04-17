@@ -1,4 +1,37 @@
 
+```bash
+wget -O gitea https://dl.gitea.com/gitea/1.25.5/gitea-1.25.5-linux-amd64
+chmod +x gitea
+```
+
+### 准备环境​
+
+```bash
+adduser \
+   --system \
+   --shell /bin/bash \
+   --gecos 'Git Version Control' \
+   --group \
+   --disabled-password \
+   --home /home/git \
+   git
+```
+
+### 创建所需的目录结构​
+
+```bash
+mkdir -p /var/lib/gitea/{custom,data,log}
+chown -R git:git /var/lib/gitea/
+chmod -R 750 /var/lib/gitea/
+mkdir /etc/gitea
+chown root:git /etc/gitea
+chmod 770 /etc/gitea
+```
+
+> 暂时为用户git设置写权限，以便Web安装程序可以写入配置文件。安装完成后，建议将权限设置为只读：
+> 
+> chmod 750 /etc/giteachmod 640 /etc/gitea/app.ini
+
 ```ini
 [Unit]
 Description=Gitea (Git with a cup of tea)
