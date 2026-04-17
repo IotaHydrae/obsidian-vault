@@ -1,9 +1,12 @@
 
+# 从二进制安装
+
+## 下载​
+
 ```bash
 wget -O gitea https://dl.gitea.com/gitea/1.25.5/gitea-1.25.5-linux-amd64
 chmod +x gitea
 ```
-
 ### 准备环境​
 
 ```bash
@@ -29,8 +32,19 @@ chmod 770 /etc/gitea
 ```
 
 > 暂时为用户git设置写权限，以便Web安装程序可以写入配置文件。安装完成后，建议将权限设置为只读：
-> 
-> chmod 750 /etc/giteachmod 640 /etc/gitea/app.ini
+
+```bash
+chmod 750 /etc/gitea
+chmod 640 /etc/gitea/app.ini
+```
+
+### 将 Gitea 二进制文件复制到全局位置​
+
+```bash
+cp gitea /usr/local/bin/gitea
+```
+
+### 创建服务文件自动启动Gitea
 
 ```ini
 [Unit]
