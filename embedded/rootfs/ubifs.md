@@ -1,8 +1,9 @@
-本文所使用的硬件为 Industio 的 Purple Pi R1 （64 + 128M） 
+本文所使用的开发板为 Industio 的 Purple Pi R1 （64 + 128M） 
 
-|     |           |
-| --- | --------- |
-| CPU | SSD201 2x |
+| 部件  | 规格                            |
+| --- | ----------------------------- |
+| 开发板 | Purple Pi R1 （IDO-SBC2D06）    |
+| CPU | SSD201 2 x Cortex-A7 @ 1.2GHz |
  ## /proc/cmdline
 
 这是一个启动参数的示例，设备从 SPI NAND 启动
