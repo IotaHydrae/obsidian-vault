@@ -110,7 +110,7 @@ mtd12: 070c0000 00020000 "UBI"
 ```bash
 # ubinfo -a
 UBI version:                    1
-Count of UBI devices:           1
+Count of UBI devices:           1    # 只有一个UBI设备 ubi0，对应 /dev/mtd12(UBI)
 UBI control device major/minor: 10:59
 Present UBI devices:            ubi0
 
@@ -159,3 +159,20 @@ State:       OK
 Name:        appconfigs
 Character device major/minor: 246:4
 ```
+
+**Logical eraseblock size（LEB 逻辑擦除块）**
+
+`126976 bytes / 124KiB`
+
+物理擦除块 PEB=128KiB (0x20000)，UBI 预留 4KiB 存放卷头 / 擦除计数元数据，可用空间 124KiB。
+
+cmdline `ubi.mtd=UBI,2048` 里的 `2048` = NAND page size 页大小。
+
+1. 总容量与空闲
+    
+
+- 总 LEB：902 块 ≈ 109.2MiB（对应 mtd12 总 112.75MB，差值是 UBI 预留块 + 坏块保留区）
+- 空闲 LEB：41 块 ≈ 4.9MiB（剩余可分配给卷的空间）
+- 预留 PEB：20 块（UBI 预留，用于替换未来出现的坏块，NAND 容错）
+- 坏块数：0，当前闪存无物理坏块
+- 最大擦除计数：467，这块 UBI 分区整体擦写次数很低，闪存寿命充足
