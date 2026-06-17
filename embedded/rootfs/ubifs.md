@@ -2,8 +2,11 @@
 
 | 部件  | 规格                            |
 | --- | ----------------------------- |
-| 开发板 | Purple Pi R1 （IDO-SBC2D06）    |
+| 开发板 | Purple Pi R1 IDO-SBC2D06）     |
 | CPU | SSD201 2 x Cortex-A7 @ 1.2GHz |
+| RAM | SIP 64MB DDR2                 |
+| ROM | On board 128MB SPI NAND Flash |
+
  ## /proc/cmdline
 
 这是一个启动参数的示例，设备从 SPI NAND 启动
@@ -210,3 +213,11 @@ NAND Flash硬件
         └─ ubi0_3 appconfigs → 配置文件挂载目录
 ```
 
+## Buildroot rootfs.tar.gz 制作 UBIFS / UBI 完整流程
+
+先对应你设备硬件参数（前面抓出来的固定值，直接复用）：
+
+- NAND page size `-m` = 2048（cmdline `ubi.mtd=UBI,2048`）
+- 物理擦除块 PEB = 0x20000 = 131072 Byte（`/proc/mtd erasesize`）
+- 逻辑擦除块 LEB `-e` = PEB - 2*page = 131072 - 4096 = **126976**
+- UBI 总分区 mtd12 总 LEB=902 块，`-c` 最大填 902 即可
