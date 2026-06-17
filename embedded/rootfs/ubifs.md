@@ -1,3 +1,4 @@
+本文所使用的硬件为 Industio 的 Purple Pi R1 （64 + 128M） 
 ## /proc/cmdline
 
 这是一个启动参数的示例，设备从 SPI NAND 启动
@@ -98,3 +99,58 @@ mtd12: 070c0000 00020000 "UBI"
     内核启动参数 `ubi.mtd=UBI` 就是绑定 `mtd12`，在这个 112.75MB 大分区内创建 UBI 卷：
     
     - `rootfs`：UBIFS 根文件系统，系统应用、配置、数据都存在这里。
+
+## uninfo -a
+
+```bash
+# ubinfo -a
+UBI version:                    1
+Count of UBI devices:           1
+UBI control device major/minor: 10:59
+Present UBI devices:            ubi0
+
+ubi0
+Volumes count:                           4
+Logical eraseblock size:                 126976 bytes, 124.0 KiB
+Total amount of logical eraseblocks:     902 (114532352 bytes, 109.2 MiB)
+Amount of available logical eraseblocks: 41 (5206016 bytes, 4.9 MiB)
+Maximum count of volumes                 128
+Count of bad physical eraseblocks:       0
+Count of reserved physical eraseblocks:  20
+Current maximum erase counter value:     467
+Minimum input/output unit size:          2048 bytes
+Character device major/minor:            246:0
+Present volumes:                         0, 1, 2, 3
+
+Volume ID:   0 (on ubi0)
+Type:        dynamic
+Alignment:   1
+Size:        678 LEBs (86089728 bytes, 82.1 MiB)
+State:       OK
+Name:        rootfs
+Character device major/minor: 246:1
+-----------------------------------
+Volume ID:   1 (on ubi0)
+Type:        dynamic
+Alignment:   1
+Size:        83 LEBs (10539008 bytes, 10.0 MiB)
+State:       OK
+Name:        miservice
+Character device major/minor: 246:2
+-----------------------------------
+Volume ID:   2 (on ubi0)
+Type:        dynamic
+Alignment:   1
+Size:        42 LEBs (5332992 bytes, 5.0 MiB)
+State:       OK
+Name:        customer
+Character device major/minor: 246:3
+-----------------------------------
+Volume ID:   3 (on ubi0)
+Type:        dynamic
+Alignment:   1
+Size:        34 LEBs (4317184 bytes, 4.1 MiB)
+State:       OK
+Name:        appconfigs
+Character device major/minor: 246:4
+```
