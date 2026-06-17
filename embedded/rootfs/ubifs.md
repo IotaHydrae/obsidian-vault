@@ -168,11 +168,45 @@ Character device major/minor: 246:4
 
 cmdline `ubi.mtd=UBI,2048` 里的 `2048` = NAND page size 页大小。
 
-1. 总容量与空闲
-    
+**总容量与空闲**
 
 - 总 LEB：902 块 ≈ 109.2MiB（对应 mtd12 总 112.75MB，差值是 UBI 预留块 + 坏块保留区）
 - 空闲 LEB：41 块 ≈ 4.9MiB（剩余可分配给卷的空间）
 - 预留 PEB：20 块（UBI 预留，用于替换未来出现的坏块，NAND 容错）
 - 坏块数：0，当前闪存无物理坏块
 - 最大擦除计数：467，这块 UBI 分区整体擦写次数很低，闪存寿命充足
+
+### Volume 0：rootfs（根文件系统，系统主分区）
+
+- 678 LEB ≈ 82.1MiB
+- 内核启动参数 `root=ubi:rootfs` 挂载此卷为 `/`，存放系统内核、基础工具、库、系统服务
+- 设备节点：`/dev/ubi0_0`
+
+### Volume 1：miservice（媒体业务分区）
+
+- 83 LEB ≈ 10.0MiB
+- IPC 摄像头专用：录像缓存、媒体进程持久数据、码流缓存、算法模型临时文件
+
+### Volume 2：customer（客户业务数据）
+
+- 42 LEB ≈ 5.0MiB
+- 厂商定制业务、设备绑定信息、用户自定义业务数据、第三方插件数据
+
+### Volume 3：appconfigs（应用配置分区）
+
+- 34 LEB ≈ 4.1MiB
+- 所有应用配置文件：网络参数、摄像头参数、账号密码、报警规则、开机配置
+    
+    优势：和 rootfs 分离，升级系统 rootfs 时不会覆盖用户配置
+
+```
+NAND Flash硬件
+└── MTD分区 mtd0~mtd11 (IPL/UBOOT/KERNEL/RECOVERY等裸分区)
+└── mtd12 "UBI" 整块容器分区
+    └── ubi0 UBI设备
+        ├─ ubi0_0 rootfs  → 挂载 /  (UBIFS根文件系统)
+        ├─ ubi0_1 miservice → 媒体业务挂载目录
+        ├─ ubi0_2 customer  → 客户数据挂载目录
+        └─ ubi0_3 appconfigs → 配置文件挂载目录
+```
+
