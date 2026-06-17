@@ -1,5 +1,9 @@
 本文所使用的硬件为 Industio 的 Purple Pi R1 （64 + 128M） 
-## /proc/cmdline
+
+|     |           |
+| --- | --------- |
+| CPU | SSD201 2x |
+ ## /proc/cmdline
 
 这是一个启动参数的示例，设备从 SPI NAND 启动
 
