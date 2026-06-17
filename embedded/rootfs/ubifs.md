@@ -9,7 +9,7 @@
 
  ## /proc/cmdline
 
-这是一个启动参数的示例，设备从 SPI NAND 启动
+这是一个设备从 SPI NAND 启动的参数示例
 
 ```
 ubi.mtd=UBI,2048 root=ubi:rootfs rw rootfstype=ubifs init=/linuxrc rootwait=1 mtdparts=nand0:384k@1280k(IPL0),384k(IPL1),384k(IPL_CUST0),384k(IPL_CUST1),768k(UBOOT0),768k(UBOOT1),256k(ENV),256k(ENV1),0x20000(KEY_CUST),0x60000(LOGO),0x500000(KERNEL),0x500000(RECOVERY),-(UBI)
@@ -36,21 +36,21 @@ ubi.mtd=UBI,2048 root=ubi:rootfs rw rootfstype=ubifs init=/linuxrc rootwait=1 mt
 
 表格
 
-|分区名|大小|偏移|作用|
-|---|---|---|---|
-|IPL0|384k|1280k|一级启动固件 A 备份|
-|IPL1|384k|接续|一级启动固件 B 备份|
-|IPL_CUST0|384k|接续|客户定制一级固件 A|
-|IPL_CUST1|384k|接续|客户定制一级固件 B|
-|UBOOT0|768k|接续|U-Boot 引导程序 A|
-|UBOOT1|768k|接续|U-Boot 引导程序 B（双备份防砖）|
-|ENV|256k|接续|U-Boot 环境变量分区 A|
-|ENV1|256k|接续|U-Boot 环境变量分区 B|
-|KEY_CUST|0x20000(128k)|接续|客户密钥、加密证书存储|
-|LOGO|0x60000(384k)|接续|开机 logo 图片资源|
-|KERNEL|0x500000(5MB)|接续|主系统内核镜像|
-|RECOVERY|0x500000(5MB)|接续|恢复模式内核（OTA / 救砖）|
-|UBI|剩余全部空间|接续|UBI 总分区，存放 UBIFS 根文件系统 rootfs|
+| 分区名       | 大小            | 偏移    | 作用                            |
+| --------- | ------------- | ----- | ----------------------------- |
+| IPL0      | 384k          | 1280k | 一级启动固件 A 备份                   |
+| IPL1      | 384k          | 接续    | 一级启动固件 B 备份                   |
+| IPL_CUST0 | 384k          | 接续    | 客户定制一级固件 A                    |
+| IPL_CUST1 | 384k          | 接续    | 客户定制一级固件 B                    |
+| UBOOT0    | 768k          | 接续    | U-Boot 引导程序 A                 |
+| UBOOT1    | 768k          | 接续    | U-Boot 引导程序 B（双备份防砖）          |
+| ENV       | 256k          | 接续    | U-Boot 环境变量分区 A               |
+| ENV1      | 256k          | 接续    | U-Boot 环境变量分区 B               |
+| KEY_CUST  | 0x20000(128k) | 接续    | 客户密钥、加密证书存储                   |
+| LOGO      | 0x60000(384k) | 接续    | 开机 logo 图片资源                  |
+| KERNEL    | 0x500000(5MB) | 接续    | 主系统内核镜像                       |
+| RECOVERY  | 0x500000(5MB) | 接续    | 恢复模式内核（OTA / 救砖）              |
+| UBI       | 剩余全部空间        | 接续    | UBI 总分区，存放 UBIFS 根文件系统 rootfs |
 
 `-(UBI)` 语法含义：NAND 所有剩余未分配空间全部划给 UBI 分区。
 
