@@ -38,3 +38,11 @@ scp images/kernel root@192.168.50.243:~/
 ```bash
 dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 ```
+
+## 屏幕配置
+
+在编写本文时，我所使用的屏幕s
+## 参考文档
+
+[Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
+[PurPle-Pi-R1接口调试教程手册]([PurPle-Pi-R1接口调试教程手册](https://industio.yuque.com/mdtih8/lgnqq1/nlecxxl09gxt9wdz?singleDoc#jVrW8))
