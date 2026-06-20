@@ -55,7 +55,7 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 vim sdk/verify/application/disp_init/src/sstardisp.c
 ```
 
-其中包含了很多屏幕配置头文件，里面bao'han'le
+src目录下有很多屏幕配置的头文件，其中描述了屏幕以及芯片本身的显示参数，例如接口类型，时序信息，极性，通道swap等。
 ### 修改引脚复用模式
 
 ```bash
