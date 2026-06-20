@@ -55,7 +55,7 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 vim kernel/arch/arm/boot/dts/infinity2m-ssc011a-s01a-padmux-rgb565-rmii-doublenet.dtsi
 ```
 
-SDK将默认接口模式改成了MIPI，我们这里需要改成RGB，你可以在设备树里找到如下被注释的内容，将如下内容取消注释，同时将MIPI相关的注释掉。
+SDK将默认接口模式改成了MIPI，我们这里需要改成RGB，你可以在设备树里找到如下被注释的内容，将如下内容取消注释，同时将MIPI相关的注释掉（PAD_TTL6 ~ PAD_TTL15）。
 
 ```c
 //for RGB565
