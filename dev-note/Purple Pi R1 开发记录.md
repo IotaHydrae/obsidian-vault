@@ -47,7 +47,7 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 
 板子提供的SDK中默认的屏幕配置是一块分辨率为 720x1280 的 MIPI 屏。
 
-再来聊聊软件部分
+再来聊聊软件部分，我们使用的是一块RGB接口的LCD，这类屏幕通常会在规格书中提供一组时序参数
 
 ### 修改引脚复用模式
 
@@ -55,7 +55,7 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 vim kernel/arch/arm/boot/dts/infinity2m-ssc011a-s01a-padmux-rgb565-rmii-doublenet.dtsi
 ```
 
-SDK里将接口改成了MIPI模式，我们需要改成RGB，你可以在设备树里找到如下被注释的内容，将如下内容取消注释，同时将MIPI相关的注释掉。
+SDK将默认接口模式改成了MIPI，我们这里需要改成RGB，你可以在设备树里找到如下被注释的内容，将如下内容取消注释，同时将MIPI相关的注释掉。
 
 ```c
 //for RGB565
