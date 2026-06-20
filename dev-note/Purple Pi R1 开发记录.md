@@ -95,7 +95,7 @@ arm-linux-gnueabihf-gcc -D_GNU_SOURCE -o  /home/developer/industio/PurPle-Pi-R1-
 ## 开发过程中遇到的问题
 
 ```
-切换屏幕接口后为RGB后，LCD_DATA6 ~ LCD_DATA15 还是 MIPI 的功能，其他引脚
+切换屏幕接口后为 RGB 后，LCD_DATA6 ~ LCD_DATA15 依然是 MIPI 复用的功能，剩余其他引脚已经切换为 RGB 功能，例如 HS,VS,DE, CLK, LCD_DATA0 ~ LCD_DATA5(Panel_R整个通道和Panel_G2)，目前还不知道是什么原因导致的。
 ```
 ## 参考文档
 
