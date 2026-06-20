@@ -95,3 +95,5 @@ arm-linux-gnueabihf-gcc -D_GNU_SOURCE -o  /home/developer/industio/PurPle-Pi-R1-
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
 [PurPle-Pi-R1接口调试教程手册]([PurPle-Pi-R1接口调试教程手册](https://industio.yuque.com/mdtih8/lgnqq1/nlecxxl09gxt9wdz?singleDoc#jVrW8))
+
+[Panel开发参考 - SigmaStarDocs](https://wx.comake.online/doc/syg27dk2rkls-SSD20X/customer/development/software/Px/zh/display/P2/panel.html)
