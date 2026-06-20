@@ -41,7 +41,9 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 
 ## 屏幕配置
 
-在编写本文时，我所使用的屏幕s
+在编写本文时，我所使用的屏幕是一块 4.0 寸的 RGB接口的屏幕，分辨率 480x480，型号为 D395C930UV0。板子提供的SDK中默认的屏幕配置是一块分辨率为 720x1280 的 MIPI 屏。
+
+### 修改
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
