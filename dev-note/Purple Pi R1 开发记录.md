@@ -32,3 +32,9 @@ adding dns 192.168.50.1
 ```
 scp images/kernel root@192.168.50.243:~/
 ```
+
+回到板子一侧，更新pen'qu
+
+```bash
+dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
+```
