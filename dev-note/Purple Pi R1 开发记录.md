@@ -85,6 +85,10 @@ SDK将默认接口模式改成了MIPI，我们这里需要改成RGB，你可以�
 ```bash
 ./build/mkfs.ubifs -F -r /home/developer/industio/PurPle-Pi-R1-main-250121/project/image/output/customer -o /home/developer/industio/PurPle-Pi-R1-main-250121/project/image/output/images/customer.ubifs -m 0x800 -e 126976 -c `./build/calc_nand_mfs.sh customer 0x800 0x20000 0 0x500000`
 ```
+
+```bash
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/customer/lib:/lib:/config/wifi/
+```
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
