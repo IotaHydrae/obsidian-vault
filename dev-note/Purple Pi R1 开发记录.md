@@ -47,7 +47,7 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 
 板子提供的SDK中默认的屏幕配置是一块分辨率为 720x1280 的 MIPI 屏。
 
-再来聊聊软件部分，
+再来聊聊软件部分
 
 ### 修改引脚复用模式
 
@@ -55,7 +55,30 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 vim kernel/arch/arm/boot/dts/infinity2m-ssc011a-s01a-padmux-rgb565-rmii-doublenet.dtsi
 ```
 
+```c
+//for RGB565
+//<PAD_TTL0            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT00 >,
+//<PAD_TTL1            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT01 >,
+//<PAD_TTL2            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT02 >,
+//<PAD_TTL3            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT03 >,
+//<PAD_TTL4            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT04 >,
+//<PAD_TTL5            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT05 >,
+//<PAD_TTL6            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT06 >,
+//<PAD_TTL7            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT07 >,
+//<PAD_TTL8            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT08 >,
+//<PAD_TTL9            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT09 >,
+//<PAD_TTL10           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT10 >,
+//<PAD_TTL11           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT11 >,
+//<PAD_TTL12           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT12 >,
+//<PAD_TTL13           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT13 >,
+//<PAD_TTL14           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT14 >,
+//<PAD_TTL15           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT15 >,
 
+//<PAD_TTL24           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_CLK >,
+//<PAD_TTL25           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_HSYNC >,
+//<PAD_TTL26           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_VSYNC >,
+//<PAD_TTL27           PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DE >,
+```
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
