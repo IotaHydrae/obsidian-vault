@@ -55,6 +55,8 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 vim kernel/arch/arm/boot/dts/infinity2m-ssc011a-s01a-padmux-rgb565-rmii-doublenet.dtsi
 ```
 
+
+
 ```c
 //for RGB565
 //<PAD_TTL0            PINMUX_FOR_TTL_MODE_3      MDRV_PUSE_TTL_DOUT00 >,
