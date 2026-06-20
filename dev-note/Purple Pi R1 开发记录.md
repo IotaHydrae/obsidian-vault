@@ -91,6 +91,12 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/customer/lib:/lib:/confi
 
 arm-linux-gnueabihf-gcc -D_GNU_SOURCE -o  /home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/src/disp_init  /home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/src/disp_init.c /home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/src/sstardisp_xingfan.c /home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/src/bmp.c /home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/src/jpeg.c -rdynamic -funwind-tables -I. -I/home/developer/industio/PurPle-Pi-R1-main-250121/project/release/include -I/home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/inc -I/home/developer/industio/PurPle-Pi-R1-main-250121/project/kbuild/4.9.84/i2m/include/uapi/mstar -L/home/developer/industio/PurPle-Pi-R1-main-250121/project/release/nvr/i2m/common/glibc/8.2.1/mi_libs/dynamic  -L/home/developer/industio/PurPle-Pi-R1-main-250121/project/release/nvr/i2m/common/glibc/8.2.1/mi_libs/static -L/home/developer/industio/PurPle-Pi-R1-main-250121/project/../sdk/verify/application/disp_init/lib -L/usr/local/lib -Wl,-Bdynamic -ljpeg -lz  -lmi_disp -lmi_panel  -lmi_gfx -lmi_sys -lmi_common -ldl  -Wl,-Bdynamic -lstdc++ -ldl  -lpthread -lm
 ```
+
+## 开发过程中遇到的问题
+
+```
+切换屏幕接口后为RGB后，LCD_DATA6 ~ LCD_DATA15 还是 MIPI 的功能，其他引脚
+```
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
