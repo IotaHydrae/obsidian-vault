@@ -47,8 +47,15 @@ dd if=/root/kernel of=/dev/mtdblock10 bs=1M && reboot
 
 板子提供的SDK中默认的屏幕配置是一块分辨率为 1024x600 的 MIPI 屏。
 
-再来聊聊软件部分，我们使用的是一块RGB接口的LCD，这类屏幕通常会在规格书中提供一组时序参数
+我们使用的是一块RGB接口的LCD，这类屏幕通常会在规格书中提供一组时序参数
 
+再来聊聊软件部分，你需要修改 panel 配置，在sdk中有一个示例
+
+```
+vim sdk/verify/application/disp_init/src/sstardisp.c
+```
+
+其中包含了很多屏幕配置头文件，里面bao'han'le
 ### 修改引脚复用模式
 
 ```bash
@@ -94,9 +101,10 @@ arm-linux-gnueabihf-gcc -D_GNU_SOURCE -o  /home/developer/industio/PurPle-Pi-R1-
 
 ## 开发过程中遇到的问题
 
-```
-切换屏幕接口后为 RGB 后，LCD_DATA6 ~ LCD_DATA15 依然是 MIPI 复用的功能，剩余其他引脚已经切换为 RGB 功能，例如 HS,VS,DE, CLK, LCD_DATA0 ~ LCD_DATA5(Panel_R整个通道和Panel_G2)，目前还不知道是什么原因导致的。
-```
+### 屏幕接口切换异常
+
+切换屏幕接口后为 RGB 后，LCD_DATA6 ~ LCD_DATA15 依然是 MIPI 复用的功能，剩余其他引脚已经切换为 RGB 功能，例如 HS, VS, DE, CLK, LCD_DATA0 ~ LCD_DATA5(Panel_R整个通道和Panel_G2)，目前还不知道是什么原因导致的。
+
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
