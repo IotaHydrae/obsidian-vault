@@ -1,14 +1,34 @@
 
+| 部件  | 规格                            |
+| --- | ----------------------------- |
+| 开发板 | Purple Pi R1 IDO-SBC2D06）     |
+| CPU | SSD201 2 x Cortex-A7 @ 1.2GHz |
+| RAM | SIP 64MB DDR2                 |
+| ROM | On board 128MB SPI NAND Flash |
+
 ## 固件烧录
 
-首先给板子配网，将网线连接至靠近USB-A口的网口，然后执行
+首先给板子配网，将网线连接至靠近USB-A口的网口(eth0)，然后执行
 
 ```bash
 udhcpc -i eth0
 ```
 
+如果网络连接正常，可以观察到如下日志
+
+```bash
+udhcpc: started, v1.31.1
+udhcpc: sending discover
+udhcpc: sending select for 192.168.50.243
+udhcpc: lease of 192.168.50.243 obtained, lease time 86400
+deleting routers
+adding dns 192.168.50.1
+```
+
 ### kernel
 
+单独更新 kernel 分区，可以参考如下步骤，首先在PC端将编译好的 kernel 镜像拷贝至板子中
+
 ```
-scp
+scp images/kernel root@192.168.50.243:~/
 ```
