@@ -148,6 +148,24 @@ export PATH=/home/developer/industio/PurPle-Pi-R1-main-250121/toolchain/gcc-arm-
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/customer/lib:/lib:/config/wifi/
 ```
+
+fbdev的分辨率保存在板子上的 /config/fbdev.ini 文件中，如果你没有重新烧录文件系统，需要修改这个文件并重启来更新fbdev的分辨率。
+
+```ini
+[FB_DEVICE]
+FB_HWLAYER_ID = 1
+FB_HWWIN_ID = 0
+FB_HWLAYER_DST = 3
+FB_HWWIN_FORMAT = 5
+FB_HWLAYER_OUTPUTCOLOR = 1
+FB_WIDTH = 480
+FB_HEIGHT = 480
+FB_TIMMING_WIDTH = 1920
+FB_TIMMING_HEIGHT = 1080
+FB_MMAP_NAME = E_MMAP_ID_FB
+FB_BUFFER_LEN = 4096
+#unit:Kbyte,4096=4M, fbdev.ko alloc size = FB_BUFFER_LEN*1024
+```
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
