@@ -105,6 +105,36 @@ arm-linux-gnueabihf-gcc -D_GNU_SOURCE -o  /home/developer/industio/PurPle-Pi-R1-
 
 切换屏幕接口后为 RGB 后，LCD_DATA6 ~ LCD_DATA15 依然是 MIPI 复用的功能，剩余其他引脚已经切换为 RGB 功能，例如 HS, VS, DE, CLK, LCD_DATA0 ~ LCD_DATA5(Panel_R整个通道和Panel_G2)，目前还不知道是什么原因导致的。
 
+目前定位到 uboot 的一个名为 bootlogo 的命令，会将引脚初始化为MIPI模式
+
+```c
+SigmaStar # bootlogo 0 0 0 0 0
+LOGO in flash offset=0x4e0000 size=0x60000
+
+NAND read: device 0 offset 0x4e0000, size 0x60000
+Time:45388 us, speed:8663 KB/s
+ 393216 bytes read: OK
+Header count 3
+Name DISP Sub head sz 56 total sz 3496 node cnt 9
+DB Table and setting match.
+First offset 2972 out buf size 0x300000 out buf addr 0x3300000 en 1
+Total size 3552
+Total sz 39128, Node cnt 1
+_BootJpdYuvCtrl 1477::  Create Decompress struct
+_BootJpdYuvCtrl 1485::  Set memory buffer as source
+_BootJpdYuvCtrl 1497::  Read the JPEG header
+_BootJpdYuvCtrl 1510::  Initiate JPEG decompression
+_BootJpdYuvCtrl 1522::  Image is 1024 by 600 with 3 components
+_BootJpdYuvCtrl 1534:: BmpBuffer: 0x23b3c4a8
+_BootJpdYuvCtrl 1547:: Start reading scanlines
+_BootJpdYuvCtrl 1557:: Done reading scanlines
+_BootJpdYuvCtrl 1562:: End of decompression
+_BootLogoYuv444ToYuv420 1201:: 444 To 422, In:23b3c4a8, Out:23300000, Width:1024, Height:600
+_BootDispCtrl 1661, H(160 10 160 1024) V(12 2 23 600) Fps:60
+_BootDispCtrl 1787, PnlLink:11
+```
+
+命令源码位于 `boot/cmd/`
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
