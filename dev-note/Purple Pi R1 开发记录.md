@@ -145,6 +145,8 @@ saveenv
 
 ```bash
 export PATH=/home/developer/industio/PurPle-Pi-R1-main-250121/toolchain/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin:$PATH
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib:/customer/lib:/lib:/config/wifi/
 ```
 ## 参考文档
 
