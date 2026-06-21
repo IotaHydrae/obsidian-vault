@@ -134,7 +134,12 @@ _BootDispCtrl 1661, H(160 10 160 1024) V(12 2 23 600) Fps:60
 _BootDispCtrl 1787, PnlLink:11
 ```
 
-命令源码位于 `boot/cmd/`
+命令源码位于 `boot/common/cmd_bootlogo.c`
+
+```shell
+setenv
+saveenv
+```
 ## 参考文档
 
 [Purple Pi R1 烧录流程]([Purple Pi R1 烧录流程](https://industio.yuque.com/mdtih8/lgnqq1/yezo0g3ragnuar79?singleDoc#ePYxu))
