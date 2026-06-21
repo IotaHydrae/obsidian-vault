@@ -136,9 +136,15 @@ _BootDispCtrl 1787, PnlLink:11
 
 命令源码位于 `boot/common/cmd_bootlogo.c`
 
+先禁用 bootlogo
+
 ```shell
-setenv
+setenv bootcmd 
 saveenv
+```
+
+```bash
+export PATH=/home/developer/industio/PurPle-Pi-R1-main-250121/toolchain/gcc-arm-8.2-2018.08-x86_64-arm-linux-gnueabihf/bin:$PATH
 ```
 ## 参考文档
 
