@@ -32,8 +32,14 @@ Number  Start (sector)    End (sector)  Size Name
      3           65536        61069247 29.0G rootfs
 ```
 
-烧录时，如果是 SPI-NAND启动，使用
+烧录时，如果从 SPI-NAND启动，使用
 
 ```
-dd
+dd if=/root/zboot.img of=/dev/mtdblockx bs=1M
+```
+
+从SD卡启动则使用
+
+```
+dd if=/root/zboot.img of=/dev/mmcblk0p2 bs=1M
 ```
