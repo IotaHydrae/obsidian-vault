@@ -6,12 +6,10 @@
 adb push kernel-6.1/zboot.img /root
 ```
 
-如果设备使用 SPI-NAND 启动，你可以通过如下方式确定内核处于哪一个分区
+如果设备使用 SPI-NAND 启动，你可以通过如下方式确定内核镜像处于哪一个分区
 
 ```bash
 cat /proc/mtd
-
-dd if=/root/zboot.img of=/dev/mtdblockx bs=1M
 ```
 
 对于 SD 卡启动的
@@ -32,4 +30,10 @@ Number  Start (sector)    End (sector)  Size Name
      1            8192           16383 4096K uboot
      2           16384           40959 12.0M boot
      3           65536        61069247 29.0G rootfs
+```
+
+烧录时，如果是 SPI-NAND启动，使用
+
+```
+dd
 ```
