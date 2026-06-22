@@ -41,8 +41,8 @@ dd if=/root/zboot.img of=/dev/mtdblockx bs=1M && sync
 从SD卡启动则使用
 
 ```bash
-dd if=/root/zboot.img of=/dev/mmcblk0p2 bs=1M && sync
+dd if=/root/zboot.img of=/dev/mmcblk0p1 bs=1M && sync
 
 # 或者
-dd if=/root/zboot.img of=/dev/mtdblockx bs=1M oflag=direct
+dd if=/root/zboot.img of=/dev/mmcblk0p1 bs=1M oflag=direct
 ```
