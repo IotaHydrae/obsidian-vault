@@ -34,8 +34,12 @@ Number  Start (sector)    End (sector)  Size Name
 
 烧录时，如果从 SPI-NAND启动，使用
 
-```
+```bash
 dd if=/root/zboot.img of=/dev/mtdblockx bs=1M && sync
+
+# 或者
+
+oflag=direct
 ```
 
 从SD卡启动则使用
