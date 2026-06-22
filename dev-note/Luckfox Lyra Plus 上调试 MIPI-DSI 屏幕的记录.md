@@ -36,14 +36,13 @@ Number  Start (sector)    End (sector)  Size Name
 
 ```bash
 dd if=/root/zboot.img of=/dev/mtdblockx bs=1M && sync
-
-# 或者
-
-oflag=direct
 ```
 
 从SD卡启动则使用
 
-```
+```bash
 dd if=/root/zboot.img of=/dev/mmcblk0p2 bs=1M && sync
+
+# 或者
+dd if=/root/zboot.img of=/dev/mtdblockx bs=1M oflag=direct
 ```
