@@ -9,7 +9,11 @@ adb push kernel-6.1/zboot.img /root
 如果设备使用 SPI-NAND 启动，你可以通过如下方式确定内核镜像处于哪一个分区
 
 ```bash
-cat /proc/mtd
+root@luckfox:/# cat /proc/mtd 
+dev:    size   erasesize  name
+mtd0: 00400000 00020000 "uboot"
+mtd1: 00c00000 00020000 "boot"
+mtd2: 0df60000 00020000 "rootfs"
 ```
 
 对于 SD 卡启动的
