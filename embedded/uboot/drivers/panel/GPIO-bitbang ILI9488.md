@@ -1,4 +1,5 @@
 要启用 panel 驱动，首先要开启一些前置 CONFIG：
+
 ```c
 CONFIG_VIDEO=y
 ```
