@@ -27,6 +27,7 @@ config VIDEO_LCD_ILITEK_ILI9488
 ```
 
 使用编辑器打开源文件 `drivers/video/ili9488.c`，来到文件底部，可以看到如下内容：
+
 ```c
 struct panel_ops ili9488_ops = {
 	.enable_backlight   = ili9488_panel_enable_backlight,
@@ -51,6 +52,7 @@ U_BOOT_DRIVER(ili9488) = {
 分别表示panel驱动实现的接口，dts标识，驱动的定义。
 
 panel_ops 的这两个接口会被 video 驱动中的这两个函数调用
+
 ```c
 /**
  * panel_enable_backlight() - Enable/disable the panel backlight
