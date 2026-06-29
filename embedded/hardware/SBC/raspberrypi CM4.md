@@ -2,9 +2,7 @@
 
 ### CPU
 
-#### 1.5GHz
-
-events per second:  5855.53
+#### 1.5GHz events per second:  5855.53
 
 ```bash
 pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
@@ -40,7 +38,7 @@ Threads fairness:
     execution time (avg/stddev):   9.9945/0.00
 ```
 
-#### 2.0 GHz
+#### 2.0 GHz events per second:  7803.38
 
 ```bash
 pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
@@ -78,7 +76,7 @@ Threads fairness:
 
 ### Memory
 
-1967.24 MiB/sec
+#### 1967.24 MiB/sec
 
 ```bash
 pi@cm4-pi:~ $ sysbench memory run
