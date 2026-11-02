@@ -1,3 +1,20 @@
+# DLN-2：MFD 子设备与各子系统的注册
+
+> 父驱动将 GPIO、I2C、SPI 和 ADC 暴露为 MFD 子设备，各子驱动再向对应内核子系统注册设备。
+
+| 子设备 | probe 关键注册点 | 需要追踪的状态 |
+| --- | --- | --- |
+| GPIO | `devm_gpiochip_add_data()` | 可睡眠访问、GPIO 及事件回调 |
+| I2C | `i2c_add_adapter()` | 端口、adapter 算法和失败时禁用 |
+| SPI | `devm_spi_register_controller()` | host 分配、传输回调、runtime PM |
+| ADC | `iio_device_register()` | 通道、trigger、buffer 和事件解绑 |
+
+父驱动通过 `mfd_cell.platform_data` 传递端口信息，使用 `mfd_add_hotplug_devices()` 创建子设备。`devm_*` 仅管理对应资源，事件回调及非托管注册仍需清理。
+
+以下为对比四种 probe 的深度源码参考；GPIO、SPI 和 ADC 指向 v6.18.4，I2C 链接未固定版本。开发时应统一到同一目标源码树。
+
+## GPIO
+
 https://elixir.bootlin.com/linux/v6.18.4/source/drivers/gpio/gpio-dln2.c
 
 ```c
@@ -70,6 +87,8 @@ static int dln2_gpio_probe(struct platform_device *pdev)
 }
 ```
 
+## I2C
+
 https://elixir.bootlin.com/linux/latest/source/drivers/i2c/busses/i2c-dln2.c
 
 ```c
@@ -123,6 +142,8 @@ out_disable:
 	return ret;
 }
 ```
+
+## SPI
 
 https://elixir.bootlin.com/linux/v6.18.4/source/drivers/spi/spi-dln2.c
 
@@ -231,6 +252,8 @@ exit_free_host:
 	return ret;
 }
 ```
+
+## ADC
 
 https://elixir.bootlin.com/linux/v6.18.4/source/drivers/iio/adc/dln2-adc.c
 

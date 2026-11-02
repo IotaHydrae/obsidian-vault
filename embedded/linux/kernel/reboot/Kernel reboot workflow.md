@@ -1,12 +1,29 @@
-```c
-reboot()
- → kernel_restart()
-   → kernel_restart_prepare()
-   → do_kernel_restart()
-     → atomic_notifier_call_chain()
-       → arm_restart_nb
-         → __arm_pm_restart()
+# Linux 重启路径与 Restart Handler
+
+> 普通重启先执行内核关闭流程，再进入架构的 `machine_restart()`；支持 restart notifier 的架构由已注册 handler 完成硬件复位。
+
+```text
+reboot syscall
+  → kernel_restart()
+    → kernel_restart_prepare() / restart prepare handlers
+    → migrate_to_reboot_cpu() / syscore_shutdown()
+    → machine_restart()             [架构相关]
+      → do_kernel_restart()         [此 ARM 实现]
+        → restart_handler_list
+          → 板级、时钟或 watchdog restart handler
 ```
+
+## 排查要点
+
+- `machine_desc.restart` 是 ARM 的一条注册路径；Rockchip、ST 和 watchdog 等驱动也可注册 handler。
+- handler 按 priority 排序；链路可能被停止，成功复位也不会返回，不能保证所有回调都执行。
+- restart handler 位于 atomic notifier 路径，不能睡眠；普通关机准备使用的 reboot notifier 是另一条链。
+- 检查 probe、handler 注册、优先级以及 reset/clock/MMIO 条件，再定位硬件动作。
+
+下文保留系统调用、ARM machine descriptor 和三种驱动的深度源码参考，链接版本以 v6.19.8 为主。实际开发统一使用目标内核源码；接口语义也可对照 [Linux v6.1 reboot.c](https://github.com/torvalds/linux/blob/v6.1/kernel/reboot.c)。
+
+## 系统调用与关闭流程
+
 
 glibc reboot 函数实现，glibc/sysdeps/unix/sysv/linux/reboot.c
 
@@ -286,7 +303,7 @@ void __init setup_arch(char **cmdline_p)
 }
 ```
 
-这里有一个疑问，`mdesc->restart` 是如何拿到的？首先通过 `mdesc = setup_machine_fdt(atags_vaddr);` 拿到 arm 架构特定的 `machine_desc` 结构体，传入的参数atags_vaddr 是设备树 bin 在内存中的虚拟地址，从 `__atags_pointer` 转换得来，它的值是设备树bin 在内存中的物理地址，由 bootloader 设置，保存在 r2 寄存器中。
+ARM32 通过 `setup_machine_fdt(atags_vaddr)` 选择 `machine_desc`，其 `dt_compat` 与设备树根节点匹配。bootloader 传入的 DTB 地址遵循 ARM32 启动协议；不能把 r2 的约定套到其他架构。
 
 延伸一下设备树 match 的部分
 

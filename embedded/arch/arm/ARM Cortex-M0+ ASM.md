@@ -1,4 +1,10 @@
-## AAPCS func call example
+# Cortex-M0+ AAPCS 调用示例
+
+> 该反汇编示例中，前四个 `int` 参数由 `r0`–`r3` 传入，返回值放在 `r0`，`bx lr` 返回调用者。
+
+反汇编地址仅对应此示例构建；具体指令随编译器、优化选项及 ABI 变化。
+
+## 示例
 
 ```c
 int __attribute__((noinline)) add_val(int a, int b, int c, int d)

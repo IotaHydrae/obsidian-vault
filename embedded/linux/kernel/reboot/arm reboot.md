@@ -1,3 +1,9 @@
+# ARM32 `machine_restart()`
+
+> 此实现关闭本地中断、停止其他 CPU，再调用 restart handler；硬件未复位时输出失败日志并停留。
+
+此处为架构源码参考，适用版本须与目标内核对照。SMP 系统需要协调所有 CPU 的复位，不能将单核软跳转视为整机重启。完整调用与注册关系见 [[Kernel reboot workflow]]。
+
 ```c
 /*
  * Restart requires that the secondary CPUs stop performing any activity

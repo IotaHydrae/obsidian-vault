@@ -1,4 +1,12 @@
-要启用 panel 驱动，首先要开启一些前置 CONFIG：
+# U-Boot：GPIO 模拟 I8080 初始化 ILI9488
+
+> panel 驱动读取接线、初始化 ILI9488 并设置绘制窗口，video 驱动再配置控制器输出和 framebuffer。
+
+以下为自定义分支的接口示例，需与 [[suniv I8080]] 配套核对；省略了部分初始化和错误处理，不是完整驱动。
+
+## 配置与注册
+
+启用视频和对应 panel、背光及 GPIO 依赖：
 
 ```c
 CONFIG_VIDEO=y
@@ -26,7 +34,7 @@ config VIDEO_LCD_ILITEK_ILI9488
 	MIPI DBI Type A/B 16-bit 8080 panel.
 ```
 
-使用编辑器打开源文件 `drivers/video/ili9488.c`，来到文件底部，可以看到如下内容：
+Makefile 的目标对应 `drivers/video/ilitek-ili9488.c`，文件名需保持一致。注册示例：
 
 ```c
 struct panel_ops ili9488_ops = {
@@ -181,4 +189,4 @@ skip_panel_setup:
 #endif
 ```
 
-在 `uclass_get_device ` 调用后，panel驱动的probe函数就会被执行，如果 video 驱动并未找到 panel 驱动，则会尝试输出一组默认时序，不过这通常不会正确的驱动屏幕，除非屏幕被外部的设备事先初始化好了。
+该 video 示例通过 `uclass_get_device(UCLASS_PANEL, 0, ...)` 选择第一个 panel 并触发所需探测；这是此驱动的行为，不代表所有 video 驱动。完整路径位于此分支的 `drivers/video/suniv/`。实际实现须检查内存分配、GPIO 申请、初始化和时序获取的返回值，再决定是否继续输出。

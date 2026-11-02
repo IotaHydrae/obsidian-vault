@@ -1,140 +1,20 @@
+# Linux `mm_struct` 与进程地址空间
 
-既然提到了 **VMA**，那就不得不提它的“总管家” —— **`mm_struct`**。
+> `mm_struct` 描述一个用户虚拟地址空间；多个任务可共享它，而 VMA 描述该地址空间中的各个区域。
 
-如果说 VMA 是书里的各个“章节”，那么 `mm_struct`（Memory Descriptor）就是这本**书的封面和索引页**。它是 Linux 内核中用于描述一个进程完整虚拟地址空间的核心数据结构。
+- 用户任务的 `task_struct->mm` 指向地址空间；使用 `CLONE_VM` 的线程可以共享同一个 `mm_struct`，不是每个任务都独占一个。
+- 内核线程通常没有自己的用户 `mm`，其 `mm` 为 `NULL`；`active_mm` 与地址空间切换有关，具体借用和切换行为依赖内核实现。
+- `pgd` 是内核持有的顶级页表指针；CPU 使用的页表基址和切换操作依赖架构。VMA 与页表分别描述映射属性和地址转换，不是一回事。
+- `start_code`、`end_code`、`start_data`、`end_data`、`start_brk`、`brk`、`start_stack` 等字段记录地址空间相关边界；`total_vm` 是虚拟内存页数统计。
 
----
+## 版本和边界
 
-### 1. `mm_struct` 在哪里？
+Linux 4.19 使用 VMA 链表和红黑树；当前内核文档描述的是 Maple Tree。排查时查看目标版本的 `include/linux/mm_types.h` 和 `mm/` 源码，不要假设 `mmap` / `mm_rb` 字段存在。
 
-在 Linux 的进程控制块 `task_struct`（也就是进程的身份证）中，有一个指针指向了 `mm_struct`。
+普通 `fork()` 通常为子进程建立独立的 `mm_struct`，并对适用的私有映射采用写时复制；页表项和映射类型的细节依赖实现。共享映射和 `CLONE_VM` 不能一概套用这个结论。
 
-- **用户进程：** 拥有唯一的 `mm_struct`。
-    
-- **内核线程：** 没有自己的用户空间地址，因此它的 `mm` 指针通常为 `NULL`（它借用上一个进程的地址空间，记录在 `active_mm` 中）。
-    
+ELF 的 `.bss` 不能简单等同于 `[end_data, start_brk]`：对齐、加载布局和随机化等会影响边界。定位时结合 ELF program headers、对应内核加载代码和 `/proc/<pid>/maps`；解析 `/proc/<pid>/stat` 时按接口说明核对字段号。
 
-### 2. 核心字段解析
+相关条目：[[VMA]]、[[virt to phy]]。
 
-`mm_struct` 里面装满了关于进程内存的统计信息和控制结构，最重要的包括：
-
-|**字段**|**作用**|
-|---|---|
-|**`mmap`**|指向 VMA 链表的头节点，用于线性遍历。|
-|**`mm_rb`**|指向 VMA **红黑树**的根节点，用于快速查找（如查找某个地址属于哪个 VMA）。|
-|**`pgd`**|指向**全局页目录**（Page Global Directory）。这是硬核所在，它指向了该进程的物理页表。|
-|**`start_code`, `end_code`**|代码段的起止虚拟地址。|
-|**`start_brk`, `brk`**|堆（Heap）的起止地址。`brk` 就是我们常说的堆顶。|
-|**`start_stack`**|栈（Stack）的起始地址。|
-|**`total_vm`**|进程总共保留的虚拟内存页数。|
-
----
-
-### 3. VMA 与 mm_struct 的层级关系
-
-这三者的关系构成了 Linux 内存管理的基石：
-
-1. **`task_struct`** 代表进程。
-    
-2. 它指向 **`mm_struct`**，代表整个虚拟内存大地图。
-    
-3. `mm_struct` 下挂载了多个 **`vm_area_struct` (VMA)**，代表地图上的各个功能区。
-    
-4. 当 CPU 访问一个地址时，通过 `mm_struct->pgd` 找到**页表**，最终映射到真实的**物理内存（Page Frame）**。
-    
-
-### 4. 为什么要有两种方式（链表 vs 红黑树）管理 VMA？
-
-这是为了在不同场景下压榨性能：
-
-- **链表：** 当内核需要把进程的所有内存布局告诉用户（比如 `cat /proc/PID/maps`）时，直接顺着链表走一遍最简单。
-    
-- **红黑树：** 当程序产生一个地址访问，内核需要快速判断“这个地址合法吗？它落在哪块 VMA 里？”时，$O(\log n)$ 复杂度的红黑树查找比 $O(n)$ 的链表遍历快得多。
-    
-
----
-
-### 5. 写时复制（COW）中的 mm_struct
-
-当你调用 `fork()` 创建子进程时，内核会为子进程创建一个新的 `mm_struct`。
-
-- 最初，子进程的 `mm_struct` 几乎完全复制父进程的内容（包括 VMA 的范围）。
-    
-- 但是，它们指向的物理页表被标记为**只读**。
-    
-- 只有当其中一个进程尝试修改内存时，才会触发缺页异常，进行真正的物理拷贝。
-
-
-### BSS 段的位置
-
-在现代 Linux 内核中，BSS 段的边界信息被整合到了 **`start_data`** 和 **`end_data`** 以及 **`brk`** 之间。
-
-实际上，内核在 `mm_struct` 中维护的是以下这组字段：
-
-- **`start_code`**, **`end_code`**: 代码段范围。
-    
-- **`start_data`**, **`end_data`**: 数据段范围（通常包含已初始化的数据）。
-    
-- **`start_brk`**: 堆的起始地址。
-    
-- **`brk`**: 当前堆顶地址。
-    
-
-**BSS 段的位置其实就在 `end_data` 和 `start_brk` 之间。**
-
-早期的内核或某些特定架构的补丁确实曾显式定义过 `start_bss`，但在现代通用的 `include/linux/mm_types.h` 定义中，BSS 被视为数据段的延伸。内核加载器（如 ELF loader）在加载程序时，会通过 ELF 文件头获取 BSS 的大小，然后：
-
-1. 将 `end_data` 设置为已初始化数据的末尾。
-    
-2. 将 `start_brk` 设置在 BSS 结束后的位置。
-    
-3. **BSS 段 = `[end_data, start_brk]`**。
-
-### 3. 如何验证？
-
-虽然结构体里没有这两个名字，但你可以通过内核提供的接口或 `/proc` 文件系统看到它们的踪迹。
-
-如果你查看内核导出的 `TASK_SIZE` 相关的宏或者 ELF 加载逻辑（`fs/binfmt_elf.c`），你会看到内核是如何计算并清零这段“数据段之后、堆之前的内存”的。
-
-在 `/proc/[pid]/stat` 文件中，第 23 到 25 个字段分别对应：
-
-- `start_code`
-    
-- `end_code`
-    
-- `start_stack` 而 BSS 的具体信息则隐藏在 `maps` 或 `smaps` 文件的 `[heap]` 之前的匿名映射区里。
-
-很多教科书为了方便理解，会画出独立的 BSS 块并标注 `start_bss`。但在**实现层面**：
-
-- **Data 和 BSS 通常被合并在同一个 VMA 中**（权限都是 `rw-p`）。
-    
-- 内核只需要保证在程序启动时，把 `end_data` 到 `start_brk` 这一块内存通过 `memset` 清零即可。
-
-## switch_mm (ARM64)
-
-```c
-void cpu_do_switch_mm(phys_addr_t pgd_phys, struct mm_struct *mm)
-{
-	unsigned long ttbr1 = read_sysreg(ttbr1_el1);
-	unsigned long asid = ASID(mm);
-	unsigned long ttbr0 = phys_to_ttbr(pgd_phys);
-
-	/* Skip CNP for the reserved ASID */
-	if (system_supports_cnp() && asid)
-		ttbr0 |= TTBR_CNP_BIT;
-
-	/* SW PAN needs a copy of the ASID in TTBR0 for entry */
-	if (IS_ENABLED(CONFIG_ARM64_SW_TTBR0_PAN))
-		ttbr0 |= FIELD_PREP(TTBR_ASID_MASK, asid);
-
-	/* Set ASID in TTBR1 since TCR.A1 is set */
-	ttbr1 &= ~TTBR_ASID_MASK;
-	ttbr1 |= FIELD_PREP(TTBR_ASID_MASK, asid);
-
-	cpu_set_reserved_ttbr0_nosync();
-	write_sysreg(ttbr1, ttbr1_el1);
-	write_sysreg(ttbr0, ttbr0_el1);
-	isb();
-	post_ttbr_update_workaround();
-}
-```
+参考：[Linux 进程地址空间与 VMA](https://docs.kernel.org/mm/process_addrs.html)。

@@ -1,3 +1,14 @@
+# 树莓派 5 驱动 ST7701SN MIPI-DSI 屏幕
+
+> 使用树莓派 5、Raspberry Pi OS 和自定义 DRM panel 驱动连接 480×800 双 lane 屏幕。
+
+## TL;DR
+
+- 核对 DSI FPC 线序和背光供电；示例需要相应转接方案。
+- 驱动仓库包含 panel 驱动和设备树 overlay；示例匹配 `goldenmorning,t397b5`。
+- 显示时序、初始化序列及复位 GPIO 取决于实际屏幕和接线，不能仅按控制器型号照搬。
+
+## 环境
 
 | 器件 |  |  |
 | --- | --- | --- |
@@ -7,6 +18,7 @@
 
 ![IMG_1183_compressed](https://img2024.cnblogs.com/blog/2605173/202607/2605173-20260702021304758-1620897413.jpg)
 
+## 硬件连接
 
 先来谈一点硬件相关的内容，因为开发板 DSI 接口的线序跟屏幕引脚定义不同，而且体积较小的开发板上一般都没有屏幕背光驱动电路，所以我们需要画一个转接板，当然你也可以直接买一个带屏幕背光驱动转接板的屏幕。这是一个带背光驱动的转接板示例：
 
@@ -20,7 +32,9 @@
 
 ![Snipaste_2026-06-29_22-42-15](https://img2024.cnblogs.com/blog/2605173/202606/2605173-20260629224305314-1380843971.png)
 
-回到软件部分，相关的驱动代码位于仓库
+## 驱动与设备树
+
+相关驱动代码位于仓库：
 ```bash
 git clone https://github.com/IotaHydrae/panel-boe-zv039wvq-n80.git
 ```
@@ -167,7 +181,7 @@ module_mipi_dsi_driver(st7701sn_driver);
 
 ## 编译、加载驱动
 
-```c
+```bash
 make
 
 sudo dtoverlay vc4-kms-dsi-boe-zv039wvq-n80-overlay.dtbo
@@ -179,12 +193,14 @@ sudo insmod panel-boe-zv039wvq-n80.ko
 ```bash
 # 开机自动加载设备树 overlay
 sudo cp vc4-kms-dsi-boe-zv039wvq-n80-overlay.dtbo /boot/firmware/overlays/
-sudo echo "dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80-overlay" >> /boot/firmware/config.txt
+printf '%s\n' 'dtoverlay=vc4-kms-dsi-boe-zv039wvq-n80-overlay' | sudo tee -a /boot/firmware/config.txt
 
 # 开机自动加载驱动
 
 /etc/modules-load.d/modules.conf
 ```
+
+追加前检查 `config.txt` 是否已有相同配置。驱动模块须安装到匹配内核的模块目录并更新依赖；需要开机加载时，在 `/etc/modules-load.d/` 配置模块名并重启验证。
 
 ## 一些有用的命令
 

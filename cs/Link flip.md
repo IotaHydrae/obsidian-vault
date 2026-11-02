@@ -1,60 +1,33 @@
+# 单链表原地反转
+
+> 逐个反转 `next` 指针，并返回新的头节点；调用方必须保存返回值。
+
+## 实现
+
 ```c
-#include <stdio.h>
+#include <stddef.h>
 
 struct list {
-        int a;
-        struct list *next;
+    int a;
+    struct list *next;
 };
 
-void list_add(struct list *new, struct list *prev)
+struct list *list_flip(struct list *head)
 {
-        prev->next = new;
-}
+    struct list *prev = NULL;
 
-void print_list(struct list *head)
-{
-        struct list *tmp = head;
-
-        for (;tmp; tmp = tmp->next) {
-                printf("%d\n", (*tmp).a);
-        }
-
-}
-
-void list_flip(struct list *head)
-{
-        struct list *prev = NULL;
-        struct list *tmp = head;
-        struct list *next = NULL;
-
-        for (;tmp;)  {
-                next = tmp->next;
-
-                tmp->next = prev;
-                prev = tmp;
-
-                tmp = next;
-        }
-
-        print_list(prev);
-}
-
-int main(int argc, char **argv)
-{
-        struct list list[6];
-
-        for (int i = 0; i < 6; i++) {
-                list[i].a = i;
-                list_add(&list[i+1], &list[i]);
-        }
-        list[5].next = NULL;
-
-        struct list *tmp = &list[0];
-
-        print_list(tmp);
-
-        list_flip(&list[0]);
-
-        return 0;
+    while (head != NULL) {
+        struct list *next = head->next;
+        head->next = prev;
+        prev = head;
+        head = next;
+    }
+    return prev;
 }
 ```
+
+## 使用与边界
+
+- 调用 `head = list_flip(head);`，否则调用方仍指向原头节点。
+- 空链表返回 `NULL`；单节点链表保持不变。
+- 时间复杂度为 O(n)，除少量指针外不分配额外空间。
