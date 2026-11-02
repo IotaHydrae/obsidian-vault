@@ -13,6 +13,7 @@ dev-note/
   boards/            开发板实践和调试记录
   linux/             Linux 系统配置与故障排查
   network/           网络分流、节点选择和路径诊断
+  mobile/            Android、iOS 诊断与手机远程使用
   tools/             开发工具、服务和使用记录
 embedded/
   arch/              处理器架构
@@ -35,7 +36,8 @@ rust/
 
 ## 笔记入口
 
-- [通用排障方法：网络、接口、终端与系统](dev-note/通用排障方法.md)
+- [通用排障方法：网络、手机、接口与系统](dev-note/通用排障方法.md)
+- [手机诊断与远程使用](dev-note/mobile/README.md)
 - [Kindle Linux 工程知识库](projects/kindle-linux/README.md)
 - [uConsole Linux 工程知识库](projects/uconsole-linux/README.md)
 - [RK3588 Ubuntu 镜像知识库](projects/rk3588-ubuntu/README.md)
