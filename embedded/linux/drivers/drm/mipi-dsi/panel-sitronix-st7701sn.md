@@ -1,3 +1,11 @@
+# Raspberry Pi B：ST7701SN 面板与 DSI Overlay
+
+> 此例使用自定义驱动和转接板连接 BOE ZV039WVQ-N80；overlay 拓扑、供电、复位和初始化顺序须与驱动一致。
+
+加载 overlay 或日志显示 dependency cycle 修复，不足以证明面板已绑定和出图。标准 MIPI DSI driver 通常要求面板作为 host 子设备；下列根节点面板写法须按自定义驱动的注册方式核对。ST7701 与 ST7701SN 的寄存器差异应查芯片资料，不能仅归纳为功耗不同。
+
+## 环境与接线
+
 | Platform       | Raspberry Pi B              |
 | -------------- | --------------------------- |
 | Kernel Version | 6.12.47+rpt-rpi-v6          |
@@ -5,9 +13,6 @@
 | Panel          | BOE ZV039WVQ-N80            |
 | Product        | GoldenMorning T397B5-C24-02 |
 | Driver IC      | ST7701SN                    |
-
-Differences between ST7701 and ST7701SN:
-- Low power consumption
 
 First, you need to design a PCB to convert the panel interface (usually an FPC cable) to the DSI interface on the Raspberry Pi. Additionally, the PCB must also provide power to the panel driver and backlight.
 

@@ -1,4 +1,16 @@
-## device attribute
+# Linux 驱动参数：Sysfs、Debugfs 与 Module Param
+
+> 按接口用途选择参数入口：设备实例的属性用 sysfs，开发调试用 debugfs，模块级设置用 module parameter。
+
+| 接口 | 适用场景 | 关键约束 |
+| --- | --- | --- |
+| Device attribute | 面向设备实例的状态与配置 | 配对创建/移除，解析输入并保护并发 |
+| Debugfs | 内部调试命令和状态 | 不承诺稳定 ABI，检查权限、输入与卸载竞态 |
+| Module parameter | 模块加载参数或模块级设置 | setter 可能在硬件初始化前执行 |
+
+以下保留 Linux 6.12.47 相关显示驱动接口片段，便于查阅回调和注册位置；省略部分依赖上下文，不是完整模块。参数赋值不会自动更新硬件。
+
+## Device attribute
 
 kernel 6.12.47
 
@@ -269,6 +281,10 @@ static int set_brightness(const char *val, const struct kernel_param *kp)
 
     pr_info("brightness changed: %d -> %d\n", brightness, new_val);
     
+    if (new_val < 0 || new_val > 255)
+        return -EINVAL;
+
+    /* 按驱动生命周期检查设备就绪状态，并处理硬件更新失败。 */
     update_panel_brightness(new_val);
 
     brightness = new_val;

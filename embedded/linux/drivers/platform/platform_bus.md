@@ -1,31 +1,17 @@
+# Linux platform 总线与驱动注册
+
+> platform 驱动注册时将底层 `device_driver` 关联到 `platform_bus_type`，再交给驱动核心注册。
+
+## 关键路径
 
 ```c
-const struct bus_type platform_bus_type = {
-	.name		= "platform",
-	.dev_groups	= platform_dev_groups,
-	.match		= platform_match,
-	.uevent		= platform_uevent,
-	.probe		= platform_probe,
-	.remove		= platform_remove,
-	.shutdown	= platform_shutdown,
-	.dma_configure	= platform_dma_configure,
-	.dma_cleanup	= platform_dma_cleanup,
-	.pm		= &platform_dev_pm_ops,
-};
-EXPORT_SYMBOL_GPL(platform_bus_type);
-
-/**
- * __platform_driver_register - register a driver for platform-level devices
- * @drv: platform driver structure
- * @owner: owning module/driver
- */
-int __platform_driver_register(struct platform_driver *drv,
-				struct module *owner)
-{
-	drv->driver.owner = owner;
-	drv->driver.bus = &platform_bus_type;
-
-	return driver_register(&drv->driver);
-}
-EXPORT_SYMBOL_GPL(__platform_driver_register);
+drv->driver.owner = owner;
+drv->driver.bus = &platform_bus_type;
+return driver_register(&drv->driver);
 ```
+
+`platform_bus_type` 提供 `match`、`probe`、`remove`、电源管理等回调。匹配逻辑见 [platform_match](platform_match.md)。
+
+## 边界
+
+结构体字段、回调签名及注册实现以目标内核版本为准。

@@ -1,3 +1,14 @@
+# Luckfox Lyra Plus 驱动 ST7701SN MIPI-DSI 屏幕
+
+> 在 RK3506G2、Linux 6.1 SDK 上，通过设备树配置 480×800 双 lane 屏幕的初始化序列与时序。
+
+## TL;DR
+
+- 核对屏幕和板卡 FPC 线序，并确认背光供电；时序和初始化序列应与实际屏幕匹配。
+- 在 SDK 的 `rk3506-luckfox-lyra.dtsi` 中修改 DSI panel 配置，重新编译内核。
+- 写入镜像前确认启动介质和 `boot` 分区，备份数据并准备恢复手段；下文分区号须按实际布局核对。
+
+## 环境
 
 | 器件 |  |  |
 | --- | --- | --- |
@@ -7,6 +18,7 @@
 
 ![IMG_1182_compressed](https://img2024.cnblogs.com/blog/2605173/202606/2605173-20260629223855139-15801877.jpg)
 
+## SDK 与硬件准备
 
 先部署一下官方提供的 SDK。官方提供的是一个[网盘链接](https://pan.baidu.com/s/1KyPieuwh63ynd-O96ChlDA?pwd=mzqk)，你需要下载下来，解压到你的开发环境中。这是一个例子：
 
@@ -17,9 +29,9 @@ cp ~/Downloads/Luckfox_Lyra_SDK_250815.tar.gz .
 tar xvf Luckfox_Lyra_SDK_250815.tar.gz -C lyra
 ```
 
-接下来你需要根据[这篇文档](https://wiki.luckfox.com/zh/Luckfox-Lyra/SDK-Image-Compilation)中的指示安装所需的依赖。官方推荐的开发用系统是 Ubuntu-22.04，所以有些包名在新版本的 ubuntu 中可能已经不存在或者改名了，你装的时候需要根据 apt 的报错信息修改一下，或者问下 ai。
+按 [SDK 编译文档](https://wiki.luckfox.com/zh/Luckfox-Lyra/SDK-Image-Compilation)安装依赖。该 SDK 使用 Ubuntu 22.04 构建环境；换用其他发行版时，按实际包管理器核对依赖名称。
 
-SDK 编译的时候需要用到 python2。新版本的 ubuntu 已经弃用了 2.x 版本python。这里我推荐使用 [pyenv](https://github.com/pyenv/pyenv) 来部署 python2 环境。我用的是 zsh，这是一个使用 pyenv 安装 Python   2.7.18 例子：
+该 SDK 使用 Python 2。以下通过 [pyenv](https://github.com/pyenv/pyenv) 在项目范围选择 Python 2.7.18，shell 为 zsh：
 
 ```bash
 curl -fsSL https://pyenv.run | bash
@@ -27,7 +39,7 @@ curl -fsSL https://pyenv.run | bash
 # 把下面这段内容添加进 ~/.zshrc
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+eval "$(pyenv init - zsh)"
 
 source ~/.zshrc
 
@@ -56,7 +68,9 @@ pyenv local 2.7.18
 
 ![Snipaste_2026-06-29_22-42-15](https://img2024.cnblogs.com/blog/2605173/202606/2605173-20260629224305314-1380843971.png)
 
-回到软件部分，找到 `kernel-6.1/arch/arm/boot/dts/rk3506-luckfox-lyra.dtsi` 177 行附近的 `&dsi` 下的 `dsi_panel: panel@0` 节点，修改如下参数：
+## 设备树配置
+
+在 `kernel-6.1/arch/arm/boot/dts/rk3506-luckfox-lyra.dtsi` 的 `&dsi` 下找到 `dsi_panel: panel@0` 节点，按实际屏幕修改如下参数：
 
 > 通常你可以在屏幕的规格书中找到时序参数，但是初始化序列需要厂商另外提供。
 
@@ -159,24 +173,24 @@ pyenv local 2.7.18
 lrwxrwxrwx 1 developer developer 26 Jun 29 20:20 output/firmware/boot.img -> ../../kernel-6.1/zboot.img
 ```
 
-你可以用如下几种方式进行烧录，看哪种比较方便适合你。
+**错误的目标分区会破坏数据或导致设备无法启动**；先检查 `/proc/mtd` 或分区表，确认对应 `boot` 分区，再备份并准备恢复手段。
 
 ### 方法一：linux 设备端烧录
 
 ```bash
-scp output/firmware/boot.img root@192.168.50.134:~/
+scp output/firmware/boot.img root@BOARD_IP:~/
 
 # 然后在板子一侧执行，重启生效
 dd if=/root/boot.img of=/dev/mtdblock1 bs=1M && sync
 ```
 
-adb 同理
+将 `BOARD_IP` 替换为实际地址。`/dev/mtdblock1` 是示例目标，写入前必须核对当前设备的分区布局。
 
 ### 方法二：linux 主机端烧录
 
 https://wiki.luckfox.com/zh/Luckfox-Lyra/Image-flashing#42-linuxx86_64-%E5%B9%B3%E5%8F%B0
 
-### 方法二：windows 烧录
+### 方法三：Windows 烧录
 
 ```
 cp output/firmware/boot.img /mnt/d/
@@ -191,7 +205,7 @@ cp output/firmware/boot.img /mnt/d/
 echo 0 > /sys/class/graphics/fbcon/cursor_blink
 ```
 
-sd 卡启动烧录 boot
+SD 卡启动时的写入示例；先核对 `/dev/mmcblk0p2` 是否为目标分区：
 
 ```bash
 dd if=/root/boot.img of=/dev/mmcblk0p2 bs=1M && sync

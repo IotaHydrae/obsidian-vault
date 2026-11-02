@@ -1,4 +1,8 @@
-为了方便开发，我在 `sunxi` video 驱动的基础上拷贝了一份代码进行修改，进而完成了一个专用于 I8080 屏幕的 video 驱动。 你可以在 `drivers/video/suniv` 目录下找到相关的文件。
+# U-Boot Suniv I8080：TCON 与 Framebuffer 格式
+
+> 面板像素格式、TCON 模式、DE BE 格式、stride 和 framebuffer 分配大小必须一致。
+
+以下寄存器片段依赖自定义 Suniv 驱动、对应 SoC 及分支；不是其他 sunxi 控制器的通用设置。面板初始化见 [[GPIO-bitbang ILI9488]]。
 
 ## TCON
 
@@ -82,6 +86,6 @@ framebuffer 的地址以及大小获取
         uc_priv->bpix = LCD_MAX_LOG2_BPP;
 ```
 
-如果你想要了解更多有关信息，请参考 `drivers/video/suniv/suniv_display.c` 文件
+完整路径位于此分支的 `drivers/video/suniv/suniv_display.c`；移植时还需核对寄存器单位、framebuffer 对齐和缓存维护。
 
 ![输入图片说明](https://foruda.gitee.com/images/1755140113099361798/257ae3bb_5412693.jpeg "IMG_09091.JPG")

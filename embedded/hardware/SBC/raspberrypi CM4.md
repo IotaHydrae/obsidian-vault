@@ -1,119 +1,19 @@
-## sysbench
+# Raspberry Pi CM4 Sysbench 测量
 
-### CPU
-
-#### 1.5GHz events per second:  5855.53
+> 两次 CPU 测量分别在 1.5 GHz 和 2.0 GHz 下得到 `5855.53` 与 `7803.38 events/s`；这些结果不证明长期稳定性。
 
 ```bash
-pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
-sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
-
-Running the test with following options:
-Number of threads: 4
-Initializing random number generator from current time
-
-
-Prime numbers limit: 10000
-
-Initializing worker threads...
-
-Threads started!
-
-CPU speed:
-    events per second:  5855.53
-
-General statistics:
-    total time:                          10.0006s
-    total number of events:              58582
-
-Latency (ms):
-         min:                                    0.68
-         avg:                                    0.68
-         max:                                    1.42
-         95th percentile:                        0.68
-         sum:                                39978.13
-
-Threads fairness:
-    events (avg/stddev):           14645.5000/3.84
-    execution time (avg/stddev):   9.9945/0.00
+sysbench cpu --threads=$(nproc) run
+sysbench memory run
 ```
 
-#### 2.0 GHz events per second:  7803.38
+工具版本为 sysbench 1.0.20、LuaJIT 2.1.1723681758；CPU 使用 4 线程、prime limit 10000。
 
-```bash
-pi@cm4-pi:~ $ sysbench cpu --threads=$(nproc) run
-sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
+| CPU 频率 | 运行时间 | events/s | 平均 / 最大 / P95 延迟 |
+| --- | --- | --- | --- |
+| 1.5 GHz | 10.0006 s | 5855.53 | 0.68 / 1.42 / 0.68 ms |
+| 2.0 GHz | 10.0005 s | 7803.38 | 0.51 / 12.56 / 0.51 ms |
 
-Running the test with following options:
-Number of threads: 4
-Initializing random number generator from current time
+内存写测试为 1 线程、1 KiB block、global scope，运行 10.0001 s，得到 `1967.24 MiB/s`，累计传输 `19680.54 MiB`；该次测试对应的 CPU 频率未注明。
 
-
-Prime numbers limit: 10000
-
-Initializing worker threads...
-
-Threads started!
-
-CPU speed:
-    events per second:  7803.38
-
-General statistics:
-    total time:                          10.0005s
-    total number of events:              78062
-
-Latency (ms):
-         min:                                    0.51
-         avg:                                    0.51
-         max:                                   12.56
-         95th percentile:                        0.51
-         sum:                                39979.49
-
-Threads fairness:
-    events (avg/stddev):           19515.5000/26.46
-    execution time (avg/stddev):   9.9949/0.00
-```
-
-### Memory
-
-#### 1967.24 MiB/sec
-
-```bash
-pi@cm4-pi:~ $ sysbench memory run
-sysbench 1.0.20 (using system LuaJIT 2.1.1723681758)
-
-Running the test with following options:
-Number of threads: 1
-Initializing random number generator from current time
-
-
-Running memory speed test with the following options:
-  block size: 1KiB
-  total size: 102400MiB
-  operation: write
-  scope: global
-
-Initializing worker threads...
-
-Threads started!
-
-Total operations: 20152878 (2014457.12 per second)
-
-19680.54 MiB transferred (1967.24 MiB/sec)
-
-
-General statistics:
-    total time:                          10.0001s
-    total number of events:              20152878
-
-Latency (ms):
-         min:                                    0.00
-         avg:                                    0.00
-         max:                                    0.24
-         95th percentile:                        0.00
-         sum:                                 4806.83
-
-Threads fairness:
-    events (avg/stddev):           20152878.0000/0.00
-    execution time (avg/stddev):   4.8068/0.00
-```
+尚缺系统镜像、温度、散热、供电及后台负载。比较频率设置时应重复测量，并同时检查稳定性与降频情况；内存结果不能直接当作 DDR 峰值带宽。

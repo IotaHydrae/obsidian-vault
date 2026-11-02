@@ -1,55 +1,15 @@
+# Linux platform 设备与驱动的匹配顺序
 
-```c
-/**
- * platform_match - bind platform device to platform driver.
- * @dev: device.
- * @drv: driver.
- *
- * Platform device IDs are assumed to be encoded like this:
- * "<name><instance>", where <name> is a short description of the type of
- * device, like "pci" or "floppy", and <instance> is the enumerated
- * instance of the device, like '0' or '42'.  Driver IDs are simply
- * "<name>".  So, extract the <name> from the platform_device structure,
- * and compare it against the name of the driver. Return whether they match
- * or not.
- */
-static int platform_match(struct device *dev, const struct device_driver *drv)
-{
-	struct platform_device *pdev = to_platform_device(dev);
-	struct platform_driver *pdrv = to_platform_driver(drv);
+> platform 总线可通过 `driver_override`、设备树、ACPI、platform ID 表和名称匹配驱动；具体逻辑以目标内核版本为准。
 
-	/* When driver_override is set, only bind to the matching driver */
-	if (pdev->driver_override)
-		return !strcmp(pdev->driver_override, drv->name);
+## 匹配顺序
 
-	/* Attempt an OF style match first */
-	if (of_driver_match_device(dev, drv))
-		return 1;
+1. 设置了 `driver_override` 时，只比较其值和驱动名，直接返回比较结果。
+2. 尝试设备树 OF 匹配。
+3. 尝试 ACPI 匹配。
+4. 驱动提供 `id_table` 时查找匹配的 `platform_device_id`。
+5. 没有使用以上分支时，回退到设备名和驱动名比较。
 
-	/* Then try ACPI style match */
-	if (acpi_driver_match_device(dev, drv))
-		return 1;
+## 注意
 
-	/* Then try to match against the id table */
-	if (pdrv->id_table)
-		return platform_match_id(pdrv->id_table, pdev) != NULL;
-
-	/* fall-back to driver name match */
-	return (strcmp(pdev->name, drv->name) == 0);
-}
-
-static const struct platform_device_id *platform_match_id(
-			const struct platform_device_id *id,
-			struct platform_device *pdev)
-{
-	while (id->name[0]) {
-		if (strcmp(pdev->name, id->name) == 0) {
-			pdev->id_entry = id;
-			return id;
-		}
-		id++;
-	}
-	return NULL;
-}
-
-```
+名称相同不是 OF 或 ACPI 匹配的必要条件；查看目标版本的 `platform_match()` 确认匹配顺序和返回行为。

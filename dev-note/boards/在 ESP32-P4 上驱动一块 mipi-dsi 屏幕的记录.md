@@ -1,9 +1,22 @@
+# ESP32-P4 驱动 ST7701SN MIPI-DSI 屏幕
+
+> 在 ESP32-P4-WIFI6、ESP-IDF 5.5.2 上，通过 Waveshare LVGL 示例配置 480×800、双 lane 的 ST7701SN 屏幕。
+
+## TL;DR
+
+- 先核对开发板与屏幕的 FPC 线序，并确认背光供电；示例使用带背光驱动的转接方案。
+- 在示例工程中选择 `Waveshare 4-DSI-TOUCH-A Display`，将显示和 LVGL 色彩格式设为 RGB888。
+- 初始化序列、时序和 GPIO 与具体屏幕及组件版本有关，其他屏幕不可直接照搬。
+
+## 环境
 
 | 器件 |  |  |
 | --- | --- | --- |
 | [Waveshare ESP32-P4-WIFI6](https://docs.waveshare.net/ESP32-P4-WIFI6) | ESP32-P4 | 双核高性能 RISC-V，最高400MHz + 单核低功耗 RISC-V 40MHz & 最大32MB Octal SPI PSRAM & 32MB SPI-NOR Flash |
 | [GoldenMorning T397B5-C24-02](https://item.taobao.com/item.htm?id=837727544469&mi_id=0000UXe6-xnBIHqeLS928YqLeCL24Bt3Uoyqq8OIE-M3bps&skuId=5765638899362) | ST7701SN | 480x800 2-lane mipi-dsi |
 | [ESP-IDF](https://github.com/espressif/esp-idf) | V5.5.2  |
+
+## 硬件连接
 
 ![IMG_1152_compressed](https://img2024.cnblogs.com/blog/2605173/202606/2605173-20260628153207049-475757738.jpg)
 

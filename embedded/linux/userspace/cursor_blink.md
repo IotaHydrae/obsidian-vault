@@ -1,17 +1,12 @@
-### 通过 sysfs 调整  framebuffer 的控制台光标闪烁行为
+# 关闭 Linux fbcon 光标闪烁
 
-定位到`/sys/class/graphics/fbcon`
-有如下文件
-```shell
-# cd /sys/class/graphics/fbcon && ls
-cursor_blink  rotate        subsystem/
-power/         rotate_all    uevent
+> framebuffer 控制台提供 `cursor_blink` 属性时，写入 `0` 关闭闪烁，写入 `1` 启用。
+
+```bash
+cat /sys/class/graphics/fbcon/cursor_blink
+echo 0 | sudo tee /sys/class/graphics/fbcon/cursor_blink
+# 恢复闪烁：
+echo 1 | sudo tee /sys/class/graphics/fbcon/cursor_blink
 ```
 
-默认情况下光标闪烁，文件cursor_blink值为1，向其中写0关闭光标闪烁
-```shell
-# On
-# echo 1 > /sys/class/graphics/fbcon/cursor_blink
-# Off
-# echo 0 > /sys/class/graphics/fbcon/cursor_blink
-```
+此接口只影响对应 fbcon，不控制桌面或应用内的光标；节点是否存在依赖内核配置和当前控制台。以上为运行时设置，开机持久化需由目标系统另行配置。

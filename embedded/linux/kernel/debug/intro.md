@@ -1,7 +1,14 @@
+# Linux 性能和内核调试工具入口
 
-|层级|目标|工具|
-|---|---|---|
-|系统级|CPU、内存、IO瓶颈|top, vmstat, iostat, sar|
-|进程级|哪个进程慢|top, htop, pidstat, perf|
-|函数级|哪个函数慢|perf, ftrace, eBPF|
-|内核级|驱动 / syscall 慢|ftrace, kprobe, bcc, eBPF|
+> 先确定问题层级，再选择系统指标、进程分析或内核追踪工具。
+
+## 工具选择
+
+| 层级 | 关注点 | 工具 |
+| --- | --- | --- |
+| 系统 | CPU、内存、I/O 瓶颈 | `top`、`vmstat`、`iostat`、`sar` |
+| 进程 | 进程资源使用和调度 | `top`、`htop`、`pidstat`、`perf` |
+| 函数 | 热点和调用路径 | `perf`、`ftrace`、eBPF |
+| 内核 / 驱动 | 驱动、系统调用和事件 | `ftrace`、kprobe、BCC、eBPF |
+
+工具可用性取决于内核配置、权限和安装环境；追踪也可能影响被测系统。

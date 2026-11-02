@@ -1,44 +1,32 @@
-# PAC（Peripheral Access Crate）for PT32L007x MCUs
+# 为 PT32L007x 生成 Rust PAC
 
-> What is PAC?
->
-> PAC stands for Peripheral Access Crate. A safe, low-level register access library automatically generated for a specific MCU. It is the cornerstone of the entire embedded Rust ecosystem, with almost all higher-level HALs, drivers, and frameworks (Embassy, RTIC, etc.) built on top of a certain PAC.. It is generated from the microcontroller's CMSIS-SVD format XML file usually called `PT32L007x.svd` for example.
+> 从 CMSIS-Pack 取得 SVD，再用 chiptool 生成寄存器访问代码；生成成功后仍需核对寄存器描述、链接脚本和目标构建。
 
-The PT32L007x series utilizes a high-performance, low-power Cortex™-M0 32-bit core operating at 64MHz. It features integrated high-speed memory (up to 64KB of flash memory and up to 16KB of SRAM), versatile multiplexed I/O ports, and a rich set of peripherals connected to the APB bus. All models include a 12-bit ADC, an advanced timer, two basic 16-bit timers, and a low-power timer. Standard communication interfaces are also included: two UART interfaces, one I2C interface, and one SPI interface.
+## 芯片与输入
 
-| Hardware Info |                   |
-| ------------- | ----------------- |
-| MCU           | PT32L007F8P7K     |
-| CPU           | Cortex-M0 @ 64MHz |
-| SRAM          | 16KB @ 0x20000000 |
-| Flash         | 64KB @ 0x00000000 |
+PT32L007F8P7K 使用 Cortex-M0，最高 64 MHz，配备 64 KiB Flash 和 16 KiB SRAM。SRAM 地址示例为 `0x20000000`；Flash 基址及启动映射应按数据手册和链接脚本核对，不由 PAC 生成过程决定。
 
-![img](./assets/system.png)
+SVD 可从 [PAI-IC.PT32x007x_DFP.1.6.0_1.pack](https://img.pai-ic.com/files/PAI-IC.PT32x007x_DFP.1.6.0_1.pack) 提取，示例文件名为 `PT32L007x.svd`。PAC 提供底层寄存器接口，并不保证任意寄存器访问顺序或硬件操作都安全。
 
-## A step by step guide how to generate PAC for PT32L007x
-
-Install dependencies and tools:
+## 工具与生成
 
 ```bash
 rustup target add thumbv6m-none-eabi
 cargo install --git https://github.com/embassy-rs/chiptool --locked
 cargo install form
-```
 
-Generate PAC `lib.rs` through a svd file and split it into multiple files via `form`:
-
-```bash
 chiptool generate --svd PT32L007x.svd
 form -i lib.rs -o src/
-rm lib.rs
-find . -name "*.rs" | xargs rustfmt
+find src -name '*.rs' -exec rustfmt {} +
 ```
 
-> A svd file could be found inside [PAI-IC.PT32x007x_DFP.1.6.0_1.pack](https://img.pai-ic.com/files/PAI-IC.PT32x007x_DFP.1.6.0_1.pack) A CMSIS-Pack.
+在独立工作目录执行，避免覆盖已有源码。需要可复现生成时，固定 chiptool commit、form 版本和 SVD 校验值；验证拆分输出完整后再决定是否删除中间的 `lib.rs`。
 
-Edit `Cargo.toml` add dependencies:
+## Crate 配置示例
 
-```rust
+以下依赖来自此生成方案，须与实际生成代码和锁文件匹配：
+
+```toml
 [dependencies]
 cortex-m = "0.7"
 cortex-m-rt = { version = "0.7.5", optional = true }
@@ -50,12 +38,10 @@ rt = ["cortex-m-rt/device"]
 defmt = ["dep:defmt"]
 ```
 
-Here is an example [pt32l007x-blink](https://github.com/IotaHydrae/pt32l007x-blink) showing how to use this PAC.
+构建检查可从 `cargo check --target thumbv6m-none-eabi` 开始，再核对向量表、memory.x、寄存器偏移及读写语义；编译通过不代表 SVD 或硬件访问正确。
 
-# Links
+## 参考
 
-[PAI-IC.PT32x007x_DFP.1.6.0_1.pack](https://img.pai-ic.com/files/PAI-IC.PT32x007x_DFP.1.6.0_1.pack)
-
-[PT32L007x 数据手册.pdf](https://img.pai-ic.com/files/076f326e480bb2690753cb613b47ee8e.pdf)
-
-[PT32x007x 参考手册.pdf](https://img.pai-ic.com/files/9a634c19943beab82df2438615b6ad42.pdf)
+- [pt32l007x-blink 使用示例](https://github.com/IotaHydrae/pt32l007x-blink)
+- [PT32L007x 数据手册](https://img.pai-ic.com/files/076f326e480bb2690753cb613b47ee8e.pdf)
+- [PT32x007x 参考手册](https://img.pai-ic.com/files/9a634c19943beab82df2438615b6ad42.pdf)

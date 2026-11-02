@@ -1,5 +1,12 @@
+# Linux Syscon：共享系统控制寄存器
 
-syscon 即 System Control Driver，用来给一系列 driver 提供统一的寄存器访问机制，例如 clk、reset。
+> Syscon 为多个驱动提供共享寄存器区域的 regmap；使用者通过 phandle 获取映射，并负责具体寄存器语义。
+
+调用路径为 `syscon_regmap_lookup_by_phandle()` → `syscon_node_to_regmap()` → 查找或创建 regmap。检查错误指针并传播适用的错误，包括依赖尚未就绪时的延迟探测。
+
+以下以 ST restart 驱动说明匹配数据、phandle 和寄存器访问的关系。regmap 的锁保护单次操作，不自动保证多步协议或整个驱动状态的一致性；是否可在原子上下文访问还取决于后端与锁配置。
+
+## 获取与使用
 
 ```c
 static int st_reset_probe(struct platform_device *pdev)
@@ -196,17 +203,4 @@ syscfg: syscon@50000000 {
 
 syscon 没有且不主动创建子设备，内核不知道有哪些功能会用到这块寄存器，让 driver 自己通过 phandle 拿 regmap。syscon 不定义协议，只提供访问机制，如何访问应当由 driver 自行决定。
 
-## 提问
-
-### `of_platform_device_create()` 什么时候触发
-
-### `EPROBE_DEFER` 在 driver model 里的传播路径
-### `regmap` 的锁机制（spinlock vs mutex）
-
-### `syscon` vs `simple-mfd` 的区别
-
-### 为什么 `reset-controller` 有时直接挂在 syscon 上
-
-### `regmap-mmio` 的 cache / lock 实现
-
-### 多个 driver 同时访问 regmap 如何保证一致性
+单纯的 syscon 节点提供共享 regmap，并不自动枚举所有使用者；与 `simple-mfd` 配合的子设备创建由设备树拓扑和相应驱动决定。

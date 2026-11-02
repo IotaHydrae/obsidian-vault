@@ -1,76 +1,17 @@
-简单来说，**VMA (Virtual Memory Area)** 是 Linux 内核用来管理进程虚拟内存地址空间的基本单位。
+# Linux VMA 与 `find_vma()`
 
-如果把进程的整个虚拟内存空间比作一本书，那么 VMA 就相当于书中的**章节**。每一章（VMA）都有明确的起始页、结束页以及特定的权限（比如只读、可读写或可执行）。
+> VMA 是地址空间中一段具有共同映射属性的虚拟地址区间；它并不保证对应物理页已经分配。
 
----
+- `vm_start` / `vm_end` 描述左闭右开的地址范围 `[start, end)`；`vm_flags` 表示映射权限和属性。
+- `vm_file` 可关联文件映射；匿名映射通常没有对应文件。`vm_ops` 可提供缺页等相关操作。
+- 同一文件、堆或栈不保证始终对应唯一 VMA；映射可以因权限变化等被拆分或合并。
 
-### 1. 为什么需要 VMA？
-
-一个进程的虚拟内存并不是一块连续、均匀的“大饼”，而是由许多不同用途的部分组成的。例如：
-
-- **代码段 (Text)：** 存放程序指令，通常是只读且可执行的。
-    
-- **数据段 (Data/Bss)：** 存放全局变量。
-    
-- **堆 (Heap)：** 动态分配的内存。
-    
-- **栈 (Stack)：** 函数调用和局部变量。
-    
-- **内存映射 (Memory Mappings)：** 比如加载的共享库（`.so` 文件）。
-    
-
-内核不能用“一刀切”的方式管理这些区域，所以它将虚拟内存划分为多个 VMA，每个 VMA 记录了这一段内存的边界和属性。
-
-### 2. VMA 的核心结构：`vm_area_struct`
-
-在 Linux 内核源码中，VMA 是通过 `struct vm_area_struct` 这个结构体来实现的。它包含了以下核心信息：
-
-- **地址范围：** `vm_start` 和 `vm_end` 定义了该区域的起止地址。
-    
-- **权限标志：** `vm_flags` 定义了该区域是可读 (`READ`)、可写 (`WRITE`) 还是可执行 (`EXEC`)。
-    
-- **背后支持：** `vm_file` 指向该区域映射的文件。如果是匿名内存（如堆或栈），则该项为空。
-    
-- **操作接口：** `vm_ops` 包含了一组函数指针，用于处理该区域的打开、关闭或缺页异常。
+## 查看与查找
 
 ```bash
-cat /proc/1073/maps
+cat /proc/<pid>/maps
 ```
 
-`linux 4.19 - mm/mmap.c`
+访问受权限和系统配置限制。内核中 `find_vma(mm, addr)` 找到的是第一个满足 `addr < vm_end` 的 VMA，可能位于 `addr` 之后；要判断地址是否实际落在该 VMA，还要检查 `vm_start <= addr`。操作 VMA 时遵守目标内核版本的锁和生命周期要求。
 
-```c
-/* Look up the first VMA which satisfies  addr < vm_end,  NULL if none. */
-struct vm_area_struct *find_vma(struct mm_struct *mm, unsigned long addr)
-{
-	struct rb_node *rb_node;
-	struct vm_area_struct *vma;
-
-	/* Check the cache first. */
-	vma = vmacache_find(mm, addr);
-	if (likely(vma))
-		return vma;
-
-	rb_node = mm->mm_rb.rb_node;
-
-	while (rb_node) {
-		struct vm_area_struct *tmp;
-
-		tmp = rb_entry(rb_node, struct vm_area_struct, vm_rb);
-
-		if (tmp->vm_end > addr) {
-			vma = tmp;
-			if (tmp->vm_start <= addr)
-				break;
-			rb_node = rb_node->rb_left;
-		} else
-			rb_node = rb_node->rb_right;
-	}
-
-	if (vma)
-		vmacache_update(addr, vma);
-	return vma;
-}
-
-EXPORT_SYMBOL(find_vma);
-```
+Linux 4.19 的实现使用 VMA 缓存和红黑树；其他版本的查找实现及数据结构需查看目标源码。地址空间整体结构见 [[mm_struct]]。
