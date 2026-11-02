@@ -1,0 +1,1103 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "scope": "Official Avaota-A1 SBC hardware v1.7, v1.6 changes, LPDDR4 reference templates, IBIS and selected AvaotaOS/T527 boot/kernel/image sources. Reference collection only, not a new available board.",
+  "cache_policy": "Original unmodified files in ignored repository-relative paths. Source hashes and ZIP CRC establish file identity/readability, not electrical or runtime validation. No automatic fetch/build/deployment consumes this catalog.",
+  "repositories": [
+    {
+      "repository": "https://github.com/AvaotaSBC/Avaota-A1",
+      "branch": "master",
+      "observed_commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe"
+    },
+    {
+      "repository": "https://github.com/AvaotaSBC/AvaotaOS",
+      "branch": "main",
+      "observed_commit": "bd95d7528c232cee59e4047994be520cb7551888"
+    },
+    {
+      "repository": "https://github.com/AvaotaSBC/linux",
+      "branch": "linux-5.15",
+      "observed_commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "version_from_Makefile": "5.15.154"
+    },
+    {
+      "repository": "https://github.com/YuzukiHD/SyterKit",
+      "build_selected_commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "scope": "Commit explicitly selected in the reviewed AvaotaOS A1 board configuration."
+    }
+  ],
+  "hardware_available_file_inventory": [
+    {
+      "path": ".github/workflows/SyncGitee.yml",
+      "sha": "f2f79ef6c6bf613bd103daaf605af65acddd1127",
+      "size": 432
+    },
+    {
+      "path": "LICENSE",
+      "sha": "65fa409f521f0425aef377f43a1b34bbe987768c",
+      "size": 13708
+    },
+    {
+      "path": "README.md",
+      "sha": "31773b8de49ff85c7cf1447aa17820f05b30567e",
+      "size": 3249
+    },
+    {
+      "path": "hardware/v1.2/01_SCH/SCH_Avaota Pi A_2024-02-28.pdf",
+      "sha": "39a43790ae51fbd961be6255d9cb26bff68ce4f8",
+      "size": 4746739
+    },
+    {
+      "path": "hardware/v1.2/02_PCB/ProProject_Avaota Pi A_2024-03-25.epro",
+      "sha": "4dc452ede9f4322faa972db4b9c4379605968ffc",
+      "size": 5677988
+    },
+    {
+      "path": "hardware/v1.2/03_GERBER/Gerber_PCB1_2024-03-25.zip",
+      "sha": "158ca4b1193bfc549fadc49bac0ba3c27d1df15f",
+      "size": 1698760
+    },
+    {
+      "path": "hardware/v1.2/04_BOM/BOM_Avaota Pi A_PCB1_2024-03-25.xlsx",
+      "sha": "538285e1f095ef1038cb327e4f7f1b89fa6bb8af",
+      "size": 17355
+    },
+    {
+      "path": "hardware/v1.2/06_ADPCB/Altium_Avaota Pi A_2024-03-25.zip",
+      "sha": "77a19599faad74271f412b51d2981e026efb49e3",
+      "size": 1537582
+    },
+    {
+      "path": "hardware/v1.3/01_SCH/SCH_Avaota Pi A_2024-04-06.pdf",
+      "sha": "6c3b9c509a30736f53e55d1b6d071d6b3ba54856",
+      "size": 4710396
+    },
+    {
+      "path": "hardware/v1.3/02_PCB/ProDocument_PCB1_2024-04-06.epro",
+      "sha": "bbe00ad6f0a4ea8c4d6a770d530cc6b7c4c3b4b7",
+      "size": 1714257
+    },
+    {
+      "path": "hardware/v1.3/03_GERBER/Gerber_PCB1_2024-04-06.zip",
+      "sha": "e1920f2d4b496c6ddc508ea8a79db93a10d6b7b5",
+      "size": 1731636
+    },
+    {
+      "path": "hardware/v1.3/04_BOM/BOM_Avaota Pi A_PCB1_2024-04-06.xlsx",
+      "sha": "eaa78bd2b4c7e4ae09d6578706caeb0f8b87a5f1",
+      "size": 17587
+    },
+    {
+      "path": "hardware/v1.3/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-04-06.pdf",
+      "sha": "4e5d3b06764938afef3aa5273c0c4f0f4b728723",
+      "size": 1937268
+    },
+    {
+      "path": "hardware/v1.3/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-04-19.pdf",
+      "sha": "e2426ff088149b6b636139e9f266a905ea80b967",
+      "size": 1937668
+    },
+    {
+      "path": "hardware/v1.3/05_PICKANDPLACE/PCB_点位_TOP_2024-04-06.pdf",
+      "sha": "5997fe11d10db75f43d3d13e4ffc15a506e6199e",
+      "size": 2094531
+    },
+    {
+      "path": "hardware/v1.3/05_PICKANDPLACE/PCB_点位_TOP_2024-04-19.pdf",
+      "sha": "a8bc4d4a17499979b045274531053e9c20f3ac5e",
+      "size": 2094703
+    },
+    {
+      "path": "hardware/v1.3/05_PICKANDPLACE/PickAndPlace_PCB1_2024-04-06.xlsx",
+      "sha": "eb33cbe2a796b7ca2424785e71806b3779e76495",
+      "size": 40952
+    },
+    {
+      "path": "hardware/v1.3/06_3D/3D_PCB1_2024-04-06.zip",
+      "sha": "b5a8616e47bf2e4965069eb8a1f0278d4b6c7488",
+      "size": 10445996
+    },
+    {
+      "path": "hardware/v1.3/07_ADPCB/Altium_Avaota A1_2024-04-06.zip",
+      "sha": "552a8177e56421980de558471afe20d78ed9317d",
+      "size": 1789823
+    },
+    {
+      "path": "hardware/v1.3/08_JLCEDA/ProPrj_Avaota A1 八核 AIoT 开发板_2024-05-03.epro",
+      "sha": "22f5a38b8cc49fe552180b232e5c72298d508901",
+      "size": 10221460
+    },
+    {
+      "path": "hardware/v1.3/08_JLCEDA/Readme.txt",
+      "sha": "35e590f03d671838ee449f06d09d8a9a2592fb71",
+      "size": 27
+    },
+    {
+      "path": "hardware/v1.3/Changelog.txt",
+      "sha": "97d85a6c5178c97cabfb347b27f01ecf7b7bb9d9",
+      "size": 326
+    },
+    {
+      "path": "hardware/v1.4/01_SCH/SCH_Avaota Pi A_2024-05-20.pdf",
+      "sha": "23a9f1726b6dfd47a817a13b1ce7f5afceb1fb0f",
+      "size": 2970474
+    },
+    {
+      "path": "hardware/v1.4/02_PCB/ProDoc_PCB1_2024-05-20.epro",
+      "sha": "3b1cc55177027c04a18433433604fd7710591994",
+      "size": 1247566
+    },
+    {
+      "path": "hardware/v1.4/03_GERBER/Gerber_PCB1_2024-05-20.zip",
+      "sha": "708da4770bcb01074f1744cad4c703c1d73c35c5",
+      "size": 1142206
+    },
+    {
+      "path": "hardware/v1.4/04_BOM/BOM_Avaota Pi A_PCB1_2024-05-20.xlsx",
+      "sha": "8ec480ffbc42944a114bf8102f2fdf957a2bc8d1",
+      "size": 17644
+    },
+    {
+      "path": "hardware/v1.4/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-04-06.pdf",
+      "sha": "4e5d3b06764938afef3aa5273c0c4f0f4b728723",
+      "size": 1937268
+    },
+    {
+      "path": "hardware/v1.4/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-04-19.pdf",
+      "sha": "e2426ff088149b6b636139e9f266a905ea80b967",
+      "size": 1937668
+    },
+    {
+      "path": "hardware/v1.4/05_PICKANDPLACE/PCB_点位_TOP_2024-04-06.pdf",
+      "sha": "5997fe11d10db75f43d3d13e4ffc15a506e6199e",
+      "size": 2094531
+    },
+    {
+      "path": "hardware/v1.4/05_PICKANDPLACE/PCB_点位_TOP_2024-04-19.pdf",
+      "sha": "a8bc4d4a17499979b045274531053e9c20f3ac5e",
+      "size": 2094703
+    },
+    {
+      "path": "hardware/v1.4/05_PICKANDPLACE/PickAndPlace_PCB1_2024-05-20.xlsx",
+      "sha": "7f7ff590b43f96ab476c70213e230b7a095be755",
+      "size": 41028
+    },
+    {
+      "path": "hardware/v1.4/06_3D/3D_PCB1_2024-04-06.zip",
+      "sha": "b5a8616e47bf2e4965069eb8a1f0278d4b6c7488",
+      "size": 10445996
+    },
+    {
+      "path": "hardware/v1.4/07_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-05-20.zip",
+      "sha": "2d1ef5e0f58f41ce639ae5a13d7c168998e997c0",
+      "size": 2610220
+    },
+    {
+      "path": "hardware/v1.4/08_JLCEDA/ProPrj_Avaota A1 八核 AIoT 开发板_2024-05-20.epro",
+      "sha": "a85b529c5e41611be0cb3a2bc6b587a9f2a519d4",
+      "size": 9504385
+    },
+    {
+      "path": "hardware/v1.4/08_JLCEDA/Readme.txt",
+      "sha": "35e590f03d671838ee449f06d09d8a9a2592fb71",
+      "size": 27
+    },
+    {
+      "path": "hardware/v1.4/Changelog.txt",
+      "sha": "b37c9678202f62891ea9697942eec0ae285ec9af",
+      "size": 39
+    },
+    {
+      "path": "hardware/v1.5/SCH_Avaota A1_PINE64_2024-07-02.pdf",
+      "sha": "b3bbd21731cb51a1aca0cc5a4dfed53694a46c6f",
+      "size": 2970540
+    },
+    {
+      "path": "hardware/v1.5/This VERSION is modify LOGO for PINE64.txt",
+      "sha": "a9434d9a68063b423db131434e32cf3a9811ba95",
+      "size": 92
+    },
+    {
+      "path": "hardware/v1.6/01_SCH/SCH_Avaota Pi A_2024-08-17.pdf",
+      "sha": "fbed9bc3060e5e2dc47614e64a3fe26facb23438",
+      "size": 2972107
+    },
+    {
+      "path": "hardware/v1.6/02_PCB/ProDoc_PCB1_2024-08-17.epro",
+      "sha": "7a600115e93464958e47cb76719f5bb0ac1304fc",
+      "size": 1433226
+    },
+    {
+      "path": "hardware/v1.6/03_GERBER/Gerber_PCB1_2024-08-17.zip",
+      "sha": "7df321a1373dae76b109d9c769fc3343c11b1481",
+      "size": 1387664
+    },
+    {
+      "path": "hardware/v1.6/04_BOM/BOM_Avaota Pi A_PCB1_2024-08-17.xlsx",
+      "sha": "56e70fced967939f3fc57ca84f0ece7b568179a6",
+      "size": 17834
+    },
+    {
+      "path": "hardware/v1.6/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-08-17.pdf",
+      "sha": "40a8af1e4e7f172aa1add2709dccba0aba532749",
+      "size": 925058
+    },
+    {
+      "path": "hardware/v1.6/05_PICKANDPLACE/PCB_点位_TOP_2024-08-17.pdf",
+      "sha": "1237cc236b77ada7efd456f79b6afcd481f14b0b",
+      "size": 1470666
+    },
+    {
+      "path": "hardware/v1.6/05_PICKANDPLACE/PickAndPlace_PCB1_2024-08-17.xlsx",
+      "sha": "cfea8a53f5cb6ae8a47fef0525b78f27d9d4edb1",
+      "size": 41188
+    },
+    {
+      "path": "hardware/v1.6/06_3D/3D_PCB1_2024-08-17.zip",
+      "sha": "40ed4a1013aa2f716e1028b4522abbaf1273459c",
+      "size": 10462961
+    },
+    {
+      "path": "hardware/v1.6/07_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-08-17.zip",
+      "sha": "7cee36b85412bbca658075d75c6f8cf5885f54ba",
+      "size": 14168512
+    },
+    {
+      "path": "hardware/v1.6/08_JLCEDA/ProDoc_Avaota Pi A_2024-08-17.epro",
+      "sha": "42d52ee157e8295105e3d98d7bc9e62b44e91d88",
+      "size": 1708437
+    },
+    {
+      "path": "hardware/v1.6/08_JLCEDA/Readme.txt",
+      "sha": "35e590f03d671838ee449f06d09d8a9a2592fb71",
+      "size": 27
+    },
+    {
+      "path": "hardware/v1.6/Changelog.txt",
+      "sha": "b6f69dea8541331dfc2a5f1ce08d94fc3bf95b3d",
+      "size": 183
+    },
+    {
+      "path": "hardware/v1.7/01_SCH/SCH_Avaota Pi A_2_2024-08-30.pdf",
+      "sha": "199c0c18d1eb3e5f73e36d233f9c5b96c6226674",
+      "size": 2972176
+    },
+    {
+      "path": "hardware/v1.7/02_PCB/ProDoc_PCB1_3_2024-08-30.epro",
+      "sha": "ca2ecfdd4e5079ba7c30fb212abe9e23eb14601c",
+      "size": 1431400
+    },
+    {
+      "path": "hardware/v1.7/03_GERBER/Gerber_PCB1_3_2024-08-30.zip",
+      "sha": "50282af14574bc85b2e462511228c5c43a6c59e3",
+      "size": 1378497
+    },
+    {
+      "path": "hardware/v1.7/04_BOM/BOM_Avaota Pi A_PCB1_2024-08-17.xlsx",
+      "sha": "56e70fced967939f3fc57ca84f0ece7b568179a6",
+      "size": 17834
+    },
+    {
+      "path": "hardware/v1.7/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-08-17.pdf",
+      "sha": "40a8af1e4e7f172aa1add2709dccba0aba532749",
+      "size": 925058
+    },
+    {
+      "path": "hardware/v1.7/05_PICKANDPLACE/PCB_点位_TOP_2024-08-17.pdf",
+      "sha": "1237cc236b77ada7efd456f79b6afcd481f14b0b",
+      "size": 1470666
+    },
+    {
+      "path": "hardware/v1.7/05_PICKANDPLACE/PickAndPlace_PCB1_2024-08-17.xlsx",
+      "sha": "cfea8a53f5cb6ae8a47fef0525b78f27d9d4edb1",
+      "size": 41188
+    },
+    {
+      "path": "hardware/v1.7/06_3D/3D_PCB1_2024-08-17.zip",
+      "sha": "40ed4a1013aa2f716e1028b4522abbaf1273459c",
+      "size": 10462961
+    },
+    {
+      "path": "hardware/v1.7/07_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-08-30.zip",
+      "sha": "12b0f438152ef312b388f5937a7186c2ff34ba1e",
+      "size": 13920426
+    },
+    {
+      "path": "hardware/v1.7/08_JLCEDA/ProDoc_Avaota Pi A_1.7_2024-08-30.epro",
+      "sha": "08e81a3d8f2d0c2b94a6bf8555da3c0a01ae408e",
+      "size": 1704094
+    },
+    {
+      "path": "hardware/v1.7/08_JLCEDA/Readme.txt",
+      "sha": "35e590f03d671838ee449f06d09d8a9a2592fb71",
+      "size": 27
+    },
+    {
+      "path": "hardware/v1.7/Changelog.txt",
+      "sha": "501b64c1ff58aa77e360391765e8769cd961a85e",
+      "size": 18
+    },
+    {
+      "path": "resource/README",
+      "sha": "d3f5a12faa99758192ecc4ed3fc22c9249232e86",
+      "size": 2
+    },
+    {
+      "path": "resource/dram_4l/01_SCH/SCH_T527 LPDDR4 4层 模板_2024-06-06.pdf",
+      "sha": "0d0c4dd354a757ed94c9b79a56d110b6d8ea35d4",
+      "size": 463869
+    },
+    {
+      "path": "resource/dram_4l/02_PCB/ProDoc_PCB2_2024-06-06.epro",
+      "sha": "bd486f125b632519fc173aea974cc33c20e05f60",
+      "size": 185119
+    },
+    {
+      "path": "resource/dram_4l/03_EDA/ProDoc_T527 LPDDR4 4层 模板_2024-06-06.epro",
+      "sha": "d55379e00475baf88a12efce64358585378de9c0",
+      "size": 199530
+    },
+    {
+      "path": "resource/dram_4l/04_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-06-06.zip",
+      "sha": "b4cfe153347b3eb08bf66a3b0d357180cb6787c8",
+      "size": 111501
+    },
+    {
+      "path": "resource/dram_8l/01_SCH/SCH_T527 LPDDR4 8层 模板（内存转正）_2024-06-06.pdf",
+      "sha": "217dc5843aa4a6f60e5e84c56f7d2382c3781a78",
+      "size": 490108
+    },
+    {
+      "path": "resource/dram_8l/02_PCB/ProDoc_PCB7_2024-06-06.epro",
+      "sha": "daf057adcbf404b7d761009362f2d6dd512b9a6b",
+      "size": 202941
+    },
+    {
+      "path": "resource/dram_8l/03_EDA/ProDoc_T527 LPDDR4 8层 模板（内存转正）_2024-06-06.epro",
+      "sha": "4872c48316d20b684948947b61ddf862320ae364",
+      "size": 219023
+    },
+    {
+      "path": "resource/dram_8l/04_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-06-06.zip",
+      "sha": "1ff024c179367d096c97fdda37dfd399b51ef83b",
+      "size": 123695
+    },
+    {
+      "path": "resource/ibis/IBIS.zip",
+      "sha": "b62d095fe1b998608aad571228935a5a0a37003b",
+      "size": 5036963
+    }
+  ],
+  "sources": [
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/LICENSE",
+      "bytes": 13708,
+      "sha256": "830bd5a61c579317156e889e98314c0585958854f2ff3c227256697385431c80",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/LICENSE"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/README.md",
+      "bytes": 3249,
+      "sha256": "1b4aaf9637c570b6a12fab53cfab75473d7e2e597850f88702f92afb05552ad1",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/README.md"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.6/01_SCH/SCH_Avaota Pi A_2024-08-17.pdf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.6/01_SCH/SCH_Avaota%20Pi%20A_2024-08-17.pdf",
+      "bytes": 2972107,
+      "sha256": "f21b0909f7daa6be57c40cd3f69c79b50d7dd0ad0fe6d8ac033d8735f40c464d",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.6/01_SCH/SCH_Avaota Pi A_2024-08-17.pdf"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.6/Changelog.txt",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.6/Changelog.txt",
+      "bytes": 183,
+      "sha256": "432d028e47795a10c3f2ebc079cc191f7bb4787d8fe55902510bc39085bde89d",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.6/Changelog.txt"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/01_SCH/SCH_Avaota Pi A_2_2024-08-30.pdf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/01_SCH/SCH_Avaota%20Pi%20A_2_2024-08-30.pdf",
+      "bytes": 2972176,
+      "sha256": "9d21a47bfabe37eaf0533fba0bec076867cea39b166c721cb8c8a506fe252c0d",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/01_SCH/SCH_Avaota Pi A_2_2024-08-30.pdf"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/02_PCB/ProDoc_PCB1_3_2024-08-30.epro",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/02_PCB/ProDoc_PCB1_3_2024-08-30.epro",
+      "bytes": 1431400,
+      "sha256": "fcb71c6f4b527450c82515c78aee41d037798b5df780e3db96803f1bddfa420c",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/02_PCB/ProDoc_PCB1_3_2024-08-30.epro",
+      "archive_entries": 137,
+      "key_archive_entries": [],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/03_GERBER/Gerber_PCB1_3_2024-08-30.zip",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/03_GERBER/Gerber_PCB1_3_2024-08-30.zip",
+      "bytes": 1378497,
+      "sha256": "17316e30e177b06555c95dca143af32e1b6f78def0dd78f90b3b86b6505df4d1",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/03_GERBER/Gerber_PCB1_3_2024-08-30.zip",
+      "archive_entries": 23,
+      "key_archive_entries": [],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/04_BOM/BOM_Avaota Pi A_PCB1_2024-08-17.xlsx",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/04_BOM/BOM_Avaota%20Pi%20A_PCB1_2024-08-17.xlsx",
+      "bytes": 17834,
+      "sha256": "609fa346028e0c77667c3f070dfe3ede0f0aa86095c3d5ac9d42d3ac18d9ffa5",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/04_BOM/BOM_Avaota Pi A_PCB1_2024-08-17.xlsx"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-08-17.pdf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/05_PICKANDPLACE/PCB_%E7%82%B9%E4%BD%8D_BOTTOM_2024-08-17.pdf",
+      "bytes": 925058,
+      "sha256": "1d5c330c76482699ad4d7bbae2ff6225dd3bd3f8c5c2af8f6bf83f015ae597cc",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/05_PICKANDPLACE/PCB_点位_BOTTOM_2024-08-17.pdf"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/05_PICKANDPLACE/PCB_点位_TOP_2024-08-17.pdf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/05_PICKANDPLACE/PCB_%E7%82%B9%E4%BD%8D_TOP_2024-08-17.pdf",
+      "bytes": 1470666,
+      "sha256": "c561bb4a98701a5b71945e17f34f6df1ed802c7ad3c8b2f9bbaedcb66a59307e",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/05_PICKANDPLACE/PCB_点位_TOP_2024-08-17.pdf"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/05_PICKANDPLACE/PickAndPlace_PCB1_2024-08-17.xlsx",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/05_PICKANDPLACE/PickAndPlace_PCB1_2024-08-17.xlsx",
+      "bytes": 41188,
+      "sha256": "0f9807f62fd7ffa59f83764f94bac235fea4554877a7c32f37624b21dd64496a",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/05_PICKANDPLACE/PickAndPlace_PCB1_2024-08-17.xlsx"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/06_3D/3D_PCB1_2024-08-17.zip",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/06_3D/3D_PCB1_2024-08-17.zip",
+      "bytes": 10462961,
+      "sha256": "6188d8276ac687830116dc725cccbae882fef8b9f0862d314435f29ce10fa0c3",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/06_3D/3D_PCB1_2024-08-17.zip",
+      "archive_entries": 1,
+      "key_archive_entries": [
+        "3D_PCB1_2024-08-17.step"
+      ],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/07_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-08-30.zip",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/07_ADPCB/Altium_Avaota%20A1%20%E5%85%AB%E6%A0%B8%20AIoT%20%E5%BC%80%E5%8F%91%E6%9D%BF_2024-08-30.zip",
+      "bytes": 13920426,
+      "sha256": "d203d1bcaee697b441cac6cfc7a21421d87a2199e2b4996682137f0c9d738e6d",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/07_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-08-30.zip",
+      "archive_entries": 17,
+      "key_archive_entries": [
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/1_BLOCK.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/2_12VDC.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/3_POWER.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/4_SYSTEM.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/5_DRAM.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/6_GPIO1.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/7_GPIO2.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/8_PERF1.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/9_PERF2.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/10_PERF3.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/11_GMAC0.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/12_GMAC1.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/Avaota Pi A_2/13_CAMERA.schdoc",
+        "Avaota A1 八核 AIoT 开发板/Avaota Pi A_1.7/PCB1_3.pcbdoc"
+      ],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/08_JLCEDA/ProDoc_Avaota Pi A_1.7_2024-08-30.epro",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/08_JLCEDA/ProDoc_Avaota%20Pi%20A_1.7_2024-08-30.epro",
+      "bytes": 1704094,
+      "sha256": "93f93638cd0f31b64bae89d368ae329498fdcb981d8acf43b42e34aa5a60e987",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/08_JLCEDA/ProDoc_Avaota Pi A_1.7_2024-08-30.epro",
+      "archive_entries": 163,
+      "key_archive_entries": [],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/08_JLCEDA/Readme.txt",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/08_JLCEDA/Readme.txt",
+      "bytes": 27,
+      "sha256": "795d61f7e5b03d2d8a630b9a5f2499b338acf6fc4e2e2a891e0a2ce7f597b00e",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/08_JLCEDA/Readme.txt"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "hardware/v1.7/Changelog.txt",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/hardware/v1.7/Changelog.txt",
+      "bytes": 18,
+      "sha256": "3b136ae770d05d611811279ca60a76ac350c385e12e1eb9873113c7a8d73cd47",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware/v1.7/Changelog.txt"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "resource/dram_4l/01_SCH/SCH_T527 LPDDR4 4层 模板_2024-06-06.pdf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/resource/dram_4l/01_SCH/SCH_T527%20LPDDR4%204%E5%B1%82%20%E6%A8%A1%E6%9D%BF_2024-06-06.pdf",
+      "bytes": 463869,
+      "sha256": "cf1f91de55019b4d2db0dfd4d6d384a843bd517fa0b071b099a93ddb64c37826",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/resource/dram_4l/01_SCH/SCH_T527 LPDDR4 4层 模板_2024-06-06.pdf"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "resource/dram_8l/01_SCH/SCH_T527 LPDDR4 8层 模板（内存转正）_2024-06-06.pdf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/resource/dram_8l/01_SCH/SCH_T527%20LPDDR4%208%E5%B1%82%20%E6%A8%A1%E6%9D%BF%EF%BC%88%E5%86%85%E5%AD%98%E8%BD%AC%E6%AD%A3%EF%BC%89_2024-06-06.pdf",
+      "bytes": 490108,
+      "sha256": "cfbe763950a8085e603f95aabdc846fd2dc1f499f35513595f9d336441c2d222",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/resource/dram_8l/01_SCH/SCH_T527 LPDDR4 8层 模板（内存转正）_2024-06-06.pdf"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "resource/dram_8l/02_PCB/ProDoc_PCB7_2024-06-06.epro",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/resource/dram_8l/02_PCB/ProDoc_PCB7_2024-06-06.epro",
+      "bytes": 202941,
+      "sha256": "4ea03d9ed2d921b0db5ae06a400056cf32497c52e39f80c6bbe71713cd57e3b7",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/resource/dram_8l/02_PCB/ProDoc_PCB7_2024-06-06.epro",
+      "archive_entries": 25,
+      "key_archive_entries": [],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "resource/dram_8l/03_EDA/ProDoc_T527 LPDDR4 8层 模板（内存转正）_2024-06-06.epro",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/resource/dram_8l/03_EDA/ProDoc_T527%20LPDDR4%208%E5%B1%82%20%E6%A8%A1%E6%9D%BF%EF%BC%88%E5%86%85%E5%AD%98%E8%BD%AC%E6%AD%A3%EF%BC%89_2024-06-06.epro",
+      "bytes": 219023,
+      "sha256": "5027924ea3e9e4da00d81e0b5d9654f01a3de9b3ddfba7d6da210061d229b90d",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/resource/dram_8l/03_EDA/ProDoc_T527 LPDDR4 8层 模板（内存转正）_2024-06-06.epro",
+      "archive_entries": 30,
+      "key_archive_entries": [],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "resource/dram_8l/04_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-06-06.zip",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/resource/dram_8l/04_ADPCB/Altium_Avaota%20A1%20%E5%85%AB%E6%A0%B8%20AIoT%20%E5%BC%80%E5%8F%91%E6%9D%BF_2024-06-06.zip",
+      "bytes": 123695,
+      "sha256": "822b88bedb015ca3794593807e0efb262f36543c5d563379839d48a56c5d4c1c",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/resource/dram_8l/04_ADPCB/Altium_Avaota A1 八核 AIoT 开发板_2024-06-06.zip",
+      "archive_entries": 5,
+      "key_archive_entries": [
+        "Avaota A1 八核 AIoT 开发板/T527 LPDDR4 8层 模板（内存转正）/T527 LPDDR4 8层 模板（内存转正）/1_P1.schdoc",
+        "Avaota A1 八核 AIoT 开发板/T527 LPDDR4 8层 模板（内存转正）/PCB7.pcbdoc"
+      ],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/Avaota-A1",
+      "commit": "bbd81c54c9a971e8fd9397fec958a9d9afebdffe",
+      "path": "resource/ibis/IBIS.zip",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/Avaota-A1/bbd81c54c9a971e8fd9397fec958a9d9afebdffe/resource/ibis/IBIS.zip",
+      "bytes": 5036963,
+      "sha256": "be92c50301ceb5957be2c11c719dff5e826951c7700bc29dfd4b593ef6595bf3",
+      "kind": "official-hardware-repository",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/resource/ibis/IBIS.zip",
+      "archive_entries": 2,
+      "key_archive_entries": [
+        "t527_lpddr4x_allwinner.ibs",
+        "t527_lpddr4_allwinner.ibs"
+      ],
+      "archive_integrity": "zip CRC checked"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/README.md",
+      "bytes": 2270,
+      "sha256": "ede8d7daf42692e9eebe795241417d2b7d777a46e54cf732f6a61ce7f45b6252",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/README.md"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "VERSION",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/VERSION",
+      "bytes": 8,
+      "sha256": "33739e86414163401cb538388da3ac76efea69e46fc6bbb09c60bf306ab1b250",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/VERSION"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "boards/avaota-a1.conf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/boards/avaota-a1.conf",
+      "bytes": 2854,
+      "sha256": "28a02e4e05065ad3d626d641713862f5aa55ee4ab6e4c67448c5d67effa1f5b2",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/boards/avaota-a1.conf"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "boards/avaota-c1.conf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/boards/avaota-c1.conf",
+      "bytes": 1275,
+      "sha256": "5e369c52402961ba264f7abe184402e5664e61c7d76cb50f04af349e3198d575",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/boards/avaota-c1.conf"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "build_all.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/build_all.sh",
+      "bytes": 12557,
+      "sha256": "a6ec3f9c516fd34973821d22db268aef39c28d8a1164defb98036978802e4252",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/build_all.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/fetch.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/fetch.sh",
+      "bytes": 4108,
+      "sha256": "fb91964f0a0ff77f37d456c61f565dadb6e56466f76bbea65c44ce59326a6c36",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/fetch.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/mkbootloader.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/mkbootloader.sh",
+      "bytes": 1252,
+      "sha256": "14dc10a2c5edc9b112406ffb303ff00d40c54662c5ca48b7d7531cc6543f4b47",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/mkbootloader.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/mklinux.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/mklinux.sh",
+      "bytes": 11932,
+      "sha256": "8bd72468a419b52692b3780dd5f49bb437d92742101c0a2ef8bb080e0f1170cf",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/mklinux.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/mkrootfs.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/mkrootfs.sh",
+      "bytes": 8869,
+      "sha256": "a3651b2523b5ac11e56aea83e2c3ebcbd688d81c31570000d3e96c462d81bb1a",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/mkrootfs.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/pack.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/pack.sh",
+      "bytes": 6180,
+      "sha256": "74ecb8b8106ff69f7b24da2ef834ee2d4ba8aafb423495a659151a05edb0f904",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/pack.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "target/boot/extlinux.conf",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/boot/extlinux.conf",
+      "bytes": 91,
+      "sha256": "6c78470cc9df6a8df58e8526e5cb431d610b4554d5d0d0a5673c87f01521c001",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/target/boot/extlinux.conf"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": ".github/workflows/Build-AvaotaOS-Kernel.yaml",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/.github/workflows/Build-AvaotaOS-Kernel.yaml",
+      "bytes": 3537,
+      "sha256": "cebe532fb70f04ba4b0d2f14815d6821bb41879a9fd3b3aabe16d1a551ae1c13",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/.github/workflows/Build-AvaotaOS-Kernel.yaml"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": ".github/workflows/Build-AvaotaOS.yaml",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/.github/workflows/Build-AvaotaOS.yaml",
+      "bytes": 3769,
+      "sha256": "865b5409beb38d4ab5bc8fe9a5d4f86ac7a2fccfb9d9fecfb955ad71d88e8c5b",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/.github/workflows/Build-AvaotaOS.yaml"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/diagnose-display.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/diagnose-display.sh",
+      "bytes": 3570,
+      "sha256": "020c2d2d060bdf6f0ebd0af1d8cd9c84afc574eaa7bc0ac3ba38362349193cf0",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/diagnose-display.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/lib/bootloader/bootloader-rockchip-uboot.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/lib/bootloader/bootloader-rockchip-uboot.sh",
+      "bytes": 2145,
+      "sha256": "f4c80eb18c6fe943ab2fe696d82f141185183385baa0d73d6082c02f34ffef5a",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/lib/bootloader/bootloader-rockchip-uboot.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/lib/bootloader/bootloader-sunxi-syterkit.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/lib/bootloader/bootloader-sunxi-syterkit.sh",
+      "bytes": 1713,
+      "sha256": "adfd15c885e6a2d299579db52bf6871874be8401ae754c8ab976f56ed51da903",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/lib/bootloader/bootloader-sunxi-syterkit.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/lib/bootloader/bootloader-sunxi-uboot.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/lib/bootloader/bootloader-sunxi-uboot.sh",
+      "bytes": 1860,
+      "sha256": "ad596182fa3208a6a70b6c5a69446fa3ffbf7fe625bcf341cd2b3bd1d3e9fcfc",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/lib/bootloader/bootloader-sunxi-uboot.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "scripts/lib/packages/kernel-deb.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/lib/packages/kernel-deb.sh",
+      "bytes": 11068,
+      "sha256": "fe19513480f5312884d57a031e88495a45796bac247fa6259360c2e83a2eaa93",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/scripts/lib/packages/kernel-deb.sh"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "os/noble/gnome-packages.list",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/os/noble/gnome-packages.list",
+      "bytes": 50,
+      "sha256": "dba542617e5316cc7fd74056c3a37967eba2a0a34034b0399db1cd614498a418",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/os/noble/gnome-packages.list"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "os/noble/base-packages.list",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/os/noble/base-packages.list",
+      "bytes": 1117,
+      "sha256": "657350e5b72a92095a2296376ee0c01e5c1c8f0672281ca9d15fcaeffa2bfb12",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/os/noble/base-packages.list"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "path": "os/bookworm/base-packages.list",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/os/bookworm/base-packages.list",
+      "bytes": 1164,
+      "sha256": "e5f3c012287a3d1915c44afb8420f9713c971e7d05579821f1dc93b5e0714083",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/AvaotaOS/os/bookworm/base-packages.list"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/Makefile",
+      "bytes": 67135,
+      "sha256": "e2b631fdb39569f77440979ce58a19a1c8620719f5c427b920949d4e80dcd5f6",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/Makefile"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "arch/arm64/configs/sun55i_t527_bsp_defconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/arch/arm64/configs/sun55i_t527_bsp_defconfig",
+      "bytes": 13883,
+      "sha256": "48e333702a12a5762b1f32a7dd81e7f32535bc76744c199da58140ce96879d3f",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/arch/arm64/configs/sun55i_t527_bsp_defconfig"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "arch/arm64/boot/dts/allwinner/sun55i-t527-avaota-a1.dts",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/arch/arm64/boot/dts/allwinner/sun55i-t527-avaota-a1.dts",
+      "bytes": 71800,
+      "sha256": "b395ed249015328c46395c541aa840fde6c6f22f685a5a3f3b982f7be9a6d761",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/arch/arm64/boot/dts/allwinner/sun55i-t527-avaota-a1.dts"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "arch/arm64/boot/dts/allwinner/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/arch/arm64/boot/dts/allwinner/Makefile",
+      "bytes": 2469,
+      "sha256": "168043b5c16f8d0afac327453a9ab4ba82164aa6844ae1356990b325a1823633",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/arch/arm64/boot/dts/allwinner/Makefile"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "bsp/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/Makefile",
+      "bytes": 71,
+      "sha256": "aa66cf6f7c1c548ba7d1eb7b44d712609621b61647a4c9031df7d8c42e1fc671",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/bsp/Makefile"
+    },
+    {
+      "repository": "YuzukiHD/SyterKit",
+      "commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "path": "board/avaota-a1/README.md",
+      "url": "https://raw.githubusercontent.com/YuzukiHD/SyterKit/0998aeb48289058d26b3c24febb3405e29b66898/board/avaota-a1/README.md",
+      "bytes": 1068,
+      "sha256": "1ee142f535a31145895c40f03d69d57add54dca3042e253e3b119269b54f5054",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/SyterKit/board/avaota-a1/README.md"
+    },
+    {
+      "repository": "YuzukiHD/SyterKit",
+      "commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "path": "cmake/board/avaota-a1.cmake",
+      "url": "https://raw.githubusercontent.com/YuzukiHD/SyterKit/0998aeb48289058d26b3c24febb3405e29b66898/cmake/board/avaota-a1.cmake",
+      "bytes": 2588,
+      "sha256": "8d18f9ad48fe49849f81c20ea01795374d421fd1955cf2f0d5e0346facc5af77",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/SyterKit/cmake/board/avaota-a1.cmake"
+    },
+    {
+      "repository": "YuzukiHD/SyterKit",
+      "commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "path": "board/avaota-a1/board.c",
+      "url": "https://raw.githubusercontent.com/YuzukiHD/SyterKit/0998aeb48289058d26b3c24febb3405e29b66898/board/avaota-a1/board.c",
+      "bytes": 12006,
+      "sha256": "24b5beea19a230457d1b50ea8c661afc9c6df3655ca378553434f55125738408",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/SyterKit/board/avaota-a1/board.c"
+    },
+    {
+      "repository": "YuzukiHD/SyterKit",
+      "commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "path": "board/avaota-a1/extlinux_boot/main.c",
+      "url": "https://raw.githubusercontent.com/YuzukiHD/SyterKit/0998aeb48289058d26b3c24febb3405e29b66898/board/avaota-a1/extlinux_boot/main.c",
+      "bytes": 27154,
+      "sha256": "e74306783ddd8d8ad7425c9d40033709e82e68e5784d0d200805808abeb35c87",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/SyterKit/board/avaota-a1/extlinux_boot/main.c"
+    },
+    {
+      "repository": "YuzukiHD/SyterKit",
+      "commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "path": "board/avaota-a1/extlinux_boot/fdt.c",
+      "url": "https://raw.githubusercontent.com/YuzukiHD/SyterKit/0998aeb48289058d26b3c24febb3405e29b66898/board/avaota-a1/extlinux_boot/fdt.c",
+      "bytes": 8986,
+      "sha256": "9b1cd6bacee63527c73a1d7b04f0efa56bdbee5154a736fed84961995fc0c462",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/SyterKit/board/avaota-a1/extlinux_boot/fdt.c"
+    },
+    {
+      "repository": "YuzukiHD/SyterKit",
+      "commit": "0998aeb48289058d26b3c24febb3405e29b66898",
+      "path": "board/avaota-a1/extlinux_boot/extlinux/extlinux.conf",
+      "url": "https://raw.githubusercontent.com/YuzukiHD/SyterKit/0998aeb48289058d26b3c24febb3405e29b66898/board/avaota-a1/extlinux_boot/extlinux/extlinux.conf",
+      "bytes": 613,
+      "sha256": "35d88f6322b915ac3204a0cfc045c1029219f9d54658e4639e4e531ff345a661",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/SyterKit/board/avaota-a1/extlinux_boot/extlinux/extlinux.conf"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "bsp/drivers/drm/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/drm/Kconfig",
+      "bytes": 3199,
+      "sha256": "0c362cd4d9dd8db3f91119f94544be83fc61c2bf259854306ff471346b362a51",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/bsp/drivers/drm/Kconfig"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "bsp/drivers/drm/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/drm/Makefile",
+      "bytes": 2283,
+      "sha256": "cae00a7ee8af19859e94acdec8349cdf855a4bd24f6685584a1d027a211e5f3d",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/bsp/drivers/drm/Makefile"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "bsp/drivers/drm/sunxi_drm_dsi.c",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/drm/sunxi_drm_dsi.c",
+      "bytes": 32220,
+      "sha256": "4971403250413ac8d7f6cb2f132a4cc61171f657d32ec8076a41828698ebb8c5",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/bsp/drivers/drm/sunxi_drm_dsi.c"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "bsp/drivers/gpu/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/gpu/Kconfig",
+      "bytes": 934,
+      "sha256": "46b7861b6bc5d71c1c5c1f4af6869c0031fb00042c5f3b92c47c4b663a609bd8",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/bsp/drivers/gpu/Kconfig"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "path": "bsp/drivers/gpu/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/gpu/Makefile",
+      "bytes": 68,
+      "sha256": "84a449f1fa1a222ff1f943c9ff530977ed78df59bff3116fe75684c2830d74da",
+      "kind": "official-software-source",
+      "cache_path": "image/work/avaota-a1-research-20261101/software/linux/bsp/drivers/gpu/Makefile"
+    },
+    {
+      "url": "https://docs.avaota.fun/avaota-sbc/avaota-a1/hardware/hardware_info",
+      "bytes": 61087,
+      "sha256": "f350ea0e01198e8e2bf1684f65f7c5a25dc4d4205ab71623773f9f6085a20b32",
+      "kind": "official-documentation-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/hardware_info.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/avaota-sbc/avaota-a1/hardware/oshw",
+      "bytes": 67986,
+      "sha256": "77646053351bf3e57656c518de071fc1d6bba206fba65b92f7bd4c0ccd22b0fc",
+      "kind": "official-documentation-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/oshw.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/avaota-sbc/avaota-a1/hardware/soc-info",
+      "bytes": 27506,
+      "sha256": "fe904a925c4d9a4f61875a0c511cd4ba229b48bd47834c42c5d194d23094c4b7",
+      "kind": "official-documentation-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/hardware/soc-info.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/kernel-dev/get-kernel/",
+      "bytes": 65086,
+      "sha256": "64785e1ed1308fe6dfd16c4635b6ac1b31e356a84dcc56dbc38240e8f40caf73",
+      "kind": "official-documentation-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/root/kernel-source-guide.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/bsp-intro/",
+      "bytes": 80871,
+      "sha256": "e7e92a131025c843e3577b67d6b8d4677ee5b75adf60ca7d6babdd443e87a029",
+      "kind": "official-documentation-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/root/bsp-guide.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/online_bom/avaota-a1.html",
+      "bytes": 19177386,
+      "sha256": "72a7d52bc082aaaad12a85a6e09839ad55d3c77470d8f5bafbeba60a11c924ac",
+      "kind": "official-documentation-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/root/online-bom.html"
+    },
+    {
+      "url": "https://github.com/AvaotaSBC/AvaotaOS",
+      "bytes": 244065,
+      "sha256": "bb54b6c45360971b84f5ee0fa6f887733cc445100d0d0035f8b97162dde2bad1",
+      "kind": "official-reference-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/reuse-review/AvaotaOS.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/avaota-sbc/avaota-a1/avaotaos/os-release",
+      "bytes": 20266,
+      "sha256": "f34684e0fad6697e2d59532694274cfb6ff14a79d17e25e2fee90828449192bd",
+      "kind": "official-reference-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/reuse-review/os-release.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/linux-manual/intro",
+      "bytes": 37665,
+      "sha256": "853ef9aec9e11b13a20e5e1a6e6216df69ae61e95c0fe3d7af988b6d5038510c",
+      "kind": "official-reference-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/reuse-review/intro.html"
+    },
+    {
+      "url": "https://docs.avaota.fun/sitemap.xml",
+      "bytes": 20816,
+      "sha256": "ec74547ef019bf1b9a59cdd4406beacfd81ea9c6198c8e1179c6073946b3ab86",
+      "kind": "official-reference-snapshot",
+      "cache_path": "image/work/avaota-a1-research-20261101/reuse-review/sitemap.xml"
+    }
+  ]
+}

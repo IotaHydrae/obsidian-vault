@@ -1,0 +1,222 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "repository": "https://github.com/clockworkpi/uConsole",
+  "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+  "cache_policy": "Unmodified local ignored downloads; paths are repository-relative. The selected repository root has no LICENSE, while the official product page states GPL v3 for design schematics and related material. Check original terms of third-party documents and models individually; do not uniformly relicense the whole archive.",
+  "sources": [
+    {
+      "id": "clockwork_Mainboard_V3.14_V5_Schematic.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_Mainboard_V3.14_V5_Schematic.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 2050109,
+      "sha256": "c94f4054ac76e51502efe01486584f7426ebce57acbf786fe1f904be26880d20",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_Mainboard_V3.14_V5_Schematic.pdf"
+    },
+    {
+      "id": "clockwork_Mainboard_V3.14_Schematic.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_Mainboard_V3.14_Schematic.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 2055801,
+      "sha256": "3222ecaa95607e958f6e14f9bb808e7f47caa44b11204f2f9ff74d343823b256",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_Mainboard_V3.14_Schematic.pdf"
+    },
+    {
+      "id": "clockwork_Adapter_CM4_Schematic.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_Adapter_CM4_Schematic.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 1150192,
+      "sha256": "02e56a25d38eed61c69c0b843c8e2c0a9741e3246d0f7cefb15600abe1081d05",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_Adapter_CM4_Schematic.pdf"
+    },
+    {
+      "id": "Clockwork_uConsole_Assembly_Guidelines.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/Clockwork_uConsole_Assembly_Guidelines.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 12454557,
+      "sha256": "85a521e012d113d342e20a6986c6efb1f9800c114970673a5ddaf8a093939dea",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/Clockwork_uConsole_Assembly_Guidelines.pdf"
+    },
+    {
+      "id": "README.md",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/README.md",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 6143,
+      "sha256": "435e79dcfafbae4d23401bfd6f8cd7a707819e531bd05ce896be6bb4bbe334ad",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/README.md"
+    },
+    {
+      "id": "JD9365DA-H3_DS_V0.01_20200819.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/JD9365DA-H3_DS_V0.01_20200819.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 4962394,
+      "sha256": "31fb4729dc65525cd761174a6939d9763d33870862f8195c14a3532fa95d1d8f",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/JD9365DA-H3_DS_V0.01_20200819.pdf",
+      "git_blob": "fbc9a74262f1e1f54b49cd5132c17ad6bbe76d21"
+    },
+    {
+      "id": "JD9365DA-H3_User_Guide_Preliminary_V0.00_20200827.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/JD9365DA-H3_User_Guide_Preliminary_V0.00_20200827.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 6050169,
+      "sha256": "68f65a69aee15c4bff99f3bf387a362a8e7d779237f20a7f429a7c17cff66f28",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/JD9365DA-H3_User_Guide_Preliminary_V0.00_20200827.pdf",
+      "git_blob": "2f422b26889166624e9abb8ea888deeed954dc07"
+    },
+    {
+      "id": "PCB/RPI CM4 to CPI v3.14 Adapter.zip",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/PCB/RPI%20CM4%20to%20CPI%20v3.14%20Adapter.zip",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 194493,
+      "sha256": "a7417021c6bc6c6212f0a2d28a30a8fa7a486da308e6fed13018bfe7347fbffb",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/PCB/RPI CM4 to CPI v3.14 Adapter.zip",
+      "git_blob": "7decea2a66365f7c1aba9e0ddbea7c5a558ec09b",
+      "archive_members": [
+        "PRI CM4 to CPI v3.14 Adapter/",
+        "PRI CM4 to CPI v3.14 Adapter/BOTTOM.art",
+        "PRI CM4 to CPI v3.14 Adapter/DRILL.art",
+        "PRI CM4 to CPI v3.14 Adapter/GND02.art",
+        "PRI CM4 to CPI v3.14 Adapter/PWR03.art",
+        "PRI CM4 to CPI v3.14 Adapter/SIIKSCREEN_BOT.art",
+        "PRI CM4 to CPI v3.14 Adapter/SIIKSCREEN_TOP.art",
+        "PRI CM4 to CPI v3.14 Adapter/SOLDEMASK_BOT.art",
+        "PRI CM4 to CPI v3.14 Adapter/SOLDEMASK_TOP.art",
+        "PRI CM4 to CPI v3.14 Adapter/TOP.art",
+        "PRI CM4 to CPI v3.14 Adapter/V3FLC008A0_0510-1-4.drl",
+        "PRI CM4 to CPI v3.14 Adapter/V3FLC008A0_0510.ipc"
+      ]
+    },
+    {
+      "id": "clockwork_DevTerm_A06_Core_for_Mainboard_V3.14_Schematic.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_DevTerm_A06_Core_for_Mainboard_V3.14_Schematic.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 1872182,
+      "sha256": "d1eea940b5f000285f442f20b7bcb3cc4ce02871209fadcd3465e4d5e14c0989",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_DevTerm_A06_Core_for_Mainboard_V3.14_Schematic.pdf",
+      "git_blob": "31f019c81f70b177b969c6f1041cf9750a261b09"
+    },
+    {
+      "id": "clockwork_DevTerm_R01_Core_for_Mainboard_V3.14_Schematic.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_DevTerm_R01_Core_for_Mainboard_V3.14_Schematic.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 3993994,
+      "sha256": "5bca688cbca18adea58ba29aff9945f5ac63e3e1f11177cf8279b00098e2d31c",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_DevTerm_R01_Core_for_Mainboard_V3.14_Schematic.pdf",
+      "git_blob": "9ec703eb2c01999c9f3f0313f685106c20160260"
+    },
+    {
+      "id": "clockwork_UC_4G_Schematic.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_UC_4G_Schematic.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 917676,
+      "sha256": "457492fbf0e884dbd5f9d948b96b1476ee6e76b8644d10c7675a8041483dcf70",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_UC_4G_Schematic.pdf",
+      "git_blob": "77ef7beea488eccad8de0261c4a5a4a6cd655444"
+    },
+    {
+      "id": "clockwork_UC_4G_drawing.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/clockwork_UC_4G_drawing.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 302285,
+      "sha256": "1e8d0a03285c29132b892e9dfc3025046b4413e694045e6cedf657ccffe236f5",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/clockwork_UC_4G_drawing.pdf",
+      "git_blob": "49d8c63d7fc371583896415ae9d6196dd7c1022d"
+    },
+    {
+      "id": "keyboard_220816.pdf",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/keyboard_220816.pdf",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 208917,
+      "sha256": "6869deed40a635360ecf37aa1ac4359168b19c7e578f4d1b21be2bcc6919c205",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/keyboard_220816.pdf",
+      "git_blob": "45933426174fc9d8fa7a2de6c8d3f6ed328264c2"
+    },
+    {
+      "id": "PCB/CPI_3.14_Mainboard_V5_Gerber.7z",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/PCB/CPI_3.14_Mainboard_V5_Gerber.7z",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 374023,
+      "sha256": "031d72c3fc979a562890080d92315b0df3a048649a984de57ce4c0d09b97a921",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/PCB/CPI_3.14_Mainboard_V5_Gerber.7z",
+      "git_blob": "ae38703d3dfcde8206e0ddf4dc3c39598bdd049f",
+      "archive_check": "7z t: OK"
+    },
+    {
+      "id": "Code/uconsole_keyboard/README.md",
+      "publisher": "ClockworkPi official uConsole repository",
+      "url": "https://raw.githubusercontent.com/clockworkpi/uConsole/53a05efca806ca024aab4fbfd28a680688c2541c/Code/uconsole_keyboard/README.md",
+      "source_commit": "53a05efca806ca024aab4fbfd28a680688c2541c",
+      "bytes": 2401,
+      "sha256": "4124ca8541c948d5a5c4431a10023b89f780adc992fde48e005d2e30d47eec50",
+      "cache_path": "image/work/hardware-reference-20261101/uconsole/Code/uconsole_keyboard/README.md",
+      "git_blob": "c50e62b6e82bec0ddf3e64d8d025afdea730881a",
+      "scope_note": "Official-repository file; its compilation instructions explicitly credit non-ClockworkPi contributions."
+    },
+    {
+      "id": "cm3-compatibility/clockworkpi-product.html",
+      "publisher": "ClockworkPi",
+      "url": "https://www.clockworkpi.com/uconsole",
+      "bytes": 994644,
+      "sha256": "2b800531fdf6ce222fb1987f64e8dee1e459f9f4a1e325ee5e234b9a4f54da0c",
+      "cache_path": "image/work/hardware-reference-20261101/cm3-compatibility/clockworkpi-product.html",
+      "retrieved_date": "2026-11-01"
+    },
+    {
+      "id": "cm3-compatibility/cm3-forum-thread.json",
+      "publisher": "ClockworkPi forum; first-person community reports",
+      "url": "https://forum.clockworkpi.com/t/uconsole-now-supports-rpi-cm3-y/11351.json",
+      "bytes": 51196,
+      "sha256": "52b720abca5cddce105952afa039771f9afa8317b9cf7ba15a41cf6e63cda830",
+      "cache_path": "image/work/hardware-reference-20261101/cm3-compatibility/cm3-forum-thread.json",
+      "retrieved_date": "2026-11-01"
+    },
+    {
+      "id": "cm3-compatibility/uconsole-cm3-README.md",
+      "publisher": "PotatoMania; original CM3 port author",
+      "url": "https://raw.githubusercontent.com/PotatoMania/uconsole-cm3/5d51d1efbf4c0acc3b08ead2bf4b35562225b808/README.md",
+      "bytes": 8021,
+      "sha256": "1546d98d0ecc7762506a53b3c30e943a0dd3ed617eaeebb129fd141b571013be",
+      "cache_path": "image/work/hardware-reference-20261101/cm3-compatibility/uconsole-cm3-README.md",
+      "retrieved_date": "2026-11-01",
+      "source_commit": "5d51d1efbf4c0acc3b08ead2bf4b35562225b808",
+      "scope_note": "First-person community implementation, not an official ClockworkPi OS release or a guarantee for all module/carrier revisions."
+    }
+  ],
+  "not_found_in_selected_tree": [
+    "Native editable mainboard or adapter PCB project",
+    "Official CM5-specific uConsole adapter schematic",
+    "Full dimensioned mainboard mechanical drawing or STEP model"
+  ],
+  "derived_tables": [
+    {
+      "path": "docs/reference/clockworkpi-uconsole/core-edge-pinout.csv",
+      "sha256": "499d2e70767e828f2add6ac3920d8d28383293ed89c380a01866f96f7824f2ae",
+      "rows": 200
+    },
+    {
+      "path": "docs/reference/clockworkpi-uconsole/expansion-j4-pinout.csv",
+      "sha256": "063af113f3a51bb1afb3abd054abb1bab136046daf3815eccd9f2fda9d449a49",
+      "rows": 52
+    }
+  ],
+  "compatibility_evidence": {
+    "official_product_url": "https://www.clockworkpi.com/uconsole",
+    "community_port_url": "https://github.com/PotatoMania/uconsole-cm3",
+    "community_power_report": "https://forum.clockworkpi.com/t/uconsole-now-supports-rpi-cm3-y/11351/10",
+    "scope": "Official page names CM3/CM4 compatibility. Community CM3+ reports establish direct insertion and working peripheral paths, while later first-person reports expose internal 5V shutdown limits; no universal plug-and-play claim."
+  }
+}

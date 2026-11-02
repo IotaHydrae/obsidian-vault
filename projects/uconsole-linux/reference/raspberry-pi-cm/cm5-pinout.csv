@@ -1,0 +1,201 @@
+pin,signal,module_direction,description,source_document,pdf_page,printed_page
+1,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+2,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+3,Ethernet_Pair3_P,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+4,Ethernet_Pair1_P,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+5,Ethernet_Pair3_N,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+6,Ethernet_Pair1_N,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+7,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+8,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+9,Ethernet_Pair2_N,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+10,Ethernet_Pair0_N,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+11,Ethernet_Pair2_P,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+12,Ethernet_Pair0_P,,以太网差分信号；接磁性器件,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+13,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+14,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+15,Ethernet_nLED3,,以太网状态指示；低有效,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+16,Fan_Tacho,input,风扇转速输入,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+17,Ethernet_nLED2,,以太网状态指示；低有效,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+18,Ethernet_SYNC_OUT,output/configurable-input,IEEE1588 同步输出；可配置为输入,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+19,Fan_PWM,output,风扇 PWM 开漏输出,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+20,EEPROM_nWP,,启动 EEPROM 写保护；拉低禁止写入,RP-008180-DS-7-cm5-datasheet.pdf,18,17
+21,LED_nACT,,活动指示 LED；低有效,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+22,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+23,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+24,GPIO26,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+25,GPIO21,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+26,GPIO19,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+27,GPIO20,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+28,GPIO13,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+29,GPIO16,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+30,GPIO6,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+31,GPIO12,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+32,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+33,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+34,GPIO5,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+35,ID_SC,,RP1 GPIO1；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+36,ID_SD,,RP1 GPIO0；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+37,GPIO7,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+38,GPIO11,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+39,GPIO8,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+40,GPIO9,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+41,GPIO25,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+42,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+43,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+44,GPIO10,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+45,GPIO24,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+46,GPIO22,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+47,GPIO23,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+48,GPIO27,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+49,GPIO18,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+50,GPIO17,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+51,GPIO15,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+52,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+53,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+54,GPIO4,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+55,GPIO14,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+56,GPIO3,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+57,SD_CLK,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+58,GPIO2,,通用 GPIO；电平由 GPIO_VREF 选择,RP-008180-DS-7-cm5-datasheet.pdf,19,18
+59,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+60,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+61,SD_DAT3,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+62,SD_CMD,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+63,SD_DAT0,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+64,SD_DAT5,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+65,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+66,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+67,SD_DAT1,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+68,SD_DAT4,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+69,SD_DAT2,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+70,SD_DAT7,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+71,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+72,SD_DAT6,,SD/eMMC 接口；仅 Lite 可引出,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+73,SD_VDD_OVERRIDE,,SD 电平选择；接3.3 V输出强制1.8 V信号，否则悬空,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+74,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+75,SD_PWR_ON,output,SD 电源开关控制；高有效，仅Lite,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+76,VBAT,input,RTC 备用电池输入；2.5–3.5 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+77,5V (Input),input,主电源输入；4.75–5.25 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+78,GPIO_VREF,,GPIO0–27参考电源；接模块3.3 V或1.8 V，禁止悬空或接地,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+79,5V (Input),input,主电源输入；4.75–5.25 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+80,SCL0,,摄像头/显示器用I²C时钟；GPIO39,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+81,5V (Input),input,主电源输入；4.75–5.25 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+82,SDA0,,摄像头/显示器用I²C数据；GPIO38,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+83,5V (Input),input,主电源输入；4.75–5.25 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+84,CM5_3.3V (Output),output,3.3 V 电源输出；每脚上限300 mA、合计600 mA,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+85,5V (Input),input,主电源输入；4.75–5.25 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+86,CM5_3.3V (Output),output,3.3 V 电源输出；每脚上限300 mA、合计600 mA,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+87,5V (Input),input,主电源输入；4.75–5.25 V,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+88,CM5_1.8V (Output),output,1.8 V 电源输出；每脚上限300 mA、合计600 mA,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+89,WL_nDisable,,拉低禁用Wi-Fi；可悬空,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+90,CM5_1.8V (Output),output,1.8 V 电源输出；每脚上限300 mA、合计600 mA,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+91,BT_nDisable,,拉低禁用蓝牙；可悬空,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+92,PWR_Button,,电源按键输入；短按唤醒/请求关机，长按强制关机,RP-008180-DS-7-cm5-datasheet.pdf,20,19
+93,nRPIBOOT,,拉低进入USB启动/烧录；不用时悬空,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+94,CC1,,USB-C电源CC1；用于5 V/5 A协商,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+95,LED_nPWR,output,电源指示LED低有效输出；需缓冲,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+96,CC2,,USB-C电源CC2；用于5 V/5 A协商,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+97,CAM_GPIO0,,摄像头控制GPIO34；3.3 V,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+98,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+99,PMIC_Enable,input,PMIC使能；拉低关闭模块电源,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+100,CAM_GPIO1,,摄像头控制GPIO35；启动期间可模拟复位输出,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+101,USB_OTG_ID,input,USB OTG角色输入；拉低选择主机并需对应驱动,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+102,PCIe_CLK_nREQ,input,PCIe 接口；CLK_nREQ,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+103,USB_N,,独立USB 2.0 OTG D−,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+104,PCIE_nWAKE,,PCIe 接口；nWAKE,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+105,USB_P,,独立USB 2.0 OTG D+,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+106,PCIE_PWR_EN,,PCIe 接口；PWR_EN,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+107,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+108,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+109,PCIe_nRST,output,PCIe 接口；nRST,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+110,PCIe_CLK_P,output,PCIe 接口；CLK_P,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+111,VBUS_EN,,USB 3.0 VBUS电源开关使能；高有效,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+112,PCIe_CLK_N,output,PCIe 接口；CLK_N,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+113,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+114,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+115,MIPI0_D0_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+116,PCIe_RX_P,input,PCIe 接口；RX_P,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+117,MIPI0_D0_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+118,PCIe_RX_N,input,PCIe 接口；RX_N,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+119,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+120,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+121,MIPI0_D1_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+122,PCIe_TX_P,output,PCIe 接口；TX_P,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+123,MIPI0_D1_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+124,PCIe_TX_N,output,PCIe 接口；TX_N,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+125,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+126,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+127,MIPI0_C_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+128,USB3-0-RX_N,input,USB 3.0主机端口0；SuperSpeed接收差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+129,MIPI0_C_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+130,USB3-0-RX_P,input,USB 3.0主机端口0；SuperSpeed接收差分信号,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+131,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,21,20
+132,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+133,MIPI0_D2_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+134,USB3-0-DP,,USB 3.0主机端口0；USB 2.0数据正端,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+135,MIPI0_D2_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+136,USB3-0-DM,,USB 3.0主机端口0；USB 2.0数据负端,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+137,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+138,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+139,MIPI0_D3_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+140,USB3-0-TX_N,output,USB 3.0主机端口0；SuperSpeed发送差分信号；模块已含AC耦合电容,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+141,MIPI0_D3_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+142,USB3-0-TX_P,output,USB 3.0主机端口0；SuperSpeed发送差分信号；模块已含AC耦合电容,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+143,HDMI1_HOTPLUG,input,HDMI1；HOTPLUG,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+144,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+145,HDMI1_SDA,bidirectional,HDMI1；SDA,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+146,HDMI1_TX2_P,output,HDMI1；TX2_P,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+147,HDMI1_SCL,bidirectional,HDMI1；SCL,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+148,HDMI1_TX2_N,output,HDMI1；TX2_N,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+149,HDMI1_CEC,input,HDMI1；CEC,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+150,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+151,HDMI0_CEC,input,HDMI0；CEC,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+152,HDMI1_TX1_P,output,HDMI1；TX1_P,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+153,HDMI0_HOTPLUG,input,HDMI0；HOTPLUG,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+154,HDMI1_TX1_N,output,HDMI1；TX1_N,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+155,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+156,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+157,USB3-1-RX_N,input,USB 3.0主机端口1；SuperSpeed接收差分信号,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+158,HDMI1_TX0_P,output,HDMI1；TX0_P,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+159,USB3-1-RX_P,input,USB 3.0主机端口1；SuperSpeed接收差分信号,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+160,HDMI1_TX0_N,output,HDMI1；TX0_N,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+161,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+162,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+163,USB3-1-DP,,USB 3.0主机端口1；USB 2.0数据正端,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+164,HDMI1_CLK_P,output,HDMI1；CLK_P,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+165,USB3-1-DM,,USB 3.0主机端口1；USB 2.0数据负端,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+166,HDMI1_CLK_N,output,HDMI1；CLK_N,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+167,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+168,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,22,21
+169,USB3-1-TX_N,output,USB 3.0主机端口1；SuperSpeed发送差分信号；模块已含AC耦合电容,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+170,HDMI0_TX2_P,output,HDMI0；TX2_P,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+171,USB3-1-TX_P,output,USB 3.0主机端口1；SuperSpeed发送差分信号；模块已含AC耦合电容,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+172,HDMI0_TX2_N,output,HDMI0；TX2_N,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+173,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+174,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+175,MIPI1_D0_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+176,HDMI0_TX1_P,output,HDMI0；TX1_P,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+177,MIPI1_D0_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+178,HDMI0_TX1_N,output,HDMI0；TX1_N,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+179,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+180,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+181,MIPI1_D1_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+182,HDMI0_TX0_P,output,HDMI0；TX0_P,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+183,MIPI1_D1_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+184,HDMI0_TX0_N,output,HDMI0；TX0_N,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+185,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+186,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+187,MIPI1_C_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+188,HDMI0_CLK_P,output,HDMI0；CLK_P,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+189,MIPI1_C_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+190,HDMI0_CLK_N,output,HDMI0；CLK_N,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+191,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+192,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+193,MIPI1_D2_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+194,MIPI1_D3_N,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+195,MIPI1_D2_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+196,MIPI1_D3_P,,可配置 CSI/DSI 的 MIPI 差分信号,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+197,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+198,GND,,地（0 V）,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+199,HDMI0_SDA,bidirectional,HDMI0；SDA,RP-008180-DS-7-cm5-datasheet.pdf,23,22
+200,HDMI0_SCL,bidirectional,HDMI0；SCL,RP-008180-DS-7-cm5-datasheet.pdf,23,22

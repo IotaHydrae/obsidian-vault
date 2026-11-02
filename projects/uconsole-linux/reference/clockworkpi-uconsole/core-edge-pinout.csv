@@ -1,0 +1,201 @@
+pin,clockwork_signal,cm3plus_signal,compatibility_note,source_document,pdf_page
+1,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+2,EMMC_DISABLE,EMMC_DISABLE_N,Clockwork标签少_N；极性及恢复电路需按原理图核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+3,GPIO0,GPIO0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+4,SDX_VREF,NC (CM3+); SDX_VDD (CM3+ Lite),Clockwork SDX_VREF；CM3+此脚NC，仅Lite为SDX_VDD,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+5,GPIO1,GPIO1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+6,SDX_VREF,NC (CM3+); SDX_VDD (CM3+ Lite),Clockwork SDX_VREF；CM3+此脚NC，仅Lite为SDX_VDD,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+7,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+8,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+9,GPIO2,GPIO2,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+10,SDX_CLK,NC (CM3+); SDX_CLK (CM3+ Lite),Clockwork外部SD信号；官方仅CM3+ Lite提供,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+11,GPIO3,GPIO3,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+12,SDX_CMD,NC (CM3+); SDX_CMD (CM3+ Lite),Clockwork外部SD信号；官方仅CM3+ Lite提供,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+13,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+14,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+15,GPIO4,GPIO4,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+16,SDX_D0,NC (CM3+); SDX_D0 (CM3+ Lite),Clockwork外部SD信号；官方仅CM3+ Lite提供,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+17,GPIO5,GPIO5,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+18,SDX_D1,NC (CM3+); SDX_D1 (CM3+ Lite),Clockwork外部SD信号；官方仅CM3+ Lite提供,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+19,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+20,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+21,GPIO6,GPIO6,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+22,SDX_D2,NC (CM3+); SDX_D2 (CM3+ Lite),Clockwork外部SD信号；官方仅CM3+ Lite提供,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+23,GPIO7,GPIO7,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+24,SDX_D3,NC (CM3+); SDX_D3 (CM3+ Lite),Clockwork外部SD信号；官方仅CM3+ Lite提供,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+25,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+26,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+27,GPIO8,GPIO8,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+28,GPIO28,GPIO28,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+29,GPIO9,GPIO9,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+30,GPIO29,GPIO29,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+31,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+32,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+33,GPIO10,GPIO10,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+34,GPIO30,GPIO30,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+35,GPIO11,GPIO11,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+36,GPIO31,GPIO31,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+37,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+38,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+39,BANK0_VREF,GPIO0-27_VDD,GPIO bank参考电源；名称不同，电气条件需另核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+40,BANK0_VREF,GPIO0-27_VDD,GPIO bank参考电源；名称不同，电气条件需另核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+41,BANK1_VREF,GPIO28-45_VDD,GPIO bank参考电源；名称不同，电气条件需另核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+42,BANK1_VREF,GPIO28-45_VDD,GPIO bank参考电源；名称不同，电气条件需另核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+43,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+44,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+45,GPIO12,GPIO12,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+46,GPIO32,GPIO32,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+47,GPIO13,GPIO13,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+48,GPIO33,GPIO33,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+49,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+50,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+51,GPIO14,GPIO14,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+52,GPIO34,GPIO34,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+53,GPIO15,GPIO15,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+54,GPIO35,GPIO35,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+55,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+56,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+57,GPIO16,GPIO16,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+58,GPIO36,GPIO36,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+59,GPIO17,GPIO17,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+60,GPIO37,GPIO37,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+61,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+62,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+63,GPIO18,GPIO18,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+64,GPIO38,GPIO38,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+65,GPIO19,GPIO19,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+66,GPIO39,GPIO39,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+67,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+68,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+69,GPIO20,GPIO20,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+70,GPIO40,GPIO40,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+71,GPIO21,GPIO21,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+72,GPIO41,GPIO41,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+73,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+74,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+75,GPIO22,GPIO22,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+76,GPIO42,GPIO42,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+77,GPIO23,GPIO23,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+78,GPIO43,GPIO43,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+79,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+80,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+81,GPIO24,GPIO24,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+82,GPIO44,GPIO44,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+83,GPIO25,GPIO25,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+84,GPIO45,GPIO45,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+85,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+86,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+87,GPIO26,GPIO26,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+88,HDMI_HPD_N_1V8,HDMI_HPD_N_1V8,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+89,GPIO27,GPIO27,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+90,EMMC_EN_N_1V8,EMMC_EN_N_1V8,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+91,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+92,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+93,DSI0_DN1,DSI0_DN1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+94,DSI1_DP0,DSI1_DP0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+95,DSI0_DP1,DSI0_DP1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+96,DSI1_DN0,DSI1_DN0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+97,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+98,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+99,DSI0_DN0,DSI0_DN0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+100,DSI1_CP,DSI1_CP,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+101,DSI0_DP0,DSI0_DP0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+102,DSI1_CN,DSI1_CN,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+103,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+104,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+105,DSI0_CN,DSI0_CN,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+106,DSI1_DP3,DSI1_DP3,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+107,DSI0_CP,DSI0_CP,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+108,DSI1_DN3,DSI1_DN3,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+109,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+110,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+111,HDMI_CLK_N,HDMI_CLK_N,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+112,DSI1_DP2,DSI1_DP2,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+113,HDMI_CLK_P,HDMI_CLK_P,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+114,DSI1_DN2,DSI1_DN2,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+115,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+116,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+117,HDMI_D0_N,HDMI_D0_N,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+118,DSI1_DP1,DSI1_DP1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+119,HDMI_D0_P,HDMI_D0_P,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+120,DSI1_DN1,DSI1_DN1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+121,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+122,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+123,HDMI_D1_N,HDMI_D1_N,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+124,MICBIAS,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+125,HDMI_D1_P,HDMI_D1_P,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+126,MICP,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+127,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+128,MICN,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+129,HDMI_D2_N,HDMI_D2_N,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+130,IGPIO0,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+131,HDMI_D2_P,HDMI_D2_P,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+132,IGPIO1,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+133,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+134,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+135,CAM1_DP3,CAM1_DP3,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+136,CAM0_DP0,CAM0_DP0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+137,CAM1_DN3,CAM1_DN3,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+138,CAM0_DN0,CAM0_DN0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+139,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+140,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+141,CAM1_DP2,CAM1_DP2,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+142,CAM0_CP,CAM0_CP,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+143,CAM1_DN2,CAM1_DN2,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+144,CAM0_CN,CAM0_CN,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+145,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+146,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+147,CAM1_CP,CAM1_CP,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+148,CAM0_DP1,CAM0_DP1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+149,CAM1_CN,CAM1_CN,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+150,CAM0_DN1,CAM0_DN1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+151,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+152,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+153,CAM1_DP1,CAM1_DP1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+154,HPOL,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+155,CAM1_DN1,CAM1_DN1,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+156,HPOR,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+157,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+158,AUD_SWITCH,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+159,CAM1_DP0,CAM1_DP0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+160,USB0_DP,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+161,CAM1_DN0,CAM1_DN0,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+162,USB0_DM,NC,Clockwork扩展；官方CM3+此脚为NC,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+163,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+164,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+165,USB_DP,USB_DP,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+166,TVDAC,TVDAC,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+167,USB_DM,USB_DM,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+168,USB_OTGID,USB_OTGID,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+169,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+170,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+171,HDMI_CEC,HDMI_CEC,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+172,VC_TRST_N,VC_TRST_N,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+173,HDMI_SDA,HDMI_SDA,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+174,VC_TDI,VC_TDI,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+175,HDMI_SCL,HDMI_SCL,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+176,VC_TMS,VC_TMS,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+177,RUN,RUN,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+178,VC_TDO,VC_TDO,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+179,VDD_CORE,VDD_CORE (DO NOT CONNECT),官方CM3+标DO NOT CONNECT；Clockwork同名不等于可驱动,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+180,VC_TCK,VC_TCK,同名引脚位置；不代表整板电气或固件互换已验证,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+181,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+182,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+183,CM_1V8,1V8,J1电源总线；1.8 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+184,CM_1V8,1V8,J1电源总线；1.8 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+185,CM_1V8,1V8,J1电源总线；1.8 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+186,CM_1V8,1V8,J1电源总线；1.8 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+187,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+188,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+189,CM_VDAC,VDAC,J1的CM_VDAC电源总线；与视频信号TVDAC不同,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+190,CM_VDAC,VDAC,J1的CM_VDAC电源总线；与视频信号TVDAC不同,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+191,CM_3V3,3V3,J1电源总线；3.3 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+192,CM_3V3,3V3,J1电源总线；3.3 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+193,CM_3V3,3V3,J1电源总线；3.3 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+194,CM_3V3,3V3,J1电源总线；3.3 V供电，勿套用CM4/CM5输出脚定义,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+195,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+196,GND,GND,J1接地总线已目视核对,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+197,CM_VBAT,VBAT,J1电源总线；主板SYS_5V连接CM_VBAT，非CM4/CM5同号引脚,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+198,CM_VBAT,VBAT,J1电源总线；主板SYS_5V连接CM_VBAT，非CM4/CM5同号引脚,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+199,CM_VBAT,VBAT,J1电源总线；主板SYS_5V连接CM_VBAT，非CM4/CM5同号引脚,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8
+200,CM_VBAT,VBAT,J1电源总线；主板SYS_5V连接CM_VBAT，非CM4/CM5同号引脚,clockwork_Adapter_CM4_Schematic.pdf J1;RP-008163-DS-2 Figure 3,1;8

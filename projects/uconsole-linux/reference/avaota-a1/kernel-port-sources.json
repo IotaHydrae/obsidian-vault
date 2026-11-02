@@ -1,0 +1,354 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "latest_6_18_observed": "6.18.60",
+  "scope": "Read-only feasibility investigation. Official upstream/stable source is distinct from vendor branch and community patch-series reports. No kernel build, patch application or device validation was performed.",
+  "sources": [
+    {
+      "url": "https://www.kernel.org/releases.json",
+      "bytes": 8376,
+      "sha256": "f527abec104dfa66324b225f36c226e5504033211766a891e3457a013097b218",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/kernel-org-releases.json",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/torvalds/linux/v6.18/arch/arm64/boot/dts/allwinner/sun55i-a523.dtsi",
+      "source_ref": "v6.18",
+      "bytes": 18845,
+      "sha256": "70acda68b07a3a212c26af749e382f9c2f3840d84a38b479cad3e4f16ff62204",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/v6.18-sun55i-a523.dtsi",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/torvalds/linux/v6.18/arch/arm64/boot/dts/allwinner/sun55i-t527-avaota-a1.dts",
+      "source_ref": "v6.18",
+      "bytes": 7956,
+      "sha256": "db37bd9ce3b5320f7131f540ada9dc187e269abe29edffc188332df5ee616454",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/v6.18-sun55i-t527-avaota-a1.dts",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "url": "https://api.github.com/repos/torvalds/linux/contents/arch/arm64/boot/dts/allwinner?ref=v6.18",
+      "source_ref": "v6.18",
+      "bytes": 84373,
+      "sha256": "15963498113acc77ce57eaaa851ce14e66c6b8b4dbe978c47ad4b5e347d2eba4",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/v6.18-allwinner-directory.json",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gregkh/linux/v6.18.60/arch/arm64/boot/dts/allwinner/sun55i-a523.dtsi",
+      "source_ref": "v6.18.60",
+      "bytes": 18888,
+      "sha256": "c7bb4b2ee1c82184ad62f09031e730f643eaa66cd98a6132e7289f557637d5dc",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/v6.18.60-sun55i-a523.dtsi",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/gregkh/linux/v6.18.60/arch/arm64/boot/dts/allwinner/sun55i-t527-avaota-a1.dts",
+      "source_ref": "v6.18.60",
+      "bytes": 7956,
+      "sha256": "db37bd9ce3b5320f7131f540ada9dc187e269abe29edffc188332df5ee616454",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/v6.18.60-sun55i-t527-avaota-a1.dts",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "url": "https://api.github.com/repos/gregkh/linux/contents/arch/arm64/boot/dts/allwinner?ref=v6.18.60",
+      "source_ref": "v6.18.60",
+      "bytes": 84456,
+      "sha256": "72799462bfa903e384fb59c7d60ac13d79d03bccf2701fda39495f46514a6f81",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-baseline/v6.18.60-allwinner-directory.json",
+      "kind": "official-kernel-source-or-release-record"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/README.md",
+      "bytes": 3420,
+      "sha256": "73db28da36a1c7bc008031a74ad5ebb5c20e11d79a6b2a971c8bac6bc31e6501",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/README.md",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/Kconfig",
+      "bytes": 213,
+      "sha256": "b59ae5ffb2ccc4ec9647f5b0d62117de4c030dab2ec0bae4f8d093cad04bc18f",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/Kconfig",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/Makefile",
+      "bytes": 71,
+      "sha256": "aa66cf6f7c1c548ba7d1eb7b44d712609621b61647a4c9031df7d8c42e1fc671",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/Makefile",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/Kconfig",
+      "bytes": 3122,
+      "sha256": "94c903a97294098509ed4090bf1f1e28f664aa1d30690fc1e9685c0afda0f259",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/Kconfig",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/Makefile",
+      "bytes": 1539,
+      "sha256": "e48ea5f2243eb1734f9d22c21fa33e5236c76d70e8cffb4f4620f0bd7b15396d",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/Makefile",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "init.sh",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/init.sh",
+      "bytes": 3760,
+      "sha256": "ace47002d714e0790de6ef6cd2715479800b5b2c4434b582f9691bf0c552c7f8",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/init.sh",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "patches/linux-5.15/0001-linux-5.15-add-bsp-support.patch",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/patches/linux-5.15/0001-linux-5.15-add-bsp-support.patch",
+      "bytes": 1040,
+      "sha256": "bd573fea97bd19fb1dc7bc5ad9ebc3e6cc39cb3aa4051c9a15d987d513933247",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/patches/linux-5.15/0001-linux-5.15-add-bsp-support.patch",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/platform/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/platform/Kconfig",
+      "bytes": 4057,
+      "sha256": "f303c1246d7cca78762105af0e48c014c63da42f8d0b1a586d2423b72c8b0842",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/platform/Kconfig",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/platform/Kconfig.common",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/platform/Kconfig.common",
+      "bytes": 1929,
+      "sha256": "dd210990ab64173b5166ae37eca49b6f2318f4ccbf53715aa9fe0f2352cb9fab",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/platform/Kconfig.common",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/drm/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/drm/Kconfig",
+      "bytes": 3199,
+      "sha256": "0c362cd4d9dd8db3f91119f94544be83fc61c2bf259854306ff471346b362a51",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/drm/Kconfig",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/drm/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/drm/Makefile",
+      "bytes": 2283,
+      "sha256": "cae00a7ee8af19859e94acdec8349cdf855a4bd24f6685584a1d027a211e5f3d",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/drm/Makefile",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/drm/sunxi_drm_dsi.c",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/drm/sunxi_drm_dsi.c",
+      "bytes": 32220,
+      "sha256": "4971403250413ac8d7f6cb2f132a4cc61171f657d32ec8076a41828698ebb8c5",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/drm/sunxi_drm_dsi.c",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/gpu/Kconfig",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/gpu/Kconfig",
+      "bytes": 934,
+      "sha256": "46b7861b6bc5d71c1c5c1f4af6869c0031fb00042c5f3b92c47c4b663a609bd8",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/gpu/Kconfig",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "path": "bsp/drivers/gpu/Makefile",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/gpu/Makefile",
+      "bytes": 68,
+      "sha256": "84a449f1fa1a222ff1f943c9ff530977ed78df59bff3116fe75684c2830d74da",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/Avaota-linux-main/bsp/drivers/gpu/Makefile",
+      "kind": "vendor-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/README.md",
+      "bytes": 17611,
+      "sha256": "c44cd997827777d296eb56493bbabb3f9ec4763030c0e81c1857d632ec3eeed3",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/README.md",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "opi4a_blindboot_defconfig",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/opi4a_blindboot_defconfig",
+      "bytes": 26135,
+      "sha256": "2b1bf92c1a00bd3301576013befbe06f5e067add81c10a04e16b846ac2eafebb",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/opi4a_blindboot_defconfig",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "sun55i-t527-orangepi-4a.dts",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/sun55i-t527-orangepi-4a.dts",
+      "bytes": 27410,
+      "sha256": "477a8bb8581b6898413ba2d2739b764fa44befc5b86485132f8b0e6ecbd82e42",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/sun55i-t527-orangepi-4a.dts",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "CHANGELOG.md",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/CHANGELOG.md",
+      "bytes": 24863,
+      "sha256": "79bc2455f86646d30dd27cfc2ed978911edc3a2a75472cfc772a8869a8261d73",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/CHANGELOG.md",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "FAQ.md",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/FAQ.md",
+      "bytes": 15875,
+      "sha256": "ddb3aa834107a7723d0e861f904d37dec87631681145e647cf61115fd45fda0c",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/FAQ.md",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0017-iommu-sun50i-A523-sun55i-support-minimyth2-2732.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0017-iommu-sun50i-A523-sun55i-support-minimyth2-2732.patch",
+      "bytes": 6059,
+      "sha256": "b3dbd439abca0f06cab898a269afe4295c834f32652bfd1d27616f467b8a3ae4",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0017-iommu-sun50i-A523-sun55i-support-minimyth2-2732.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0024-arm64-dts-a523-HDMI-display-pipeline-DE33-tcon-top-t.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0024-arm64-dts-a523-HDMI-display-pipeline-DE33-tcon-top-t.patch",
+      "bytes": 7230,
+      "sha256": "1e9ec79595d1b5e986e01b7db42600a1c616783c646af6a3d3674f919c2e2484",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0024-arm64-dts-a523-HDMI-display-pipeline-DE33-tcon-top-t.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0025-arm64-dts-a523-IOMMU-nodes-minimyth2-2805.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0025-arm64-dts-a523-IOMMU-nodes-minimyth2-2805.patch",
+      "bytes": 1674,
+      "sha256": "00955589b2a7ad53559647d3f11848270918221d591ec8a6756cf8181c866181",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0025-arm64-dts-a523-IOMMU-nodes-minimyth2-2805.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0056-arm64-dts-sun55i-t527-orangepi-4a-keep-OTG-VBUS-alwa.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0056-arm64-dts-sun55i-t527-orangepi-4a-keep-OTG-VBUS-alwa.patch",
+      "bytes": 1783,
+      "sha256": "e264e5a4f90e99725cbc2a4f560903f5f75fe4371dcc13efd7e7d9cff6890391",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0056-arm64-dts-sun55i-t527-orangepi-4a-keep-OTG-VBUS-alwa.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0060-thermal-sun8i-add-A523-T527-THS-support.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0060-thermal-sun8i-add-A523-T527-THS-support.patch",
+      "bytes": 6841,
+      "sha256": "22fc65e24790a4bbfd0a6eaa511f3312ff1704259b7573e607824833e97fffec",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0060-thermal-sun8i-add-A523-T527-THS-support.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0064-clk-sunxi-ng-add-the-A523-T527-CPU-CCU.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0064-clk-sunxi-ng-add-the-A523-T527-CPU-CCU.patch",
+      "bytes": 8591,
+      "sha256": "eace33aea3b4f9b7293ba3e742d7e19b172521793430de5f07996db58e5d4bbb",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0064-clk-sunxi-ng-add-the-A523-T527-CPU-CCU.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0095-clk-sunxi-ng-add-cycle-masking-divider-maskdiv-clock.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0095-clk-sunxi-ng-add-cycle-masking-divider-maskdiv-clock.patch",
+      "bytes": 12129,
+      "sha256": "be853c93e5515c1b342cca64fd2e0a4bc7d9d306ed1fc16cd4421c4dee13be68",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0095-clk-sunxi-ng-add-cycle-masking-divider-maskdiv-clock.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "repository": "ut-slayer/orangepi-4a-mainline",
+      "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+      "path": "patches/0096-clk-sunxi-ng-sun55i-a523-GPU-clock-divider-is-fracti.patch",
+      "url": "https://raw.githubusercontent.com/ut-slayer/orangepi-4a-mainline/38eb27cff2181ca784bca1030b83e41d8ec789e1/patches/0096-clk-sunxi-ng-sun55i-a523-GPU-clock-divider-is-fracti.patch",
+      "bytes": 3819,
+      "sha256": "c43ac0ac8af2e49affb44e81765bd63d740861368dd4cb0a190db303ae1d6469",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-mainline/patches/0096-clk-sunxi-ng-sun55i-a523-GPU-clock-divider-is-fracti.patch",
+      "kind": "community-author-source"
+    },
+    {
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/kernel-dev/get-kernel/",
+      "bytes": 65086,
+      "sha256": "64785e1ed1308fe6dfd16c4635b6ac1b31e356a84dcc56dbc38240e8f40caf73",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/get-kernel.html",
+      "kind": "official-vendor-documentation-snapshot"
+    },
+    {
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/bsp-intro/",
+      "bytes": 80871,
+      "sha256": "e7e92a131025c843e3577b67d6b8d4677ee5b75adf60ca7d6babdd443e87a029",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/bsp-intro.html",
+      "kind": "official-vendor-documentation-snapshot"
+    }
+  ],
+  "community_patch_inventory": {
+    "repository": "https://github.com/ut-slayer/orangepi-4a-mainline",
+    "commit": "38eb27cff2181ca784bca1030b83e41d8ec789e1",
+    "files": 143,
+    "scope": "Complete patch filenames indexed; only selected patch files read. Author-reported Orange Pi 4A runtime results, not project A1/CM2 acceptance.",
+    "cache_path": "image/work/avaota-bsp-manual-20261101/kernel-port/orangepi-patches-inventory.json"
+  }
+}

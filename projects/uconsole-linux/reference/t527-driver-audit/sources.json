@@ -1,0 +1,2278 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "scope": "Fixed public Avaota/WalnutPi source/build trees, selected object-source closure, and three actual official user-space package payloads. Absence claims limited to inspected snapshots. No compilation, installation, module loading or hardware execution.",
+  "repositories": [
+    {
+      "repository": "walnutpi/wpi-update-server",
+      "ref": "reviewed snapshot",
+      "commit": "d1ef6388245a7783563983ac392f20de517e46d7"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "ref": "reviewed snapshot",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "ref": "reviewed snapshot",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174"
+    },
+    {
+      "repository": "walnutpi/walnutpi.isp",
+      "ref": "reviewed snapshot",
+      "commit": "5a178bc9437ea3b28a2760d4a6ca86eab83173af"
+    },
+    {
+      "repository": "walnutpi/walnutpi.lib",
+      "ref": "reviewed snapshot",
+      "commit": "3f222ed181a9f701b9dd7999e278c0e77af5c5fa"
+    },
+    {
+      "repository": "walnutpi/npu-model-transform",
+      "ref": "reviewed snapshot",
+      "commit": "edada00223820baa41492795fe37281934c8c164"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "ref": "main",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "ref": "linux-5.15",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "ref": "reviewed snapshot",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "ref": "reviewed snapshot",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "ref": "reviewed snapshot",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28"
+    }
+  ],
+  "sources": [
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/Kconfig",
+      "bytes": 157,
+      "sha256": "39f725dee144299ed46d108e1ae16768e049845c964091f195aea6052db8dc7c",
+      "git_blob": "46e575180777b5222c2c94e868492689ac552a8b",
+      "source_path": "bsp/drivers/npu/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_galcore/Makefile",
+      "bytes": 2418,
+      "sha256": "0f41aebe7e68b6f4dbb8e667ff323bef4044521be09dd76e5cbf15ce8bae6581",
+      "git_blob": "bd64705fa1a31a025d52dd2f146a485392e2c209",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_galcore/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_galcore/Kconfig",
+      "bytes": 178,
+      "sha256": "a9e6214bb01f8cd4f51531b098437b5633115aebb332577c0dfc7dfbc9731136",
+      "git_blob": "d257dc2aee89e848091158efc0369c29beed3f09",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_galcore/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_vip/Kbuild",
+      "bytes": 5120,
+      "sha256": "084f7bcdca6ffe86197482bdc4775d3283fc63e2a3ad85ffd0f9b6d2b1814547",
+      "git_blob": "2606d4101b2a50216094fd0ef856ad621173e348",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_vip/Kbuild",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "bytes": 192,
+      "sha256": "80c3e9f76edf42cd519964eefe518d413745f2f2d63d56c36c8580c11b1e3242",
+      "git_blob": "a87252422d5070da3de991cd70d471bf1c842374",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vin/Kconfig",
+      "bytes": 4193,
+      "sha256": "f0facec41f199fb83c788ac8f5eda0a9bc0aac07e3e7b7efd8d26ce2f3cec53b",
+      "git_blob": "1b1c208f175fc0a54b6c7867053f1714880e02ca",
+      "source_path": "bsp/drivers/vin/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vin/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/ve/Makefile",
+      "bytes": 132,
+      "sha256": "4613baeb48f5f3e5dcf93404964a276607b08c38df25242062b1bdf51b55ae03",
+      "git_blob": "764e30df8aafbe264b53039f6863c2345e7661ee",
+      "source_path": "bsp/drivers/ve/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/ve/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/ve/Kconfig",
+      "bytes": 147,
+      "sha256": "f0427153e76df14f85c629d259c7bc42a64cdba287cde9c8273d31803f6a519e",
+      "git_blob": "058cc36581f2223539657c56ff24331667c54d80",
+      "source_path": "bsp/drivers/ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/ve/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/ve/cedar-ve/Makefile",
+      "bytes": 306,
+      "sha256": "9d22e0bf5c03772ab31eca3d1b9dbbce6f9b03b7fb09e1be240e1822d7707655",
+      "git_blob": "66af96e832ce9230f66aee8515fd0de225dd0abb",
+      "source_path": "bsp/drivers/ve/cedar-ve/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/ve/cedar-ve/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/Makefile",
+      "bytes": 164,
+      "sha256": "ba17bd369cd0a4f437b7e1a86e0a97964710fe1085cde4d7c5a898543e74ccad",
+      "git_blob": "f6828ee9a76e20ac4815b51221dd10b0ab060644",
+      "source_path": "bsp/drivers/npu/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vin/Makefile",
+      "bytes": 4680,
+      "sha256": "9fbd137071643f6ec1c5989df28bb26cc8d0474d27cb3f7d62ac82542c19c2e6",
+      "git_blob": "9527f904b646dfb8bb0a374deb6658ca014e3f8d",
+      "source_path": "bsp/drivers/vin/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vin/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/ve/cedar-ve/Kconfig",
+      "bytes": 485,
+      "sha256": "a31d5569eba31bda76e60722e6aa897f5e52d9c8364ab1fb8160812fece74d50",
+      "git_blob": "8851db913dfa93f219a468fa0708bae6ba9bfc06",
+      "source_path": "bsp/drivers/ve/cedar-ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/ve/cedar-ve/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/ve/google-ve/Kconfig",
+      "bytes": 332,
+      "sha256": "28a05af9188270cbc3fe556425fc8f6e0245b865ceb07efcd6d6f195ebd9949e",
+      "git_blob": "a757d290004f42ce8c77a2961e67c293bdca5ce9",
+      "source_path": "bsp/drivers/ve/google-ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/ve/google-ve/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/ve/google-ve/Makefile",
+      "bytes": 199,
+      "sha256": "95cff3312e356e3d7e91ba640d359d524b6dc7433b766d55e32d65de9c1410fc",
+      "git_blob": "7c5cd2a67505df3732d429512297e597f74fbb0a",
+      "source_path": "bsp/drivers/ve/google-ve/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/ve/google-ve/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vin/vin-isp/sunxi_isp.c",
+      "bytes": 111728,
+      "sha256": "81f25f00fa9ec58564b205f6354a8571d66a6c823f0333ca3d4d1a1771dd3d14",
+      "git_blob": "bed2b4f97ecdf39302807be78703216ae238eac4",
+      "source_path": "bsp/drivers/vin/vin-isp/sunxi_isp.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vin/vin-isp/sunxi_isp.c",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_vip/gc_vip_kernel.c",
+      "bytes": 74579,
+      "sha256": "c6c4dd28fc59eb565a4ea37e19a2c6e1f242ea948402011e80b30bc5b34468a6",
+      "git_blob": "13c2820ca923f36803830d4c62b93a6c03680fb1",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/gc_vip_kernel.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_vip/gc_vip_kernel.c",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_vip/linux/allwinner/gc_vip_kernel_drv_platform.c",
+      "bytes": 17585,
+      "sha256": "3a0befdb6b8ee97cb12dff1e1e0618d3cff8e89ed4d14691697c59185a6b2d1f",
+      "git_blob": "694e4662efa909be0bcaee27d9a0ca2aa69dce40",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/linux/allwinner/gc_vip_kernel_drv_platform.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_vip/linux/allwinner/gc_vip_kernel_drv_platform.c",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/npu/aw_nna_galcore/os/platform/allwinner/gc_hal_kernel_platform_allwinner.c",
+      "bytes": 15015,
+      "sha256": "9fc7ed206f611471a78b348ac6e5a01a3a19d91bc2ad5e7105d448badb94c108",
+      "git_blob": "3bd4018a524410353f3cfee25aab03a38be99bf2",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/os/platform/allwinner/gc_hal_kernel_platform_allwinner.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/npu/aw_nna_galcore/os/platform/allwinner/gc_hal_kernel_platform_allwinner.c",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vin/vin-isp/isp600/isp600_reg_cfg.c",
+      "bytes": 20120,
+      "sha256": "0a10a71b1ba85c4ec070e7226c880baa7621912797edaabd3503e6830f233983",
+      "git_blob": "4057da79084fb4e9f5e0a9e15b3622eb74a846ba",
+      "source_path": "bsp/drivers/vin/vin-isp/isp600/isp600_reg_cfg.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vin/vin-isp/isp600/isp600_reg_cfg.c",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/rt-media/libmath",
+      "bytes": 50536,
+      "sha256": "de7f7ecf9f33c0f4a931e2e2a600cc42a28ee9c3d333246265f9e41d74ef8287",
+      "source_path": "bsp/drivers/rt-media/libmath",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/rt-media/libmath",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/rt-media/Makefile",
+      "bytes": 683,
+      "sha256": "7d5b85e4f88e37238e14c072215aea96fe14822dd578dc50a421088c3a2c49ac",
+      "source_path": "bsp/drivers/rt-media/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/rt-media/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/rt-media/Kconfig",
+      "bytes": 882,
+      "sha256": "b5671bdb11ffc43cb3ea0652f5245949ecd98401fa2d098ec5c6bac3b9bd0a6a",
+      "source_path": "bsp/drivers/rt-media/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/rt-media/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vfe/lib/lib_mipicsi2_v1",
+      "bytes": 3768,
+      "sha256": "e823b034088d95cb2be5f5c6096bc8a7b569a6de9cf9f4d11e71969db3a073b9",
+      "source_path": "bsp/drivers/vfe/lib/lib_mipicsi2_v1",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vfe/lib/lib_mipicsi2_v1",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vfe/lib/lib_mipicsi2_v2",
+      "bytes": 3556,
+      "sha256": "883e3c0ce76a830e34474f0f73f5a684893c4d08d0b750461a0efcf6cb1e1cf4",
+      "source_path": "bsp/drivers/vfe/lib/lib_mipicsi2_v2",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vfe/lib/lib_mipicsi2_v2",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vfe/lib/libisp_32",
+      "bytes": 622628,
+      "sha256": "ca52b43f960fe18dadde6849a9d17e9de704cedef921a674bee819a038ee701c",
+      "source_path": "bsp/drivers/vfe/lib/libisp_32",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vfe/lib/libisp_32",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vfe/lib/libisp_64",
+      "bytes": 619464,
+      "sha256": "f8a979fb6498d881182c52207418e497135c2311ba3de87b849a0d8d7e394cec",
+      "source_path": "bsp/drivers/vfe/lib/libisp_64",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vfe/lib/libisp_64",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vfe/Makefile",
+      "bytes": 2182,
+      "sha256": "3f1347475413b6528f38f1bae0aa37c3b837ad9182ac6836bcc05a77cdd5be8c",
+      "source_path": "bsp/drivers/vfe/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vfe/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/vfe/Kconfig",
+      "bytes": 266,
+      "sha256": "e05318b5a4b5a0adca1b30c43e8077bf646e0a6c176672c8bf52f0ebbf1dc8f8",
+      "source_path": "bsp/drivers/vfe/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/vfe/Kconfig",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/video/sunxi/disp2/hdmi/libhdmi_sun50iw1",
+      "bytes": 47252,
+      "sha256": "87fa725f5596dfc1080a415434832a1750e3be0f922b7490c29253d4937d4b0f",
+      "source_path": "bsp/drivers/video/sunxi/disp2/hdmi/libhdmi_sun50iw1",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/video/sunxi/disp2/hdmi/libhdmi_sun50iw1",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/video/sunxi/disp2/hdmi/libhdmi_sun8iw11",
+      "bytes": 36056,
+      "sha256": "7ebd945f1ea000a63a23008f18e814e85ad96d0c58298030f90020a10dbf0256",
+      "source_path": "bsp/drivers/video/sunxi/disp2/hdmi/libhdmi_sun8iw11",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/video/sunxi/disp2/hdmi/libhdmi_sun8iw11",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "7c2a33957cb82e522885992ec26331d1c1c6db28",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/7c2a33957cb82e522885992ec26331d1c1c6db28/bsp/drivers/video/sunxi/disp2/hdmi/Makefile",
+      "bytes": 1083,
+      "sha256": "18cd29bd5697d9dfbaa5c32b45de1b70bb2fa3af9f9158a4e0203d88a4d0ffbd",
+      "source_path": "bsp/drivers/video/sunxi/disp2/hdmi/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/main/bsp/drivers/video/sunxi/disp2/hdmi/Makefile",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/scripts/lib/packages/useroverlay-deb.sh",
+      "bytes": 279,
+      "sha256": "4b7d031c6dc44ae9fe3b0c84ef114af06ed25d9a1e4c1f6d7fb7dbe8b31da086",
+      "source_path": "scripts/lib/packages/useroverlay-deb.sh",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/builder/scripts/lib/packages/useroverlay-deb.sh",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/overlays/usr/lib/aarch64-linux-gnu/libVE.so",
+      "bytes": 54352,
+      "sha256": "5dae75f60e9501ade44b07ee0a54733282a4e4d54a336538cb9e2d291b7e54eb",
+      "source_path": "target/overlays/usr/lib/aarch64-linux-gnu/libVE.so",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/builder/target/overlays/usr/lib/aarch64-linux-gnu/libVE.so",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/AvaotaOS",
+      "commit": "bd95d7528c232cee59e4047994be520cb7551888",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/overlays/usr/lib/aarch64-linux-gnu/libawh264.so",
+      "bytes": 192056,
+      "sha256": "097733fc26cbf1451694fb28623879161d5a1972973ac241cba95c7d4c407527",
+      "source_path": "target/overlays/usr/lib/aarch64-linux-gnu/libawh264.so",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/builder/target/overlays/usr/lib/aarch64-linux-gnu/libawh264.so",
+      "kind": "kernel-driver-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/npu/Makefile",
+      "bytes": 164,
+      "sha256": "ba17bd369cd0a4f437b7e1a86e0a97964710fe1085cde4d7c5a898543e74ccad",
+      "source_path": "bsp/drivers/npu/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/npu/Makefile",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/npu/aw_nna_vip/Kbuild",
+      "bytes": 5120,
+      "sha256": "084f7bcdca6ffe86197482bdc4775d3283fc63e2a3ad85ffd0f9b6d2b1814547",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/npu/aw_nna_vip/Kbuild",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "bytes": 192,
+      "sha256": "80c3e9f76edf42cd519964eefe518d413745f2f2d63d56c36c8580c11b1e3242",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/npu/aw_nna_galcore/Makefile",
+      "bytes": 2418,
+      "sha256": "0f41aebe7e68b6f4dbb8e667ff323bef4044521be09dd76e5cbf15ce8bae6581",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/npu/aw_nna_galcore/Makefile",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/vin/Makefile",
+      "bytes": 4680,
+      "sha256": "9fbd137071643f6ec1c5989df28bb26cc8d0474d27cb3f7d62ac82542c19c2e6",
+      "source_path": "bsp/drivers/vin/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/vin/Makefile",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/vin/Kconfig",
+      "bytes": 4193,
+      "sha256": "f0facec41f199fb83c788ac8f5eda0a9bc0aac07e3e7b7efd8d26ce2f3cec53b",
+      "source_path": "bsp/drivers/vin/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/vin/Kconfig",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/bsp/drivers/ve/cedar-ve/Kconfig",
+      "bytes": 485,
+      "sha256": "a31d5569eba31bda76e60722e6aa897f5e52d9c8364ab1fb8160812fece74d50",
+      "source_path": "bsp/drivers/ve/cedar-ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/bsp/drivers/ve/cedar-ve/Kconfig",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "AvaotaSBC/linux",
+      "commit": "a464bc4feaff7b102dac6362b44ac3303ec7cae1",
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/linux/a464bc4feaff7b102dac6362b44ac3303ec7cae1/arch/arm64/configs/sun55i_t527_bsp_defconfig",
+      "bytes": 13883,
+      "sha256": "48e333702a12a5762b1f32a7dd81e7f32535bc76744c199da58140ce96879d3f",
+      "source_path": "arch/arm64/configs/sun55i_t527_bsp_defconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/avaota/integrated/arch/arm64/configs/sun55i_t527_bsp_defconfig",
+      "kind": "integrated-kernel-source"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/arch/arm64/configs/walnutpi2b_defconfig",
+      "bytes": 195776,
+      "sha256": "b8a03e71e392a2ea6aa4b837a026fafec47a239c923e68e98c5e866227b03b79",
+      "git_blob_sha": "672de96e49e88f710fb8f85827faa0da23c8ac10",
+      "source_path": "arch/arm64/configs/walnutpi2b_defconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/arch/arm64/configs/walnutpi2b_defconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/Kconfig",
+      "bytes": 229,
+      "sha256": "3bf5f9b4822f76c4be23385536ab8334cb0d253919d0e792c2e040a54fa3fa52",
+      "git_blob_sha": "eae343b18c84c3c12a9af36c886be578bcea784b",
+      "source_path": "bsp/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/Makefile",
+      "bytes": 99,
+      "sha256": "5bbab5cc47f8501913589917e9e1b9adc60392c0a0054b37d826b72657dcf7c4",
+      "git_blob_sha": "8611323111cebfd657a37cb5e69c63e2392c2540",
+      "source_path": "bsp/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/Kconfig",
+      "bytes": 3189,
+      "sha256": "6c24d469b5c62725f34aefbf180bedec557406c34f9f73205446190f6136a973",
+      "git_blob_sha": "d6de782bce6674447743ece8e800db8c89cddbae",
+      "source_path": "bsp/drivers/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/Makefile",
+      "bytes": 1553,
+      "sha256": "3547d90d849a428d83a0950a8c10ea06cf421dae288c7d09e91e1163c3df9103",
+      "git_blob_sha": "4b2ceee19b8aeb10cead3e72bbfb563debf58ee5",
+      "source_path": "bsp/drivers/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/gpu/Kconfig",
+      "bytes": 934,
+      "sha256": "46b7861b6bc5d71c1c5c1f4af6869c0031fb00042c5f3b92c47c4b663a609bd8",
+      "git_blob_sha": "90c8564884def59d100caf0d934b7b8583202fa9",
+      "source_path": "bsp/drivers/gpu/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/gpu/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/gpu/panfrost/Makefile",
+      "bytes": 277,
+      "sha256": "f0c6616c10b09727697ac5be86e2b85869aaf4c9d827790f4f08fe9ee292949c",
+      "git_blob_sha": "6abc16af87e266bd5d9b20df590be51b6b965a2e",
+      "source_path": "bsp/drivers/gpu/panfrost/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/gpu/panfrost/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/Kconfig",
+      "bytes": 157,
+      "sha256": "39f725dee144299ed46d108e1ae16768e049845c964091f195aea6052db8dc7c",
+      "git_blob_sha": "46e575180777b5222c2c94e868492689ac552a8b",
+      "source_path": "bsp/drivers/npu/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/Makefile",
+      "bytes": 164,
+      "sha256": "ba17bd369cd0a4f437b7e1a86e0a97964710fe1085cde4d7c5a898543e74ccad",
+      "git_blob_sha": "f6828ee9a76e20ac4815b51221dd10b0ab060644",
+      "source_path": "bsp/drivers/npu/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_galcore/Kbuild",
+      "bytes": 8992,
+      "sha256": "2f29be0423f3e3b1d6ae06da75bc8333d1a54207eb2dff058bcc9ca8ae223af9",
+      "git_blob_sha": "61ea8ccac05ee55656e7197e25b33e8801f0f343",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_galcore/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_galcore/Kconfig",
+      "bytes": 196,
+      "sha256": "076355dc1788c36857158a939ed04562fefa3e5d523437c09703f95ce031f47f",
+      "git_blob_sha": "5f95ae0b00cf89af0e88e257c25c8316f6457087",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_galcore/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_galcore/kernel/Android.mk",
+      "bytes": 5131,
+      "sha256": "1d136ec12ff93bac6404c913444ced2ca8e0936f6f73cb31c2866b89bbedabe3",
+      "git_blob_sha": "455497c0cc889f87fdddd6a1cd4d436986e7a804",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/kernel/Android.mk",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_galcore/kernel/Android.mk",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_galcore/kernel/arch/makefile.linux",
+      "bytes": 3957,
+      "sha256": "17b0e2809ea8e037d326b3d216120d70001c5c583969c7cd780034914a66a093",
+      "git_blob_sha": "f6335c81a8ef1f8dca488e00cffda43428653430",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/kernel/arch/makefile.linux",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_galcore/kernel/arch/makefile.linux",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_galcore/kernel/makefile.linux",
+      "bytes": 4021,
+      "sha256": "3ab07a8526268470e5c18b34ee52e8431fb7dfe4b2d38afb86a82726a1b46e3e",
+      "git_blob_sha": "571a9277cb22b2fc8d25da396460ece694a57b58",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/kernel/makefile.linux",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_galcore/kernel/makefile.linux",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_galcore/os/linux/user/makefile.linux",
+      "bytes": 3538,
+      "sha256": "8b051be549b08e65e856eb4be62ec077f26e2c3ad7054da45af09964faca32b2",
+      "git_blob_sha": "e95285be77dbebc6bd6059e880d0c1e14608a241",
+      "source_path": "bsp/drivers/npu/aw_nna_galcore/os/linux/user/makefile.linux",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_galcore/os/linux/user/makefile.linux",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "bytes": 819,
+      "sha256": "d35ab994e792033ee7f45d62ba2bad0aa85a13c17e2a4571389f67d8b4b4e189",
+      "git_blob_sha": "7586e5f3a29e4b24b8164eb2b661546b047882b9",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_vip/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_vip/Makefile",
+      "bytes": 143,
+      "sha256": "e9c2b0a7f1a018db9bc78238c33018c662d88133bfee565f6d8d58ae65bda6b6",
+      "git_blob_sha": "788929c99f2e0b0164f9fd06977c2cb41f52730b",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_vip/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_vip/vip1/Kbuild",
+      "bytes": 5120,
+      "sha256": "084f7bcdca6ffe86197482bdc4775d3283fc63e2a3ad85ffd0f9b6d2b1814547",
+      "git_blob_sha": "2606d4101b2a50216094fd0ef856ad621173e348",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/vip1/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_vip/vip1/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/npu/aw_nna_vip/vip2/Kbuild",
+      "bytes": 6951,
+      "sha256": "84298c93726bc4bf428e088bc9799bc0691ccefb8d438f409480a2ac4b6be9cf",
+      "git_blob_sha": "714b189c72cd041f7268e9f91376dbe33c047347",
+      "source_path": "bsp/drivers/npu/aw_nna_vip/vip2/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/npu/aw_nna_vip/vip2/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/Kconfig",
+      "bytes": 147,
+      "sha256": "f0427153e76df14f85c629d259c7bc42a64cdba287cde9c8273d31803f6a519e",
+      "git_blob_sha": "058cc36581f2223539657c56ff24331667c54d80",
+      "source_path": "bsp/drivers/ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/Makefile",
+      "bytes": 132,
+      "sha256": "4613baeb48f5f3e5dcf93404964a276607b08c38df25242062b1bdf51b55ae03",
+      "git_blob_sha": "764e30df8aafbe264b53039f6863c2345e7661ee",
+      "source_path": "bsp/drivers/ve/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/cedar-ve/Kconfig",
+      "bytes": 843,
+      "sha256": "aaaa63a0d5a64a03f03db5e953a2f051ff134335288f3630a3db5b0e45729f7d",
+      "git_blob_sha": "b816243c54ee14854dc9e44a470ad26cac33ab62",
+      "source_path": "bsp/drivers/ve/cedar-ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/cedar-ve/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/cedar-ve/Makefile",
+      "bytes": 1101,
+      "sha256": "c536674c9aab7bb8036a36d49c419350ad49b3fec94cc34b28165759f8ad13b3",
+      "git_blob_sha": "3a8abc36e59883e684bed1c151a0a468c8e65a15",
+      "source_path": "bsp/drivers/ve/cedar-ve/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/cedar-ve/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/cedar-ve/cedar_ve.c",
+      "bytes": 61013,
+      "sha256": "5641988ea2a64eb36015dda73e551e626ba0185fada1bc128d08bbc7e0bfbc84",
+      "git_blob_sha": "e9fb8f0759e267d62708f65fd6fd6d9d647c0a4b",
+      "source_path": "bsp/drivers/ve/cedar-ve/cedar_ve.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/cedar-ve/cedar_ve.c",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/cedar-ve/codec/Makefile",
+      "bytes": 866,
+      "sha256": "33ad0b63c1464fa0d198916f13b48876657a2536003947b77e670ee21f17f14d",
+      "git_blob_sha": "1c9881ab8fb61c519d01d89c19e7163ef8c6b510",
+      "source_path": "bsp/drivers/ve/cedar-ve/codec/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/cedar-ve/codec/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/cedar-ve/codec/lib/libve",
+      "bytes": 341078,
+      "sha256": "9a6cdb55769dae1d65ba3f75325cae4713f1230f1875abb713ef17990b42f024",
+      "git_blob_sha": "e541215bf122e006b304604f7896803c7396b874",
+      "source_path": "bsp/drivers/ve/cedar-ve/codec/lib/libve",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/cedar-ve/codec/lib/libve",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/google-ve/Kconfig",
+      "bytes": 332,
+      "sha256": "28a05af9188270cbc3fe556425fc8f6e0245b865ceb07efcd6d6f195ebd9949e",
+      "git_blob_sha": "a757d290004f42ce8c77a2961e67c293bdca5ce9",
+      "source_path": "bsp/drivers/ve/google-ve/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/google-ve/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/ve/google-ve/Makefile",
+      "bytes": 199,
+      "sha256": "95cff3312e356e3d7e91ba640d359d524b6dc7433b766d55e32d65de9c1410fc",
+      "git_blob_sha": "7c5cd2a67505df3732d429512297e597f74fbb0a",
+      "source_path": "bsp/drivers/ve/google-ve/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/ve/google-ve/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vendor_hooks/Kconfig",
+      "bytes": 596,
+      "sha256": "a46c43be8c0b0bc5fab1b6bc54947330360fabec22682ccfe42a1ac19de8ad32",
+      "git_blob_sha": "27736944eb6b60ad6eea835de2d7f4581c29e053",
+      "source_path": "bsp/drivers/vendor_hooks/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vendor_hooks/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vendor_hooks/Makefile",
+      "bytes": 100,
+      "sha256": "3645457c6119b016297957f439568caebc75cf3660165647b6cad181ec1fd939",
+      "git_blob_sha": "e4b8de33f584c49fed26149351541e24d9a0d433",
+      "source_path": "bsp/drivers/vendor_hooks/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vendor_hooks/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vfe/Kconfig",
+      "bytes": 266,
+      "sha256": "e05318b5a4b5a0adca1b30c43e8077bf646e0a6c176672c8bf52f0ebbf1dc8f8",
+      "git_blob_sha": "42a4fc6ac74a3ab46f5f8e365102f1fb772da467",
+      "source_path": "bsp/drivers/vfe/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vfe/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vfe/Makefile",
+      "bytes": 2182,
+      "sha256": "3f1347475413b6528f38f1bae0aa37c3b837ad9182ac6836bcc05a77cdd5be8c",
+      "git_blob_sha": "e41747d3c50ccace38fd067cdf4bd3eb54383a62",
+      "source_path": "bsp/drivers/vfe/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vfe/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vfe/actuator/Makefile",
+      "bytes": 142,
+      "sha256": "d4a4dc9328c3f47e419dde38be763a7d191f0a22c78cba83f832c3436e459e63",
+      "git_blob_sha": "9a36d9a543c553a697ceec04a50f13ba7543abf5",
+      "source_path": "bsp/drivers/vfe/actuator/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vfe/actuator/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vfe/device/Makefile",
+      "bytes": 178,
+      "sha256": "3f41f6e67f1fc049467e1ad3194b928201d36581d51845a53f9ee66455f4d70f",
+      "git_blob_sha": "ad77f60e2e18bd755ff9815af7ad104699ceb69e",
+      "source_path": "bsp/drivers/vfe/device/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vfe/device/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vfe/test/Makefile",
+      "bytes": 327,
+      "sha256": "1010047a9b03b7902ff03c6cdd953766b70a09264b529a0b72425e005c7e164a",
+      "git_blob_sha": "0a3710022975d7b05538689b7a8dc794052ada57",
+      "source_path": "bsp/drivers/vfe/test/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vfe/test/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/Kconfig",
+      "bytes": 4193,
+      "sha256": "f0facec41f199fb83c788ac8f5eda0a9bc0aac07e3e7b7efd8d26ce2f3cec53b",
+      "git_blob_sha": "1b1c208f175fc0a54b6c7867053f1714880e02ca",
+      "source_path": "bsp/drivers/vin/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/Makefile",
+      "bytes": 4680,
+      "sha256": "9fbd137071643f6ec1c5989df28bb26cc8d0474d27cb3f7d62ac82542c19c2e6",
+      "git_blob_sha": "9527f904b646dfb8bb0a374deb6658ca014e3f8d",
+      "source_path": "bsp/drivers/vin/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/actuator/Kconfig",
+      "bytes": 591,
+      "sha256": "074c62639993ab1eaa2a2975ebc2e3a116c812911fa305e475bfb5d595f6dd91",
+      "git_blob_sha": "776b92744afc8d2d95c53c7da0b5a062ad209757",
+      "source_path": "bsp/drivers/vin/modules/actuator/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/actuator/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/actuator/Makefile",
+      "bytes": 637,
+      "sha256": "9320fb1242a0a7be9c8c6f77aafbfa45cddb89b7cf094b546639a4a818650204",
+      "git_blob_sha": "1164b7645e9b70536f2898f8f5fad0880510f48f",
+      "source_path": "bsp/drivers/vin/modules/actuator/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/actuator/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/Kconfig",
+      "bytes": 4568,
+      "sha256": "4720d60a1edce568f5ef525b28e5f7130651ac7aa05914e3a574912d05b279a6",
+      "git_blob_sha": "e06fa4b2e170cce987ae7bc1339e5133a223f44f",
+      "source_path": "bsp/drivers/vin/modules/sensor/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/Makefile",
+      "bytes": 3395,
+      "sha256": "76f35c39f6a33059a75082f16c5c4d9c7a8f69c02fd7ae1ea5cd61ee21fc7acc",
+      "git_blob_sha": "f4a568a9d85d85d5fbe404a0ae1851ef49eaffbd",
+      "source_path": "bsp/drivers/vin/modules/sensor/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/lt7911d_mipi/Makefile",
+      "bytes": 471,
+      "sha256": "8348bf98027c87fde921c919d9e1e0bb3338c91b8f21084f1ca8431de7442809",
+      "git_blob_sha": "2e4906869036e1ffbf8f02df2a680ca45c8a1efc",
+      "source_path": "bsp/drivers/vin/modules/sensor/lt7911d_mipi/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/lt7911d_mipi/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/nvp6134/Makefile",
+      "bytes": 1613,
+      "sha256": "6460c14e1a04601ead32fbcb9a3f4e52a37c982485d2152254207cdb3d9bf5b4",
+      "git_blob_sha": "eff5e1847eda99aa73dd1fb8f283481da02cc4c6",
+      "source_path": "bsp/drivers/vin/modules/sensor/nvp6134/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/nvp6134/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/nvp6158/Makefile",
+      "bytes": 1546,
+      "sha256": "a2e2940d942f77b5a7b1b0041c553b2cf7198cfaa0bc3e8edf96295231f0d278",
+      "git_blob_sha": "512ebd941be811ed96393da3c0570b8290eb7fc2",
+      "source_path": "bsp/drivers/vin/modules/sensor/nvp6158/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/nvp6158/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/nvp6324/Makefile",
+      "bytes": 661,
+      "sha256": "60e66970280f8eeecd61d14f206cbbb32a8eda3a3c2f6cd3c2ac5712606230b2",
+      "git_blob_sha": "41b7aa0bd01415425e0361dd873a85fdf6a952a9",
+      "source_path": "bsp/drivers/vin/modules/sensor/nvp6324/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/nvp6324/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/nvp6324/i2c/Makefile",
+      "bytes": 1760,
+      "sha256": "67fc1ba200faf63b7329efff1af2cf6371fca5900547b270a0283cc75bb025af",
+      "git_blob_sha": "1da40283f54561347d20d8632a366aaf20fb7392",
+      "source_path": "bsp/drivers/vin/modules/sensor/nvp6324/i2c/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/nvp6324/i2c/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/rk628f/Makefile",
+      "bytes": 558,
+      "sha256": "7661e05a00cdadbf4582e35d95dd566496f359780fbd824c1bdc2f82ce684a86",
+      "git_blob_sha": "b693a9ed4bd157fc70cdc1c1ad86da3869ef4f3f",
+      "source_path": "bsp/drivers/vin/modules/sensor/rk628f/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/rk628f/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/rm84_serdes/Makefile",
+      "bytes": 369,
+      "sha256": "1c0937bae201dad0ad9dbabf5b575ad7ac97526da0c13bd8ae285d0d69271ab0",
+      "git_blob_sha": "030db753304cdcd11c07ba869889b0bed2e925e4",
+      "source_path": "bsp/drivers/vin/modules/sensor/rm84_serdes/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/rm84_serdes/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/td104/Makefile",
+      "bytes": 73,
+      "sha256": "d108c397fc92fec60d621cc92cd5b91512239087912711e65f032701984aeaf2",
+      "git_blob_sha": "0b4b08168556cc7db19d2c5c29b904ef68fa5b22",
+      "source_path": "bsp/drivers/vin/modules/sensor/td104/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/td104/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/modules/sensor/thine244_serdes/Makefile",
+      "bytes": 377,
+      "sha256": "cf2ffa69cfde9ce74d624c1ad911c3a82cc64e06718b4ed0a0f36717619c9f50",
+      "git_blob_sha": "3aa93184aeabf949801926a5ddf36f70384b8f70",
+      "source_path": "bsp/drivers/vin/modules/sensor/thine244_serdes/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/modules/sensor/thine244_serdes/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/vin-isp/sunxi_isp.c",
+      "bytes": 116348,
+      "sha256": "abd51e1a998d966d921435b904e4b421c92e58f5a34add9d58b83e45610b877d",
+      "git_blob_sha": "f3fc8e0bc2cce749986cbc70719f350094b593b4",
+      "source_path": "bsp/drivers/vin/vin-isp/sunxi_isp.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/vin-isp/sunxi_isp.c",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/drivers/vin/vin_test/mplane_image/Makefile",
+      "bytes": 868,
+      "sha256": "34579dc75c62a3d35e457a5dddf556a2268926313a564488a97bff8a628ab7e5",
+      "git_blob_sha": "d5df1a780af9f2cfeb07adbe7f60d2b92ad466be",
+      "source_path": "bsp/drivers/vin/vin_test/mplane_image/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/drivers/vin/vin_test/mplane_image/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/Makefile",
+      "bytes": 5961,
+      "sha256": "e9bf1199e463b101e2d53f554ef7b1a6ab32b1443dc4e30be6e26390c68ebc76",
+      "git_blob_sha": "f7d9f26c39952627c5b41fe61e3722912caf9c63",
+      "source_path": "bsp/modules/gpu/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/Makefile",
+      "bytes": 293,
+      "sha256": "e46f1a6909161e1ed639162242bdad1b711c649218c52f9cabb2b17ed822bc95",
+      "git_blob_sha": "c8a76d0c0189ebf671bf8bf0c59c53663f9dcbf8",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Kbuild",
+      "bytes": 1119,
+      "sha256": "1dc8c5ca02fb7882f7d593b573c06586b1d05017f3f1cc451227302892618908",
+      "git_blob_sha": "e5ded4cf7395b381e7365994c8f632c500b24ffb",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Kconfig",
+      "bytes": 2165,
+      "sha256": "ae65985e8db0fdf5f9b3a7dd3a83dd11da4a7a7ccd181a5d8adfc947a4638b64",
+      "git_blob_sha": "7f9f1d4c418a9c9789d6ece7860db143b0c31ffc",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Makefile",
+      "bytes": 5071,
+      "sha256": "0c84878cdd5796f232aa82f222f7870d02d9a59da90b7c2977f6ebe3d8ca6e89",
+      "git_blob_sha": "cc4bde71d3e6cb681207cc2e615a775f8bd985e8",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Kbuild",
+      "bytes": 892,
+      "sha256": "11c5cb708c930e96718f7f66acd8cddb15753910ca024be92a45339094a49e6a",
+      "git_blob_sha": "0e20cb44543e33597644a366c3cad50b3a0c2850",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Kconfig",
+      "bytes": 968,
+      "sha256": "a02ac1d777fc1287a94ac04f7f7756bd7b2505f32b5fe8d3a4ecb68992620ced",
+      "git_blob_sha": "66ca1bcebdaa59063d32af5f0a6cfb767fb48d07",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Makefile",
+      "bytes": 1172,
+      "sha256": "e256847138715701b5ffaf69c55a0a1749c1a78f35f426600a40b8686081e694",
+      "git_blob_sha": "6144a470b7bce02db2ba74131cc2c939b082a114",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/dma_buf_test_exporter/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/memory_group_manager/Kbuild",
+      "bytes": 879,
+      "sha256": "298da13db02703c704d3d13023a5763c1076e8b794e5637efea9c5c362ff8bd2",
+      "git_blob_sha": "99ce311a7aad416d528e3f71535f0cbd236b26d6",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/memory_group_manager/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/memory_group_manager/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/protected_memory_allocator/Kbuild",
+      "bytes": 891,
+      "sha256": "49807500d9401d050da6d0cf91c6dbc0bfcf573f4af2e8d94bf63f7118f5cf3e",
+      "git_blob_sha": "25295a9a0f764bc9d4d5c037b8b316eb9fb42d7a",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/protected_memory_allocator/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/base/arm/protected_memory_allocator/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Kbuild",
+      "bytes": 840,
+      "sha256": "d542546811f0a81a18ef06d1b55eff7706d0430e89d634f2f4dc55fc3b6a0b4c",
+      "git_blob_sha": "52ea5fb1ba586e34c1397446ccf021966397d135",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Kconfig",
+      "bytes": 874,
+      "sha256": "fb583fb98a6411bfc9ed1a87dee0a2cb7fb4e90ff78b3a2e7c146f488843b20b",
+      "git_blob_sha": "2da8c98377fa5d65a69f29d36168556b8bf13a25",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Makefile",
+      "bytes": 815,
+      "sha256": "128f06f851c4fda00286335bf94247de5b0d73246c7d7dc9c66f073ee786ec9d",
+      "git_blob_sha": "ea9ecc7fefbb93427ac90769086d4af17cdce9f1",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Kbuild",
+      "bytes": 7108,
+      "sha256": "02df8a5dfbd40bfe266fda66c4b7f0c2c81530764adfe653b6dfea787663c9aa",
+      "git_blob_sha": "1d0b2b482ea8d26a1c9b88a43cc71c0e8e998a75",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Kconfig",
+      "bytes": 13013,
+      "sha256": "def83092f6f9054f1281746c35efaf423cd5b6c18d26350c2712c14f7e4e310a",
+      "git_blob_sha": "1c5e1f849e3f786a780bdd62ef51fd575332f4c2",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Makefile",
+      "bytes": 9580,
+      "sha256": "eb4696e68e46147e7927fd94608d124269517a1129349eb803bbab22c366cac1",
+      "git_blob_sha": "b052128e5d3d814fd2da4621c637cd0c1222b70f",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/arbiter/Kbuild",
+      "bytes": 882,
+      "sha256": "d8cc7d8e1d209f267af9778c0f0dbdf368073eb54e2e6c889e7a68e446a132cb",
+      "git_blob_sha": "52032818ca5918f33fa008fe2f33ac31ba4d4b50",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/arbiter/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/arbiter/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/backend/gpu/Kbuild",
+      "bytes": 2092,
+      "sha256": "02d23a12174388762f014f9386416eee367f3699f1f32ffd88de9cd3c16a2f5c",
+      "git_blob_sha": "f821a6ffc59504afc4513a8b0a09014db00ac36a",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/backend/gpu/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/backend/gpu/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/context/Kbuild",
+      "bytes": 1031,
+      "sha256": "4d26ca5bcdfcc1b3595b21f818c8ba3637b9aa7e3055d338dc9e83c4a5733bfc",
+      "git_blob_sha": "1d9c00a460a29b698cba6f6dbe91f51f971864b3",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/context/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/context/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/csf/Kbuild",
+      "bytes": 1998,
+      "sha256": "8752658dca886b4a52f754f0b1e71ca0673da73ec5c65b50c38aac2341af7ee2",
+      "git_blob_sha": "c5438f047f95f236c23ccf9405c2e9df18665bc4",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/csf/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/csf/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/csf/ipa_control/Kbuild",
+      "bytes": 862,
+      "sha256": "d4bd7ca48668f335f767156ffce8d52c5d619345745b3b70fff134ffee76c313",
+      "git_blob_sha": "08824b28b4bf0a17722b538f5d126b33c747f98d",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/csf/ipa_control/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/csf/ipa_control/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/debug/Kbuild",
+      "bytes": 1108,
+      "sha256": "83f75bc83174ac97cbdafdd793307f0a0244a3776016fd91355f6bf4d93a5933",
+      "git_blob_sha": "8beee2d45529e6b5bcb29294c6f752ac90946509",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/debug/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/debug/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/device/Kbuild",
+      "bytes": 1163,
+      "sha256": "f9a22b969c7738a619d530200e3fa8e3c907b6add6ad63e85278d5eab13f4dc5",
+      "git_blob_sha": "90e70249bf3032928dfb6a9fd552f0bcc149f51b",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/device/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/device/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/gpu/Kbuild",
+      "bytes": 1003,
+      "sha256": "5df0191a11d77854c996984ab905a4004e7418d1e73c9a4852a4f8aee26c9063",
+      "git_blob_sha": "c3ab8112d97f843b9af0b35c36ed8cbf5f11aeb4",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/gpu/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/gpu/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/hwcnt/Kbuild",
+      "bytes": 1364,
+      "sha256": "03bb9e30758c862d9024c116f10ea9f00739032fe175ddfbb0c9c86802a09504",
+      "git_blob_sha": "8c8775f0540c1ab0d48ccbacd0282275aeb3f03c",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/hwcnt/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/hwcnt/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/ipa/Kbuild",
+      "bytes": 1239,
+      "sha256": "4fe1ada77d0ecc0b75f602724940d3545fae76b192a9c2deb78b91fcde18e4b9",
+      "git_blob_sha": "96977e95151763435f05c2c02715760ce52cc8d7",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/ipa/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/ipa/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/mmu/Kbuild",
+      "bytes": 1063,
+      "sha256": "f8c351bc4606bbb02cd8e8cd3b6663307f9157e475f3ac0a9c01e5659d338a6c",
+      "git_blob_sha": "7f2bb2656a74c337499cfa63fb80b38765d75b48",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/mmu/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/mmu/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/Kconfig",
+      "bytes": 980,
+      "sha256": "dbb416481488ffbcf6e6202cbf792338af2fe6bce641ccff378e0a5fd1c27dfe",
+      "git_blob_sha": "5f0118d98640cc88f90cdddc37d66a14eb4392ba",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/devicetree/Kbuild",
+      "bytes": 1013,
+      "sha256": "64cd6bb4b211d2e88a1541ca421e0aa230956d1a621988e6fef96acb4d2f5958",
+      "git_blob_sha": "995c4cd1f963caaa4f63df90aa78a93d828f5368",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/devicetree/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/devicetree/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/meson/Kbuild",
+      "bytes": 944,
+      "sha256": "df369ff22c37e91ccb2c5b2dbb39467b74d4d4d3747d42dc9f827b8ee5d30c54",
+      "git_blob_sha": "3f55378a3c0b3f7a6e9b2b4c34cb923aafbfee96",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/meson/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/meson/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/sunxi/Kbuild",
+      "bytes": 859,
+      "sha256": "b80f60e1a6ff8cef7f9b485e5d3fc64ce2e51957827d6c8c81005c476b6ab674",
+      "git_blob_sha": "6f15470a5c5404c039ab49b5c86a3c3db62e29b6",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/sunxi/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/sunxi/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress/Kbuild",
+      "bytes": 931,
+      "sha256": "ec224dce891f90e91b2e6e3b5f4c2007df5d3f42c137099042657ce07f933179",
+      "git_blob_sha": "b5473661c621e9a96f6f426a2e6c9cdad782c8aa",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress_1xv7_a57/Kbuild",
+      "bytes": 931,
+      "sha256": "ec224dce891f90e91b2e6e3b5f4c2007df5d3f42c137099042657ce07f933179",
+      "git_blob_sha": "b5473661c621e9a96f6f426a2e6c9cdad782c8aa",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress_1xv7_a57/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress_1xv7_a57/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress_6xvirtex7_10mhz/Kbuild",
+      "bytes": 988,
+      "sha256": "2c5b66f54bb1e9cbc3b5475da24b6feea333814edb2a3d57aa7251261ab52e64",
+      "git_blob_sha": "bb92c476be85e30f5c8fb08e82729d95be1558c8",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress_6xvirtex7_10mhz/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/platform/vexpress_6xvirtex7_10mhz/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/Kbuild",
+      "bytes": 1165,
+      "sha256": "e02fddf8877e8c84a552227923f6d2bba1715f7e28609b8a37e4932bea1c489c",
+      "git_blob_sha": "38e4dd4d712a0d36e589aab43c731b5d19692d99",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/Kconfig",
+      "bytes": 2129,
+      "sha256": "f5a1b3975531f35050469bf768aa4bcf466d6fc66366f194121976c364da90ad",
+      "git_blob_sha": "e6f037606a5a0073bda58076faf788d98e6d7e02",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/kutf/Kbuild",
+      "bytes": 988,
+      "sha256": "a85aa25a0381130abcc825eaccc3d8702bd3e7d518a340bffcc2e67ebe4ecb8b",
+      "git_blob_sha": "c4790bc66c234dfd2c6cdde2fb8fda4392f1e9e3",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/kutf/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/kutf/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_clk_rate_trace/kernel/Kbuild",
+      "bytes": 968,
+      "sha256": "9ef6f04afc4ff6474db55b01eff8b3246a3699afbc6fe2a5084335aa3f2bcf02",
+      "git_blob_sha": "027bc27c9d3ce7c2a31b9fa7b678518f0ef16c03",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_clk_rate_trace/kernel/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_clk_rate_trace/kernel/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_irq_test/Kbuild",
+      "bytes": 926,
+      "sha256": "f0640c50ff787922668aff0d5c4b5c6c712ef4bc999be8a01ff7982ad48c1aba",
+      "git_blob_sha": "213d6d5ea31782ec8d2c3ee1dd2fa24a05539be7",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_irq_test/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_irq_test/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_mgm_integration_test/Kbuild",
+      "bytes": 963,
+      "sha256": "d28ca668d4362fa94a78aeec039f934624c9d240fcbe12a03ab64e50ba71de24",
+      "git_blob_sha": "e9bff98b88b6f7d5be5bfcd8763a1a3488171487",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_mgm_integration_test/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tests/mali_kutf_mgm_integration_test/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/thirdparty/Kbuild",
+      "bytes": 811,
+      "sha256": "2103b9280c5b9853985050c4a9db4c72bc295ed954f7a35a9a9d69204f37203d",
+      "git_blob_sha": "c723f3a19b795bdbe11dbfb6065bcc79a014fc32",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/thirdparty/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/thirdparty/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tl/Kbuild",
+      "bytes": 1098,
+      "sha256": "abaa343cdcbdc396a58da0e4d688a7106f28b0981f417190f482be281c3b81e6",
+      "git_blob_sha": "1ecf3e47248af7d3b0ea3bde91d8f8dd04edbcc7",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tl/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/gpu/arm/midgard/tl/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Kbuild",
+      "bytes": 2034,
+      "sha256": "8d2fdd85eaa4965c925104fe9e82a1d4984bcba896264712a77f6e48925b507c",
+      "git_blob_sha": "4d7d665f5652c13110dc93058594aa116cd7f85a",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Kconfig",
+      "bytes": 1582,
+      "sha256": "410bda50ebe8dc1d43f6a46456841b541bee860a99755e985c56ca36da561511",
+      "git_blob_sha": "283e2b56b6410ff76599d268c0dbe10fd9693d92",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Makefile",
+      "bytes": 3601,
+      "sha256": "a1b62a69c3853160b2719bc4c5680ed323c3f69dc44939c42630fcf22d0f7039",
+      "git_blob_sha": "a6b5622c92ae29fc8f99b55ce97b75bbc4ebac05",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver/drivers/hwtracing/coresight/mali/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/Makefile",
+      "bytes": 293,
+      "sha256": "e46f1a6909161e1ed639162242bdad1b711c649218c52f9cabb2b17ed822bc95",
+      "git_blob_sha": "c8a76d0c0189ebf671bf8bf0c59c53663f9dcbf8",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Kbuild",
+      "bytes": 1114,
+      "sha256": "c85857f890ab1c3357fe2ae37949d3a203099b94cc32e6df211ecfaa8b9bef22",
+      "git_blob_sha": "b0fbf9369381ef9106797a266ff2eb9f189f3fe3",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Kconfig",
+      "bytes": 2160,
+      "sha256": "e9c8b86b23d43e1cc99196f7acaae6f60c3d04ade9c3ae27d3851148ece28291",
+      "git_blob_sha": "75d54348970742636741a2dd3c6040d61fb004fb",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Makefile",
+      "bytes": 3038,
+      "sha256": "b63cd54836d9b4c6526e173237d02cb53dad3be9a9e32502c0dffe9fbe35ab7e",
+      "git_blob_sha": "0bd6ab5f502f2f9e9c173750fe64b6e9ca7c4d3f",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_lock/src/Kbuild",
+      "bytes": 869,
+      "sha256": "f7fa565164112cd4512f2965d2071e45f19a85843f49198ef26a02d6abd2bf30",
+      "git_blob_sha": "c7ae3324e79820772608586486c7b3e46b00fe44",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_lock/src/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_lock/src/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_lock/src/Makefile",
+      "bytes": 1303,
+      "sha256": "9c1e257ba5768cdd701311a5486c2a655ad228d69fb4af7cf7bcbf7a59ed76f2",
+      "git_blob_sha": "451d2d710123bf14bd2b0356f9720bf97afa25a7",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_lock/src/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_lock/src/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Kbuild",
+      "bytes": 892,
+      "sha256": "11c5cb708c930e96718f7f66acd8cddb15753910ca024be92a45339094a49e6a",
+      "git_blob_sha": "0e20cb44543e33597644a366c3cad50b3a0c2850",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Kconfig",
+      "bytes": 968,
+      "sha256": "a02ac1d777fc1287a94ac04f7f7756bd7b2505f32b5fe8d3a4ecb68992620ced",
+      "git_blob_sha": "66ca1bcebdaa59063d32af5f0a6cfb767fb48d07",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Makefile",
+      "bytes": 1172,
+      "sha256": "e256847138715701b5ffaf69c55a0a1749c1a78f35f426600a40b8686081e694",
+      "git_blob_sha": "6144a470b7bce02db2ba74131cc2c939b082a114",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/dma_buf_test_exporter/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/memory_group_manager/Kbuild",
+      "bytes": 879,
+      "sha256": "298da13db02703c704d3d13023a5763c1076e8b794e5637efea9c5c362ff8bd2",
+      "git_blob_sha": "99ce311a7aad416d528e3f71535f0cbd236b26d6",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/memory_group_manager/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/memory_group_manager/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/protected_memory_allocator/Kbuild",
+      "bytes": 891,
+      "sha256": "49807500d9401d050da6d0cf91c6dbc0bfcf573f4af2e8d94bf63f7118f5cf3e",
+      "git_blob_sha": "25295a9a0f764bc9d4d5c037b8b316eb9fb42d7a",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/protected_memory_allocator/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/base/arm/protected_memory_allocator/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Kbuild",
+      "bytes": 840,
+      "sha256": "d542546811f0a81a18ef06d1b55eff7706d0430e89d634f2f4dc55fc3b6a0b4c",
+      "git_blob_sha": "52ea5fb1ba586e34c1397446ccf021966397d135",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Kconfig",
+      "bytes": 874,
+      "sha256": "fb583fb98a6411bfc9ed1a87dee0a2cb7fb4e90ff78b3a2e7c146f488843b20b",
+      "git_blob_sha": "2da8c98377fa5d65a69f29d36168556b8bf13a25",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Makefile",
+      "bytes": 815,
+      "sha256": "128f06f851c4fda00286335bf94247de5b0d73246c7d7dc9c66f073ee786ec9d",
+      "git_blob_sha": "ea9ecc7fefbb93427ac90769086d4af17cdce9f1",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Kbuild",
+      "bytes": 7408,
+      "sha256": "e730a612a7dff375d9fe272a2213e9ff5754c18f3905bfe2f3f8cae03d2fdec3",
+      "git_blob_sha": "4884dcd2f7d1799d566992ab5a3fd6be61744925",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Kconfig",
+      "bytes": 12415,
+      "sha256": "bed13c6f10d9182f5df5de67a45e0c989f126f301bde82990b1eb5d99bf4bd7e",
+      "git_blob_sha": "5541383b81ac1c1b5a7fa4a915f669fc019e7ae7",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Kconfig",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Kconfig",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Makefile",
+      "bytes": 7047,
+      "sha256": "9011fcdccfbfa8bc529457bf7c1b08e0e5ffa587f1a0ef65b5d8651dda85bbff",
+      "git_blob_sha": "07f50ea3c7dbf61b50c20dd91305295583c82dd7",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/Makefile",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/arbiter/Kbuild",
+      "bytes": 882,
+      "sha256": "d8cc7d8e1d209f267af9778c0f0dbdf368073eb54e2e6c889e7a68e446a132cb",
+      "git_blob_sha": "52032818ca5918f33fa008fe2f33ac31ba4d4b50",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/arbiter/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/arbiter/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/backend/gpu/Kbuild",
+      "bytes": 1782,
+      "sha256": "3991ec7fe1a3450da5c523b463d27b41133d983955463e65f496df5a1981f73c",
+      "git_blob_sha": "5dbcff3f2cf4a5fbad12669de56c4a1cde23572f",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/backend/gpu/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/backend/gpu/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/context/Kbuild",
+      "bytes": 1031,
+      "sha256": "4d26ca5bcdfcc1b3595b21f818c8ba3637b9aa7e3055d338dc9e83c4a5733bfc",
+      "git_blob_sha": "1d9c00a460a29b698cba6f6dbe91f51f971864b3",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/context/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/context/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/csf/Kbuild",
+      "bytes": 1609,
+      "sha256": "707fde45428d5f89dceda099f9f19a57af6d0d232b08124d4d6632e333126d46",
+      "git_blob_sha": "765e419c6dc4433e2cd78b78d460948974a8492d",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/csf/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/csf/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/csf/ipa_control/Kbuild",
+      "bytes": 862,
+      "sha256": "d4bd7ca48668f335f767156ffce8d52c5d619345745b3b70fff134ffee76c313",
+      "git_blob_sha": "08824b28b4bf0a17722b538f5d126b33c747f98d",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/csf/ipa_control/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/csf/ipa_control/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/gpu/Kbuild",
+      "bytes": 1003,
+      "sha256": "5df0191a11d77854c996984ab905a4004e7418d1e73c9a4852a4f8aee26c9063",
+      "git_blob_sha": "c3ab8112d97f843b9af0b35c36ed8cbf5f11aeb4",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/gpu/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/gpu/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "repository": "walnutpi/linux",
+      "commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "url": "https://raw.githubusercontent.com/walnutpi/linux/4242fecc7cfd9914da999a490814a716048a8727/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/platform/vexpress/Kbuild",
+      "bytes": 931,
+      "sha256": "ec224dce891f90e91b2e6e3b5f4c2007df5d3f42c137099042657ce07f933179",
+      "git_blob_sha": "b5473661c621e9a96f6f426a2e6c9cdad782c8aa",
+      "source_path": "bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/platform/vexpress/Kbuild",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/source/bsp/modules/gpu/mali-valhall/driver_r32p1/drivers/gpu/arm/midgard/platform/vexpress/Kbuild",
+      "kind": "kernel-source-and-static-input"
+    },
+    {
+      "url": "http://apt.walnutpi.com/debian/pool/arm64/libisp-t527_1.0.0_all.deb",
+      "bytes": 940592,
+      "sha256": "dbc6aa109f69d9f9f524a8d2510cf2986ed87a417b04b87ebba8a5b246662186",
+      "package": "libisp-t527",
+      "version": "1.0.0",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/packages/libisp-t527_1.0.0_all.deb",
+      "kind": "official-distribution-package"
+    },
+    {
+      "url": "http://apt.walnutpi.com/debian/pool/arm64/mesa-xorg-g57-debian12_1.0.0_arm64.deb",
+      "bytes": 4826194,
+      "sha256": "b09fe15ca6d46c90fea3ae5c63259a6bc37cc088c32d6a4c38a673c9a2b76b32",
+      "package": "mesa-xorg-g57-debian12",
+      "version": "1.0.0",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/packages/mesa-xorg-g57-debian12_1.0.0_arm64.deb",
+      "kind": "official-distribution-package"
+    },
+    {
+      "url": "http://apt.walnutpi.com/debian/pool/arm64/walnutpi.isp_1.0.0_all.deb",
+      "bytes": 28998,
+      "sha256": "41ac7cabe41164221577391d1f26bbc4199544b35db21bc42f13f71381ced2eb",
+      "package": "walnutpi.isp",
+      "version": "1.0.0",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/packages/walnutpi.isp_1.0.0_all.deb",
+      "kind": "official-distribution-package"
+    },
+    {
+      "url": "http://apt.walnutpi.com/debian/pool/arm64/walnutpi.npu_1.1.2_all.deb",
+      "bytes": 253820,
+      "sha256": "fd64d3ddd492863a5dc19462552500f8d197b2b7e59e32140208487093e79419",
+      "package": "walnutpi.npu",
+      "version": "1.1.2",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/walnut/packages/walnutpi.npu_1.1.2_all.deb",
+      "kind": "official-distribution-package"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/8c2b8cb543d2319d48f6013fbaeea3bcca1efe2c",
+      "bytes": 801,
+      "sha256": "5c9705f84811c7d44b49682d01c0500172bebfa38868d9ec659a365435a9f395",
+      "git_blob": "8c2b8cb543d2319d48f6013fbaeea3bcca1efe2c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/README.md",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/f8fec3cc99ea97c3cb087ec0ab741c9b7549657c",
+      "bytes": 195,
+      "sha256": "99ff87c52b4e937dada9319afb56953b5dd22039b3fb75cecb62cff70bcd17ae",
+      "git_blob": "f8fec3cc99ea97c3cb087ec0ab741c9b7549657c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/bookworm.conf",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/0b9bffac10fc09b9d4af34e65aee6ce306ece775",
+      "bytes": 23486,
+      "sha256": "8ff3d4891c2ab52683b555f6af7a919dac0702b218d3316ff89c76e854152192",
+      "git_blob": "0b9bffac10fc09b9d4af34e65aee6ce306ece775",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/web/debian/dists/bookworm/main/binary-arm64/Packages",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/b21db9a9fd158a23f1b4b2bbaf56a5fa1ea5f9f5",
+      "bytes": 58260,
+      "sha256": "60cb4d08a4a4e3ab9009eba4ae58bb2db3b14a4b14a9907255017e6588ac2b65",
+      "git_blob": "b21db9a9fd158a23f1b4b2bbaf56a5fa1ea5f9f5",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/web/debian/dists/bookworm/main/binary-all/Packages",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/a98bd25f10901e0c56c9412851957eada74123ea",
+      "bytes": 10505,
+      "sha256": "412f5d72fa6e586e002cf6950c68c85dee603b8b156241908a5a548a2b7e176a",
+      "git_blob": "a98bd25f10901e0c56c9412851957eada74123ea",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/web/debian/dists/bookworm/walnutpi-2b/binary-arm64/Packages",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/fe3da13c0acfc5a8752a1682c2321720d046b309",
+      "bytes": 23229,
+      "sha256": "9bafd6b57b21f1c1d52133bc178db2790ebb8a5e339d02f30a0aa270c17d0af0",
+      "git_blob": "fe3da13c0acfc5a8752a1682c2321720d046b309",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/web/debian/dists/bookworm/walnutpi-2b/binary-all/Packages",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "url": "https://api.github.com/repos/walnutpi/wpi-update-server/git/blobs/c3cd4f1d57a65372b3a7887c7b0eece46a59570f",
+      "bytes": 1546,
+      "sha256": "decd41baf1404790b885a1af93b067d4c8c5daa5ab74e898eff4a86c12e92324",
+      "git_blob": "c3cd4f1d57a65372b3a7887c7b0eece46a59570f",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/wpi-update-server/web/debian/release-log/walnutpi-2b_en.log",
+      "kind": "official-package-index-and-source"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/setup.py",
+      "bytes": 3095,
+      "sha256": "402d9418e1d33a6e2da926bd035c38a17056394c82bc79ea8a95cba3d164caba",
+      "git_blob": "aa6993b589969e4d0e75b59fe6caefd80a566e9b",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "setup.py",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/setup.py",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/LICENSE",
+      "bytes": 18092,
+      "sha256": "8177f97513213526df2cf6184d8ff986c675afb514d4e68a404010521b880643",
+      "git_blob": "d159169d1050894d3ea3b98e1c965c4058208fe1",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "LICENSE",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/LICENSE",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/walnutpi_npu/NPU.py",
+      "bytes": 2748,
+      "sha256": "27f977bf0cbf63029c29abb8c03e38cab62989afb89279f3405337c6681e43c3",
+      "git_blob": "aaee6589ad4be66abfa67913db4e73695acaf61b",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "walnutpi_npu/NPU.py",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/walnutpi_npu/NPU.py",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/walnutpi_npu/_awnn_lib/t527/Makefile",
+      "bytes": 604,
+      "sha256": "bc15e8e51b4fd5bd0a54b9cafe084a7795308e867589c352138a282e61ba6099",
+      "git_blob": "fc5e4bd4bf4873404910cca4c46b4b5f69b208fc",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "walnutpi_npu/_awnn_lib/t527/Makefile",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/walnutpi_npu/_awnn_lib/t527/Makefile",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/walnutpi_npu/_awnn_lib/t527/src/awnn_lib.c",
+      "bytes": 17429,
+      "sha256": "d2c86bb77f12f130c3aa5e582dd3d183ad953a9618caac2caf4d141cf3fca1f0",
+      "git_blob": "01921d6a25d3543957bb9024a12b693c52a3cacd",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "walnutpi_npu/_awnn_lib/t527/src/awnn_lib.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/walnutpi_npu/_awnn_lib/t527/src/awnn_lib.c",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/walnutpi_npu/_awnn_lib/t527/lib/libVIPlite.so",
+      "bytes": 149464,
+      "sha256": "683364a59e5aecba68f45f35f3520fab16f5e2cbc6bda8537979cae6cc15bfe0",
+      "git_blob": "538a7139a6001d857f61ae446b155e20b433be92",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "walnutpi_npu/_awnn_lib/t527/lib/libVIPlite.so",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/walnutpi_npu/_awnn_lib/t527/lib/libVIPlite.so",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.npu",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.npu/dca734db32464a355b90b14739f7b430dfb15174/walnutpi_npu/_awnn_lib/t527/lib/libVIPuser.so",
+      "bytes": 38776,
+      "sha256": "f7bdcf45fb238b6d18ff09cb92d3f29bbf6b250c7c9525a5d4e25ff20852217f",
+      "git_blob": "b91c5f6c92c25daf4fc3afc89e61062f66f86031",
+      "commit": "dca734db32464a355b90b14739f7b430dfb15174",
+      "source_path": "walnutpi_npu/_awnn_lib/t527/lib/libVIPuser.so",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.npu/walnutpi_npu/_awnn_lib/t527/lib/libVIPuser.so",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.isp",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.isp/5a178bc9437ea3b28a2760d4a6ca86eab83173af/setup.py",
+      "bytes": 1377,
+      "sha256": "efc1fc1a20c46977b0d0acb70ac24d3efe646b3043bed76e9070b093bc411992",
+      "git_blob": "f8f90be73db7b33d6d9d22e0ca686c4879270e6b",
+      "commit": "5a178bc9437ea3b28a2760d4a6ca86eab83173af",
+      "source_path": "setup.py",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.isp/setup.py",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.isp",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.isp/5a178bc9437ea3b28a2760d4a6ca86eab83173af/LICENSE",
+      "bytes": 1063,
+      "sha256": "5a1fe23d416e0d386afcd6b928a20529de162c5a655a060fd63ec1da1b4fe03d",
+      "git_blob": "8c832456016a39ae9c8d8d8cea3eba48865789b3",
+      "commit": "5a178bc9437ea3b28a2760d4a6ca86eab83173af",
+      "source_path": "LICENSE",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.isp/LICENSE",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.isp",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.isp/5a178bc9437ea3b28a2760d4a6ca86eab83173af/walnutpi_isp/__init__.py",
+      "bytes": 2343,
+      "sha256": "2e00131962891cc79ab5e6b342e036ea26804ff6de07ca826d7babd93f17e21f",
+      "git_blob": "9f3aab51cab6cd96067360bf1e17b5fd6e07ed5c",
+      "commit": "5a178bc9437ea3b28a2760d4a6ca86eab83173af",
+      "source_path": "walnutpi_isp/__init__.py",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.isp/walnutpi_isp/__init__.py",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi.isp",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi.isp/5a178bc9437ea3b28a2760d4a6ca86eab83173af/walnutpi_isp/_aw_isp/AWIspApi.c",
+      "bytes": 5893,
+      "sha256": "98dc0c6fa8a16a204713652bc30d9e8519e3c9fab3756e7b6fdc4b2b9e37fe29",
+      "git_blob": "21413aead0d50fe15f3c44de3dc8cd75fa13d845",
+      "commit": "5a178bc9437ea3b28a2760d4a6ca86eab83173af",
+      "source_path": "walnutpi_isp/_aw_isp/AWIspApi.c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi.isp/walnutpi_isp/_aw_isp/AWIspApi.c",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/libisp-t527/DEBIAN/control",
+      "bytes": 189,
+      "sha256": "0a7761ac54f10ab124cad8ceca69ded4b68c324012cfd45c1e4cef4e0c4fa2a5",
+      "git_blob": "8831665e6a347852b55b3b1b8fa56fd079f3f18c",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/libisp-t527/DEBIAN/control",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/libisp-t527/DEBIAN/control",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/libisp-t527/etc/modules-load.d/vin.conf",
+      "bytes": 48,
+      "sha256": "a6a8f359b9b1f3dad98bba11bbab2b87871a60b3cf190e06e6f5b33afab85d11",
+      "git_blob": "dc55e1eb8aa5e9adcc5a5b4c5d2c422af2a9b261",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/libisp-t527/etc/modules-load.d/vin.conf",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/libisp-t527/etc/modules-load.d/vin.conf",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/libisp-t527/usr/include/AWIspApi.h",
+      "bytes": 1069,
+      "sha256": "1a4727106a9d6baeb1b43ac08bb0b8b51b018b5438bb6fb4f0683e2e92ce159d",
+      "git_blob": "78652b67e9357c45d6b1f6e0e26c1d72c3a6dbcc",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/libisp-t527/usr/include/AWIspApi.h",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/libisp-t527/usr/include/AWIspApi.h",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/libisp-t527/usr/lib/libAWIspApi.so",
+      "bytes": 71784,
+      "sha256": "ca95d5ad4f84ce47516b3b08dc4e64eb1709ff92a07f5e854547cfc4b11d7d7f",
+      "git_blob": "682f6efe8d2a5d82501f91997f7680247b16f42b",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/libisp-t527/usr/lib/libAWIspApi.so",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/libisp-t527/usr/lib/libAWIspApi.so",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/libisp-t527/usr/lib/libisp.so",
+      "bytes": 1966136,
+      "sha256": "2c347f740fbadfb286bce95adccf183421cf460fdbd139ca5cb0c295b077e97b",
+      "git_blob": "b1a74c8c708a265b579cd5d44ef1714f0a226018",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/libisp-t527/usr/lib/libisp.so",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/libisp-t527/usr/lib/libisp.so",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/libisp-t527/usr/lib/libisp_algo.a",
+      "bytes": 500674,
+      "sha256": "714532030143103296e125a09e1c4d42feae4d16fc3046708355736c0b5a4cba",
+      "git_blob": "46c5edda0a92a78ef3243bf3e6bd2d9f8f32b7f3",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/libisp-t527/usr/lib/libisp_algo.a",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/libisp-t527/usr/lib/libisp_algo.a",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/walnutpi.npu/DEBIAN/gen.sh",
+      "bytes": 872,
+      "sha256": "bdd2db153339617611c75584027b93c1b982846428c0f50d2479f507759a2d04",
+      "git_blob": "400f7ced77aabf2aa71ee748e95e61be70bb8bb6",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/walnutpi.npu/DEBIAN/gen.sh",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/walnutpi.npu/DEBIAN/gen.sh",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/walnutpi-debs",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-debs/316f7690ef3c6ced334f1f511c40d7176388d665/arm64/walnutpi.isp/DEBIAN/gen.sh",
+      "bytes": 872,
+      "sha256": "e486edeff9897336420d7fb1221a73cabb2628cc839b3bf045c4b7981d5bf85f",
+      "git_blob": "05fc31f0e5ffda7461289969192672798f0dfb94",
+      "commit": "316f7690ef3c6ced334f1f511c40d7176388d665",
+      "source_path": "arm64/walnutpi.isp/DEBIAN/gen.sh",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/walnutpi-debs/arm64/walnutpi.isp/DEBIAN/gen.sh",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/npu-model-transform",
+      "url": "https://raw.githubusercontent.com/walnutpi/npu-model-transform/edada00223820baa41492795fe37281934c8c164/README.md",
+      "bytes": 326,
+      "sha256": "e93ec9bdbfadda9d34123d59ba12451f1a74aa27744ef5ed8069aafde64761a6",
+      "git_blob": "4328c99ff572a03db038693f995d30fa0d9406a4",
+      "commit": "edada00223820baa41492795fe37281934c8c164",
+      "source_path": "README.md",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/npu-model-transform/README.md",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/npu-model-transform",
+      "url": "https://raw.githubusercontent.com/walnutpi/npu-model-transform/edada00223820baa41492795fe37281934c8c164/tools/npu-model-generate.sh",
+      "bytes": 3423,
+      "sha256": "e971d3771f828feeb0c4acf98e964e515df6b734a8bebcb7bdfd42f2bafd9fb2",
+      "git_blob": "131357ae1bc03e6b1ff3c88fbfb9631a0f55c3b3",
+      "commit": "edada00223820baa41492795fe37281934c8c164",
+      "source_path": "tools/npu-model-generate.sh",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/npu-model-transform/tools/npu-model-generate.sh",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "repository": "walnutpi/npu-model-transform",
+      "url": "https://raw.githubusercontent.com/walnutpi/npu-model-transform/edada00223820baa41492795fe37281934c8c164/tools/npu-model-export.sh",
+      "bytes": 4357,
+      "sha256": "6281c922f4ec6c0ca0fb6d8ef98e56c669e8cc9539ee93ee8622eab0ffbb167e",
+      "git_blob": "59795713dc7392e29de50b26cdf2c94eaaa00ba2",
+      "commit": "edada00223820baa41492795fe37281934c8c164",
+      "source_path": "tools/npu-model-export.sh",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/npu-model-transform/tools/npu-model-export.sh",
+      "kind": "userspace-source-and-binary"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/packages/ffmpeg/DEBIAN/control",
+      "bytes": 1225,
+      "sha256": "8793e70ee7dad323bf450b36035e1cc8ff0a03b3f7d480082095506663bb9d58",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/AvaotaOS/target/packages/ffmpeg/DEBIAN/control",
+      "kind": "builder-prebuilt-userspace"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/packages/ffmpeg/usr/share/doc/ffmpeg/copyright",
+      "bytes": 44039,
+      "sha256": "7447a836ec8522b699ba022d5de6c9ab39cd1682054facf550ce84589f161e2a",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/AvaotaOS/target/packages/ffmpeg/usr/share/doc/ffmpeg/copyright",
+      "kind": "builder-prebuilt-userspace"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/packages/libcedarx/usr/lib/aarch64-linux-gnu/libvideoengine.so",
+      "bytes": 31024,
+      "sha256": "61d73d091e2f923d2ba14d9145c0247e6ea944de37f71305ead1a7732440ce0c",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/AvaotaOS/target/packages/libcedarx/usr/lib/aarch64-linux-gnu/libvideoengine.so",
+      "kind": "builder-prebuilt-userspace"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/AvaotaSBC/AvaotaOS/bd95d7528c232cee59e4047994be520cb7551888/target/overlays/usr/lib/aarch64-linux-gnu/libEGL_mesa.so",
+      "bytes": 514576,
+      "sha256": "9d26245c53051cbb8eb48e3809e7ffb331843420f0c3f917faf54b4d47a9ea02",
+      "cache_path": "image/work/t527-driver-source-audit-20261101/userspace/AvaotaOS/target/overlays/usr/lib/aarch64-linux-gnu/libEGL_mesa.so",
+      "kind": "builder-prebuilt-userspace"
+    }
+  ],
+  "package_integrity": {
+    "method": "Package SHA256/length matched against fixed official GitHub Packages indices",
+    "apt_release_signature_verified": false,
+    "transport": "Official HTTP apt bytes used after HTTPS failure; no installation/execution"
+  },
+  "evidence_directory": "image/work/t527-driver-source-audit-20261101",
+  "scope_notes": [
+    "No .ko suffix found in reviewed public source snapshots is not proof that every downstream image has no extra binary-only modules.",
+    "Public source visibility, license, successful rebuild, and runtime acceptance are separate.",
+    "Prebuilt Mesa/FFmpeg/glibc are not classified closed merely because an ELF is shipped."
+  ],
+  "coverage": {
+    "avaota": {
+      "main_tree_entries": 4038,
+      "main_tree_truncated": false,
+      "critical_driver_subtrees_match_integrated_branch": true,
+      "npu_source_object_checks": {
+        "galcore": 38,
+        "vip_common": 13,
+        "vip_default_platform": 1
+      },
+      "vin_source_object_checks": 45,
+      "reviewed_extensionless_ar_archives": 7
+    },
+    "walnut": {
+      "bsp_tree_entries": 16300,
+      "bsp_tree_truncated": false,
+      "extra_root_subtrees_reviewed": 22,
+      "excluded_from_binary_suffix_scan": [
+        "Documentation",
+        ".github"
+      ],
+      "scope": "Path inventory is complete for inspected trees; not every driver or configuration was compiled or line-reviewed."
+    }
+  },
+  "local_static_analysis": [
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/avaota/report.json",
+      "bytes": 1346,
+      "sha256": "d156dbf97d46f54248b59bd340e690a809ea7250bb4fb740670785248ff0faf4"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/avaota/main-vs-integrated-subtree-identity.json",
+      "bytes": 1790,
+      "sha256": "4ce7081286371e15c4506489c5f69de9527c8c58d49085d4ddbec8433b01830a"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/avaota/npu-object-closure.json",
+      "bytes": 2634,
+      "sha256": "84173be2245360f02e9040b7c2fd9717158c70c6f29eeebe0e0a289c0d875cea"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/avaota/vin-object-closure.json",
+      "bytes": 6180,
+      "sha256": "3e84892e30d8cfc59c6335c1b02dff1497ada662ceadae3dcf627f0227fbd1ac"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/avaota/opaque-archive-inspection.json",
+      "bytes": 4772,
+      "sha256": "f81e5163fb2f03d8f452f3659d5fad592874e14a8a09b2d7cf00fe732737ec58"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/walnut/audit-matrix.json",
+      "bytes": 4450,
+      "sha256": "9b3eb11059f61185adccb002a917f020697774a02b6cf9072bc140a3283d1e8b"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/walnut/libve-inspection.json",
+      "bytes": 399,
+      "sha256": "550d2497c44a15d13f1059eb1a5b52bc34b0850904991c9beb585f08ea949038"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/userspace/deb-content-manifest.json",
+      "bytes": 25259,
+      "sha256": "774ba9d26ddc9fcdc21b228778f5b9583a06e977bef86ee3a9f0387bd0873a0a"
+    },
+    {
+      "path": "image/work/t527-driver-source-audit-20261101/userspace/static-binary-inspection.json",
+      "bytes": 9373,
+      "sha256": "2099c2f90fffb47ae5264627d1d8529d0ea647ebe3534aa04338a7eb24862492"
+    }
+  ]
+}
