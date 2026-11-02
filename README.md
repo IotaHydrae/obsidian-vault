@@ -21,6 +21,7 @@ embedded/
   rootfs/            根文件系统
   uboot/             U-Boot
 projects/
+  kindle-linux/      Kindle KT4、Alpine chroot 与 KOReader 应用
   rk3588-ubuntu/     RK3588 Ubuntu 镜像工程知识库
   uconsole-linux/    uConsole Linux、CM4/CM5 与硬件资料
 rust/
@@ -33,6 +34,7 @@ rust/
 
 ## 笔记入口
 
+- [Kindle Linux 工程知识库](projects/kindle-linux/README.md)
 - [uConsole Linux 工程知识库](projects/uconsole-linux/README.md)
 - [RK3588 Ubuntu 镜像知识库](projects/rk3588-ubuntu/README.md)
 - [Linux 内核地址](embedded/linux/kernel/memory/Kernel%20Address%20-%20Virtual%20and%20Physical.md)
