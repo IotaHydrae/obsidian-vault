@@ -12,6 +12,7 @@ cs/                  计算机基础
 dev-note/
   boards/            开发板实践和调试记录
   linux/             Linux 系统配置与故障排查
+  network/           网络分流、节点选择和路径诊断
   tools/             开发工具、服务和使用记录
 embedded/
   arch/              处理器架构
@@ -34,6 +35,7 @@ rust/
 
 ## 笔记入口
 
+- [通用排障方法：网络、接口、终端与系统](dev-note/通用排障方法.md)
 - [Kindle Linux 工程知识库](projects/kindle-linux/README.md)
 - [uConsole Linux 工程知识库](projects/uconsole-linux/README.md)
 - [RK3588 Ubuntu 镜像知识库](projects/rk3588-ubuntu/README.md)
@@ -50,6 +52,8 @@ rust/
 
 ## 整理约定
 
+- 通用知识提炼为机制、参数化示例、验证判据和适用范围，具体部署值按实际环境确定。
+- 来源材料中，仅 RK3588 Ubuntu 镜像工程的对外副本要求脱敏；其他来源保留与知识有关的实际信息。
 - 通用技术知识放在对应主题下；具体开发板的实践过程放在 `dev-note/boards/`。
 - 本地附件集中放在 `assets/`。如需让新附件自动进入该目录，可在 Obsidian 的“文件与链接”设置中指定默认附件位置。
 - `.obsidian/` 当前未纳入 Git，Obsidian 的本地设置需要在各设备分别配置。
