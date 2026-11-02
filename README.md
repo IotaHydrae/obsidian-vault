@@ -20,6 +20,8 @@ embedded/
   pico/              Raspberry Pi Pico
   rootfs/            根文件系统
   uboot/             U-Boot
+projects/
+  rk3588-ubuntu/     RK3588 Ubuntu 镜像工程知识库
 rust/
   embedded/          嵌入式 Rust
   macro/             宏与示例
@@ -30,6 +32,7 @@ rust/
 
 ## 笔记入口
 
+- [RK3588 Ubuntu 镜像知识库](projects/rk3588-ubuntu/README.md)
 - [Linux 内核地址](embedded/linux/kernel/memory/Kernel%20Address%20-%20Virtual%20and%20Physical.md)
 - [USB 设备的枚举过程](embedded/linux/drivers/usb/USB%20设备的枚举过程.md)
 - [MIPI-DSI 协议](embedded/hardware/MIPI-DSI%20协议.md)

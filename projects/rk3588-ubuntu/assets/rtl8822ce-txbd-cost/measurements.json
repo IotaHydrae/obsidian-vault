@@ -1,0 +1,4213 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-23",
+  "scope": "RTL8822CE runtime TXBD debug ON/OFF, existing module; patched module compiled but not installed",
+  "environment": {
+    "board": "LubanCat-5 V2",
+    "wireless": "Mini-PCIe RTL8822CE",
+    "root_device": "eMMC",
+    "kernel": "6.1.172 #13 SMP Wed Oct 21 17:01:21 CST 2026",
+    "cpu_policy": "performance",
+    "wifi_channel": 165,
+    "wifi_width_mhz": 20,
+    "sender_cpu": 4,
+    "governor_or_network_changed": false
+  },
+  "source": {
+    "project_head_before_patch": "2b4711276",
+    "upstream_commits": [
+      "3a28689bdb6241f52c20a4b5a65821df6ba1ad6d",
+      "409968622668ab1ab68ae2a56fc323def74ef977"
+    ]
+  },
+  "build": {
+    "baseline_external": {
+      "bytes": 3731560,
+      "sha256": "3bff0fc6da97737f150ea3a53cda2ce04b3b19bc2c1ffb135f3cd18ebb355f69",
+      "vermagic": "6.1.172 SMP mod_unload modversions aarch64",
+      "srcversion": "8E1DFE2B24CB49EFFAA51BA",
+      "section_groups": {
+        "text": 1429229,
+        "rodata": 574139,
+        "data": 234291,
+        "bss": 39512
+      },
+      "tx_debug_symbols": [
+        "00000000000018f0 0000000000000008 b backup_idx",
+        "000000000005db78 0000000000000080 T rtw_tx_desc_backup_reset",
+        "000000000005d9bc 00000000000001bc T rtw_tx_desc_backup",
+        "0000000000012b40 000000000000059c T core_get_tx_ring_ext",
+        "00000000000018f8 0000000000002300 b tx_backup"
+      ],
+      "stripped_bytes": 3650760
+    },
+    "patched_external": {
+      "bytes": 3720848,
+      "sha256": "fcab587804c5a90e20311f108a49a0dc158b1cc227ee8b099ea8085096f62658",
+      "vermagic": "6.1.172 SMP mod_unload modversions aarch64",
+      "srcversion": "EB08C10553079BD3C5EBB27",
+      "section_groups": {
+        "text": 1425377,
+        "rodata": 573466,
+        "data": 234291,
+        "bss": 30544
+      },
+      "tx_debug_symbols": [],
+      "stripped_bytes": 3640120
+    }
+  },
+  "measurement": {
+    "status": "OBSERVATION",
+    "oracle": "NONE for performance; complete workload, unchanged mode and no PMU multiplexing checked as invariants",
+    "cycles": "All online CPUs, user and kernel included, hypervisor excluded; no multiplexing",
+    "active_seconds_estimate": "sum(cpu_cycles / (that_cpu_frequency_khz * 1000)); frequency checked before and after each run, not packet latency",
+    "nominal_datagrams_per_second": 2000,
+    "payload_bytes": 1200,
+    "datagrams_per_run": 16000,
+    "mode_sequence": [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "mode_meaning": {
+      "1": "TXBD debug ON",
+      "0": "TXBD debug OFF"
+    },
+    "window_end": "Sender returns only after application receiver confirms all 16000 unique datagrams; does not prove all local completion work has drained",
+    "pairing": [
+      [
+        300,
+        301
+      ],
+      [
+        303,
+        302
+      ],
+      [
+        304,
+        305
+      ],
+      [
+        307,
+        306
+      ],
+      [
+        308,
+        309
+      ],
+      [
+        311,
+        310
+      ]
+    ],
+    "summary": {
+      "1": {
+        "cycles": {
+          "median": 565576106.0,
+          "min": 555304972,
+          "max": 590248334
+        },
+        "instructions": {
+          "median": 330493994.5,
+          "min": 329220466,
+          "max": 342535621
+        },
+        "active_seconds_estimate": {
+          "median": 0.24980670684541526,
+          "min": 0.24435841502161282,
+          "max": 0.2618445178985969
+        }
+      },
+      "0": {
+        "cycles": {
+          "median": 366458939.5,
+          "min": 355811385,
+          "max": 378498993
+        },
+        "instructions": {
+          "median": 326759713.0,
+          "min": 324038144,
+          "max": 330017356
+        },
+        "active_seconds_estimate": {
+          "median": 0.16269649166719813,
+          "min": 0.1576305942449688,
+          "max": 0.16929478461699263
+        }
+      }
+    },
+    "on_minus_off": {
+      "cycles": {
+        "values": [
+          215955903,
+          198275207,
+          198044935,
+          199493587,
+          229956622,
+          187851033
+        ],
+        "median": 198884397.0,
+        "min": 187851033,
+        "max": 229956622
+      },
+      "instructions": {
+        "values": [
+          12518265,
+          3666027,
+          3737926,
+          5182322,
+          16479011,
+          382012
+        ],
+        "median": 4460124.0,
+        "min": 382012,
+        "max": 16479011
+      },
+      "active_seconds_estimate": {
+        "values": [
+          0.09464256376275507,
+          0.08643238190901362,
+          0.08647389357107427,
+          0.08672782077664401,
+          0.10075218004039113,
+          0.08105936510983561
+        ],
+        "median": 0.08660085717385914,
+        "min": 0.08105936510983561,
+        "max": 0.10075218004039113
+      }
+    },
+    "runs": [
+      {
+        "run": 300,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 300,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.002426812,
+          "sender_cpu_seconds": 0.185154
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 24974190,
+              "enabled_ns": 8005258303,
+              "running_ns": 8005258303
+            },
+            "instructions": {
+              "value": 9210704,
+              "enabled_ns": 8005307595,
+              "running_ns": 8005307595
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 21248168,
+              "enabled_ns": 8005307886,
+              "running_ns": 8005307886
+            },
+            "instructions": {
+              "value": 5357234,
+              "enabled_ns": 8005306720,
+              "running_ns": 8005306720
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 3854813,
+              "enabled_ns": 8005306135,
+              "running_ns": 8005306135
+            },
+            "instructions": {
+              "value": 1044849,
+              "enabled_ns": 8005304386,
+              "running_ns": 8005304386
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 1279273,
+              "enabled_ns": 8005305845,
+              "running_ns": 8005305845
+            },
+            "instructions": {
+              "value": 349104,
+              "enabled_ns": 8005306428,
+              "running_ns": 8005306428
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 455536404,
+              "enabled_ns": 8005309344,
+              "running_ns": 8005309344
+            },
+            "instructions": {
+              "value": 255709867,
+              "enabled_ns": 8005311386,
+              "running_ns": 8005311386
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 17775401,
+              "enabled_ns": 8005311386,
+              "running_ns": 8005311386
+            },
+            "instructions": {
+              "value": 12296228,
+              "enabled_ns": 8005312261,
+              "running_ns": 8005312261
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 8144540,
+              "enabled_ns": 8005313720,
+              "running_ns": 8005313720
+            },
+            "instructions": {
+              "value": 4892038,
+              "enabled_ns": 8005314886,
+              "running_ns": 8005314886
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 57435545,
+              "enabled_ns": 8005315760,
+              "running_ns": 8005315760
+            },
+            "instructions": {
+              "value": 53675597,
+              "enabled_ns": 8005316636,
+              "running_ns": 8005316636
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16002,
+          "tx_bytes": 20320204,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15957,
+          "success_cnt": 15957,
+          "failure_cnt": 0,
+          "retry_cnt": 1221
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.993899425957352
+        }
+      },
+      {
+        "run": 301,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 301,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.010360827,
+          "sender_cpu_seconds": 0.098317
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 22191183,
+              "enabled_ns": 8012924469,
+              "running_ns": 8012924469
+            },
+            "instructions": {
+              "value": 6341191,
+              "enabled_ns": 8012924761,
+              "running_ns": 8012924761
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 19322250,
+              "enabled_ns": 8012925344,
+              "running_ns": 8012925344
+            },
+            "instructions": {
+              "value": 5183248,
+              "enabled_ns": 8012925052,
+              "running_ns": 8012925052
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1734949,
+              "enabled_ns": 8012934969,
+              "running_ns": 8012934969
+            },
+            "instructions": {
+              "value": 426182,
+              "enabled_ns": 8012937886,
+              "running_ns": 8012937886
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 520264,
+              "enabled_ns": 8012944594,
+              "running_ns": 8012944594
+            },
+            "instructions": {
+              "value": 114919,
+              "enabled_ns": 8012945469,
+              "running_ns": 8012945469
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 252222811,
+              "enabled_ns": 8012947219,
+              "running_ns": 8012947219
+            },
+            "instructions": {
+              "value": 250864772,
+              "enabled_ns": 8012948386,
+              "running_ns": 8012948386
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 13897846,
+              "enabled_ns": 8012948970,
+              "running_ns": 8012948970
+            },
+            "instructions": {
+              "value": 10729504,
+              "enabled_ns": 8012950136,
+              "running_ns": 8012950136
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 9198684,
+              "enabled_ns": 8012951302,
+              "running_ns": 8012951302
+            },
+            "instructions": {
+              "value": 4193095,
+              "enabled_ns": 8012952469,
+              "running_ns": 8012952469
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 55204444,
+              "enabled_ns": 8012953636,
+              "running_ns": 8012953636
+            },
+            "instructions": {
+              "value": 52164445,
+              "enabled_ns": 8012954220,
+              "running_ns": 8012954220
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16002,
+          "tx_bytes": 20320204,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15950,
+          "success_cnt": 15950,
+          "failure_cnt": 0,
+          "retry_cnt": 2102
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.991964834975079
+        }
+      },
+      {
+        "run": 302,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 302,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.007662294,
+          "sender_cpu_seconds": 0.098684
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 13951602,
+              "enabled_ns": 8010190094,
+              "running_ns": 8010190094
+            },
+            "instructions": {
+              "value": 3760271,
+              "enabled_ns": 8010191844,
+              "running_ns": 8010191844
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 16510978,
+              "enabled_ns": 8010191553,
+              "running_ns": 8010191553
+            },
+            "instructions": {
+              "value": 3991498,
+              "enabled_ns": 8010192137,
+              "running_ns": 8010192137
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 2779275,
+              "enabled_ns": 8010194761,
+              "running_ns": 8010194761
+            },
+            "instructions": {
+              "value": 738672,
+              "enabled_ns": 8010194469,
+              "running_ns": 8010194469
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 503182,
+              "enabled_ns": 8010200886,
+              "running_ns": 8010200886
+            },
+            "instructions": {
+              "value": 114897,
+              "enabled_ns": 8010201470,
+              "running_ns": 8010201470
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 253804305,
+              "enabled_ns": 8010203219,
+              "running_ns": 8010203219
+            },
+            "instructions": {
+              "value": 252353205,
+              "enabled_ns": 8010204678,
+              "running_ns": 8010204678
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 13922829,
+              "enabled_ns": 8010205553,
+              "running_ns": 8010205553
+            },
+            "instructions": {
+              "value": 10890891,
+              "enabled_ns": 8010206428,
+              "running_ns": 8010206428
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 7436264,
+              "enabled_ns": 8010208178,
+              "running_ns": 8010208178
+            },
+            "instructions": {
+              "value": 3810154,
+              "enabled_ns": 8010209928,
+              "running_ns": 8010209928
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 57618544,
+              "enabled_ns": 8010210512,
+              "running_ns": 8010210512
+            },
+            "instructions": {
+              "value": 51377468,
+              "enabled_ns": 8010211386,
+              "running_ns": 8010211386
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16004,
+          "tx_bytes": 20320376,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 2
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15905,
+          "success_cnt": 15905,
+          "failure_cnt": 0,
+          "retry_cnt": 1973
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.997896980959922
+        }
+      },
+      {
+        "run": 303,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 303,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.009423399,
+          "sender_cpu_seconds": 0.184262
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 17799944,
+              "enabled_ns": 8011959344,
+              "running_ns": 8011959344
+            },
+            "instructions": {
+              "value": 5048124,
+              "enabled_ns": 8011961386,
+              "running_ns": 8011961386
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 16003822,
+              "enabled_ns": 8011963429,
+              "running_ns": 8011963429
+            },
+            "instructions": {
+              "value": 3901649,
+              "enabled_ns": 8011964011,
+              "running_ns": 8011964011
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 2418306,
+              "enabled_ns": 8011967219,
+              "running_ns": 8011967219
+            },
+            "instructions": {
+              "value": 609407,
+              "enabled_ns": 8011968677,
+              "running_ns": 8011968677
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 527415,
+              "enabled_ns": 8011973052,
+              "running_ns": 8011973052
+            },
+            "instructions": {
+              "value": 115000,
+              "enabled_ns": 8011973344,
+              "running_ns": 8011973344
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 451172302,
+              "enabled_ns": 8011974803,
+              "running_ns": 8011974803
+            },
+            "instructions": {
+              "value": 255364993,
+              "enabled_ns": 8011975969,
+              "running_ns": 8011975969
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12989580,
+              "enabled_ns": 8011975969,
+              "running_ns": 8011975969
+            },
+            "instructions": {
+              "value": 9667499,
+              "enabled_ns": 8011977427,
+              "running_ns": 8011977427
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 9246795,
+              "enabled_ns": 8011978887,
+              "running_ns": 8011978887
+            },
+            "instructions": {
+              "value": 4238371,
+              "enabled_ns": 8011981219,
+              "running_ns": 8011981219
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 54644022,
+              "enabled_ns": 8011982094,
+              "running_ns": 8011982094
+            },
+            "instructions": {
+              "value": 51758040,
+              "enabled_ns": 8011984136,
+              "running_ns": 8011984136
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16002,
+          "tx_bytes": 20320204,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15955,
+          "success_cnt": 15955,
+          "failure_cnt": 0,
+          "retry_cnt": 1067
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.988098013913259
+        }
+      },
+      {
+        "run": 304,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 304,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.00021041,
+          "sender_cpu_seconds": 0.183566
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 18855347,
+              "enabled_ns": 8002769220,
+              "running_ns": 8002769220
+            },
+            "instructions": {
+              "value": 5270899,
+              "enabled_ns": 8002769803,
+              "running_ns": 8002769803
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 18057692,
+              "enabled_ns": 8002772427,
+              "running_ns": 8002772427
+            },
+            "instructions": {
+              "value": 4426809,
+              "enabled_ns": 8002772136,
+              "running_ns": 8002772136
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1834554,
+              "enabled_ns": 8002774177,
+              "running_ns": 8002774177
+            },
+            "instructions": {
+              "value": 453231,
+              "enabled_ns": 8002775052,
+              "running_ns": 8002775052
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 882966,
+              "enabled_ns": 8002777386,
+              "running_ns": 8002777386
+            },
+            "instructions": {
+              "value": 197409,
+              "enabled_ns": 8002776511,
+              "running_ns": 8002776511
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 450735573,
+              "enabled_ns": 8002777386,
+              "running_ns": 8002777386
+            },
+            "instructions": {
+              "value": 255330348,
+              "enabled_ns": 8002778844,
+              "running_ns": 8002778844
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 13356383,
+              "enabled_ns": 8002779135,
+              "running_ns": 8002779135
+            },
+            "instructions": {
+              "value": 9864922,
+              "enabled_ns": 8002780886,
+              "running_ns": 8002780886
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 6285610,
+              "enabled_ns": 8002782052,
+              "running_ns": 8002782052
+            },
+            "instructions": {
+              "value": 2886577,
+              "enabled_ns": 8002783511,
+              "running_ns": 8002783511
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 54427710,
+              "enabled_ns": 8002782928,
+              "running_ns": 8002782928
+            },
+            "instructions": {
+              "value": 51790101,
+              "enabled_ns": 8002783803,
+              "running_ns": 8002783803
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16003,
+          "tx_bytes": 20320306,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15910,
+          "success_cnt": 15910,
+          "failure_cnt": 0,
+          "retry_cnt": 1093
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.994099988951348
+        }
+      },
+      {
+        "run": 305,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 305,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.006481904,
+          "sender_cpu_seconds": 0.098678
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 16441738,
+              "enabled_ns": 8009030719,
+              "running_ns": 8009030719
+            },
+            "instructions": {
+              "value": 4570867,
+              "enabled_ns": 8009031303,
+              "running_ns": 8009031303
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 17049471,
+              "enabled_ns": 8009031595,
+              "running_ns": 8009031595
+            },
+            "instructions": {
+              "value": 4278869,
+              "enabled_ns": 8009031594,
+              "running_ns": 8009031594
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1729284,
+              "enabled_ns": 8009031596,
+              "running_ns": 8009031596
+            },
+            "instructions": {
+              "value": 425845,
+              "enabled_ns": 8009034803,
+              "running_ns": 8009034803
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 492611,
+              "enabled_ns": 8009040053,
+              "running_ns": 8009040053
+            },
+            "instructions": {
+              "value": 114971,
+              "enabled_ns": 8009042094,
+              "running_ns": 8009042094
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 252690112,
+              "enabled_ns": 8009044136,
+              "running_ns": 8009044136
+            },
+            "instructions": {
+              "value": 251384570,
+              "enabled_ns": 8009045011,
+              "running_ns": 8009045011
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12666973,
+              "enabled_ns": 8009045885,
+              "running_ns": 8009045885
+            },
+            "instructions": {
+              "value": 9770265,
+              "enabled_ns": 8009047344,
+              "running_ns": 8009047344
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 7414206,
+              "enabled_ns": 8009048510,
+              "running_ns": 8009048510
+            },
+            "instructions": {
+              "value": 3794062,
+              "enabled_ns": 8009049969,
+              "running_ns": 8009049969
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 57906505,
+              "enabled_ns": 8009050844,
+              "running_ns": 8009050844
+            },
+            "instructions": {
+              "value": 52142921,
+              "enabled_ns": 8009051428,
+              "running_ns": 8009051428
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16002,
+          "tx_bytes": 20320204,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15948,
+          "success_cnt": 15948,
+          "failure_cnt": 0,
+          "retry_cnt": 1757
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.9950697959866375
+        }
+      },
+      {
+        "run": 306,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 306,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.001729721,
+          "sender_cpu_seconds": 0.097898
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 13067529,
+              "enabled_ns": 8004226386,
+              "running_ns": 8004226386
+            },
+            "instructions": {
+              "value": 3676766,
+              "enabled_ns": 8004227552,
+              "running_ns": 8004227552
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 15322970,
+              "enabled_ns": 8004229886,
+              "running_ns": 8004229886
+            },
+            "instructions": {
+              "value": 3748375,
+              "enabled_ns": 8004229886,
+              "running_ns": 8004229886
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1721545,
+              "enabled_ns": 8004233677,
+              "running_ns": 8004233677
+            },
+            "instructions": {
+              "value": 421972,
+              "enabled_ns": 8004233969,
+              "running_ns": 8004233969
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 776460,
+              "enabled_ns": 8004238635,
+              "running_ns": 8004238635
+            },
+            "instructions": {
+              "value": 196917,
+              "enabled_ns": 8004239511,
+              "running_ns": 8004239511
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 248909405,
+              "enabled_ns": 8004241845,
+              "running_ns": 8004241845
+            },
+            "instructions": {
+              "value": 249783361,
+              "enabled_ns": 8004243595,
+              "running_ns": 8004243595
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 13328904,
+              "enabled_ns": 8004244762,
+              "running_ns": 8004244762
+            },
+            "instructions": {
+              "value": 9969608,
+              "enabled_ns": 8004246220,
+              "running_ns": 8004246220
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 6351324,
+              "enabled_ns": 8004247677,
+              "running_ns": 8004247677
+            },
+            "instructions": {
+              "value": 3082568,
+              "enabled_ns": 8004249427,
+              "running_ns": 8004249427
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 56333248,
+              "enabled_ns": 8004250010,
+              "running_ns": 8004250010
+            },
+            "instructions": {
+              "value": 53158577,
+              "enabled_ns": 8004251177,
+              "running_ns": 8004251177
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16003,
+          "tx_bytes": 20320306,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15909,
+          "success_cnt": 15909,
+          "failure_cnt": 0,
+          "retry_cnt": 2278
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.993074511992745
+        }
+      },
+      {
+        "run": 307,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 307,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.007046286,
+          "sender_cpu_seconds": 0.184271
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 11496412,
+              "enabled_ns": 8009593636,
+              "running_ns": 8009593636
+            },
+            "instructions": {
+              "value": 3215977,
+              "enabled_ns": 8009594803,
+              "running_ns": 8009594803
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 16403467,
+              "enabled_ns": 8009596552,
+              "running_ns": 8009596552
+            },
+            "instructions": {
+              "value": 4017974,
+              "enabled_ns": 8009596844,
+              "running_ns": 8009596844
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1574670,
+              "enabled_ns": 8009597136,
+              "running_ns": 8009597136
+            },
+            "instructions": {
+              "value": 380024,
+              "enabled_ns": 8009597428,
+              "running_ns": 8009597428
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 2486100,
+              "enabled_ns": 8009599762,
+              "running_ns": 8009599762
+            },
+            "instructions": {
+              "value": 811795,
+              "enabled_ns": 8009600053,
+              "running_ns": 8009600053
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 448452966,
+              "enabled_ns": 8009602094,
+              "running_ns": 8009602094
+            },
+            "instructions": {
+              "value": 255047496,
+              "enabled_ns": 8009604136,
+              "running_ns": 8009604136
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 13535247,
+              "enabled_ns": 8009604719,
+              "running_ns": 8009604719
+            },
+            "instructions": {
+              "value": 9971246,
+              "enabled_ns": 8009605302,
+              "running_ns": 8009605302
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 6688277,
+              "enabled_ns": 8009606762,
+              "running_ns": 8009606762
+            },
+            "instructions": {
+              "value": 3223809,
+              "enabled_ns": 8009608511,
+              "running_ns": 8009608511
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 54667833,
+              "enabled_ns": 8009609677,
+              "running_ns": 8009609677
+            },
+            "instructions": {
+              "value": 52552145,
+              "enabled_ns": 8009610552,
+              "running_ns": 8009610552
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16003,
+          "tx_bytes": 20320274,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 2
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15959,
+          "success_cnt": 15959,
+          "failure_cnt": 0,
+          "retry_cnt": 1265
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.996017197030596
+        }
+      },
+      {
+        "run": 308,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 308,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.007666669,
+          "sender_cpu_seconds": 0.185811
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 24826416,
+              "enabled_ns": 8010202637,
+              "running_ns": 8010202637
+            },
+            "instructions": {
+              "value": 8058348,
+              "enabled_ns": 8010203512,
+              "running_ns": 8010203512
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 17262403,
+              "enabled_ns": 8010204677,
+              "running_ns": 8010204677
+            },
+            "instructions": {
+              "value": 4084049,
+              "enabled_ns": 8010203803,
+              "running_ns": 8010203803
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1911614,
+              "enabled_ns": 8010207012,
+              "running_ns": 8010207012
+            },
+            "instructions": {
+              "value": 441505,
+              "enabled_ns": 8010208470,
+              "running_ns": 8010208470
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 2674600,
+              "enabled_ns": 8010208762,
+              "running_ns": 8010208762
+            },
+            "instructions": {
+              "value": 715150,
+              "enabled_ns": 8010207887,
+              "running_ns": 8010207887
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 454121067,
+              "enabled_ns": 8010209636,
+              "running_ns": 8010209636
+            },
+            "instructions": {
+              "value": 257111468,
+              "enabled_ns": 8010211969,
+              "running_ns": 8010211969
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 17681659,
+              "enabled_ns": 8010213136,
+              "running_ns": 8010213136
+            },
+            "instructions": {
+              "value": 13011443,
+              "enabled_ns": 8010214595,
+              "running_ns": 8010214595
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 10333503,
+              "enabled_ns": 8010216345,
+              "running_ns": 8010216345
+            },
+            "instructions": {
+              "value": 5266893,
+              "enabled_ns": 8010218386,
+              "running_ns": 8010218386
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 58448188,
+              "enabled_ns": 8010218969,
+              "running_ns": 8010218969
+            },
+            "instructions": {
+              "value": 52563532,
+              "enabled_ns": 8010220428,
+              "running_ns": 8010220428
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16003,
+          "tx_bytes": 20320306,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15919,
+          "success_cnt": 15919,
+          "failure_cnt": 0,
+          "retry_cnt": 1546
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.993994740070775
+        }
+      },
+      {
+        "run": 309,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 309,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.001912015,
+          "sender_cpu_seconds": 0.09728
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 13042860,
+              "enabled_ns": 8004415386,
+              "running_ns": 8004415386
+            },
+            "instructions": {
+              "value": 3812428,
+              "enabled_ns": 8004415969,
+              "running_ns": 8004415969
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 23043275,
+              "enabled_ns": 8004418886,
+              "running_ns": 8004418886
+            },
+            "instructions": {
+              "value": 5204213,
+              "enabled_ns": 8004418011,
+              "running_ns": 8004418011
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1813057,
+              "enabled_ns": 8004419760,
+              "running_ns": 8004419760
+            },
+            "instructions": {
+              "value": 476085,
+              "enabled_ns": 8004419469,
+              "running_ns": 8004419469
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 502044,
+              "enabled_ns": 8004424427,
+              "running_ns": 8004424427
+            },
+            "instructions": {
+              "value": 115639,
+              "enabled_ns": 8004426469,
+              "running_ns": 8004426469
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 244629295,
+              "enabled_ns": 8004429095,
+              "running_ns": 8004429095
+            },
+            "instructions": {
+              "value": 249503901,
+              "enabled_ns": 8004430844,
+              "running_ns": 8004430844
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12363461,
+              "enabled_ns": 8004431720,
+              "running_ns": 8004431720
+            },
+            "instructions": {
+              "value": 9506565,
+              "enabled_ns": 8004432886,
+              "running_ns": 8004432886
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 7266908,
+              "enabled_ns": 8004434636,
+              "running_ns": 8004434636
+            },
+            "instructions": {
+              "value": 3674482,
+              "enabled_ns": 8004436095,
+              "running_ns": 8004436095
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 54641928,
+              "enabled_ns": 8004437262,
+              "running_ns": 8004437262
+            },
+            "instructions": {
+              "value": 52480064,
+              "enabled_ns": 8004437844,
+              "running_ns": 8004437844
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16002,
+          "tx_bytes": 20320204,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15918,
+          "success_cnt": 15918,
+          "failure_cnt": 0,
+          "retry_cnt": 1509
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.991781970020384
+        }
+      },
+      {
+        "run": 310,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 310,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.001986072,
+          "sender_cpu_seconds": 0.099383
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 20062881,
+              "enabled_ns": 8004492385,
+              "running_ns": 8004492385
+            },
+            "instructions": {
+              "value": 5500199,
+              "enabled_ns": 8004492386,
+              "running_ns": 8004492386
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 19760523,
+              "enabled_ns": 8004495011,
+              "running_ns": 8004495011
+            },
+            "instructions": {
+              "value": 5003508,
+              "enabled_ns": 8004495594,
+              "running_ns": 8004495594
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1099749,
+              "enabled_ns": 8004498803,
+              "running_ns": 8004498803
+            },
+            "instructions": {
+              "value": 252652,
+              "enabled_ns": 8004500845,
+              "running_ns": 8004500845
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 5230793,
+              "enabled_ns": 8004501137,
+              "running_ns": 8004501137
+            },
+            "instructions": {
+              "value": 1732967,
+              "enabled_ns": 8004500261,
+              "running_ns": 8004500261
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 250963163,
+              "enabled_ns": 8004502595,
+              "running_ns": 8004502595
+            },
+            "instructions": {
+              "value": 250983597,
+              "enabled_ns": 8004504636,
+              "running_ns": 8004504636
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 14403092,
+              "enabled_ns": 8004505220,
+              "running_ns": 8004505220
+            },
+            "instructions": {
+              "value": 10549471,
+              "enabled_ns": 8004506970,
+              "running_ns": 8004506970
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 7936269,
+              "enabled_ns": 8004508720,
+              "running_ns": 8004508720
+            },
+            "instructions": {
+              "value": 3686214,
+              "enabled_ns": 8004509594,
+              "running_ns": 8004509594
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 59042523,
+              "enabled_ns": 8004511053,
+              "running_ns": 8004511053
+            },
+            "instructions": {
+              "value": 52194286,
+              "enabled_ns": 8004512511,
+              "running_ns": 8004512511
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16006,
+          "tx_bytes": 20320644,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 3
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15959,
+          "success_cnt": 15959,
+          "failure_cnt": 0,
+          "retry_cnt": 2153
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.993983768043108
+        }
+      },
+      {
+        "run": 311,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 311,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 8.002633474,
+          "sender_cpu_seconds": 0.184582
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 18502190,
+              "enabled_ns": 8005181011,
+              "running_ns": 8005181011
+            },
+            "instructions": {
+              "value": 5343803,
+              "enabled_ns": 8005181886,
+              "running_ns": 8005181886
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 17297495,
+              "enabled_ns": 8005183345,
+              "running_ns": 8005183345
+            },
+            "instructions": {
+              "value": 4299053,
+              "enabled_ns": 8005183637,
+              "running_ns": 8005183637
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1180450,
+              "enabled_ns": 8005185386,
+              "running_ns": 8005185386
+            },
+            "instructions": {
+              "value": 281086,
+              "enabled_ns": 8005185678,
+              "running_ns": 8005185678
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 4820863,
+              "enabled_ns": 8005186552,
+              "running_ns": 8005186552
+            },
+            "instructions": {
+              "value": 1560529,
+              "enabled_ns": 8005186261,
+              "running_ns": 8005186261
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 451122840,
+              "enabled_ns": 8005188887,
+              "running_ns": 8005188887
+            },
+            "instructions": {
+              "value": 254107645,
+              "enabled_ns": 8005190637,
+              "running_ns": 8005190637
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12747309,
+              "enabled_ns": 8005190345,
+              "running_ns": 8005190345
+            },
+            "instructions": {
+              "value": 10034535,
+              "enabled_ns": 8005192095,
+              "running_ns": 8005192095
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 6029648,
+              "enabled_ns": 8005193262,
+              "running_ns": 8005193262
+            },
+            "instructions": {
+              "value": 2770564,
+              "enabled_ns": 8005194136,
+              "running_ns": 8005194136
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 54649231,
+              "enabled_ns": 8005194720,
+              "running_ns": 8005194720
+            },
+            "instructions": {
+              "value": 51887691,
+              "enabled_ns": 8005195303,
+              "running_ns": 8005195303
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16002,
+          "tx_bytes": 20320204,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15918,
+          "success_cnt": 15918,
+          "failure_cnt": 0,
+          "retry_cnt": 1101
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.995347180985846
+        }
+      }
+    ],
+    "blocks": [
+      {
+        "runs": [
+          300,
+          301,
+          302,
+          303
+        ],
+        "on_mean_minus_off_mean": {
+          "cycles": 207115555,
+          "instructions": 8092146,
+          "active_seconds_estimate": 0.09053747283588431
+        }
+      },
+      {
+        "runs": [
+          304,
+          305,
+          306,
+          307
+        ],
+        "on_mean_minus_off_mean": {
+          "cycles": 198769261.0,
+          "instructions": 4460124,
+          "active_seconds_estimate": 0.08660085717385915
+        }
+      },
+      {
+        "runs": [
+          308,
+          309,
+          310,
+          311
+        ],
+        "on_mean_minus_off_mean": {
+          "cycles": 208903827.5,
+          "instructions": 8430511.5,
+          "active_seconds_estimate": 0.09090577257511334
+        }
+      }
+    ]
+  },
+  "exploratory_measurement": {
+    "used_for_final_cost_estimate": false,
+    "reason": "Window ended at sender sendto completion and could omit remote delivery tail; all samples retained",
+    "runs": [
+      {
+        "run": 200,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 200,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.99223279,
+          "sender_cpu_seconds": 0.184105
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 14187014,
+              "enabled_ns": 7997222886,
+              "running_ns": 7997222886
+            },
+            "instructions": {
+              "value": 3824583,
+              "enabled_ns": 7997220261,
+              "running_ns": 7997220261
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 26915832,
+              "enabled_ns": 7997221429,
+              "running_ns": 7997221429
+            },
+            "instructions": {
+              "value": 6422748,
+              "enabled_ns": 7997218512,
+              "running_ns": 7997218512
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 11020265,
+              "enabled_ns": 7997219970,
+              "running_ns": 7997219970
+            },
+            "instructions": {
+              "value": 3240897,
+              "enabled_ns": 7997219678,
+              "running_ns": 7997219678
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 13844118,
+              "enabled_ns": 7997220262,
+              "running_ns": 7997220262
+            },
+            "instructions": {
+              "value": 4255232,
+              "enabled_ns": 7997218803,
+              "running_ns": 7997218803
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 456222462,
+              "enabled_ns": 7997219970,
+              "running_ns": 7997219970
+            },
+            "instructions": {
+              "value": 262823994,
+              "enabled_ns": 7997220845,
+              "running_ns": 7997220845
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12347874,
+              "enabled_ns": 7997221137,
+              "running_ns": 7997221137
+            },
+            "instructions": {
+              "value": 10295556,
+              "enabled_ns": 7997222595,
+              "running_ns": 7997222595
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 3723900,
+              "enabled_ns": 7997224345,
+              "running_ns": 7997224345
+            },
+            "instructions": {
+              "value": 1604198,
+              "enabled_ns": 7997225511,
+              "running_ns": 7997225511
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 60964666,
+              "enabled_ns": 7997225220,
+              "running_ns": 7997225220
+            },
+            "instructions": {
+              "value": 55110275,
+              "enabled_ns": 7997226387,
+              "running_ns": 7997226387
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16006,
+          "tx_bytes": 20320682,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 3
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15632,
+          "success_cnt": 15632,
+          "failure_cnt": 0,
+          "retry_cnt": 1810
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.997952005942352
+        }
+      },
+      {
+        "run": 201,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 201,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 9.094889992,
+          "sender_cpu_seconds": 0.085188
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 11160323,
+              "enabled_ns": 9098750466,
+              "running_ns": 9098750466
+            },
+            "instructions": {
+              "value": 3127587,
+              "enabled_ns": 9098750466,
+              "running_ns": 9098750466
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 53040237,
+              "enabled_ns": 9098753381,
+              "running_ns": 9098753381
+            },
+            "instructions": {
+              "value": 10140205,
+              "enabled_ns": 9098753674,
+              "running_ns": 9098753674
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 9835556,
+              "enabled_ns": 9098755423,
+              "running_ns": 9098755423
+            },
+            "instructions": {
+              "value": 3216029,
+              "enabled_ns": 9098755132,
+              "running_ns": 9098755132
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 4730605,
+              "enabled_ns": 9098756299,
+              "running_ns": 9098756299
+            },
+            "instructions": {
+              "value": 1442698,
+              "enabled_ns": 9098756299,
+              "running_ns": 9098756299
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 227369059,
+              "enabled_ns": 9098757464,
+              "running_ns": 9098757464
+            },
+            "instructions": {
+              "value": 241845621,
+              "enabled_ns": 9098759215,
+              "running_ns": 9098759215
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 11784783,
+              "enabled_ns": 9098760382,
+              "running_ns": 9098760382
+            },
+            "instructions": {
+              "value": 10145331,
+              "enabled_ns": 9098761257,
+              "running_ns": 9098761257
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 2944109,
+              "enabled_ns": 9098763299,
+              "running_ns": 9098763299
+            },
+            "instructions": {
+              "value": 457084,
+              "enabled_ns": 9098764465,
+              "running_ns": 9098764465
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 105437936,
+              "enabled_ns": 9098764465,
+              "running_ns": 9098764465
+            },
+            "instructions": {
+              "value": 82503314,
+              "enabled_ns": 9098766215,
+              "running_ns": 9098766215
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 15950,
+          "tx_bytes": 20256500,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 14573,
+          "success_cnt": 14573,
+          "failure_cnt": 0,
+          "retry_cnt": 4820
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 9.40905661508441
+        }
+      },
+      {
+        "run": 202,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 202,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992147331,
+          "sender_cpu_seconds": 0.098175
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 10385775,
+              "enabled_ns": 7995894052,
+              "running_ns": 7995894052
+            },
+            "instructions": {
+              "value": 2918892,
+              "enabled_ns": 7995893178,
+              "running_ns": 7995893178
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 24227261,
+              "enabled_ns": 7995894927,
+              "running_ns": 7995894927
+            },
+            "instructions": {
+              "value": 5762749,
+              "enabled_ns": 7995895220,
+              "running_ns": 7995895220
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 6409654,
+              "enabled_ns": 7995896970,
+              "running_ns": 7995896970
+            },
+            "instructions": {
+              "value": 2046843,
+              "enabled_ns": 7995897553,
+              "running_ns": 7995897553
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 3993787,
+              "enabled_ns": 7995899886,
+              "running_ns": 7995899886
+            },
+            "instructions": {
+              "value": 1251602,
+              "enabled_ns": 7995899595,
+              "running_ns": 7995899595
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 250962795,
+              "enabled_ns": 7995900470,
+              "running_ns": 7995900470
+            },
+            "instructions": {
+              "value": 253084261,
+              "enabled_ns": 7995902220,
+              "running_ns": 7995902220
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 9638825,
+              "enabled_ns": 7995903679,
+              "running_ns": 7995903679
+            },
+            "instructions": {
+              "value": 8788832,
+              "enabled_ns": 7995904553,
+              "running_ns": 7995904553
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 2236928,
+              "enabled_ns": 7995906594,
+              "running_ns": 7995906594
+            },
+            "instructions": {
+              "value": 624044,
+              "enabled_ns": 7995908053,
+              "running_ns": 7995908053
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 60186720,
+              "enabled_ns": 7995908636,
+              "running_ns": 7995908636
+            },
+            "instructions": {
+              "value": 52164041,
+              "enabled_ns": 7995909803,
+              "running_ns": 7995909803
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16001,
+          "tx_bytes": 20320070,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15558,
+          "success_cnt": 15558,
+          "failure_cnt": 0,
+          "retry_cnt": 2710
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.994053849950433
+        }
+      },
+      {
+        "run": 203,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 203,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992226373,
+          "sender_cpu_seconds": 0.152469
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 10385858,
+              "enabled_ns": 7995957637,
+              "running_ns": 7995957637
+            },
+            "instructions": {
+              "value": 3013520,
+              "enabled_ns": 7995959678,
+              "running_ns": 7995959678
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 51516669,
+              "enabled_ns": 7995962303,
+              "running_ns": 7995962303
+            },
+            "instructions": {
+              "value": 10167039,
+              "enabled_ns": 7995961428,
+              "running_ns": 7995961428
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 9269073,
+              "enabled_ns": 7995964928,
+              "running_ns": 7995964928
+            },
+            "instructions": {
+              "value": 2874162,
+              "enabled_ns": 7995965511,
+              "running_ns": 7995965511
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 2969090,
+              "enabled_ns": 7995969887,
+              "running_ns": 7995969887
+            },
+            "instructions": {
+              "value": 914666,
+              "enabled_ns": 7995969887,
+              "running_ns": 7995969887
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 384841866,
+              "enabled_ns": 7995971637,
+              "running_ns": 7995971637
+            },
+            "instructions": {
+              "value": 255582402,
+              "enabled_ns": 7995973678,
+              "running_ns": 7995973678
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12707133,
+              "enabled_ns": 7995974554,
+              "running_ns": 7995974554
+            },
+            "instructions": {
+              "value": 9451380,
+              "enabled_ns": 7995975720,
+              "running_ns": 7995975720
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 2821054,
+              "enabled_ns": 7995977762,
+              "running_ns": 7995977762
+            },
+            "instructions": {
+              "value": 405115,
+              "enabled_ns": 7995978345,
+              "running_ns": 7995978345
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 134975353,
+              "enabled_ns": 7995979219,
+              "running_ns": 7995979219
+            },
+            "instructions": {
+              "value": 75301872,
+              "enabled_ns": 7995980678,
+              "running_ns": 7995980678
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16000,
+          "tx_bytes": 20320000,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 14886,
+          "success_cnt": 14886,
+          "failure_cnt": 0,
+          "retry_cnt": 7467
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 8.122066232026555
+        }
+      },
+      {
+        "run": 204,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 204,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992233374,
+          "sender_cpu_seconds": 0.183692
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 9806104,
+              "enabled_ns": 7995985927,
+              "running_ns": 7995985927
+            },
+            "instructions": {
+              "value": 2879016,
+              "enabled_ns": 7995986511,
+              "running_ns": 7995986511
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 28760618,
+              "enabled_ns": 7995986802,
+              "running_ns": 7995986802
+            },
+            "instructions": {
+              "value": 7218953,
+              "enabled_ns": 7995987969,
+              "running_ns": 7995987969
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 6903141,
+              "enabled_ns": 7995988845,
+              "running_ns": 7995988845
+            },
+            "instructions": {
+              "value": 2024989,
+              "enabled_ns": 7995988261,
+              "running_ns": 7995988261
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 3345829,
+              "enabled_ns": 7995990012,
+              "running_ns": 7995990012
+            },
+            "instructions": {
+              "value": 1054383,
+              "enabled_ns": 7995990011,
+              "running_ns": 7995990011
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 448308304,
+              "enabled_ns": 7995991470,
+              "running_ns": 7995991470
+            },
+            "instructions": {
+              "value": 255141633,
+              "enabled_ns": 7995993511,
+              "running_ns": 7995993511
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12448258,
+              "enabled_ns": 7995994678,
+              "running_ns": 7995994678
+            },
+            "instructions": {
+              "value": 9487850,
+              "enabled_ns": 7995997011,
+              "running_ns": 7995997011
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 2239763,
+              "enabled_ns": 7995998178,
+              "running_ns": 7995998178
+            },
+            "instructions": {
+              "value": 552188,
+              "enabled_ns": 7995999636,
+              "running_ns": 7995999636
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 55248135,
+              "enabled_ns": 7996000220,
+              "running_ns": 7996000220
+            },
+            "instructions": {
+              "value": 51981669,
+              "enabled_ns": 7996001678,
+              "running_ns": 7996001678
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16000,
+          "tx_bytes": 20320000,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15599,
+          "success_cnt": 15599,
+          "failure_cnt": 0,
+          "retry_cnt": 2861
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.994042922044173
+        }
+      },
+      {
+        "run": 205,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 205,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992147771,
+          "sender_cpu_seconds": 0.097793
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 10469002,
+              "enabled_ns": 7995879760,
+              "running_ns": 7995879760
+            },
+            "instructions": {
+              "value": 2943278,
+              "enabled_ns": 7995880636,
+              "running_ns": 7995880636
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 25016747,
+              "enabled_ns": 7995882969,
+              "running_ns": 7995882969
+            },
+            "instructions": {
+              "value": 6579010,
+              "enabled_ns": 7995884136,
+              "running_ns": 7995884136
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 1561854,
+              "enabled_ns": 7995887927,
+              "running_ns": 7995887927
+            },
+            "instructions": {
+              "value": 369217,
+              "enabled_ns": 7995888511,
+              "running_ns": 7995888511
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 6945433,
+              "enabled_ns": 7995888803,
+              "running_ns": 7995888803
+            },
+            "instructions": {
+              "value": 2239991,
+              "enabled_ns": 7995887345,
+              "running_ns": 7995887345
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 249692644,
+              "enabled_ns": 7995889385,
+              "running_ns": 7995889385
+            },
+            "instructions": {
+              "value": 251010771,
+              "enabled_ns": 7995890261,
+              "running_ns": 7995890261
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 9777207,
+              "enabled_ns": 7995891135,
+              "running_ns": 7995891135
+            },
+            "instructions": {
+              "value": 8929383,
+              "enabled_ns": 7995892302,
+              "running_ns": 7995892302
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 2075897,
+              "enabled_ns": 7995893469,
+              "running_ns": 7995893469
+            },
+            "instructions": {
+              "value": 438185,
+              "enabled_ns": 7995894636,
+              "running_ns": 7995894636
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 59795572,
+              "enabled_ns": 7995894928,
+              "running_ns": 7995894928
+            },
+            "instructions": {
+              "value": 52283764,
+              "enabled_ns": 7995896094,
+              "running_ns": 7995896094
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16000,
+          "tx_bytes": 20320000,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15915,
+          "success_cnt": 15915,
+          "failure_cnt": 0,
+          "retry_cnt": 1334
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.993210423039272
+        }
+      },
+      {
+        "run": 206,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 206,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992103268,
+          "sender_cpu_seconds": 0.094483
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 10260516,
+              "enabled_ns": 7995848552,
+              "running_ns": 7995848552
+            },
+            "instructions": {
+              "value": 2939528,
+              "enabled_ns": 7995848844,
+              "running_ns": 7995848844
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 31671492,
+              "enabled_ns": 7995851177,
+              "running_ns": 7995851177
+            },
+            "instructions": {
+              "value": 7245842,
+              "enabled_ns": 7995851469,
+              "running_ns": 7995851469
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 5896716,
+              "enabled_ns": 7995853220,
+              "running_ns": 7995853220
+            },
+            "instructions": {
+              "value": 1944782,
+              "enabled_ns": 7995853220,
+              "running_ns": 7995853220
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 3450201,
+              "enabled_ns": 7995860511,
+              "running_ns": 7995860511
+            },
+            "instructions": {
+              "value": 1104513,
+              "enabled_ns": 7995861969,
+              "running_ns": 7995861969
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 245138690,
+              "enabled_ns": 7995862844,
+              "running_ns": 7995862844
+            },
+            "instructions": {
+              "value": 249393943,
+              "enabled_ns": 7995864011,
+              "running_ns": 7995864011
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 9568612,
+              "enabled_ns": 7995865178,
+              "running_ns": 7995865178
+            },
+            "instructions": {
+              "value": 8620093,
+              "enabled_ns": 7995865761,
+              "running_ns": 7995865761
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 2444606,
+              "enabled_ns": 7995867511,
+              "running_ns": 7995867511
+            },
+            "instructions": {
+              "value": 571857,
+              "enabled_ns": 7995869261,
+              "running_ns": 7995869261
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 67116727,
+              "enabled_ns": 7995869552,
+              "running_ns": 7995869552
+            },
+            "instructions": {
+              "value": 58837157,
+              "enabled_ns": 7995870719,
+              "running_ns": 7995870719
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 15948,
+          "tx_bytes": 20252760,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15296,
+          "success_cnt": 15296,
+          "failure_cnt": 0,
+          "retry_cnt": 4188
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 8.222986181965098
+        }
+      },
+      {
+        "run": 207,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 207,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 10.78695381,
+          "sender_cpu_seconds": 0.06123
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 12612613,
+              "enabled_ns": 10790730084,
+              "running_ns": 10790730084
+            },
+            "instructions": {
+              "value": 3614849,
+              "enabled_ns": 10790731542,
+              "running_ns": 10790731542
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 95274763,
+              "enabled_ns": 10790733000,
+              "running_ns": 10790733000
+            },
+            "instructions": {
+              "value": 15878451,
+              "enabled_ns": 10790733584,
+              "running_ns": 10790733584
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 9113117,
+              "enabled_ns": 10790735334,
+              "running_ns": 10790735334
+            },
+            "instructions": {
+              "value": 2858522,
+              "enabled_ns": 10790735917,
+              "running_ns": 10790735917
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 5888319,
+              "enabled_ns": 10790742625,
+              "running_ns": 10790742625
+            },
+            "instructions": {
+              "value": 1838854,
+              "enabled_ns": 10790744667,
+              "running_ns": 10790744667
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 197738552,
+              "enabled_ns": 10790745834,
+              "running_ns": 10790745834
+            },
+            "instructions": {
+              "value": 257773173,
+              "enabled_ns": 10790747001,
+              "running_ns": 10790747001
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 19988509,
+              "enabled_ns": 10790748458,
+              "running_ns": 10790748458
+            },
+            "instructions": {
+              "value": 13063390,
+              "enabled_ns": 10790750792,
+              "running_ns": 10790750792
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 4928047,
+              "enabled_ns": 10790753125,
+              "running_ns": 10790753125
+            },
+            "instructions": {
+              "value": 568929,
+              "enabled_ns": 10790754001,
+              "running_ns": 10790754001
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 375797122,
+              "enabled_ns": 10790754292,
+              "running_ns": 10790754292
+            },
+            "instructions": {
+              "value": 157669716,
+              "enabled_ns": 10790755459,
+              "running_ns": 10790755459
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 15933,
+          "tx_bytes": 20234910,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15020,
+          "success_cnt": 15020,
+          "failure_cnt": 0,
+          "retry_cnt": 4166
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 10.989126319997013
+        }
+      },
+      {
+        "run": 208,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 208,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992224894,
+          "sender_cpu_seconds": 0.184463
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 14573603,
+              "enabled_ns": 7995967845,
+              "running_ns": 7995967845
+            },
+            "instructions": {
+              "value": 4700881,
+              "enabled_ns": 7995968720,
+              "running_ns": 7995968720
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 32334554,
+              "enabled_ns": 7995971052,
+              "running_ns": 7995971052
+            },
+            "instructions": {
+              "value": 7833234,
+              "enabled_ns": 7995971053,
+              "running_ns": 7995971053
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 9451958,
+              "enabled_ns": 7995971052,
+              "running_ns": 7995971052
+            },
+            "instructions": {
+              "value": 2983132,
+              "enabled_ns": 7995971928,
+              "running_ns": 7995971928
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 6960833,
+              "enabled_ns": 7995972511,
+              "running_ns": 7995972511
+            },
+            "instructions": {
+              "value": 2071882,
+              "enabled_ns": 7995972511,
+              "running_ns": 7995972511
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 456547740,
+              "enabled_ns": 7995974553,
+              "running_ns": 7995974553
+            },
+            "instructions": {
+              "value": 259985741,
+              "enabled_ns": 7995976011,
+              "running_ns": 7995976011
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 10928360,
+              "enabled_ns": 7995977762,
+              "running_ns": 7995977762
+            },
+            "instructions": {
+              "value": 9316443,
+              "enabled_ns": 7995979511,
+              "running_ns": 7995979511
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 3389314,
+              "enabled_ns": 7995980969,
+              "running_ns": 7995980969
+            },
+            "instructions": {
+              "value": 947522,
+              "enabled_ns": 7995982428,
+              "running_ns": 7995982428
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 58141897,
+              "enabled_ns": 7995982719,
+              "running_ns": 7995982719
+            },
+            "instructions": {
+              "value": 52267842,
+              "enabled_ns": 7995983594,
+              "running_ns": 7995983594
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 34230
+          },
+          "after": {
+            "temp": 34230
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16000,
+          "tx_bytes": 20320000,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15299,
+          "success_cnt": 15299,
+          "failure_cnt": 0,
+          "retry_cnt": 3002
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 8.172237194958143
+        }
+      },
+      {
+        "run": 209,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 209,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.99214556,
+          "sender_cpu_seconds": 0.097645
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 9922460,
+              "enabled_ns": 7995886760,
+              "running_ns": 7995886760
+            },
+            "instructions": {
+              "value": 2894719,
+              "enabled_ns": 7995891136,
+              "running_ns": 7995891136
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 21153341,
+              "enabled_ns": 7995892303,
+              "running_ns": 7995892303
+            },
+            "instructions": {
+              "value": 4955662,
+              "enabled_ns": 7995892011,
+              "running_ns": 7995892011
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 7258589,
+              "enabled_ns": 7995892886,
+              "running_ns": 7995892886
+            },
+            "instructions": {
+              "value": 1742837,
+              "enabled_ns": 7995892886,
+              "running_ns": 7995892886
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 6079802,
+              "enabled_ns": 7995893761,
+              "running_ns": 7995893761
+            },
+            "instructions": {
+              "value": 1988671,
+              "enabled_ns": 7995893469,
+              "running_ns": 7995893469
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 247252911,
+              "enabled_ns": 7995894927,
+              "running_ns": 7995894927
+            },
+            "instructions": {
+              "value": 251525893,
+              "enabled_ns": 7995896677,
+              "running_ns": 7995896677
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 12152062,
+              "enabled_ns": 7995898136,
+              "running_ns": 7995898136
+            },
+            "instructions": {
+              "value": 10584122,
+              "enabled_ns": 7995899011,
+              "running_ns": 7995899011
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 4364849,
+              "enabled_ns": 7995901636,
+              "running_ns": 7995901636
+            },
+            "instructions": {
+              "value": 1247403,
+              "enabled_ns": 7995902511,
+              "running_ns": 7995902511
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 57495954,
+              "enabled_ns": 7995903387,
+              "running_ns": 7995903387
+            },
+            "instructions": {
+              "value": 51825903,
+              "enabled_ns": 7995904845,
+              "running_ns": 7995904845
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16000,
+          "tx_bytes": 20320000,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15823,
+          "success_cnt": 15823,
+          "failure_cnt": 0,
+          "retry_cnt": 3189
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 8.004279571934603
+        }
+      },
+      {
+        "run": 210,
+        "mode": 0,
+        "mode_before": 0,
+        "mode_after": 0,
+        "sender": {
+          "run": 210,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992147601,
+          "sender_cpu_seconds": 0.09806
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 9699181,
+              "enabled_ns": 7995933136,
+              "running_ns": 7995933136
+            },
+            "instructions": {
+              "value": 2847881,
+              "enabled_ns": 7995933427,
+              "running_ns": 7995933427
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 28173596,
+              "enabled_ns": 7995936053,
+              "running_ns": 7995936053
+            },
+            "instructions": {
+              "value": 5744551,
+              "enabled_ns": 7995935761,
+              "running_ns": 7995935761
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 6303815,
+              "enabled_ns": 7995936927,
+              "running_ns": 7995936927
+            },
+            "instructions": {
+              "value": 1910755,
+              "enabled_ns": 7995938386,
+              "running_ns": 7995938386
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 5168342,
+              "enabled_ns": 7995939260,
+              "running_ns": 7995939260
+            },
+            "instructions": {
+              "value": 1680829,
+              "enabled_ns": 7995939261,
+              "running_ns": 7995939261
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 250621939,
+              "enabled_ns": 7995941886,
+              "running_ns": 7995941886
+            },
+            "instructions": {
+              "value": 253591373,
+              "enabled_ns": 7995943636,
+              "running_ns": 7995943636
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 11914768,
+              "enabled_ns": 7995945677,
+              "running_ns": 7995945677
+            },
+            "instructions": {
+              "value": 10310864,
+              "enabled_ns": 7995946844,
+              "running_ns": 7995946844
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 3771783,
+              "enabled_ns": 7995948886,
+              "running_ns": 7995948886
+            },
+            "instructions": {
+              "value": 849965,
+              "enabled_ns": 7995950053,
+              "running_ns": 7995950053
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 65167558,
+              "enabled_ns": 7995950636,
+              "running_ns": 7995950636
+            },
+            "instructions": {
+              "value": 52428606,
+              "enabled_ns": 7995952094,
+              "running_ns": 7995952094
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16001,
+          "tx_bytes": 20320070,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 1
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15565,
+          "success_cnt": 15565,
+          "failure_cnt": 0,
+          "retry_cnt": 2923
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 7.992791587952524
+        }
+      },
+      {
+        "run": 211,
+        "mode": 1,
+        "mode_before": 1,
+        "mode_after": 1,
+        "sender": {
+          "run": 211,
+          "pps": 2000,
+          "seconds": 8,
+          "size": 1200,
+          "attempted": 16000,
+          "sent": 16000,
+          "send_errors": 0,
+          "elapsed": 7.992226644,
+          "sender_cpu_seconds": 0.091169
+        },
+        "returncode": 0,
+        "pmu": {
+          "0": {
+            "cycles": {
+              "value": 11984250,
+              "enabled_ns": 7995974845,
+              "running_ns": 7995974845
+            },
+            "instructions": {
+              "value": 3152130,
+              "enabled_ns": 7995975428,
+              "running_ns": 7995975428
+            }
+          },
+          "1": {
+            "cycles": {
+              "value": 69080769,
+              "enabled_ns": 7995975719,
+              "running_ns": 7995975719
+            },
+            "instructions": {
+              "value": 11673186,
+              "enabled_ns": 7995975719,
+              "running_ns": 7995975719
+            }
+          },
+          "2": {
+            "cycles": {
+              "value": 7938809,
+              "enabled_ns": 7995977761,
+              "running_ns": 7995977761
+            },
+            "instructions": {
+              "value": 2634207,
+              "enabled_ns": 7995977178,
+              "running_ns": 7995977178
+            }
+          },
+          "3": {
+            "cycles": {
+              "value": 3685315,
+              "enabled_ns": 7995982427,
+              "running_ns": 7995982427
+            },
+            "instructions": {
+              "value": 1161651,
+              "enabled_ns": 7995983011,
+              "running_ns": 7995983011
+            }
+          },
+          "4": {
+            "cycles": {
+              "value": 260925131,
+              "enabled_ns": 7995985052,
+              "running_ns": 7995985052
+            },
+            "instructions": {
+              "value": 260716884,
+              "enabled_ns": 7995987095,
+              "running_ns": 7995987095
+            }
+          },
+          "5": {
+            "cycles": {
+              "value": 13353248,
+              "enabled_ns": 7995989135,
+              "running_ns": 7995989135
+            },
+            "instructions": {
+              "value": 10044210,
+              "enabled_ns": 7995990886,
+              "running_ns": 7995990886
+            }
+          },
+          "6": {
+            "cycles": {
+              "value": 6132169,
+              "enabled_ns": 7995992927,
+              "running_ns": 7995992927
+            },
+            "instructions": {
+              "value": 1331214,
+              "enabled_ns": 7995994677,
+              "running_ns": 7995994677
+            }
+          },
+          "7": {
+            "cycles": {
+              "value": 290838191,
+              "enabled_ns": 7995995260,
+              "running_ns": 7995995260
+            },
+            "instructions": {
+              "value": 123756024,
+              "enabled_ns": 7995996427,
+              "running_ns": 7995996427
+            }
+          }
+        },
+        "frequency_khz": {
+          "before": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          },
+          "after": {
+            "0": 1800000,
+            "1": 1800000,
+            "2": 1800000,
+            "3": 1800000,
+            "4": 2304000,
+            "5": 2304000,
+            "6": 2352000,
+            "7": 2352000
+          }
+        },
+        "temperature_millicelsius": {
+          "before": {
+            "temp": 33307
+          },
+          "after": {
+            "temp": 33307
+          }
+        },
+        "interface_counter_delta": {
+          "tx_packets": 16001,
+          "tx_bytes": 20320090,
+          "tx_errors": 0,
+          "tx_dropped": 0,
+          "rx_packets": 0
+        },
+        "firmware_tx_report": {
+          "data_sent_cnt": 15340,
+          "success_cnt": 15340,
+          "failure_cnt": 0,
+          "retry_cnt": 5614
+        },
+        "receiver": {
+          "packets": 16000,
+          "bytes": 19200000,
+          "duplicates": 0,
+          "span_seconds": 8.09967222600244
+        }
+      }
+    ]
+  },
+  "cleanup": {
+    "running": false,
+    "mode": "drained",
+    "exit_code": 0,
+    "restored_mode": 1,
+    "receiver_process_exited": true,
+    "receiver_udp_port_closed": true
+  },
+  "limitations": [
+    "System-wide PMU observation includes unrelated activity and link retry variation",
+    "Fixed ABBA samples are descriptive, not independent random samples or a confidence interval",
+    "Per-datagram normalization refers to UDP application datagrams, not 802.11 fragments or hardware retries",
+    "Runtime OFF retains code, conditional branches and static buffers; compiled-out module performance and maximum throughput were not measured"
+  ]
+}
