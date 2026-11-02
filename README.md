@@ -49,6 +49,7 @@ rust/
 - [树莓派 5 MIPI-DSI 实践](dev-note/boards/在树莓派5上驱动一块%20mipi-dsi%20屏幕的记录.md)
 - [Linux 系统实时性优化](dev-note/linux/Linux%20系统实时性优化.md)
 - [Gitea 安装与使用](dev-note/tools/gitea%20安装与使用.md)
+- [常用 Skills](ai/常用skills.md)
 - [Ollama](ai/ollama.md)
 - [可乐鸡翅](cookbook/荤菜/可乐鸡翅.md)
 
