@@ -1,0 +1,460 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "scope": "Official CM2 interface/mechanics and IO carrier schematic; selected T527 build/BSP sources. Not a published complete core-module schematic or verified uConsole compatibility.",
+  "cache_policy": "Original files stay in the ignored local cache. Text above consists only of public source identities; source API author metadata and contact details are not copied. No implicit build/download/deployment command consumes this catalog.",
+  "repositories": [
+    {
+      "repository": "https://github.com/walnutpi/walnutpi-build",
+      "branch": "main",
+      "observed_commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "scope": "Pinned repository files reviewed for this note."
+    },
+    {
+      "repository": "https://github.com/walnutpi/walnutpi-2",
+      "branch": "main",
+      "observed_commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "scope": "Pinned repository files reviewed for this note."
+    },
+    {
+      "repository": "https://github.com/walnutpi/linux",
+      "branch": "5.15.147",
+      "observed_commit": "4242fecc7cfd9914da999a490814a716048a8727",
+      "scope": "Observed branch snapshot; upstream build configuration uses mutable branch names, not this pin."
+    },
+    {
+      "repository": "https://github.com/walnutpi/SyterKit",
+      "branch": "main",
+      "observed_commit": "ca6639f5fd1e1bd956007c8986e4756911c4d950",
+      "scope": "Observed branch snapshot; upstream build configuration uses mutable branch names, not this pin."
+    },
+    {
+      "repository": "https://github.com/walnutpi/firmware",
+      "branch": "default HEAD",
+      "observed_commit": "43540450a49f36692b60509288f318229572a8f7",
+      "scope": "Observed branch snapshot; upstream build configuration uses mutable branch names, not this pin."
+    }
+  ],
+  "sources": [
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/README.md",
+      "bytes": 2542,
+      "sha256": "e40b127d8e0f73f54bd3db83a7ebe77b481ff3e6bd78bb0ac829a6ef4f43866e",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/README.md",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "README_zh.md",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/README_zh.md",
+      "bytes": 2473,
+      "sha256": "985e3c49eb6d112582873669476fd30dd283307e1f1ac5970aa7d492a4de76f2",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/README_zh.md",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/LICENSE",
+      "bytes": 1066,
+      "sha256": "7f7b991ab7742f6c0e89f732de5f8408ba6921411bb48ca0c1e3ea15861c4d56",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/LICENSE",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/cm2-3d.zip",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/cm2-3d.zip",
+      "bytes": 11858395,
+      "sha256": "98685b13702b35d2fbb059fe7f15a87e537dee0bd554eaae3431edfa05810fb4",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/cm2-3d.zip",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/cm2-io-board-overview.png",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/cm2-io-board-overview.png",
+      "bytes": 1669068,
+      "sha256": "4b95bf8fa518cac5e2e5f0c8d3fc985b86f615fe2e1a9251b27d9ccd19c8ba16",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/cm2-io-board-overview.png",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/cm2-io-board-schematic.pdf",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/cm2-io-board-schematic.pdf",
+      "bytes": 675767,
+      "sha256": "c2c761abd9b7ab4beaabd816cf04c70b38480aba3d66ffbad927834f152deeee",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/cm2-io-board-schematic.pdf",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/cm2-overview.png",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/cm2-overview.png",
+      "bytes": 1992459,
+      "sha256": "e860b438f9a137e0f47215387fbe01156086c5aa8306f5de0d180f85e0a56842",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/cm2-overview.png",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/cm2-size.png",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/cm2-size.png",
+      "bytes": 33993,
+      "sha256": "459fa9c11ea7530766249c70d3c907de7a22bb262c627a435239786597ae5cb2",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/cm2-size.png",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/pinout_en.png",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/pinout_en.png",
+      "bytes": 459898,
+      "sha256": "c18c7e388e4f8095fbfc193b8220e64597ba1aae08cd593ba9e3952c95623f01",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/pinout_en.png",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/CM2/pcb/EasyEDA/Project Link.txt",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/CM2/pcb/EasyEDA/Project%20Link.txt",
+      "bytes": 45,
+      "sha256": "ff7ffc32d054d1a57957d1511d7899e7c39ec5b91645c5d31c3e8beb6a6eef6c",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/CM2/pcb/EasyEDA/Project Link.txt",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/2B/schematic/README.txt",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/2B/schematic/README.txt",
+      "bytes": 140,
+      "sha256": "ddfc7634173608ab9b969de499c58d8db79aa8ddce3b94b60bd5ddab74b44480",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/2B/schematic/README.txt",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-2",
+      "commit": "b96231a65670989928dd3b720a06bd488ccc1319",
+      "path": "hardware/2B/schematic/walnutpi-2b-sch-reduced.pdf",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-2/b96231a65670989928dd3b720a06bd488ccc1319/hardware/2B/schematic/walnutpi-2b-sch-reduced.pdf",
+      "bytes": 24865,
+      "sha256": "ae6ee760f7bf3a80b78fa2a870cc7417b79c68b888574722a9da5cfeda3b3afd",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/hardware/2B/schematic/walnutpi-2b-sch-reduced.pdf",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/README.md",
+      "bytes": 2734,
+      "sha256": "09f30f59abcfcef55d5b36e74832bd5af543e534a4c6ce0eda90ff6719fd006e",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/README.md",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "build.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/build.sh",
+      "bytes": 4577,
+      "sha256": "ef4ed8b30778a4da99dcb9bee471874079e4fa963a55c53869c02d60c056661e",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/build.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "board/walnutpi-2b/board.conf",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/board/walnutpi-2b/board.conf",
+      "bytes": 1246,
+      "sha256": "7021f8f5e33944dc5202bfe9afd0d10f9d2cb7f2d6ab7bd96003a5f5c028ba33",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/board/walnutpi-2b/board.conf",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "board/walnutpi-2b/config.txt",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/board/walnutpi-2b/config.txt",
+      "bytes": 481,
+      "sha256": "e3c04ba170fdac4ccf84baa804d9bd33573433e069ad0f5cf9dd1fd8937676d2",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/board/walnutpi-2b/config.txt",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/__path.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/__path.sh",
+      "bytes": 2822,
+      "sha256": "8284e02293a107214c866b47f21a65dc14d5af7529601c97e775edf681f6df40",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/__path.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/__menu.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/__menu.sh",
+      "bytes": 3066,
+      "sha256": "f8485ea23da8ab0d8d0e9b86301cb6ab79bb8e303c082f97928d3ce1d670db45",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/__menu.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/boot/build.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/boot/build.sh",
+      "bytes": 3453,
+      "sha256": "184648ed9d43f8ab73011b8c2a3a227679d592fac2d48f5835eda26ceb235058",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/boot/build.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/boot/__uboot.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/boot/__uboot.sh",
+      "bytes": 2275,
+      "sha256": "b6c3a2d40d18de5c937a949dcfa2dc26e8cd239605e56d92b4f063806d7d74f7",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/boot/__uboot.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/boot/__pack.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/boot/__pack.sh",
+      "bytes": 5289,
+      "sha256": "a8514ee9c887498a7ae49152a8c55c8fa3c4896d3fc9810cf95b9240eec7c4ab",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/boot/__pack.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/kernel/build.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/kernel/build.sh",
+      "bytes": 3358,
+      "sha256": "05d7e5814e3e99716f47d85fa4546d7e40df8cd3f4fe742b1a45e5f85cd97dd7",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/kernel/build.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/kernel/__compile.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/kernel/__compile.sh",
+      "bytes": 1318,
+      "sha256": "5303b7b21bf8a26660d7b8a74ad3fa9a5843d1284133e86f30eca4e74fa95e26",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/kernel/__compile.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/kernel/__pack.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/kernel/__pack.sh",
+      "bytes": 14169,
+      "sha256": "fc6547d8f5c5f82c5b9dea8bbfc9896a9d2ef5862eb3d20b28aa753971cfe724",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/kernel/__pack.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/rootfs/__gen.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/rootfs/__gen.sh",
+      "bytes": 14919,
+      "sha256": "2746ec12dbc6acf16f32c5f9a80b4eae5f7e13240f7af09312a8caa58a833cb5",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/rootfs/__gen.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/image/__make_prepare.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/image/__make_prepare.sh",
+      "bytes": 7319,
+      "sha256": "97f58a3b0d9b335c6173ab61b43856f86e286f86db7f18e2b805db53086e60ce",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/image/__make_prepare.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/image/__make_image.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/image/__make_image.sh",
+      "bytes": 10912,
+      "sha256": "c64360c075848e81cb0e039a9e072bcbd30a65b03e8a97e163c407df99a5c705",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/image/__make_image.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "board/walnutpi-2b/debian12/wpi-base",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/board/walnutpi-2b/debian12/wpi-base",
+      "bytes": 507,
+      "sha256": "f77c4e9a14879d4c03c0dd8e71418c686ad7c9f20a07d0c2ccfb604adcfb6cec",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/board/walnutpi-2b/debian12/wpi-base",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "board/walnutpi-2b/debian12/wpi-desktop",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/board/walnutpi-2b/debian12/wpi-desktop",
+      "bytes": 124,
+      "sha256": "3266f5a4902c6b564088e81d0df7273ab82a5152259ee148036c62483663d5b4",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/board/walnutpi-2b/debian12/wpi-desktop",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "board/walnutpi-2b/ubuntu24/wpi-base",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/board/walnutpi-2b/ubuntu24/wpi-base",
+      "bytes": 422,
+      "sha256": "bed92d4bde93a615187532a6d3849de19ecf1c468548874e7f4c85185e8beda2",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/board/walnutpi-2b/ubuntu24/wpi-base",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "board/walnutpi-2b/ubuntu24/wpi-desktop",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/board/walnutpi-2b/ubuntu24/wpi-desktop",
+      "bytes": 34,
+      "sha256": "b19673dd1ece34332100f92a4f9ffc17f3e48e8a17c046315a5b95bf805e6971",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/board/walnutpi-2b/ubuntu24/wpi-desktop",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/package/BR2_PACKAGE_AIC8800_SDIO.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/package/BR2_PACKAGE_AIC8800_SDIO.sh",
+      "bytes": 1372,
+      "sha256": "904fa210ad8e465a0b17b1ead2f55a180aec79ca11f6734ffbfa9690ae5bbaf3",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/package/BR2_PACKAGE_AIC8800_SDIO.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/boot/__syterkit.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/boot/__syterkit.sh",
+      "bytes": 1271,
+      "sha256": "7118c14ca981f6aca5992947aea798d08c0451ef38c9b331c18660499ac687de",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/boot/__syterkit.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/boot/deb/boot-postinst.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/boot/deb/boot-postinst.sh",
+      "bytes": 1096,
+      "sha256": "79c91d50002d1b55b33fb34532087ddbb34d555f8972ae555814b0869a05e6f3",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/boot/deb/boot-postinst.sh",
+      "kind": "repository-file"
+    },
+    {
+      "repository": "walnutpi/walnutpi-build",
+      "commit": "d6ac41ea66d9adf97adb503087a7485f82f30b28",
+      "path": "scripts/kernel/deb/dtb-postinst.sh",
+      "url": "https://raw.githubusercontent.com/walnutpi/walnutpi-build/d6ac41ea66d9adf97adb503087a7485f82f30b28/scripts/kernel/deb/dtb-postinst.sh",
+      "bytes": 353,
+      "sha256": "97f150237d4d64b8e975fd6fe0ed8880fa518dd2b013001df3840b0a4984d04a",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/software/walnutpi-build/scripts/kernel/deb/dtb-postinst.sh",
+      "kind": "repository-file"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/intro/hw-parameter/",
+      "bytes": 35022,
+      "sha256": "ad6f7494d92843e8d8a2f33830f71f18d3c784a68909d58bdf8bda4dfd9bee35",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_intro_hw-parameter.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/en/docs/walnutpi_2/intro/hw-parameter/",
+      "bytes": 35709,
+      "sha256": "fa78bd5b07f9801302931d6bfe0ca1b46a36332d75b35c900521e0b97f2a8bae",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/en_docs_walnutpi_2_intro_hw-parameter.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/",
+      "bytes": 41162,
+      "sha256": "9317d2d6aa352db804426a57c5fda34e2e5f66c2b96fdb38b741ba780418d071",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/getting_start/cm2-peripherals",
+      "bytes": 35977,
+      "sha256": "65fefff094d7385463ff4243e2e1577375cfeba842a7812263516588d6431868",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_getting_start_cm2-peripherals.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/intro/download",
+      "bytes": 29734,
+      "sha256": "1b90c6e18cd9ac9c7e09aa74c5f2c587aee30fbed37d786eb1ecf73a677d058d",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_intro_download.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/gpio/gpio_intro",
+      "bytes": 30951,
+      "sha256": "ee944f917d4274addb7f16091f3c0819398891313c4d2aa6cfa3d11a00e2b58c",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_gpio_gpio_intro.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/gpio/gpio_config",
+      "bytes": 30229,
+      "sha256": "ca6a6a7c90f0ad7cf06c5d5f3acbddef2c3997cb3bd87ec996fe559f02281ffc",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_gpio_gpio_config.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/os_software/display/5.5_mipi",
+      "bytes": 45237,
+      "sha256": "7b1e348c88b08a22e307f46de6f32e83119c4a601ae9f64a8b9094a94848708f",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_os_software_display_5.5_mipi.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/os_software/display/rpi_mipi",
+      "bytes": 38700,
+      "sha256": "83b7111c1d219ceaed14e5647ea0ca22585c0d7d6e1605ef71f593bdaa4cfab1",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_os_software_display_rpi_mipi.html",
+      "kind": "official-wiki-snapshot"
+    },
+    {
+      "url": "https://wiki.walnutpi.com/docs/walnutpi_2/intro/",
+      "bytes": 28561,
+      "sha256": "7d59f2b669383e7cce81090ff185e731bc0f842707544684abda6c2546dd98a2",
+      "cache_path": "image/work/walnutpi-cm2-research-20261101/hardware/docs_walnutpi_2_intro.html",
+      "kind": "official-wiki-snapshot"
+    }
+  ]
+}

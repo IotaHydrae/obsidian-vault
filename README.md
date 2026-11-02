@@ -22,6 +22,7 @@ embedded/
   uboot/             U-Boot
 projects/
   rk3588-ubuntu/     RK3588 Ubuntu 镜像工程知识库
+  uconsole-linux/    uConsole Linux、CM4/CM5 与硬件资料
 rust/
   embedded/          嵌入式 Rust
   macro/             宏与示例
@@ -32,6 +33,7 @@ rust/
 
 ## 笔记入口
 
+- [uConsole Linux 工程知识库](projects/uconsole-linux/README.md)
 - [RK3588 Ubuntu 镜像知识库](projects/rk3588-ubuntu/README.md)
 - [Linux 内核地址](embedded/linux/kernel/memory/Kernel%20Address%20-%20Virtual%20and%20Physical.md)
 - [USB 设备的枚举过程](embedded/linux/drivers/usb/USB%20设备的枚举过程.md)

@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "scope": "Official module datasheets, mechanical STEP models, and IO Board reference designs. Not complete SoM SoC/RAM/PMIC PCB source.",
+  "cache_policy": "Originals are unmodified local ignored downloads; paths are repository-relative. Asset IDs and PDF internal Release are separate identities.",
+  "sources": [
+    {
+      "id": "cm4-step",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1204-design-files/documents/RP-008170-DS-1-CM4-step.zip",
+      "bytes": 8636084,
+      "sha256": "667649c0728b260ea7ce6b595eb0458f53bd5eef5a3249d3a8b5415de81e23a5",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm4-step.zip",
+      "key_entries": [
+        "CM4.step"
+      ]
+    },
+    {
+      "id": "cm5io-rev2-kicad",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1098-design-files/documents/RP-008099-DD-1-CM5%20IO%20Board,%20revision%202,%20KiCAD%20files..zip",
+      "bytes": 3607418,
+      "sha256": "48b14a6757b0edc0ac110331445f35a4212b5ce432bdcec6605c99431b59496b",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm5io-rev2-kicad.zip",
+      "kicad_version": "9",
+      "key_entries": [
+        "CM5IO.3dshapes/10164227-1001a1rlf.stp",
+        "CM5IO.3dshapes/471511051.stp",
+        "CM5IO.3dshapes/BM04B-SRSS-TB.STEP",
+        "CM5IO.3dshapes/FH12-22S-0.5SH.stp",
+        "CM5IO.3dshapes/MTSSD03-67MSW337.STEP",
+        "CM5IO.3dshapes/SRP5030CC.stp",
+        "CM5IO.3dshapes/TRJG0926HENL .stp",
+        "CM5IO.3dshapes/USB3stacked.STEP",
+        "CM5IO.kicad_pcb",
+        "CM5IO.kicad_pro",
+        "CM5IO.kicad_sch",
+        "CM5IOBOM.txt",
+        "CM5_GPIO.kicad_sch",
+        "CM5_HighSpeed.kicad_sch",
+        "PCIe-M2.kicad_sch",
+        "README.TXT"
+      ],
+      "license_note": "No standalone LICENSE found; README retains original manufacturer terms for 3D models, some approximate."
+    },
+    {
+      "id": "cm5io-kicad",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1098-design-files/documents/RP-007514-DD-2-rpi-cm5io%20Kicad.zip",
+      "bytes": 3594386,
+      "sha256": "bc8b3f917f07dbc02522d503522af0de982beba2a0fe124c5de66c3886511b71",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm5io-kicad.zip",
+      "kicad_version": "8",
+      "key_entries": [
+        "CM5IO.3dshapes/10164227-1001a1rlf.stp",
+        "CM5IO.3dshapes/471511051.stp",
+        "CM5IO.3dshapes/BM04B-SRSS-TB.STEP",
+        "CM5IO.3dshapes/FH12-22S-0.5SH.stp",
+        "CM5IO.3dshapes/MTSSD03-67MSW337.STEP",
+        "CM5IO.3dshapes/SRP5030CC.stp",
+        "CM5IO.3dshapes/TRJG0926HENL .stp",
+        "CM5IO.3dshapes/USB3stacked.STEP",
+        "CM5IO.kicad_pcb",
+        "CM5IO.kicad_pro",
+        "CM5IO.kicad_sch",
+        "CM5_GPIO.kicad_sch",
+        "CM5_HighSpeed.kicad_sch",
+        "PCIe-M2.kicad_sch",
+        "README.TXT"
+      ],
+      "license_note": "No standalone LICENSE found; README retains original manufacturer terms for 3D models, some approximate."
+    },
+    {
+      "id": "cm4-datasheet",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/634-raspberry-pi-compute-module-4/documents/RP-008168-DS-4-cm4-datasheet.pdf",
+      "bytes": 11057926,
+      "sha256": "d6946f8bb3e0276defa95b99b9d402a01a4805d3de02d53f835e93044ea7af97",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm4-datasheet.pdf",
+      "document_release": "4",
+      "document_build_date": "2026-06-30",
+      "mechanical_section": "3.1",
+      "mechanical_figure": 4,
+      "mechanical_printed_page": 13,
+      "mechanical_pdf_page": 14,
+      "documentation_license": "CC-BY-ND-4.0"
+    },
+    {
+      "id": "cm4io-datasheet",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/756-raspberry-pi-compute-module-4-io-board/documents/RP-008172-DS-1-cm4io-datasheet.pdf",
+      "bytes": 10591801,
+      "sha256": "5e89840aba4011f416513ba59f6ca671dae3b342b9e07641bcfe215177f03969",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm4io-datasheet.pdf",
+      "document_build_date": "2022-06-07",
+      "document_build_version": "66d4b42-clean",
+      "mechanical_chapter": 3,
+      "mechanical_figure": 2,
+      "mechanical_printed_page": 9,
+      "mechanical_pdf_page": 10,
+      "documentation_license": "CC-BY-ND-4.0"
+    },
+    {
+      "id": "cm5io-datasheet",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1097-raspberry-pi-compute-module-5-io-board/documents/RP-008182-DS-3-cm5io-datasheet.pdf",
+      "bytes": 5749036,
+      "sha256": "4fd7f9edea384ccec4710943a886c5cd922dcdcd3b17f519325d3c70933f8f8e",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm5io-datasheet.pdf",
+      "document_release": "3",
+      "document_build_date": "2026-09-11",
+      "mechanical_section": "6.1",
+      "mechanical_figure": 2,
+      "mechanical_printed_page": 10,
+      "mechanical_pdf_page": 11,
+      "documentation_license": "CC-BY-ND-4.0"
+    },
+    {
+      "id": "cm4io-kicad",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1210-design-files/documents/RP-008173-DS-1-CM4IO-KiCAD.zip",
+      "bytes": 6819369,
+      "sha256": "5ea867e17968cb9c117fbce7a982ea395d66a6ee605253a9a0879483bbfcb0aa",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm4io-kicad.zip",
+      "kicad_version": "6",
+      "key_entries": [
+        "CM4_GPIO.kicad_sch",
+        "CM4_HighSpeed.kicad_sch",
+        "CM4IO.3dshapes/DC-001-A-2.1mm-R.STEP",
+        "CM4IO.3dshapes/DF40C-100DS.stp",
+        "CM4IO.3dshapes/FH12-22S-0.5SH.stp",
+        "CM4IO.3dshapes/JTHDA-19F08.STEP",
+        "CM4IO.3dshapes/PowerDI3333-8_Type-UX.STP",
+        "CM4IO.3dshapes/TRJG0926HENL .stp",
+        "CM4IO.3dshapes/UBAF-0110.STEP",
+        "CM4IO.3dshapes/UBF-2305-xx .STEP",
+        "CM4IOv5.kicad_pcb",
+        "CM4IOv5.kicad_pro",
+        "CM4IOv5.kicad_sch",
+        "PCIe.kicad_sch",
+        "PSUs.kicad_sch",
+        "README.TXT",
+        "RTC.kicad_sch",
+        "USB2-HUB.kicad_sch"
+      ],
+      "license_note": "No standalone LICENSE found; README retains original manufacturer terms for 3D models, some approximate."
+    },
+    {
+      "id": "cm5-datasheet",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/944-raspberry-pi-compute-module-5/documents/RP-008180-DS-7-cm5-datasheet.pdf",
+      "bytes": 7705648,
+      "sha256": "80070fefd8db6e8abc6e146c8b7b5fb318ba129cc1e28826936d547fde79c863",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm5-datasheet.pdf",
+      "document_release": "3",
+      "document_build_date": "2026-06-08",
+      "mechanical_section": "4.1.1",
+      "mechanical_figure": 4,
+      "mechanical_printed_page": 16,
+      "mechanical_pdf_page": 17,
+      "documentation_license": "CC-BY-ND-4.0"
+    },
+    {
+      "id": "cm5-step",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1096-design-files/documents/RP-007222-DD-2-rpi-cm5%203D_STEP.zip",
+      "bytes": 2060012,
+      "sha256": "2b4d26c6b30607c68099ad60df6fb8b8c8d04e9461f325c7c77dc421d2855005",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm5-step.zip",
+      "key_entries": [
+        "CM5R5-3dsteps.step"
+      ]
+    },
+    {
+      "id": "cm5lite-step",
+      "publisher": "Raspberry Pi Ltd",
+      "url": "https://pip-assets.raspberrypi.com/categories/1096-design-files/documents/RP-007220-DD-1-rpi-cm5lite%203D_STEP.zip",
+      "bytes": 16049704,
+      "sha256": "5f43025e40c060e816340e9ed00831f092ba154d017ea3c2c83a07c20c0461ef",
+      "cache_path": "image/work/hardware-reference-20261101/mechanical/cm5lite-step.zip",
+      "key_entries": [
+        "CM5liteR5-3dstep.step"
+      ]
+    },
+    {
+      "id": "cm3-plus-datasheet",
+      "publisher": "Raspberry Pi Ltd",
+      "title": "Raspberry Pi Compute Module 3+ Datasheet",
+      "url": "https://pip-assets.raspberrypi.com/categories/627-raspberry-pi-compute-module-3/documents/RP-008163-DS-2-cm3-plus-datasheet.pdf",
+      "bytes": 1171867,
+      "sha256": "e0fdea51dde8c959738f8e5e8af41fa4a30d074400413522c8db423b19a18d0a",
+      "cache_path": "image/work/hardware-reference-20261101/cm4/cm3-datasheet.pdf",
+      "document_release": 2,
+      "document_build_date": "2026-06-30",
+      "scope": "legacy 200-pin comparison only",
+      "documentation_license": "CC-BY-ND-4.0"
+    }
+  ],
+  "derived_tables": [
+    {
+      "path": "docs/reference/raspberry-pi-cm/cm5-pinout.csv",
+      "sha256": "fd4ef9de0493684618dff2fe59ddb2512acb4d9d3033e62efd2c17e6c84eee01",
+      "rows": 200
+    },
+    {
+      "path": "docs/reference/raspberry-pi-cm/cm4-cm5-pin-comparison.csv",
+      "sha256": "f0059b5be3ab33f232e2283003ae530d859d3be3c967fef9a2fdd53b64471644",
+      "rows": 200
+    },
+    {
+      "path": "docs/reference/raspberry-pi-cm/cm4-pinout.csv",
+      "sha256": "1fd274d42cc960d4c6da207bbdf42a941b28f32ff87723ffdfcf251617879cc2",
+      "rows": 200
+    }
+  ]
+}

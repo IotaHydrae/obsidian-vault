@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "retrieved_date": "2026-11-01",
+  "scope": "Current official Linux BSP category only: introduction plus 17 subsystem pages. Sidebars to RTOS/HAL are excluded. No device commands were run.",
+  "category": {
+    "url": "https://docs.avaota.fun/category/bsp-%E9%A9%B1%E5%8A%A8%E6%89%8B%E5%86%8C/",
+    "bytes": 50218,
+    "sha256": "3b1500c13de51786bbe58feca3457568553a91639f21cf8402404716d04f6c86",
+    "cache_path": "image/work/avaota-bsp-manual-20261101/root/category.html"
+  },
+  "manual_pages": [
+    {
+      "slug": "bsp-intro",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/bsp-intro/",
+      "bytes": 80871,
+      "sha256": "e7e92a131025c843e3577b67d6b8d4677ee5b75adf60ca7d6babdd443e87a029",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/bsp-intro.html"
+    },
+    {
+      "slug": "ccu",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/ccu/",
+      "bytes": 92245,
+      "sha256": "be8e51d400328e5d22c539dab49c12093f13b19164003fba4e584314c535d0be",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/ccu.html"
+    },
+    {
+      "slug": "ce",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/ce/",
+      "bytes": 92641,
+      "sha256": "a15032a514bccf310e9f95213f5865039e7fdfac6e0d465db7af5b00824c0c1c",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/ce.html"
+    },
+    {
+      "slug": "gmac",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/gmac/",
+      "bytes": 210372,
+      "sha256": "b1bb2e4fe0d658a679217bab1990c2a66f00b0b41c896cd2436ceb41ad9dd2b6",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/gmac.html"
+    },
+    {
+      "slug": "gpio",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/gpio/",
+      "bytes": 229805,
+      "sha256": "023bda832401cf999e2c0a186258267390bc454b6e3e4a51c567178e3cfe6a5b",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/gpio.html"
+    },
+    {
+      "slug": "hwspinlock",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/hwspinlock/",
+      "bytes": 76936,
+      "sha256": "755257e25ef24383ce128a301e6d62b2a8d35f67651653ed6c022420ef43e7be",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/hwspinlock.html"
+    },
+    {
+      "slug": "ir-rx",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/ir-rx/",
+      "bytes": 79454,
+      "sha256": "21599e72dfb04462ed2a98fcf84b22be589a140fc45f67c0ba3d5fdc2291c17f",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/ir-rx.html"
+    },
+    {
+      "slug": "ir-tx",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/ir-tx/",
+      "bytes": 356832,
+      "sha256": "9488f7c1617a94d7b3e2eef399a27fb007ca163ab6b609b23284569f9863fde5",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/ir-tx.html"
+    },
+    {
+      "slug": "ledc",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/ledc/",
+      "bytes": 97431,
+      "sha256": "b4ff4d58a9382cb0829ae0d10315213d50a6a00071591fcfd994bcb63b82e7ad",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/ledc.html"
+    },
+    {
+      "slug": "mipi-csi",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/mipi-csi/",
+      "bytes": 1621693,
+      "sha256": "5387f2732c1021e9779838a2b693aa06c6c516efe7040e517da0eabda90e7ac5",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/mipi-csi.html"
+    },
+    {
+      "slug": "pcie",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/pcie/",
+      "bytes": 109025,
+      "sha256": "1916570465be5e28bf7854b406ea81649ff6686aff56a89eb48cc46af2851de6",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/pcie.html"
+    },
+    {
+      "slug": "pwm",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/pwm/",
+      "bytes": 230562,
+      "sha256": "eea8c7811735a472802bc8ad9aa6c9a2e291715c5b63d67a798d99d7f9162a71",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/pwm.html"
+    },
+    {
+      "slug": "rtc",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/rtc/",
+      "bytes": 156111,
+      "sha256": "0b49514a205f0ef1023b798538b1d05df624bcb9eac739832b0cd130b87f1e05",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/rtc.html"
+    },
+    {
+      "slug": "sid",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/sid/",
+      "bytes": 125297,
+      "sha256": "31f4ead427c9572c62195d7eaedf5263c8da5bc4307603ed01a73a274ab2d670",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/sid.html"
+    },
+    {
+      "slug": "spi",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/spi/",
+      "bytes": 527789,
+      "sha256": "0634f80a7d1b5547367a34ea2e64b663983d2722e48aea2341cb5812c04a90c2",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/spi.html"
+    },
+    {
+      "slug": "timer",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/timer/",
+      "bytes": 52421,
+      "sha256": "7ebe35886618e4c3690b042a41d1361c2988eae90c4d3b0f1534e357fc7e08e7",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/timer.html"
+    },
+    {
+      "slug": "twi",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/twi/",
+      "bytes": 200460,
+      "sha256": "8dc45ed33c73f9ae63d5860ca275e8caa4c5ac3e5b548408f3d9c3c0670bc7c9",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/twi.html"
+    },
+    {
+      "slug": "uart",
+      "url": "https://docs.avaota.fun/linux-manual/sdk-develop/bsp-driver/uart/",
+      "bytes": 258737,
+      "sha256": "7c9c316060bd796183f918e8836ed68c6291d790a82f317369e201f48cc0fb1d",
+      "cache_path": "image/work/avaota-bsp-manual-20261101/root/uart.html"
+    }
+  ]
+}
