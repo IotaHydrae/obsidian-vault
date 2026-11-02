@@ -1,6 +1,6 @@
 # 常用 Skills
 
-> 按任务选择技能和配套工具，优先在需要的项目中启用；技能、CLI 和 MCP 服务的安装范围分别确认。
+> 按任务选择技能和配套工具，优先在需要的项目中启用；技能、插件 Agent、CLI 和 MCP 服务的安装范围分别确认。
 
 ## TL;DR
 
@@ -10,6 +10,7 @@
 | [universal-modder](https://github.com/rehan-remade/universal-modder) | 从游戏结构分析到 Mod 素材、脚本和打包 | Mod 工作流技能集与工具链 |
 | [REA](https://github.com/morluto/rea) | 原生程序、JavaScript、.NET 和 Web 逆向分析 | MCP 服务、CLI 与配套技能 |
 | [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) | 前端界面的视觉方向、布局、字体与交互细节 | Anthropic 官方设计技能 |
+| [code-simplifier](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md) | 保持行为不变，简化近期修改的代码 | Anthropic 官方插件中的 Agent |
 
 资料核对：2026-11-02。命令为上游提供的使用入口；安装选项、依赖与支持范围以对应仓库为准。
 
@@ -70,6 +71,22 @@ npx skills add https://github.com/anthropics/skills --skill frontend-design
 ```
 
 按安装器提示选择客户端并确认项目范围。技能正文见 [官方 SKILL.md](https://github.com/anthropics/skills/blob/main/skills/frontend-design/SKILL.md)。
+
+## code-simplifier：保持行为的代码简化
+
+Anthropic 官方 `code-simplifier` 插件中的 Agent，适合在功能实现或修复完成后整理代码：减少不必要的嵌套、重复和抽象，改善命名与控制流，保留有助于理解的结构。
+
+核心约束是保持原有功能、输出和行为；默认只处理当前会话近期修改的代码，扩大范围需要明确说明。以可读性和可维护性为目标，避免为了减少行数而使用密集表达式或混合多个职责。
+
+上游要求遵循项目的 `CLAUDE.md`，并给出 JS／TS／React 的具体约定；用于其他语言时，按实际项目规范调整。原文件还指定了 `model: opus`，迁移到其他客户端时应按其 Agent／Skill 格式和可用模型适配。
+
+Claude Code 项目级插件安装入口，在目标项目中执行：
+
+```sh
+claude plugin install code-simplifier@claude-plugins-official --scope project
+```
+
+该命令通过 Claude Code 的官方插件市场安装插件，项目级配置可供团队共享；仅当前用户在此项目使用时可选择 `--scope local`。具体格式见 [Agent 正文](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md)，安装范围见 [Claude Code 插件说明](https://code.claude.com/docs/en/discover-plugins#install-plugins)。
 
 ## 安装范围与依赖
 
