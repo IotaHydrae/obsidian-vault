@@ -1,633 +1,219 @@
-# ARM Trusted Firmware（TF-A）详解
+# ARM Trusted Firmware-A：启动阶段与运行时服务
 
-ARM Trusted Firmware-A（TF-A） 是 ARM 为 Cortex-A 系列处理器设计的一套开源安全启动与运行时固件框架。
+> TF-A 是 Arm A-profile 平台可信启动与安全运行时固件的开源参考实现；在典型 AArch64 系统中，BL31 驻留安全内存，以 EL3 固件身份处理 PSCI、世界切换及其他已注册服务。
 
-它位于 BootROM、U-Boot、Linux 等软件之间，负责建立 ARM TrustZone 安全执行环境，并提供处理器启动、异常级别切换、电源管理、安全服务等底层功能。
+## TL;DR
 
-如果你正在研究 RK3506、RK3588 这类 ARM SoC 的 Linux 启动流程，那么 TF-A 是非常值得理解的一层。
+- **先区分架构**：本文主线是 AArch64 的传统 TrustZone 模型；AArch32 和启用 RME 的系统不能直接套用同一张启动图。
+- **区分阶段与组件**：BL1/BL2 负责早期启动和加载，BL31 提供 EL3 运行时服务，BL32 是可选安全载荷，BL33 是普通世界固件。
+- **区分加载与执行**：加载了 BL32 不代表它与 BL31 并行启动；典型流程由 BL31 先初始化 BL32，返回后再进入 BL33。
+- **区分打包与信任**：FIP 是容器；是否验签、从哪里取得可信根、是否继续验证 Linux，取决于整条启动链的配置。
 
-先建立一个核心认识：
+核对基准：**TF-A v2.15.0**；Linux PSCI 调用路径对照 **6.18.62**。旧称 ATF / ARM Trusted Firmware，当前项目名为 Trusted Firmware-A。平台 SDK 的分支和二进制实现可能不同。
 
-> TF-A 不只是一个 Bootloader，而是一套分阶段运行的固件体系。它既参与 Linux 启动，也可能在 Linux 启动之后继续驻留，提供安全世界的运行时服务。
+## 启动阶段：谁加载谁，谁继续驻留
 
-## 1. TF-A 在整个 ARM 启动链中的位置
+| 映像 | AArch64 典型执行位置 | 职责 | Linux 启动后 |
+| --- | --- | --- | --- |
+| BL1 | EL3，通常来自可信 ROM | 复位处理、基础初始化、加载 BL2，并响应 BL2 的交接请求 | 不是普通运行时服务入口 |
+| BL2 | S-EL1；特定配置可在 EL3 | 按平台策略加载及认证 BL31、BL32、BL33 和配置数据 | 通常完成使命，可否回收依平台布局 |
+| BL31 | EL3 | Secure Monitor、上下文管理、PSCI 与运行时服务分发 | 代码/数据驻留，按异常或调用进入执行 |
+| BL32 | 通常为 S-EL1 | 可选 Secure Payload，如 OP-TEE；不一定来自 TF-A 仓库 | 启用时通常驻留安全世界 |
+| BL33 | NS-EL2 或 NS-EL1 | U-Boot、EDK2/UEFI 等普通世界固件，继续启动 OS | 是否保留部分运行时能力由实现决定 |
 
-先看一个典型的 ARMv8-A SoC 启动流程：
+BL1 本身可以是平台 ROM 中的可信代码，不能假定所有 SoC 都存在“厂商 BootROM 后再运行 TF-A BL1”的串行关系。厂商 ROM、SPL 或 miniloader 可以替代 TF-A 的部分前期阶段，但必须满足下一阶段的入口约定。
 
-[Linux-arm(1)ATF启动流程_linux atf-CSDN博客](https://images.openai.com/static-rsc-4/VnlHiRYS1ulN7NlpIlCIfWLmAWORY0Jm25APhXSX-uqZnA4S6pPg7q8dVC31PpAjT87hNaVffsL_Ut0Jy6dDgkUVI0urzR7WRn5yxQXivvcyRmhYFR6ZnYNlDHayXgtfDlFSbrgprzCrWjtdzJXe9XeFL1rRfutwhQxhX3YNsek?purpose=inline)
+DRAM、时钟、安全内存隔离由平台启动代码分工完成，**不保证由 BL2 单独完成**。例如 DDR 训练可能已经由厂商 DDR 固件或 U-Boot TPL 完成。
 
-[blog.csdn.net](https://blog.csdn.net/Once_day/article/details/145330809?utm_source=chatgpt.com)
+### 参考冷启动流程
 
-```
-         ARM SoC 上电
-              │
-              ▼
-        BootROM（硬件固化）
-              │
-              ▼
-       BL1（可选，TF-A）
-              │
-              ▼
-       BL2（TF-A）
-              │
-       ┌──────┴─────────┐
-       │                │
-       ▼                ▼
-  BL31（TF-A）       BL32（可选）
-  EL3 Runtime       OP-TEE OS
-       │                │
-       └──────┬─────────┘
-              │
-              ▼
-       BL33（U-Boot）
-              │
-              ▼
-          Linux Kernel
-              │
-              ▼
-           Rootfs
+下面表示**包含 TF-A BL1、BL2 运行于 S-EL1**的控制权转移；BL2 加载映像与后续执行不是一回事。
+
+```mermaid
+flowchart TD
+    Reset["平台复位入口"] --> BL1["BL1 · EL3"]
+    BL1 --> BL2["BL2 · S-EL1<br/>加载 BL31 / 可选 BL32 / BL33"]
+    BL2 -->|SMC RUN_IMAGE| Handoff["BL1 · 恢复 EL3 交接"]
+    Handoff --> BL31["BL31 · 初始化 EL3 与运行时服务"]
+    BL31 -->|配置了安全载荷与分发器| BL32["BL32 · 安全载荷初始化"]
+    BL32 -->|返回 BL31| Exit["BL31 · 准备目标上下文"]
+    BL31 -->|不启用 BL32| Exit
+    Exit -->|ERET| BL33["BL33 · U-Boot / UEFI<br/>Non-secure EL2 或 EL1"]
+    BL33 --> Linux["Linux 启动"]
+    Linux --> Rootfs["用户空间 / Rootfs"]
 ```
 
-这里最重要的是理解 BL1、BL2、BL31、BL32、BL33 这些名称。
+TF-A v2.15.0 的 `RESET_TO_BL2=1` 路径让 BL2 在 EL3 接管复位入口，可省去上述 BL1 路径；BL2 直接交接下一映像。另有直接以 BL31 为入口的配置，不能用单一流程覆盖所有平台。
 
-它们不是五个必须同时存在的独立程序，而是 ARM Trusted Firmware 体系中不同启动阶段或不同安全执行环境的固件映像。
+冷启动以外，CPU_ON、CPU 休眠恢复等通常沿专门的 warm-boot 路径恢复上下文，**不会重新执行整条 BL2 加载链**。
 
-## 2. BL1、BL2、BL31、BL32、BL33 分别做什么？
+### BL31 如何交接 BL33
 
-|阶段|运行级别|主要职责|
-|---|---|---|
-|BL1|EL3|最初的可信启动，基础 CPU 初始化|
-|BL2|Secure EL1|加载、验证后续固件，初始化安全内存|
-|BL31|EL3|常驻 Secure Monitor，提供运行时服务|
-|BL32|Secure EL1|可选的 Trusted OS，例如 OP-TEE|
-|BL33|Non-secure EL2/EL1|普通世界 Bootloader，例如 U-Boot|
+交接需要的不只是一个函数地址：
 
-这里有几个值得注意的地方。
+| 信息 | 用途 |
+| --- | --- |
+| 映像入口 `pc` | 下一阶段开始执行的位置 |
+| `spsr` | 目标异常级、执行状态及中断屏蔽等初始状态 |
+| 安全属性 | 区分 Secure / Non-secure 等目标上下文 |
+| 参数寄存器及平台数据 | 传递下一阶段约定的启动信息 |
 
-### BL1：Trusted Bootstrap
+通用框架通过 `entry_point_info_t` 描述入口，平台代码取得下一映像信息；`bl31_prepare_next_image_entry()` 初始化上下文，再由 EL3 退出路径恢复相关状态并执行 `ERET`。因此不能把跨安全状态交接当作普通 C 函数调用。
 
-BL1 是最早的 TF-A 启动阶段。
+加载地址、入口、参数结构版本、缓存一致性或目标 EL 不匹配，都可能表现为“打印完 BL31 日志后没有输出”。
 
-主要工作：
+## Exception Level 与 Security State
 
-- 初始化必要的 CPU 架构状态。
-    
-- 设置异常向量。
-    
-- 判断冷启动还是热启动。
-    
-- 初始化必要的平台硬件。
-    
-- 加载并验证 BL2。
-    
-- 将控制权交给 BL2。
-    
+异常级决定特权层次，安全状态决定访问域，二者是不同维度。以下是传统 AArch64 TrustZone 的常见安排：
 
-但并不是所有 SoC 都有 TF-A BL1。
+| 异常级 | Non-secure 世界 | Secure 世界 |
+| --- | --- | --- |
+| EL0 | Linux 用户程序、OP-TEE Client | Trusted Application，具体取决于安全 OS |
+| EL1 | 普通 OS 内核，如 Linux | Trusted OS，如 OP-TEE |
+| EL2 | Hypervisor；VHE 宿主内核也可在此运行 | 仅支持相应扩展和软件栈时使用 S-EL2 |
+| EL3 | 不属于普通世界的一个独立 OS 层 | Secure Monitor / TF-A BL31，管理下层上下文 |
 
-例如，某些 SoC 的 BootROM 已经完成了 BL1 所需要的一部分工作，直接将控制权交给 TF-A BL2。
+- “BL31 常驻”指映像和状态持续保留，**不是 CPU 始终在 EL3 执行**。运行 Linux 时 CPU 通常执行普通世界代码。
+- 世界切换由 EL3 上下文管理和返回状态配合完成；安全内存、外设访问还依赖 TZC、防火墙、互连等硬件配置，不能只靠软件修改一个标志。
+- 支持 RME 的系统增加 Root/Realm 状态；SPMD、SPMC、RMM 等架构也有不同分工，需另查相应设计，不能把它们全部等同于传统 BL32/OP-TEE。
 
-### BL2：Trusted Boot Firmware
+### AArch32 不能照搬 BL31 图
 
-BL2 可以理解为一个负责加载后续固件的可信 Bootloader。
+Armv7-A 使用处理器模式和 Monitor 等机制，不能直接套用 AArch64 的 EL0～EL3 执行模型。TF-A 的 AArch32 参考流程没有独立 BL31，BL32 承担相应运行时固件角色，可使用 SP_MIN 等实现；具体安全 OS 如何集成仍取决于平台。
 
-它主要负责：
+**RK3506 是 Cortex-A7 / Armv7-A 平台；RK3588 是 AArch64 平台。** 前者的安全固件职责、映像命名及启动链需要独立核对，不能因为两者都出现 `tee.bin` 就套用相同的 BL31 → BL32 流程。
 
-1. 初始化 DRAM。
-    
-2. 配置 TrustZone 内存隔离。
-    
-3. 加载 BL31。
-    
-4. 加载可选的 BL32（例如 OP-TEE）。
-    
-5. 加载 BL33（例如 U-Boot）。
-    
-6. 根据平台安全启动配置验证固件。
-    
+## Linux 如何调用 TF-A
 
-这里需要特别注意：
+### SMC、SMCCC 与服务分发
 
-BL2 并不是简单地把几个二进制文件从 Flash 搬到 RAM。
+`SMC` 是触发 Secure Monitor Call 的指令；**SMCCC 是调用约定**，规定 function ID、参数和返回值。function ID 区分调用类型、32/64 位约定和服务归属（OEN），并非所有 SMC 都进入 OP-TEE。
 
-它还负责建立后续安全执行环境所需的内存布局、加载参数以及安全边界。
+没有匹配的运行时服务时，TF-A 会返回 `SMC_UNK`；这与“没有进入 BL31”是不同问题。
 
-### BL31：EL3 Runtime Firmware
+下面是裸机、SMC 未被 EL2 截获时的简化路径：
 
-这是我认为理解 TF-A 最重要的部分。
-
-BL31 会一直驻留在 EL3，直到 Linux 启动之后仍然可能继续工作。
-
-它主要负责：
-
-- Secure Monitor。
-    
-- PSCI 电源管理接口。
-    
-- CPU Core 启动、关闭及休眠。
-    
-- Secure World 与 Normal World 之间的切换。
-    
-- 处理来自低异常级别的 SMC 调用。
-    
-- 管理部分安全中断及运行时服务。
-    
-
-例如，Linux 执行：
-
-```
-psci_cpu_on(cpu, entry_point);
+```mermaid
+sequenceDiagram
+    participant L as Linux · Non-secure
+    participant M as TF-A BL31 · EL3
+    participant P as SoC 电源管理实现
+    participant T as OP-TEE · S-EL1
+    L->>M: SMC(function ID, 参数)
+    M->>M: 保存上下文，查找运行时服务
+    alt PSCI 请求
+        M->>P: 平台电源操作或委托控制器
+        P-->>M: 结果
+    else OP-TEE 请求且已集成分发器
+        M->>T: 分发器切换安全世界上下文
+        T->>T: 执行 TEE 服务 / Trusted Application
+        T-->>M: 返回普通世界的结果或 RPC 请求
+    end
+    M-->>L: 恢复上下文，ERET 返回
 ```
 
-底层会通过 SMC 指令请求 EL3 的 TF-A 执行 CPU 启动操作。
+EL2 可以截获部分 SMC。虚拟机也可能通过 `HVC` 请求由 Hypervisor 提供的 PSCI 服务，**不是每次 Linux PSCI 调用都必然进入物理机 BL31**。Linux 根据设备树 `method = "smc"` / `"hvc"` 或 ACPI 信息选择 conduit。
 
-因此，Linux 并不需要直接操作所有 CPU 电源控制寄存器，而是通过 PSCI 标准接口请求固件完成。
+### PSCI：标准电源接口
 
-这也是为什么 Linux 内核中有 PSCI 驱动，而 TF-A 中有 PSCI 实现。
+| 调用 | 用途 |
+| --- | --- |
+| `CPU_ON` | 请求启动目标 CPU，并提供入口地址 |
+| `CPU_OFF` | 关闭调用 CPU |
+| `CPU_SUSPEND` | CPU/电源域进入受支持的低功耗状态 |
+| `SYSTEM_OFF` / `SYSTEM_RESET` | 系统关机 / 复位 |
+| `SYSTEM_SUSPEND` / `PSCI_FEATURES` | 系统挂起 / 查询可选能力，须核对版本与固件支持 |
 
-官方设计文档对 BL31 的职责有详细说明：
+Linux 6.18.62 中的典型 CPU_ON 软件路径为：
 
-GitHub+1
-
-### BL32：Secure Payload
-
-BL32 是可选的安全世界固件。
-
-最常见的例子就是 OP-TEE。
-
-它运行在 Secure World，负责处理需要隔离保护的应用和服务。
-
-例如：
-
-- 密钥管理。
-    
-- 安全存储。
-    
-- 加密和解密。
-    
-- 安全启动相关服务。
-    
-- DRM 相关安全操作。
-    
-- 安全认证。
-    
-
-注意，BL32 不一定就是 OP-TEE，也可以是其他 Trusted OS 或安全分区管理相关固件。
-
-### BL33：Normal World Bootloader
-
-BL33 就是普通世界的 Bootloader。
-
-常见的就是：
-
-- U-Boot
-    
-- EDK2 / UEFI
-    
-- 其他平台 Bootloader
-    
-
-它通常运行在 EL2 或 EL1，随后负责加载 Linux Kernel。
-
-## 3. 为什么 BL31 这么特殊？理解 ARM Exception Level
-
-要理解 TF-A，必须先理解 ARMv8-A 的 Exception Level。
-
-ARMv8-A 提供了 EL0 到 EL3 四个异常级别。
-
-[ARM64 Execution States - ElseWhere](https://images.openai.com/static-rsc-4/GvJHApr_Au9EX5QFtboR8HcsIgHs8h5RUw8IDa7x5wIPsQvk7FX4gUyj3QbmQd4rT77z12e4n1IVW90Z_xslSt17DiJXjh-QyFHi200oMqVVbunm9X1yWwzW07gWpeS7JndPgwTDUW6ZohlxU9mjoVVfxeY0lQ5wzBZLdQNGzp8?purpose=inline)
-
-[duetorun.com](https://duetorun.com/blog/20230602/a64-execution-state/?utm_source=chatgpt.com)
-
-|Exception Level|典型用途|
-|---|---|
-|EL0|普通用户程序|
-|EL1|Linux Kernel|
-|EL2|Hypervisor，例如 KVM|
-|EL3|Secure Monitor / TF-A|
-
-其中：
-
-- EL0：用户空间。
-    
-- EL1：操作系统内核。
-    
-- EL2：虚拟化层。
-    
-- EL3：最高权限的固件执行层。
-    
-
-但是这里还有一个非常重要的概念：
-
-Exception Level 和 Security State 是两个不同的维度。
-
-ARM TrustZone 把执行环境分成：
-
-- Secure World
-    
-- Normal World
-    
-
-例如：
-
-```
-              ARM Cortex-A
-                   │
-          ┌────────┴────────┐
-          │                 │
-      Secure World      Normal World
-          │                 │
-         EL3               EL2
-          │                 │
-         EL1               EL1
-          │                 │
-         EL0               EL0
-          │                 │
-        OP-TEE             Linux
+```text
+psci_ops.cpu_on → psci_0_2_cpu_on → __psci_cpu_on
+→ invoke_psci_fn → arm_smccc_smc 或 arm_smccc_hvc
 ```
 
-这只是概念示意，并非所有 EL 都能在两个 Security State 中自由使用。
+SMC conduit 下，TF-A 的标准服务处理器继续分发到 `psci_smc_handler()`，再调用平台电源管理实现。该实现可能操作 SoC 寄存器，也可能委托独立电源控制器；无需 OP-TEE 参与。
 
-EL3 是 Secure Monitor 所在的最高异常级别，负责管理两个世界之间的切换。
+### OP-TEE：安全 OS 与分发器
 
-例如：
+传统集成中，`SPD=opteed` 把 OP-TEE Dispatcher 编入 BL31，OP-TEE OS 作为 BL32 提供。**只打包 BL32 不足以完成集成**，还需要正确的分发器、加载布局、内存隔离和 Linux 侧配置；使用 FF-A/SPMD 的方案另有调用路径。
 
-```
-Linux Kernel (EL1, Non-secure)
-             │
-             │ SMC instruction
-             ▼
-       TF-A BL31 (EL3)
-             │
-             │ 切换到 Secure World
-             ▼
-        OP-TEE (EL1, Secure)
-             │
-             │ 执行安全操作
-             ▼
-       TF-A BL31 (EL3)
-             │
-             │ 返回 Normal World
-             ▼
-        Linux Kernel
+典型客户端请求经过：
+
+```text
+普通应用 → libteec → /dev/tee* → Linux OP-TEE 驱动
+→ SMC → BL31/opteed → OP-TEE OS → Trusted Application
 ```
 
-SMC（Secure Monitor Call）就是两个世界之间请求安全固件服务的重要入口。
+OP-TEE 可提供密钥、加密、安全存储等服务；需要普通世界文件系统等协助时，还可能通过 RPC 和 `tee-supplicant` 往返多次。共享内存中的地址、长度和内容仍须校验，进入 Secure World 不会自动让输入可信。
 
-## 4. TF-A 和 OP-TEE 是什么关系？
+## FIP 与安全启动的边界
 
-这是一个很容易混淆的地方。
+| 概念 | 解决的问题 | 不能据此推断 |
+| --- | --- | --- |
+| FIP | 用 ToC、UUID 和数据区组织多个固件及配置条目 | 容器中的条目已验签 |
+| Trusted Board Boot（TBB） | 根据 Chain of Trust 认证后续固件 | 已自动覆盖 Linux 与 Rootfs |
+| TrustZone | 区分安全状态与硬件访问权限 | 当前启动映像来自可信签名者 |
+| OP-TEE | 隔离执行安全应用和服务 | 它必然负责所有启动阶段验签 |
 
-它们不是竞争关系，而是协作关系。
+FIP 可包含 BL2、BL31、BL32、BL33、配置 DTB 及证书等；具体条目取决于平台。已有工具时，可用只读命令查看包内容：
 
-## Secure World
-
-OP-TEE（BL32）
-
-Trusted OS · Secure EL1
-
-安全应用、密钥管理、安全存储
-
-Secure Monitor Call / 返回
-
-TF-A（BL31）
-
-Secure Monitor · EL3
-
-世界切换、PSCI、电源管理、运行时服务
-
-## Normal World
-
-Linux Kernel
-
-Non-secure EL1
-
-普通操作系统
-
-U-Boot（BL33）
-
-Non-secure EL2 / EL1
-
-加载 Linux
-
-可以这样理解：
-
-- TF-A BL31 是安全世界与普通世界之间的底层管理者。
-    
-- OP-TEE 是运行在安全世界中的操作系统。
-    
-- Linux 是运行在普通世界中的操作系统。
-    
-
-例如，Linux 用户空间的程序想使用安全存储：
-
-```
-Linux Application
-       │
-       ▼
-OP-TEE Client API
-       │
-       ▼
-Linux OP-TEE Driver
-       │
-       ▼
-      SMC
-       │
-       ▼
-TF-A BL31
-       │
-       ▼
-OP-TEE BL32
-       │
-       ▼
-Trusted Application
-       │
-       ▼
-Secure Storage
+```sh
+./tools/fiptool/fiptool info /path/to/fip.bin
 ```
 
-这里 OP-TEE Client API、Linux 驱动和 OP-TEE OS 是不同层次的组件。
-
-也就是说，没有 OP-TEE，TF-A 依然可以正常工作；没有 OP-TEE，BL31 依然可以提供 PSCI 服务。
-
-## 5. TF-A 的几个重要技术
-
-如果你以后准备阅读 TF-A 源码，建议重点关注下面几个部分。
-
-### 5.1 PSCI
-
-PSCI 全称 Power State Coordination Interface。
-
-它是 ARM 定义的电源管理接口。
-
-主要功能：
-
-|接口|功能|
-|---|---|
-|`CPU_ON`|启动其他 CPU Core|
-|`CPU_OFF`|关闭当前 CPU|
-|`CPU_SUSPEND`|CPU 进入低功耗状态|
-|`SYSTEM_RESET`|系统复位|
-|`SYSTEM_OFF`|系统关机|
-
-例如 Linux 启动 CPU1：
-
-```
-Linux Kernel
-     │
-     ▼
-PSCI CPU_ON
-     │
-     ▼
-SMC
-     │
-     ▼
-TF-A BL31
-     │
-     ▼
-SoC Power Controller
-     │
-     ▼
-CPU1 Power ON
-```
-
-你可以把 PSCI 理解为 Linux 与底层固件之间的一套标准电源管理协议。
-
-### 5.2 SMC
-
-SMC 是 ARM 提供的一条 CPU 指令：
-
-```
-smc #0
-```
-
-它可以触发 Secure Monitor Call，让处理器进入 EL3 异常处理流程。
-
-Linux 可以通过 SMC 请求：
-
-- PSCI 服务。
-    
-- OP-TEE 服务。
-    
-- 平台特定的安全服务。
-    
-
-并不是所有 SMC 都直接由 BL31 自己处理，有些请求会由 BL31 分发给其他服务或安全世界。
-
-### 5.3 FIP
-
-FIP 全称 Firmware Image Package。
-
-这是 TF-A 提供的一种固件打包格式。
-
-它可以将多个固件映像打包在一起，例如：
-
-```
-fip.bin
-  │
-  ├── BL31
-  ├── BL32
-  ├── BL33
-  ├── FW_CONFIG
-  ├── TB_FW_CONFIG
-  └── TRUSTED_BOOT_FW_CERT
-```
-
-BL2 可以从 FIP 中读取需要的映像。
-
-需要注意：
-
-FIP 是一种打包格式，不是所有 ARM SoC 都使用 FIP。具体固件存储格式取决于 SoC 厂商的启动架构。
-
-Trusted Firmware-A 2.15.0 documentation+1
-
-## 6. TF-A 源码应该怎么看？
-
-官方仓库：
-
-[ARM-software/arm-trusted-firmware](https://github.com/ARM-software/arm-trusted-firmware?utm_source=chatgpt.com)
-
-官方文档：
-
-[Trusted Firmware-A Documentation](https://tf-a.docs.trustedfirmware.org/?utm_source=chatgpt.com)
-
-主要目录：
-
-```
-arm-trusted-firmware/
-│
-├── bl1/                  # BL1
-│
-├── bl2/                  # BL2
-│
-├── bl31/                 # EL3 Runtime Firmware
-│
-├── bl32/                 # Secure Payload 相关框架
-│
-├── common/               # 公共代码
-│
-├── drivers/              # 通用驱动
-│
-├── include/              # 公共头文件
-│
-├── lib/                  # 通用库
-│
-├── plat/                 # SoC / 开发板平台适配
-│   ├── arm/
-│   ├── allwinner/
-│   └── ...
-│
-├── services/             # PSCI、SMC 等运行时服务
-│
-└── tools/
-    ├── fiptool/          # FIP 打包工具
-    └── cert_create/      # 安全启动证书工具
-```
-
-我建议重点阅读：
-
-|源码位置|重点|
-|---|---|
-|`bl1/`|最早期启动过程|
-|`bl2/`|固件加载与启动参数|
-|`bl31/`|EL3、SMC、运行时服务|
-|`services/std_svc/psci/`|PSCI 实现|
-|`plat/`|SoC 平台适配|
-|`tools/fiptool/`|固件打包|
-
-尤其是 `bl31/` 和 `services/std_svc/psci/`，对于理解 Linux 与底层 ARM 固件的交互非常有价值。
-
-## 7. 放到 Rockchip SoC 上应该怎么理解？
-
-结合你正在研究的 RK3506、RK3588，我觉得这是最有实际价值的部分。
-
-Rockchip 平台的启动链通常不是简单地从 TF-A BL1 开始，而是会有厂商自己的 BootROM、DDR 初始化代码和 U-Boot SPL 等组件。
-
-一个概念性的启动流程：
-
-```
-        Rockchip BootROM
-               │
-               ▼
-       TPL / DDR Init
-       （依平台而定）
-               │
-               ▼
-          U-Boot SPL
-               │
-        ┌──────┴──────┐
-        │             │
-        ▼             ▼
-      BL31          BL32
-      TF-A          OP-TEE
-        │             │
-        └──────┬──────┘
-               │
-               ▼
-          U-Boot BL33
-               │
-               ▼
-          Linux Kernel
-               │
-               ▼
-             Rootfs
-```
-
-这里有一个重要区别：
-
-U-Boot SPL 不一定就是 TF-A BL1。
-
-在一些平台上，SPL 可以承担类似 BL2 的 Trusted Boot Firmware 职责；也有平台使用非 TF-A 的启动固件直接加载 BL31。
-
-所以判断一个固件属于哪个阶段，不能只看它的文件名，要看它的执行职责和交接接口。
-
-在 Rockchip 的固件目录或打包配置中，你可能会看到：
-
-|文件或组件|可能对应的职责|
-|---|---|
-|`idbloader.img`|Rockchip 前期启动固件|
-|`u-boot-spl.bin`|SPL / 前期 Bootloader|
-|`bl31.elf` / `bl31.bin`|TF-A BL31|
-|`tee.bin`|OP-TEE BL32|
-|`u-boot.itb`|U-Boot 等后续映像的打包文件|
-|`trust.img`|Rockchip 特定的可信固件打包形式|
-
-具体对应关系会随 Rockchip SoC、SDK 版本和启动配置变化。
-
-### 8. 我建议你建立的知识体系
-
-学习 ARM 启动过程时，不要把所有东西都归类成 Bootloader。建议分成四个层次：
-
-第一层：硬件启动
-
-BootROM / DDR
-
-- BootROM
-    
-- SRAM
-    
-- DDR 初始化
-    
-- SoC 时钟及基础硬件
-    
-
-第二层：可信固件启动
-
-TF-A
-
-- BL1 / BL2
-    
-- BL31
-    
-- BL32
-    
-- Secure Boot
-    
-
-第三层：普通世界启动
-
-U-Boot
-
-- SPL
-    
-- U-Boot proper
-    
-- Device Tree
-    
-- Linux Kernel
-    
-
-第四层：操作系统
-
-Linux
-
-- EL1
-    
-- PSCI
-    
-- OP-TEE Client
-    
-- 驱动与用户空间
-    
-
-我推荐接下来按照这个顺序深入：
-
-1. ARM TrustZone：理解 Secure World 和 Normal World 的硬件隔离机制。
-    
-2. ARM Exception Levels：深入 EL0～EL3、SCR_EL3、SMC。
-    
-3. TF-A BL31：理解 EL3 Runtime、PSCI 和 CPU 上下电。
-    
-4. OP-TEE：理解 Linux 如何通过 SMC 与 Trusted OS 通信。
-    
-5. Secure Boot：理解从 BootROM 到 Linux 的 Chain of Trust。
-    
-
-最后推荐两个官方资料：
-
-- [TF-A 官方文档](https://tf-a.docs.trustedfirmware.org/?utm_source=chatgpt.com)
-    
-- [OP-TEE OS 源码](https://github.com/OP-TEE/optee_os?utm_source=chatgpt.com)
-    
-
-我的建议：先深入 BL31，而不是从 BL1 开始逐行读源码。 因为 BL31 是 Linux 启动之后仍然会与之交互的固件层。把 PSCI、SMC 和 EL3 理解透彻之后，你就能真正理解 Linux 内核下面还有哪些软件在控制 ARM SoC。
+安全启动需分别确认：
+
+1. **可信根**：由不可随意替换的启动代码和可信公钥/公钥哈希等建立，不能只相信可修改存储中的自签名证书。
+2. **认证开关与材料**：`TRUSTED_BOARD_BOOT` 控制认证支持；`GENERATE_COT` 用于生成并打包相应证书。包里有证书不代表启动时执行了认证。
+3. **信任链终点**：TF-A 的 TBB 通常覆盖到 BL33；若要覆盖 OS，还需由 U-Boot/UEFI 继续验证内核、设备树、initramfs，Rootfs 完整性再按设计使用 dm-verity 等机制。
+
+平台还需按产品要求处理回滚防护、恢复入口和密钥生命周期。TF-A、FIP 和 OP-TEE 都不能单独证明完整安全启动已启用。
+
+## Rockchip 平台如何对应
+
+对 RK3588 等 AArch64 Rockchip 平台，常见分工是：BootROM 启动前期 loader，DDR 固件/TPL 与 SPL/miniloader 完成必要初始化和加载，再进入 BL31，最终交给 U-Boot proper（BL33）。是否启用 BL32，以及用哪种容器，取决于 SDK 和打包配置。
+
+| 文件或组件 | 常见用途 | 核对重点 |
+| --- | --- | --- |
+| DDR binary / TPL | DDR 训练和早期内存初始化 | SoC、DRAM 类型、版本与入口约定 |
+| `idbloader.img` | BootROM 可识别的前期 loader 组合 | 可能组合 DDR/TPL 与 SPL，不是 BL1 的固定别名 |
+| `u-boot-spl.bin` / miniloader | 加载后续映像、准备交接 | 可承担类似 BL2 的职责，但不等同于 TF-A BL2 源码 |
+| `bl31.elf` / `bl31.bin` | AArch64 EL3 固件 | 地址、入口、平台 ABI，不能跨 SoC 混用 |
+| `tee.bin` 等 | 可能是 TEE/安全固件 | 先核对架构与包格式，不能仅凭文件名认定具体角色 |
+| `u-boot.itb` | FIT 容器 | 可同时装 U-Boot、BL31、可选 TEE 等，不只装 BL33 |
+| `trust.img` | 部分 Rockchip loader/SDK 的可信固件包 | 与 FIP、FIT 不是同一种格式，也不是所有方案都需要 |
+
+部分 SoC 的 TF-A 平台代码未完全上游开源，U-Boot 官方文档允许使用 Rockchip `rkbin` 提供的 BL31 二进制。不能仅根据“U-Boot 是开源的”推断整条固件链均可从主线源码构建。
+
+## 源码阅读与定位
+
+先从正在分析的 SoC 平台目录、实际构建选项和打包输入确定路径，再读公共框架。以下目录基于 TF-A v2.15.0：
+
+| 源码位置 | 主要观察点 |
+| --- | --- |
+| `plat/<vendor>/<soc>/` | 平台入口、内存布局、映像信息、电源管理回调 |
+| `bl1/`、`bl2/` | 早期初始化、加载、认证及下一阶段交接 |
+| `bl31/bl31_main.c` | `runtime_svc_init()`、BL32 初始化、`bl31_prepare_next_image_entry()` |
+| `bl31/aarch64/runtime_exceptions.S`、`common/runtime_svc.c` | 低 EL 异常入口、上下文保存与运行时服务查找 |
+| `services/std_svc/std_svc_setup.c`、`lib/psci/` | 标准服务入口与 PSCI 实现 |
+| `services/spd/opteed/` | OP-TEE 初始化和安全载荷上下文切换 |
+| `tools/fiptool/`、`tools/cert_create/` | 固件容器与证书生成，职责不同 |
+
+排查时根据控制权停留位置缩小范围：
+
+| 现象 | 优先检查 |
+| --- | --- |
+| 看不到 BL31 日志 | 前级是否加载并进入 BL31、串口地址/时钟、日志构建选项；无日志本身不证明未执行 |
+| BL31 后进入不了 BL33 | BL33 是否存在、入口/SPSR/安全状态、交接参数和内存覆盖 |
+| 启用 TEE 后卡住 | 分发器与 BL32 格式是否匹配、安全内存范围、初始化返回路径 |
+| Linux 次级 CPU 启动失败 | PSCI conduit、固件能力、CPU MPIDR、入口与平台电源回调 |
+| 挂起后无法恢复 | warm-boot 入口、保存状态、DDR 保持及 GIC/平台恢复顺序 |
+
+## 官方资料与源码
+
+- [TF-A v2.15.0 Firmware Design](https://trustedfirmware-a.readthedocs.io/en/v2.15.0/design/firmware-design.html)：AArch64/AArch32 冷启动、运行时及交接要求。
+- [构建选项](https://trustedfirmware-a.readthedocs.io/en/v2.15.0/getting_started/build-options.html)、[Trusted Board Boot](https://trustedfirmware-a.readthedocs.io/en/v2.15.0/design/trusted-board-boot.html)：复位入口变体、认证开关和信任链。
+- [BL31 实现](https://github.com/ARM-software/arm-trusted-firmware/blob/v2.15.0/bl31/bl31_main.c)、[PSCI 实现](https://github.com/ARM-software/arm-trusted-firmware/blob/v2.15.0/lib/psci/psci_main.c)、[OP-TEE Dispatcher](https://trustedfirmware-a.readthedocs.io/en/v2.15.0/components/spd/optee-dispatcher.html)。
+- [Linux 6.18.62 PSCI](https://github.com/gregkh/linux/blob/v6.18.62/drivers/firmware/psci/psci.c)：SMC/HVC 选择和 CPU_ON 调用路径。
+- [U-Boot Rockchip 文档](https://docs.u-boot.org/en/latest/board/rockchip/rockchip.html)、[v2026.10 SPL/TF-A 交接](https://github.com/u-boot/u-boot/blob/v2026.10/common/spl/spl_atf.c)：DDR、SPL、BL31 与打包方式。
+- Rockchip 官方内核设备树：[RK3506 引入 RK3502 公共定义](https://github.com/rockchip-linux/kernel/blob/develop-6.1/arch/arm/boot/dts/rk3506.dtsi)、[Cortex-A7 CPU 定义](https://github.com/rockchip-linux/kernel/blob/develop-6.1/arch/arm/boot/dts/rk3502.dtsi)。
