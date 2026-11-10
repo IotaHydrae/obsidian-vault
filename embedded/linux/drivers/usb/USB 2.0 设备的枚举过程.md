@@ -1,4 +1,4 @@
-# USB 设备枚举：协议状态、Linux 路径与排障
+# USB 2.0 设备的枚举过程
 
 > 枚举是主机通过 EP0 识别、寻址和配置设备的过程；描述符可读、配置成功、接口驱动可用是三个不同的检查点，不能仅凭一条插入日志判断设备已经正常工作。
 
@@ -9,7 +9,7 @@
 - **配置是一棵描述符树**：主机读取配置、接口、alternate setting、端点及类描述符，再选择一个配置；EP0 不靠配置中的端点描述符创建。
 - **Linux 通常按接口匹配功能驱动**：`lsusb` 能列出设备，不代表 `SET_CONFIGURATION`、驱动 `probe()` 或后续功能初始化都成功。
 
-范围：以 **Linux 6.18.62 LTS 主机侧**为实现参照。主流程按 USB 2.0 描述；USB 3.x 保留设备识别、配置和接口绑定等概念，但链路训练、复位及包级机制不同。
+范围：以 **Linux 6.18.62 LTS 主机侧**为实现参照，覆盖 USB 2.0 的 Low-Speed、Full-Speed 和 High-Speed 设备。
 
 ## 从接入到功能可用
 
@@ -28,7 +28,7 @@ flowchart TD
 
 图中省略失败重试分支；任一控制请求、资源分配或配置步骤都可能失败。**Default 使用地址 0，Address 使用分配的非零地址；Configured 表示配置生效，不表示功能驱动必然就绪。**
 
-USB 2.0 Low-Speed 通过 D− 上拉表明连接；Full-Speed 设备通过 D+ 上拉，High-Speed 设备也先以相应的 USB 2.0 连接方式出现，再在复位期间通过 chirp 握手确认高速。USB 3.x SuperSpeed 使用独立的高速信号对与链路训练，不能用 D+/D− 的枚举细节解释整条 SuperSpeed 路径。
+USB 2.0 Low-Speed 通过 D− 上拉表明连接；Full-Speed 设备通过 D+ 上拉，High-Speed 设备也先以相应的 USB 2.0 连接方式出现，再在复位期间通过 chirp 握手确认高速。
 
 `bcdUSB` 是协议版本声明，不等于当前链路速率；实际速度以主机日志、`lsusb -t` 等信息为准。
 
@@ -42,7 +42,7 @@ USB 2.0 Low-Speed 通过 D− 上拉表明连接；Full-Speed 设备通过 D+ �
 | `SET_ADDRESS`，`bRequest=0x05` | `wValue=新地址`，`wLength=0` | 将设备从默认地址移到主机分配的地址 |
 | `GET_DESCRIPTOR(Configuration)` | `wValue=(0x02 << 8) \| index` | 按配置描述符索引读取配置树 |
 | `GET_DESCRIPTOR(String)` | `wValue=(0x03 << 8) \| index` | 读取字符串；索引 0 返回 LANGID 列表，其他索引配合 `wIndex` 中的 LANGID |
-| `GET_DESCRIPTOR(BOS)` | `wValue=0x0f00` | 获取设备能力集合；Linux 对相应协议版本的设备尝试读取 |
+| `GET_DESCRIPTOR(BOS)` | `wValue=0x0f00` | 获取设备能力集合；Linux 在 `bcdUSB >= 0x0201` 时尝试读取，USB 2.x 扩展设备也可能使用 |
 | `SET_CONFIGURATION`，`bRequest=0x09` | `wValue=bConfigurationValue`，`wLength=0` | 激活选定配置；协议中的值 0 表示取消配置 |
 
 `SET_ADDRESS` 是无数据阶段的控制请求：**状态阶段仍在旧地址完成，然后设备使用新地址**。固件若在 Setup 阶段立刻切换地址，可能导致主机收不到该请求的状态响应。
@@ -61,7 +61,6 @@ USB 2.0 Low-Speed 通过 D− 上拉表明连接；Full-Speed 设备通过 D+ �
 | Low-Speed | 8 字节 |
 | Full-Speed | 8、16、32 或 64 字节 |
 | High-Speed | 64 字节 |
-| SuperSpeed 及以上 | 512 字节；设备描述符中的 `bMaxPacketSize0=9` 编码为 `2^9` |
 
 最大包长限制的是单个数据包，不是整个控制传输的总长度。固件需要正确处理分包和短包结束；主机请求 64 字节、设备实际返回完整的 18 字节设备描述符，本身并不是长度错误。
 
@@ -74,7 +73,7 @@ Linux 6.18.62 的 `hub_port_init()` 保留两种初始化方案。下面省略�
 | New scheme | 复位 → 地址 0 上请求最多 64 字节设备描述符 → 再次复位 → 设地址 → 读取完整设备描述符 |
 | Old scheme | 复位 → 设地址 → 请求设备描述符前 8 字节 → 读取完整设备描述符 |
 
-`old_scheme_first`、`use_both_schemes`、端口 quirk 和重试次数参与方案选择；**SuperSpeed 设备在该版本中不使用 new scheme**。因此重复的复位、描述符读取或地址尝试，不一定是主机实现错误。
+`old_scheme_first`、`use_both_schemes`、端口 quirk 和重试次数参与方案选择。因此重复的复位、描述符读取或地址尝试，不一定是主机实现错误。
 
 这些是主机兼容策略。设备固件应实现符合协议的 EP0 状态机，处理合法的部分读取、重复请求和复位，不能只针对一次抓包中的固定顺序工作。
 
@@ -93,7 +92,7 @@ Hub 的状态变化最终交给工作队列中的 `hub_event()` 处理，经 `po
 
 这是常见通用设备驱动路径，省略驱动核心回调和特殊设备驱动。Linux 不保证一律选择第一个配置，电源预算、设备类型和策略等也参与选择。
 
-**xHCI 的地址阶段有独立控制器路径**：`hub_set_address()` 可调用 HCD 的 `address_device`，xHCI 通过 Address Device 命令让控制器完成相关操作；它不必表现为 usbcore 提交的普通 `SET_ADDRESS` URB。usbmon 中没有看到这条 URB，不能据此认定线上没有地址分配过程。
+**xHCI 的地址阶段有独立控制器路径**：`hub_set_address()` 可调用 HCD 的 `address_device`，xHCI 通过 Address Device 命令让控制器完成相关操作；它不必表现为 usbcore 提交的普通 `SET_ADDRESS` URB。usbmon 中没有看到这条 URB，不能据此认定线上没有地址分配过程。xHCI 是主机控制器接口类型，也能承载 USB 2.0 设备，不能据此判断设备的实际链路速率。
 
 普通 USB 功能驱动通常绑定 **`usb_interface`**，匹配可依据 VID/PID、接口 class/subclass/protocol 等。复合设备可以由多个接口驱动提供不同功能，驱动也可能进一步 claim 关联接口。
 
@@ -144,7 +143,12 @@ sudo tshark -i usbmon1 -w usb-enum.pcapng
 
 示例接口 `usbmon1` 应按目标总线和 `tshark -D` 的结果替换。**插入设备前开始采集**，完成后用 Ctrl-C 停止；重试可能改变设备编号，不要一开始就只过滤旧地址。分析 Setup 字段、完成状态、实际返回长度以及重试边界。
 
-`lsusb -v` 本身也可能发出控制请求，应与最初插入时的枚举流量区分。usbmon 记录的是软件向 HCD 提交的请求及完成情况，不能精确替代总线分析仪；复位电平、chirp、物理链路训练和所有控制器自主事务，需要结合控制器跟踪或硬件测量。
+`lsusb -v` 本身也可能发出控制请求，应与最初插入时的枚举流量区分。usbmon 记录的是软件向 HCD 提交的请求及完成情况，不能精确替代总线分析仪；复位电平、chirp 和控制器自主事务，需要结合控制器跟踪或硬件测量。
+
+## 相关笔记
+
+- [[USB 3.0 设备的枚举过程]]：SuperSpeed 链路、EP0 包长与 Linux 初始化策略的差异。
+- [[USB Control Transfer]]：控制传输的 Setup / Data / Status 阶段。
 
 ## 源码与参考资料
 
