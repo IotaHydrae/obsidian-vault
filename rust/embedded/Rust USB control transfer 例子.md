@@ -2,6 +2,8 @@
 
 > 使用 `rusb::DeviceHandle` 发送 vendor control request；必须传播传输错误并检查读取长度。
 
+协议阶段、Setup 字段和状态方向见 [[USB 2.0 设备的传输过程#控制传输]]。
+
 示例协议使用 VID:PID `1209:c303`、请求 `0x00` 和索引 `0x106` / `0x107` 控制 GPIO。这些字段、引脚编号和数据编码属于特定固件；使用前核对设备协议及 `rusb` 版本。
 
 依赖示例为 `rusb = "0.9.4"`，接口见 [rusb 0.9.4 UsbContext](https://docs.rs/rusb/0.9.4/rusb/trait.UsbContext.html)。

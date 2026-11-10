@@ -45,6 +45,7 @@ rust/
 - [Linux 线程化中断：原理、触发路径与接口示例](embedded/linux/kernel/irq/threaded-irq.md)
 - [Linux Kernel API 笔记索引](embedded/linux/kernel/kernel-api/README.md)
 - [USB 2.0 设备的枚举过程](embedded/linux/drivers/usb/USB%202.0%20设备的枚举过程.md)
+- [USB 2.0 设备的传输过程](embedded/linux/drivers/usb/USB%202.0%20设备的传输过程.md)
 - [USB 3.0 设备的枚举过程](embedded/linux/drivers/usb/USB%203.0%20设备的枚举过程.md)
 - [MIPI-DSI 协议](embedded/hardware/MIPI-DSI%20协议.md)
 - [Rust 泛型](rust/泛型/0.%20泛型的定义.md)

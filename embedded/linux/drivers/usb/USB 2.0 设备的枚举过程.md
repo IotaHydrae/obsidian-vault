@@ -34,7 +34,7 @@ USB 2.0 Low-Speed 通过 D− 上拉表明连接；Full-Speed 设备通过 D+ �
 
 ## EP0 上的关键标准请求
 
-以下是常见请求的含义，**不是规定每次都按表格顺序发送**。控制传输的 Setup / Data / Status 阶段及方向见 [[USB Control Transfer]]。
+以下是常见请求的含义，**不是规定每次都按表格顺序发送**。控制传输的 Setup / Data / Status 阶段及方向见 [[USB 2.0 设备的传输过程#控制传输]]。
 
 | 请求 | 关键字段 | 作用 |
 | --- | --- | --- |
@@ -148,7 +148,7 @@ sudo tshark -i usbmon1 -w usb-enum.pcapng
 ## 相关笔记
 
 - [[USB 3.0 设备的枚举过程]]：SuperSpeed 链路、EP0 包长与 Linux 初始化策略的差异。
-- [[USB Control Transfer]]：控制传输的 Setup / Data / Status 阶段。
+- [[USB 2.0 设备的传输过程]]：四种传输类型、包格式与控制传输时序。
 
 ## 源码与参考资料
 
