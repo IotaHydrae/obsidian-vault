@@ -79,7 +79,9 @@ TF-A v2.15.0 的 `RESET_TO_BL2=1` 路径让 BL2 在 EL3 接管复位入口，可
 
 ### AArch32 不能照搬 BL31 图
 
-Armv7-A 使用处理器模式和 Monitor 等机制，不能直接套用 AArch64 的 EL0～EL3 执行模型。TF-A 的 AArch32 参考流程没有独立 BL31，BL32 承担相应运行时固件角色，可使用 SP_MIN 等实现；具体安全 OS 如何集成仍取决于平台。
+Armv7-A 使用处理器模式和 Monitor 等机制。Armv8-A 的 AArch32 状态则有模式与 EL 的对应关系；AArch64 内核运行 32 位应用时，通常只让 EL0 使用 AArch32，内核继续在 AArch64 执行。完整对照见 [Armv7-A 与 Armv8-A 的处理器模式与异常级](../arch/arm/Armv7-A%20%E4%B8%8E%20Armv8-A%20-%20%E5%A4%84%E7%90%86%E5%99%A8%E6%A8%A1%E5%BC%8F%E4%B8%8E%E5%BC%82%E5%B8%B8%E7%BA%A7.md)。
+
+以 `ARCH=aarch32` 构建的 TF-A 参考流程没有独立 BL31，BL32 承担相应运行时固件角色，可使用 SP_MIN 等实现；这与 AArch64 BL31 托管 AArch32 BL32 是不同方案。具体安全 OS 如何集成仍取决于平台。
 
 **RK3506 是 Cortex-A7 / Armv7-A 平台；RK3588 是 AArch64 平台。** 前者的安全固件职责、映像命名及启动链需要独立核对，不能因为两者都出现 `tee.bin` 就套用相同的 BL31 → BL32 流程。
 
