@@ -21,7 +21,7 @@
 | 同步入口 | `i2c_transfer()`、`i2c_smbus_*()` | `spi_sync()`、`spi_write_then_read()` |
 | 成功返回 | `i2c_transfer()` 返回完成的消息数 | `spi_sync()` 等通常返回 0 |
 
-I²C 控制器提供 `I2C_FUNC_*` 能力；client 的地址通常由设备树或其他枚举方式提供。SPI 的 mode、bits per word、最大频率和片选必须与外设及 controller 相符。实例化方式见 [[如何实例化I2C设备]]，虚拟 adapter 见 [[通过 dummy I2C adapter 驱动了解 i2c adapter 驱动框架]]。
+I²C 控制器提供 `I2C_FUNC_*` 能力；client 的地址通常由设备树或其他枚举方式提供。SPI 的 mode、bits per word、最大频率和片选必须与外设及 controller 相符。实例化方式见 [[如何实例化I2C设备]]；虚拟驱动实践见 [[通过 dummy I2C adapter 驱动了解 i2c adapter 驱动框架]] 和 [[Linux Dummy SPI 控制器与设备]]。
 
 ## I²C 组合读取示例
 

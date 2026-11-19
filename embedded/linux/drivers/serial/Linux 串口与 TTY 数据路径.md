@@ -74,7 +74,7 @@ bootloader 串口输出、Linux `earlycon`、正常 console 和用户空间 gett
 - 硬件 UART 同时检查引脚复用、电平、电源、时钟、TX/RX、GND 以及 RTS/CTS 的接线和配置。
 - 无早期日志时区分 bootloader 输出、earlycon、正常 console 和用户空间 getty；一个阶段可用不代表其他阶段也可用。
 
-USB Gadget 串口登录见 [[g_serial - systemd getty@ttyGS0]]；引脚配置见 [[Linux pinctrl 与 GPIO]]。
+虚拟串口驱动实践见 [[Linux Dummy UART 驱动]]；USB Gadget 串口登录见 [[g_serial - systemd getty@ttyGS0]]；引脚配置见 [[Linux pinctrl 与 GPIO]]。
 
 ## 参考
 

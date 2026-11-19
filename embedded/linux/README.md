@@ -24,6 +24,7 @@
 | 系统电源管理 | [[Linux 系统休眠与中断唤醒]]、[[Linux CPUFreq OPP Thermal 与 CPUIdle]]、[[platform_pm]]、[[Kernel API - pm_runtime]] |
 | 引脚与 GPIO | [[Linux pinctrl 与 GPIO]]、[[Kernel API - gpiod]] |
 | DMA 引擎 | [[Linux DMAEngine 数据传输]]、[[Kernel API - dma_map_single]] |
+| 虚拟驱动实践 | [I²C、SPI 和 UART 虚拟驱动](drivers/dummy/README.md) |
 | I²C / SPI / IIO | [[Linux I2C 与 SPI 驱动数据路径]]、[[如何实例化I2C设备]]、[[i2c-dev]]、[[Trigger]] |
 | 存储和文件系统 | [[Linux 存储与文件系统]]、[[Linux VFS Page Cache 与写回]]、[[Linux 块层 BIO blk-mq 与闪存]] |
 | 串口和 TTY | [[Linux 串口与 TTY 数据路径]]、[[g_serial - systemd getty@ttyGS0]] |
