@@ -81,10 +81,17 @@ static const struct i2c_device_id dummy_i2c_ids[] = {
 };
 MODULE_DEVICE_TABLE(i2c, dummy_i2c_ids);
 
+static const struct of_device_id dummy_i2c_of_match[] = {
+	{ .compatible = "example,kb-i2c-demo" },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, dummy_i2c_of_match);
+
 static struct i2c_driver dummy_i2c_driver = {
 	.driver = {
 		.name = "kb_dummy_i2c_client",
 		.dev_groups = dummy_i2c_groups,
+		.of_match_table = dummy_i2c_of_match,
 	},
 	.probe = dummy_i2c_probe,
 	.id_table = dummy_i2c_ids,

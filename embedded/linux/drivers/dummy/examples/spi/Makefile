@@ -1,4 +1,5 @@
 obj-m += dummy_spi_controller.o
+obj-m += dummy_spi_of.o
 obj-m += dummy_spi_client.o
 
 KDIR ?= /lib/modules/$(shell uname -r)/build

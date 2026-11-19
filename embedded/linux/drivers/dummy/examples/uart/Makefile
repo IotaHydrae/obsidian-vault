@@ -1,4 +1,5 @@
 obj-m += dummy_uart.o
+obj-m += dummy_uart_of.o
 
 KDIR ?= /lib/modules/$(shell uname -r)/build
 

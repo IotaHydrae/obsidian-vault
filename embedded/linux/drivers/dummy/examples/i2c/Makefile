@@ -1,4 +1,5 @@
 obj-m += dummy_i2c_adapter.o
+obj-m += dummy_i2c_of.o
 obj-m += dummy_i2c_client.o
 
 KDIR ?= /lib/modules/$(shell uname -r)/build

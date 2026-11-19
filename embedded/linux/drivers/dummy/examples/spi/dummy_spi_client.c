@@ -91,14 +91,22 @@ static int dummy_spi_probe(struct spi_device *spi)
 
 static const struct spi_device_id dummy_spi_ids[] = {
 	{ "kb_spi_demo", 0 },
+	{ "kb-spi-demo", 0 },
 	{ }
 };
 MODULE_DEVICE_TABLE(spi, dummy_spi_ids);
+
+static const struct of_device_id dummy_spi_of_match[] = {
+	{ .compatible = "example,kb-spi-demo" },
+	{ }
+};
+MODULE_DEVICE_TABLE(of, dummy_spi_of_match);
 
 static struct spi_driver dummy_spi_driver = {
 	.driver = {
 		.name = "kb_dummy_spi_client",
 		.dev_groups = dummy_spi_groups,
+		.of_match_table = dummy_spi_of_match,
 	},
 	.probe = dummy_spi_probe,
 	.id_table = dummy_spi_ids,

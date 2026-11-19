@@ -6,18 +6,22 @@
 
 - 控制器通过 `i2c_adapter` 和 `i2c_algorithm.xfer` 接收消息；设备驱动通过 `i2c_client` 调用 `i2c_transfer()`。
 - 本例在动态编号的虚拟总线上创建 `0x42` 设备，提供只读 ID 和可读写寄存器，不访问真实 I²C 硬件。
+- 自注册版本直接创建 client；设备树版本由 platform 驱动注册 adapter，再由 I²C core 根据子节点创建设备。
 - 两条消息的组合读取必须返回 `2`；`i2c_master_send()` 返回的是字节数，不是消息数。
-- 完整源码：[adapter 与虚拟设备](examples/i2c/dummy_i2c_adapter.c)、[client 驱动](examples/i2c/dummy_i2c_client.c)；构建文件为 `examples/i2c/Makefile`。
+- 源码：[自注册 adapter](examples/i2c/dummy_i2c_adapter.c)、[设备树 adapter](examples/i2c/dummy_i2c_of.c)、[传输模拟](examples/i2c/dummy_i2c_emulator.h)、[client 驱动](examples/i2c/dummy_i2c_client.c)。
 
 范围：Linux 6.18 LTS、7 位地址和同步传输。入口见 [[embedded/linux/drivers/dummy/README|虚拟驱动学习目录]]。
 
 ## 对象与数据路径
 
 ```text
-用户读取或写入 sysfs value
-  → dummy_i2c_client：i2c_transfer() / i2c_master_send()
-  → I²C core：检查、总线锁、调用 adapter 算法
-  → dummy_i2c_adapter：xfer() 解析消息并访问内存中的寄存器
+读取：value_show → dummy_i2c_read_reg → i2c_transfer(2 个 msg)
+     → I²C core 加锁 / 检查 → algorithm.xfer → 读取虚拟寄存器
+     → 消息数 2 → 格式化为 sysfs 文本 → 用户
+
+写入：value_store → kstrtou8 → i2c_master_send(reg + value)
+     → i2c_transfer(1 个 msg) → algorithm.xfer → 更新虚拟寄存器
+     → 消息数 1 转换为字节数 2 → sysfs 写入完成
 ```
 
 | 对象 | 本例职责 | 真实驱动中对应的内容 |
@@ -27,7 +31,106 @@
 | `i2c_client` | 描述地址为 `0x42` 的虚拟设备 | 固件、板级信息等提供的外设实例 |
 | `i2c_driver` | 匹配 client、检查 ID、提供 `value` | 面向芯片寄存器协议的外设驱动 |
 
-控制器模块用 `i2c_add_adapter()` 分配总线号，再用 `i2c_new_client_device()` 创建 client。client 的名字 `kb_i2c_demo` 与设备驱动的 `i2c_device_id` 匹配，随后进入 `probe()`。这里是为了自包含实验而手动创建 client；实板上的设备通常由设备树等固件描述，见 [[如何实例化I2C设备]]。
+自注册版本用 `i2c_add_adapter()` 注册总线，再用 `i2c_new_client_device()` 创建 client；名字 `kb_i2c_demo` 与 `i2c_device_id` 匹配。设备树版本的创建和匹配路径是：
+
+```text
+控制器 DT 节点 → platform_device → platform_driver.probe
+→ adapter.dev.of_node = pdev->dev.of_node → devm_i2c_add_adapter
+→ I²C core 枚举可用子节点 → i2c_client → of_match_table → client.probe
+```
+
+注册期间就可能同步调用 client 的 `probe()`；因此算法、状态和节点指针必须在注册 adapter **之前**准备好。client 的其他实例化方式见 [[如何实例化I2C设备]]。
+
+## 最小接口及作用
+
+这里的“必需”指本实验所选的**原始 I²C 同步传输路径**，不是所有 I²C 控制器的唯一实现方式。例如只提供 SMBus 能力的 adapter 可有不同算法回调。
+
+| 接口 / 字段 | 必需性 | 作用 |
+| --- | --- | --- |
+| `i2c_adapter.name`、`.owner`、`.algo` | 本例必需 | 命名总线、标识模块所有者、连接控制器算法；设备树版本还设置 `.dev.parent` 和 `.dev.of_node` |
+| `i2c_algorithm.xfer` | 本例必需 | 接收 `i2c_msg` 数组，执行普通 I²C 消息；成功返回完成的消息数，失败返回负错误码 |
+| `i2c_algorithm.functionality` | 本例必需 | 向上层报告 `I2C_FUNC_*` 能力，供 `i2c_check_functionality()` 检查 |
+| `i2c_set_adapdata()` / `i2c_get_adapdata()` | 本例使用 | 将每条虚拟总线的寄存器状态与 adapter 关联，传输回调由此取得状态；不要求所有驱动都使用 |
+| `root_device_register()` / `root_device_unregister()` | 自注册版本 | 创建 / 释放没有真实硬件的父设备；设备树版本使用 platform 设备作为父设备 |
+| `i2c_add_adapter()` / `i2c_del_adapter()` | 自注册版本 | 注册 / 注销 adapter；编号由 core 分配或结合固件 alias 决定 |
+| `devm_i2c_add_adapter()` | 设备树版本 | 注册 adapter 并绑定 platform 设备生命周期；解绑时自动注销，不再手动 `i2c_del_adapter()` |
+| `i2c_new_client_device()` / `i2c_unregister_device()` | 自注册版本 | 显式创建 / 删除虚拟 client；DT 子节点由 core 创建时不再调用，避免重复占用地址 |
+| `platform_driver.probe` / `.of_match_table` | 设备树版本 | 匹配控制器节点后准备 adapter；真实硬件通常在这里获取资源 |
+| `module_platform_driver()` | 设备树版本 | 注册 / 注销 platform driver；适用于本例无需额外模块初始化步骤的情况 |
+| `MODULE_DEVICE_TABLE(of, ...)` | 用于模块自动加载 | 导出设备树匹配别名；设备匹配仍由驱动的 `.of_match_table` 完成 |
+| `i2c_driver.probe` | 本例必需 | 在设备匹配后检查能力和设备 ID，成功后设备才完成绑定 |
+| `i2c_device_id` / `of_match_table` | 按枚举方式选择 | 分别匹配自注册 client 名称与 DT `compatible`；本例同时提供两种表 |
+| `module_i2c_driver()` | 本例使用 | 注册 / 注销 `i2c_driver`；展开后等价于配对的驱动注册和注销 |
+| `i2c_transfer()` / `i2c_master_send()` | client 使用 | 前者提交一个或多个 message，后者提交单条写消息并以字节数返回结果 |
+| `value_show()` / `value_store()` | 可选 | 通过 `dev_groups` 暴露测试属性，不是 I²C 框架的强制接口 |
+| `i2c_driver.remove` | 按资源需要 | 解绑时清理非托管资源、停止异步工作；本例 client 没有此类资源，因此未实现 |
+
+## DTS 节点与匹配
+
+以下是 `examples/i2c/dummy-i2c.dtso` 的节点内容；它是**实验用虚拟设备**，`example,...` 不是可直接用于产品的正式硬件 binding：
+
+```dts
+i2c-dummy {
+    compatible = "example,kb-dummy-i2c";
+    #address-cells = <1>;
+    #size-cells = <0>;
+    status = "okay";
+
+    device@42 {
+        compatible = "example,kb-i2c-demo";
+        reg = <0x42>;
+    };
+};
+```
+
+| 属性 | 作用 |
+| --- | --- |
+| 控制器 `compatible` | 匹配 `dummy_i2c_of.c` 的 `platform_driver` |
+| `#address-cells` / `#size-cells` | 定义子设备 `reg` 为一个地址 cell、不含长度 cell |
+| 子设备 `compatible` | 匹配 `dummy_i2c_client.c` 的 `of_match_table` |
+| 子设备 `reg = <0x42>` | 7 位 I²C 地址，不是 MMIO 地址；必须与本例模拟的 `0x42` 一致 |
+| `status` | `okay` 表示节点可用；没有此属性时通常也视为可用 |
+
+该虚拟控制器没有 MMIO、时钟和中断，故不编造控制器 `reg`、`clocks` 或 `interrupts`。在真实板上通常启用 SoC DTSI 已定义的 I²C 控制器，并按实际器件 binding 配置其子节点。
+
+`dummy_i2c_of_probe()` 的关键代码如下；完整的 platform 匹配表和内存分配见对应源码：
+
+```c
+adapter->owner = THIS_MODULE;
+adapter->algo = &dummy_i2c_algorithm;
+adapter->dev.parent = &pdev->dev;
+adapter->dev.of_node = pdev->dev.of_node;
+strscpy(adapter->name, "kb-dummy-i2c-of", sizeof(adapter->name));
+i2c_set_adapdata(adapter, &bus->state);
+return devm_i2c_add_adapter(&pdev->dev, adapter);
+```
+
+`adapter->dev.of_node` 让 I²C core 知道要从哪个控制器节点寻找子设备；只写 platform 驱动的 `of_match_table` 而不设置它，不能完成这里的子节点枚举。client 驱动还要有与 `example,kb-i2c-demo` 对应的 `of_match_table`。
+
+下面从仓库根目录生成**新的测试 DTB**；`fdtoverlay` 在离线文件中合并，不会自动更改当前运行系统：
+
+```sh
+dtc -@ -I dts -O dtb -o /tmp/dummy-i2c.dtbo \
+  embedded/linux/drivers/dummy/examples/i2c/dummy-i2c.dtso
+fdtoverlay -i /path/to/base.dtb -o /tmp/dummy-i2c-test.dtb /tmp/dummy-i2c.dtbo
+```
+
+让虚拟机或测试板用新的 DTB 启动，确认目标内核启用 `CONFIG_OF`，然后在目标机执行：
+
+```sh
+cd embedded/linux/drivers/dummy/examples/i2c
+make KDIR=/path/to/matching/linux-6.18-build W=1
+sudo insmod ./dummy_i2c_client.ko
+sudo insmod ./dummy_i2c_of.ko
+ls -l /sys/bus/platform/drivers/kb_dummy_i2c_of/
+value=$(find /sys/devices/platform/i2c-dummy -type f -name value -print -quit)
+[ -n "$value" ] && printf '37\n' | sudo tee "$value"
+[ -n "$value" ] && cat "$value"                      # 应为 37
+sudo rmmod dummy_i2c_of
+sudo rmmod dummy_i2c_client
+```
+
+驱动目录应出现 `i2c-dummy` 设备链接；找不到属性或读回不是 `37` 都不是通过。**不要同时把自注册模块当成同一条 DT 总线**：它会另建一条独立的虚拟总线，不能验证 DT 路径。
 
 ## 虚拟设备协议
 
@@ -63,7 +166,7 @@ return ret < 0 ? ret : -EIO;
 
 ## 构建和验证
 
-准备与**运行中的目标内核**完全匹配的构建树和 `Module.symvers`，并启用 `CONFIG_MODULES`、`CONFIG_I2C`。交叉编译时使用目标内核的 `ARCH`、`CROSS_COMPILE`，并将模块放到目标机；不要用不同内核的构建结果直接加载。
+以下验证自注册版本。准备与**运行中的目标内核**完全匹配的构建树和 `Module.symvers`，并启用 `CONFIG_MODULES`、`CONFIG_I2C`。交叉编译时使用目标内核的 `ARCH`、`CROSS_COMPILE`，并将模块放到目标机；不要用不同内核的构建结果直接加载。
 
 ```sh
 cd embedded/linux/drivers/dummy/examples/i2c
@@ -105,5 +208,5 @@ sudo rmmod dummy_i2c_client
 
 ## 参考
 
-- Linux 6.18.62：[`i2c.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/i2c.h)、[I²C client 驱动](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/writing-clients.rst)、[DMA 注意事项](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/dma-considerations.rst)、[i2c-stub](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/i2c-stub.rst)。
+- Linux 6.18.62：[`i2c.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/i2c.h)、[I²C core 的 DT 枚举](https://github.com/gregkh/linux/blob/v6.18.62/drivers/i2c/i2c-core-of.c)、[I²C client 驱动](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/writing-clients.rst)、[DMA 注意事项](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/dma-considerations.rst)、[i2c-stub](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/i2c-stub.rst)。
 - 蜗窝科技：[I²C 软件架构](https://www.wowotech.net/comm/i2c_overview.html)、[I²C provider](https://www.wowotech.net/comm/i2c_provider.html)。

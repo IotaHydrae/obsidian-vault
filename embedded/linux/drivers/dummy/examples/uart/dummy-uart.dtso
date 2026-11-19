@@ -1,0 +1,14 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			serial-dummy {
+				compatible = "example,kb-dummy-uart";
+				status = "okay";
+			};
+		};
+	};
+};

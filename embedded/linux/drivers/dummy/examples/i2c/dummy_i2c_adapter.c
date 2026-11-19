@@ -4,60 +4,11 @@
 #include <linux/i2c.h>
 #include <linux/module.h>
 
-#define DUMMY_I2C_ADDR		0x42
-#define DUMMY_I2C_ID_REG	0x00
-#define DUMMY_I2C_VALUE_REG	0x01
-#define DUMMY_I2C_ID		0xa5
+#include "dummy_i2c_emulator.h"
 
 static struct device *dummy_parent;
 static struct i2c_client *dummy_client;
-static u8 dummy_value;
-
-static int dummy_i2c_xfer(struct i2c_adapter *adapter,
-			  struct i2c_msg *msgs, int num)
-{
-	int i;
-
-	for (i = 0; i < num; i++) {
-		if (msgs[i].addr != DUMMY_I2C_ADDR)
-			return -ENXIO;
-	}
-
-	if (num == 1 && msgs[0].flags == 0 && msgs[0].len == 2) {
-		if (msgs[0].buf[0] == DUMMY_I2C_ID_REG)
-			return -EACCES;
-		if (msgs[0].buf[0] != DUMMY_I2C_VALUE_REG)
-			return -EINVAL;
-		dummy_value = msgs[0].buf[1];
-		return 1;
-	}
-
-	if (num == 2 && msgs[0].flags == 0 && msgs[0].len == 1 &&
-	    msgs[1].flags == I2C_M_RD && msgs[1].len == 1) {
-		switch (msgs[0].buf[0]) {
-		case DUMMY_I2C_ID_REG:
-			msgs[1].buf[0] = DUMMY_I2C_ID;
-			return 2;
-		case DUMMY_I2C_VALUE_REG:
-			msgs[1].buf[0] = dummy_value;
-			return 2;
-		default:
-			return -EINVAL;
-		}
-	}
-
-	return -EOPNOTSUPP;
-}
-
-static u32 dummy_i2c_functionality(struct i2c_adapter *adapter)
-{
-	return I2C_FUNC_I2C;
-}
-
-static const struct i2c_algorithm dummy_i2c_algorithm = {
-	.xfer = dummy_i2c_xfer,
-	.functionality = dummy_i2c_functionality,
-};
+static struct dummy_i2c_state dummy_state;
 
 static struct i2c_adapter dummy_adapter = {
 	.owner = THIS_MODULE,
@@ -77,6 +28,7 @@ static int __init dummy_i2c_adapter_init(void)
 		return PTR_ERR(dummy_parent);
 
 	dummy_adapter.dev.parent = dummy_parent;
+	i2c_set_adapdata(&dummy_adapter, &dummy_state);
 	ret = i2c_add_adapter(&dummy_adapter);
 	if (ret)
 		goto unregister_parent;

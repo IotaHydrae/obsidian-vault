@@ -1,0 +1,22 @@
+/dts-v1/;
+/plugin/;
+
+/ {
+	fragment@0 {
+		target-path = "/";
+		__overlay__ {
+			spi-dummy {
+				compatible = "example,kb-dummy-spi";
+				#address-cells = <1>;
+				#size-cells = <0>;
+				status = "okay";
+
+				device@0 {
+					compatible = "example,kb-spi-demo";
+					reg = <0>;
+					spi-max-frequency = <1000000>;
+				};
+			};
+		};
+	};
+};

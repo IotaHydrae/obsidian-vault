@@ -6,8 +6,9 @@
 
 - `uart_register_driver()` 注册串口驱动，`uart_add_one_port()` 添加端口；本例得到 `ttyDUMMY0`。
 - `start_tx()` 在端口锁持有期间取出 TX 字节，写入 TTY flip buffer 并推送，形成软件回环。
+- 设备树版本通过 platform 匹配后注册 UART port；自注册版本不读取设备树，两者是独立的实验入口。
 - 原始字节测试先把 TTY 设置为 raw、关闭回显，并处理读取超时；输入输出不保证按一次 `read()` 划分。回环状态下启用 TTY 回显可能引发持续的自回显。
-- 完整源码：[dummy_uart.c](examples/uart/dummy_uart.c)；构建文件为 `examples/uart/Makefile`。
+- 源码：[自注册版本](examples/uart/dummy_uart.c)、[设备树版本](examples/uart/dummy_uart_of.c)、[串口回调与回环](examples/uart/dummy_uart_ops.h)。
 
 范围：Linux 6.18 LTS、单端口短数据软件回环；不模拟真实 UART 寄存器、波特率、电平、FIFO、中断或 DMA。入口见 [[embedded/linux/drivers/dummy/README|虚拟驱动学习目录]]。
 
@@ -15,10 +16,10 @@
 
 ```text
 应用 write(/dev/ttyDUMMY0)
-  → TTY / line discipline → serial_core TX 软件缓冲
-  → uart_ops.start_tx() → uart_port_tx() 取字节
-  → tty_insert_flip_char() → tty_flip_buffer_push()
-  → TTY / line discipline → 应用 read(/dev/ttyDUMMY0)
+  → TTY / line discipline → serial_core uart_write() → TX 软件 FIFO
+  → uart_ops.start_tx() → uart_port_tx() 逐字节取出
+  → dummy_receive_char() → tty_insert_flip_char() → TTY flip buffer
+  → tty_flip_buffer_push() → line discipline → 应用 read(/dev/ttyDUMMY0)
 ```
 
 | 对象或接口 | 本例作用 | 真实硬件中对应的职责 |
@@ -43,6 +44,113 @@
 
 端口注册失败时反向释放已注册的 driver 和父设备。卸载先移除端口，serial core 会解除该端口与 TTY 的关联并处理挂断，再注销 driver；使用异步中断、DMA、work 或 timer 的真实驱动，还必须先阻止新工作并同步所有在途回调。
 
+## 最小接口及作用
+
+下表的“必需”针对**本例能被打开、发送、关闭并支持常见 TTY 操作**的路径；真实硬件的必需接口还取决于中断、流控、console 和电源管理等功能，不能把空实现直接用于产品。
+
+| 注册接口 | 作用 |
+| --- | --- |
+| `uart_register_driver()` | 向 serial core 注册一组端口的驱动，准备对应的 TTY driver 和状态表；必须先于添加端口 |
+| `uart_add_one_port()` | 把一个已初始化的 `uart_port` 及其 `uart_ops` 接入 serial core；本例 `line = 0` |
+| `uart_remove_one_port()` | 先摘除端口、解除 TTY 关联并处理在途引用；设备树版本在 platform `remove()` 中调用 |
+| `uart_unregister_driver()` | 最后注销 UART driver；调用前所有端口都必须已移除 |
+| `root_device_register()` / `root_device_unregister()` | 自注册版本创建 / 释放虚拟父设备；设备树版本使用 platform 设备作为父设备 |
+| `platform_driver.probe` / `remove` | 设备树版本匹配后添加端口，解绑时先移除端口；不是 `uart_ops` 的收发回调 |
+| `of_match_table` | platform 驱动用它把节点的 `compatible` 与驱动匹配起来 |
+| `MODULE_DEVICE_TABLE(of, ...)` | 导出模块自动加载所需的 DT 别名；手动加载时设备仍需通过匹配表绑定 |
+| `platform_set_drvdata()` / `platform_get_drvdata()` | 绑定设备和端口指针，使 `remove()` 能找到 `probe()` 注册的端口 |
+| `platform_driver_register()` / `platform_driver_unregister()` | 注册 / 注销 platform 驱动；本例需要控制其与 `uart_driver` 的注册顺序，因此显式调用 |
+
+### `uart_ops` 回调
+
+| 回调 | 必需性 | 作用与本例行为 |
+| --- | --- | --- |
+| `startup()` | 本例必需 | 首次打开端口时初始化硬件、申请 IRQ / 启用接收；本例无硬件，返回 `0` |
+| `shutdown()` | 本例必需 | 最后关闭或移除时关闭接收、停止 IRQ / DMA 并回收资源；本例为空 |
+| `start_tx()` | 本例必需 | 启动发送；本例从 serial core TX FIFO 取字节并送入自身接收路径 |
+| `stop_tx()` | 本例必需 | 停止发送，例如停止 TX 中断；本例同步发送，没有硬件动作 |
+| `stop_rx()` | 本例必需 | 关闭路径中停止接收；本例无 RX 中断，因此为空 |
+| `tx_empty()` | 本例必需 | 报告发送 FIFO 和移位寄存器是否已空；本例同步完成，返回 `TIOCSER_TEMT` |
+| `set_mctrl()` | 本例必需 | 设置 RTS / DTR 等 modem 输出；本例没有物理输出，故不操作 |
+| `get_mctrl()` | 本例必需 | 报告 CTS / DCD / DSR 等 modem 输入；本例将这些状态固定为有效 |
+| `set_termios()` | 本例必需 | 根据 `termios` 设置速率、数据位、校验、停止位和流控；本例不模拟这些硬件行为 |
+| `type()` | 可选 | 返回端口类型描述字符串；本例返回 `kb-dummy-uart` |
+| `request_port()` | 按资源需要 | 申请 IO / MMIO 区域；本例没有资源，返回 `0` |
+| `release_port()` | 按资源需要 | 释放前述资源；本例为空 |
+| `config_port()` | 配置路径需要 | 自动配置或识别端口类型时设置 `port->type`；本例使用实验专用非零类型 |
+
+`break_ctl`、`enable_ms`、`start_rx`、`pm`、`send_xchar` 等是按功能选择的其他回调，不属于该软件回环的必需集合。每个回调的锁和睡眠约束以 `serial_core.h` 的接口注释为准。
+
+### 数据搬运辅助接口
+
+| 接口 | 作用 |
+| --- | --- |
+| `uart_port_tx()` | 在端口锁持有时从 TX 软件 FIFO 逐字节取出数据，处理发送统计和写唤醒；本例的发送目标是接收函数 |
+| `tty_insert_flip_char()` | 把接收字节和状态放入 TTY flip buffer；可能因缓冲不足而失败 |
+| `tty_flip_buffer_push()` | 通知 TTY 层把已写入的接收数据送往 line discipline；不是同步的用户态 `read()` |
+
+真实 UART 通常由 RX IRQ / DMA 完成处理读取硬件 FIFO，再调用接收辅助接口；serial core 没有一个替驱动读取物理 FIFO 的通用 `receive()` 回调。
+
+## DTS 节点与匹配
+
+以下是 `examples/uart/dummy-uart.dtso` 的节点内容。`example,...` 仅是实验用匹配字符串，不是正式产品的硬件 binding：
+
+```dts
+serial-dummy {
+    compatible = "example,kb-dummy-uart";
+    status = "okay";
+};
+```
+
+该虚拟端口没有实际寄存器、IRQ、时钟或引脚，因此不应编造 `reg`、`interrupts`、`clocks` 或 `pinctrl-*`。真实板通常启用 SoC DTSI 已有的 UART 节点，并按其 binding 和电路配置资源。
+
+```text
+DT 节点 → platform_device → dummy_uart_of 的 of_match_table
+→ platform probe → 初始化 uart_port → uart_add_one_port → ttyDUMMY0
+解绑：platform remove → uart_remove_one_port → 释放端口内存
+```
+
+`dummy_uart_of.c` 的模块初始化先注册 `uart_driver` 再注册 platform driver；退出时先撤销 platform driver，使各端口的 `remove()` 运行，再注销 `uart_driver`。`devm_kzalloc()` 只管理端口内存，**不会替代** `uart_remove_one_port()`。
+
+platform 驱动匹配表与端口注册的关键关系是：
+
+```c
+static const struct of_device_id dummy_uart_of_match[] = {
+    { .compatible = "example,kb-dummy-uart" },
+    { }
+};
+/* platform_driver.driver.of_match_table = dummy_uart_of_match */
+
+port->dev = &pdev->dev;
+port->ops = &dummy_uart_ops;
+port->line = 0;
+ret = uart_add_one_port(&dummy_uart_of_driver, port);
+```
+
+片段省略了分配、`port->type` 等初始化和错误处理；可运行版本见 `dummy_uart_of.c`。设备树先匹配 platform 驱动，serial core 再接收已经初始化好的端口；不是 DTS 直接调用 `uart_ops`。
+
+本例固定 `line = 0`、`dev_name = "ttyDUMMY"`、端口数为 1，故产生 `ttyDUMMY0`；DT 的 `serial` alias 不会自动修改这个编号，除非驱动显式读取并使用它。自注册和设备树版本使用相同 TTY 名称，**只能二选一加载**。
+
+从仓库根目录生成**新的测试 DTB**，用它启动虚拟机或测试板，并确认目标内核启用 `CONFIG_OF`：
+
+```sh
+dtc -@ -I dts -O dtb -o /tmp/dummy-uart.dtbo \
+  embedded/linux/drivers/dummy/examples/uart/dummy-uart.dtso
+fdtoverlay -i /path/to/base.dtb -o /tmp/dummy-uart-test.dtb /tmp/dummy-uart.dtbo
+```
+
+在目标机执行，驱动目录应出现 `serial-dummy` 设备链接：
+
+```sh
+cd embedded/linux/drivers/dummy/examples/uart
+make KDIR=/path/to/matching/linux-6.18-build W=1
+sudo insmod ./dummy_uart_of.ko
+ls -l /sys/bus/platform/drivers/kb_dummy_uart_of/
+ls -l /dev/ttyDUMMY0
+```
+
+然后使用下方 Python 回环测试，完成后执行 `sudo rmmod dummy_uart_of`；不要同时加载 `dummy_uart.ko`。
+
 ## 发送和接收实现
 
 ```c
@@ -63,7 +171,7 @@ static void dummy_start_tx(struct uart_port *port)
 
 ## 构建和验证
 
-目标内核需要 `CONFIG_MODULES`、`CONFIG_TTY`、`CONFIG_SERIAL_CORE`，构建树及 `Module.symvers` 必须与运行内核匹配：
+以下加载自注册版本；设备树版本加载 `dummy_uart_of.ko`，其后测试步骤相同。目标内核需要 `CONFIG_MODULES`、`CONFIG_TTY`、`CONFIG_SERIAL_CORE`，构建树及 `Module.symvers` 必须与运行内核匹配：
 
 ```sh
 cd embedded/linux/drivers/dummy/examples/uart
@@ -104,10 +212,9 @@ finally:
     termios.tcsetattr(fd, termios.TCSANOW, old)
     os.close(fd)
 PY
-sudo rmmod dummy_uart
 ```
 
-打不开节点时先检查模块日志、节点权限和是否存在 `ttyDUMMY0`；收到多余字节时检查 raw / echo 和是否有其他进程占用。卸载前关闭所有使用该设备的程序，否则 `rmmod` 可能因模块仍被使用而失败。超时或内容不一致均不是通过；`2` 秒只是实验超时，不是 UART 的性能指标。
+自注册版本测试后执行 `sudo rmmod dummy_uart`；设备树版本执行 `sudo rmmod dummy_uart_of`。打不开节点时先检查模块日志、节点权限和是否存在 `ttyDUMMY0`；收到多余字节时检查 raw / echo 和是否有其他进程占用。卸载前关闭所有使用该设备的程序，否则 `rmmod` 可能因模块仍被使用而失败。超时或内容不一致均不是通过；`2` 秒只是实验超时，不是 UART 的性能指标。
 
 ## 迁移到硬件
 
@@ -121,5 +228,5 @@ sudo rmmod dummy_uart
 
 ## 参考
 
-- Linux 6.18.62：[串口驱动 API](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/serial/driver.rst)、[TTY buffer](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/tty/tty_buffer.rst)、[`serial_core.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/serial_core.h)、[`serial_core.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/tty/serial/serial_core.c)。
+- Linux 6.18.62：[串口驱动 API](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/serial/driver.rst)、[串口通用 binding](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/devicetree/bindings/serial/serial.yaml)、[TTY buffer](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/tty/tty_buffer.rst)、[`serial_core.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/serial_core.h)、[`serial_core.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/tty/serial/serial_core.c)。
 - 蜗窝科技：[串口框架概述](https://www.wowotech.net/comm/serial_overview.html)、[TTY 软件架构](https://www.wowotech.net/tty_framework/tty_architecture.html)。

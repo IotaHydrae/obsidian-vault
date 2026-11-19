@@ -4,24 +4,11 @@
 #include <linux/module.h>
 #include <linux/spi/spi.h>
 
+#include "dummy_spi_loopback.h"
+
 static struct device *dummy_parent;
 static struct spi_controller *dummy_controller;
 static struct spi_device *dummy_device;
-
-static int dummy_spi_transfer_one(struct spi_controller *controller,
-				  struct spi_device *spi,
-				  struct spi_transfer *transfer)
-{
-	const u8 *tx = transfer->tx_buf;
-	u8 *rx = transfer->rx_buf;
-	unsigned int i;
-
-	for (i = 0; i < transfer->len; i++) {
-		if (rx)
-			rx[i] = tx ? tx[i] : 0xff;
-	}
-	return 0;
-}
 
 static int __init dummy_spi_controller_init(void)
 {
