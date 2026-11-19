@@ -66,9 +66,12 @@ static int __init dummy_uart_of_init(void)
 	if (ret)
 		return ret;
 	ret = platform_driver_register(&dummy_uart_platform_driver);
-	if (ret)
+	if (ret) {
 		uart_unregister_driver(&dummy_uart_of_driver);
-	return ret;
+		return ret;
+	}
+	dummy_uart_guard_module_unload(&dummy_uart_of_driver);
+	return 0;
 }
 
 static void __exit dummy_uart_of_exit(void)

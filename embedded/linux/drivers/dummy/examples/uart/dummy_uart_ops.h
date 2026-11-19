@@ -2,11 +2,26 @@
 #ifndef KB_DUMMY_UART_OPS_H
 #define KB_DUMMY_UART_OPS_H
 
+#include <linux/module.h>
 #include <linux/serial_core.h>
+#include <linux/tty_driver.h>
 #include <linux/tty_flip.h>
 
 /* A private nonzero marker for this lab, not a registered UART UAPI type. */
 #define DUMMY_UART_TYPE	0xff
+
+static void dummy_uart_guard_module_unload(const struct uart_driver *driver)
+{
+#ifdef CONFIG_MODULE_UNLOAD
+	if (!driver->owner || driver->tty_driver->owner == driver->owner)
+		return;
+
+	/* TTY hangup does not wait for all file descriptors to close. */
+	__module_get(driver->owner);
+	pr_warn("%s: serial_core did not set the TTY owner; unload disabled until reboot\n",
+		driver->driver_name);
+#endif
+}
 
 static unsigned int dummy_tx_empty(struct uart_port *port)
 {

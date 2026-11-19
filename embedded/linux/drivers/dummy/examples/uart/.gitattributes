@@ -1,0 +1,2 @@
+# A unified diff puts a context marker before the source line's indentation.
+serial-core-tty-owner.patch whitespace=-space-before-tab

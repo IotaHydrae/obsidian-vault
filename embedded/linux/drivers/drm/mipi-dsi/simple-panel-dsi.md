@@ -5,7 +5,7 @@
 ## TL;DR
 
 - 驱动根据 DSI `compatible` 找到面板描述，设置 lane 数、像素格式和 DSI mode flags，再 attach 到 host。
-- 对驱动已支持的简单面板，可在 DSI host 的 DTS 子节点配置型号、虚拟通道、电源、使能 GPIO 和背光。
+- 对驱动已支持的简单面板，在 DSI host 的 DTS 子节点配置型号、虚拟通道、电源、使能 GPIO 和背光；`remote-endpoint` 不创建设备。
 - panel prepare / enable、disable / unprepare 与 host / bridge 的显示管线协作；背光和像素数据是不同路径。
 - 需要 DCS 初始化时，主线通常由专用面板驱动发送命令；支持 DTS 命令序列的厂商 BSP 可按其扩展格式配置。
 - 黑屏先分辨 probe / attach、供电复位、mode、链路和背光，不能只看 DRM 设备是否出现。
@@ -21,7 +21,7 @@ DSI host 创建设备 → compatible 匹配 dsi_of_match
 → 上游 DRM 组件建立管线 → panel prepare / enable
 ```
 
-设备树节点可以是 DSI host 的子节点，或按 binding 使用 OF graph 关联。`reg` 表示 DSI virtual channel；实际面板可用的 `compatible` 要同时查看 binding 与目标驱动匹配表，不能只写一个泛化名称。
+**设备枚举和显示管线连接是两件事。** `mipi_dsi_host_register()` 枚举 host 下可用且带 `reg` 的直接子节点，`reg` 表示 DSI virtual channel。OF graph 的 `remote-endpoint` 表达组件之间的连接，不能代替这一步；若拓扑不使用 host 子节点，必须由相应驱动显式注册 `mipi_dsi_device`。实际面板的 `compatible` 要核对 binding 和驱动匹配表，不能只写一个泛化名称。
 
 面板描述中的固定 timing、尺寸及 DSI 参数由对应型号定义；`panel-timing` 是否支持覆盖取决于驱动和 binding。已有的面板不应为了凑分辨率而借用另一型号的 `compatible`。
 
@@ -82,7 +82,7 @@ DSI host 创建设备 → compatible 匹配 dsi_of_match
 
 ### `panel-timing` 和 reset 的边界
 
-`panel-simple` 会尝试读取 `panel-timing`，但只允许覆盖驱动描述符中允许范围内的 `display_timing`。**本例 AUO 面板使用固定 `drm_display_mode`（`num_modes = 1`）**，因此不能靠添加 `panel-timing` 任意替换其固定时序；驱动会拒绝该覆盖。schema 接受某个属性也不等于此驱动会按预期使用它。
+`panel-simple.c` 的共用解析路径会尝试读取 `panel-timing`，但只允许覆盖驱动描述符中允许范围内的 `display_timing`。**本例 AUO 面板使用固定 `drm_display_mode`（`num_modes = 1`）**，驱动会拒绝覆盖；6.18.62 的 `panel-simple-dsi.yaml` 也没有把 `panel-timing` 列为允许属性，不应添加到这个节点。
 
 Linux 6.18.62 的 `panel-simple.c` 获取并控制的是 `enable-gpios`；虽然通用 panel binding 中存在 `reset-gpios`，本驱动不会仅因节点添加它就执行 reset 脉冲。如果屏幕需要特定 reset 序列、多路电源或 DCS 初始化命令，应使用适配该屏的专用驱动或按实际硬件实现所需支持。
 

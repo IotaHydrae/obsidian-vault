@@ -27,13 +27,13 @@
 | --- | --- |
 | `compatible` | 设备真实兼容性、顺序、binding 与驱动 match table |
 | `reg` | 父总线的地址/大小单元和资源含义；I²C 子节点是总线地址，SPI 子节点通常是片选 |
-| `interrupts` / `interrupt-parent` | 控制器定义的 specifier、极性和触发类型；不是直接填写 Linux IRQ 号 |
+| `interrupts` / `interrupt-parent` | 中断控制器的 `#interrupt-cells`、极性和触发类型；不是直接填写 Linux IRQ 号，见 [[Linux IRQ Domain 与中断控制器]] |
 | `clocks` / `clock-names` | provider 和 consumer 名称、时钟数量与依赖 |
 | `*-supply` / `resets` | 实际电源轨、复位控制器与对应名称 |
 | `pinctrl-*` / `*-gpios` | 引脚复用、active-low 语义、驱动 consumer 名称 |
 | `status` | 节点是否可用；还应关注父总线及实际运行的 DTB |
 
-`reg` 和 `ranges` 的解释取决于父总线 binding；驱动通常应使用资源和总线 API 获取结果，不把 DTS 原始值直接强转为 CPU 指针。`aliases` 的作用和限制见 [[alias|Linux 设备树 aliases 与设备编号]]。
+`reg` 由父节点的 `#address-cells` / `#size-cells` 和 `ranges` 解释或转换，使用总线资源 API 获取结果，不把 DTS 原始值强转为 CPU 指针。clock、reset、regulator 和 GPIO 引用应由各框架的 consumer API 获取，不直接解析供应者寄存器。`aliases` 的作用与限制见 [[alias|Linux 设备树 aliases 与设备编号]]。
 
 ## schema 验证
 
@@ -50,7 +50,7 @@ make ARCH=arm64 DT_SCHEMA_FILES=spi/spi-controller.yaml dtbs_check
 
 1. 检查运行中的 `/sys/firmware/devicetree/base/` 与 bootloader 加载路径，确认实际 DTB 和节点状态。
 2. 检查相应总线上的设备是否创建，再检查驱动匹配、probe 返回值和供应者。
-3. 对 `-EPROBE_DEFER`，从日志和可用时的 `devices_deferred` 反查 clock、regulator、GPIO、IRQ、PHY 等依赖。
+3. 资源 API 返回 `-EPROBE_DEFER` 时把错误传回 `probe()` 的调用方，不当成可选资源不存在；从日志和 debugfs 的 `devices_deferred`（若可用）反查供应者。若 probe 失败，应按逆序撤销已经完成的操作并保留错误码。
 4. schema 全部通过后仍要核对引脚、电压、复位、时钟和线缆；软件检查不能证明板级时序。
 
 ## 参考

@@ -44,7 +44,7 @@ provider：struct clk_hw / clk_ops → gate、mux、divider、PLL 等硬件
 
 1. 确认实际 DTB 中的 `clocks` / `clock-names`、provider 驱动和 `-EPROBE_DEFER`。
 2. 判断 handle 获取、prepare/enable、set rate 和实际 I/O 分别在哪一步失败。
-3. 在支持 `CONFIG_COMMON_CLK_DEBUG` 的系统查看 debugfs `clk/clk_summary`；记录时钟、父节点、速率及计数，但它是软件状态快照。
+3. 在启用 `CONFIG_COMMON_CLK` 和 `CONFIG_DEBUG_FS` 的系统确认 debugfs 挂载点，再读其下的 `clk/clk_summary`（通常为 `/sys/kernel/debug/clk/clk_summary`）。记录时钟、父节点、速率及计数；这不是引脚波形测量。
 4. 用硬件允许的方式验证外设可访问性，必要时测量时钟和电源；检查运行/休眠切换后是否恢复。
 
 ## 参考

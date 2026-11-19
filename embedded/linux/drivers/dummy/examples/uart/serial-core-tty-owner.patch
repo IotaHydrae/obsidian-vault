@@ -1,0 +1,17 @@
+Subject: [PATCH] serial: core: retain the low-level module for live TTY objects
+
+Set the owner before tty_register_driver() publishes the TTY driver. TTY
+open and final release then hold and drop a reference to the low-level
+UART module. Preserve the existing owner if no low-level one was supplied.
+
+diff --git a/drivers/tty/serial/serial_core.c b/drivers/tty/serial/serial_core.c
+--- a/drivers/tty/serial/serial_core.c
++++ b/drivers/tty/serial/serial_core.c
+@@ -2783,3 +2783,7 @@ int uart_register_driver(struct uart_driver *drv)
++	/* Keep the low-level driver alive until the TTY is released. */
++	if (drv->owner)
++		normal->owner = drv->owner;
++
+ 	normal->driver_name	= drv->driver_name;
+ 	normal->name		= drv->dev_name;
+ 	normal->major		= drv->major;

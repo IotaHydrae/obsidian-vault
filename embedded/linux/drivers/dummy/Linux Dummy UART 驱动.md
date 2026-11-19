@@ -7,6 +7,7 @@
 - `uart_register_driver()` 注册串口驱动，`uart_add_one_port()` 添加端口；本例得到 `ttyDUMMY0`。
 - `start_tx()` 在端口锁持有期间取出 TX 字节，写入 TTY flip buffer 并推送，形成软件回环。
 - 设备树版本通过 platform 匹配后注册 UART port；自注册版本不读取设备树，两者是独立的实验入口。
+- 未向 TTY 传递 UART 模块 `owner` 的内核可运行回环，但本例会禁用普通卸载。要练习卸载和重载，请使用已修复 `serial_core` 的测试内核。
 - 原始字节测试先把 TTY 设置为 raw、关闭回显，并处理读取超时；输入输出不保证按一次 `read()` 划分。回环状态下启用 TTY 回显可能引发持续的自回显。
 - 源码：[自注册版本](examples/uart/dummy_uart.c)、[设备树版本](examples/uart/dummy_uart_of.c)、[串口回调与回环](examples/uart/dummy_uart_ops.h)。
 
@@ -37,12 +38,33 @@
 模块加载：root_device_register → uart_register_driver → uart_add_one_port
 首次打开：serial_core 分配 TX 缓冲 → startup → set_termios
 读写期间：start_tx → 软件回环 → TTY 接收
-最后关闭：shutdown；模块卸载：uart_remove_one_port → uart_unregister_driver
+最后关闭：shutdown → TTY 完成对象释放
+可卸载时：uart_remove_one_port → uart_unregister_driver
 ```
 
 `root_device_register()` 只为设备模型提供虚拟父设备，不代表物理 platform device。本例没有 MMIO 地址，也不会映射或申请硬件资源；真实设备通常在 platform 驱动的 `probe()` 获取资源后注册端口。
 
-端口注册失败时反向释放已注册的 driver 和父设备。卸载先移除端口，serial core 会解除该端口与 TTY 的关联并处理挂断，再注销 driver；使用异步中断、DMA、work 或 timer 的真实驱动，还必须先阻止新工作并同步所有在途回调。
+端口注册失败时反向释放已注册的 driver 和父设备。`uart_remove_one_port()` 摘除端口并挂断 TTY，但**挂断不是关闭所有 FD**；旧 FD 的释放路径仍可能访问 `uart_state` 内嵌的 `tty_port`。因此不能在 TTY 对象仍存活时调用会释放状态表的 `uart_unregister_driver()`。真实驱动还需同步 IRQ、DMA、work 或 timer 的异步访问。
+
+### 模块引用与卸载
+
+下表针对启用了 `CONFIG_MODULE_UNLOAD` 的测试内核；未启用该选项时，内核本身不支持卸载模块。
+
+| 内核行为 | 本例的卸载约束 |
+| --- | --- |
+| 未修复的 Linux 6.18.62：`uart_register_driver()` 没有把 `uart_driver.owner` 传给 `tty_driver.owner` | 两个示例在初始化成功后持有一个长期模块引用。即使关闭了所有 FD，普通 `rmmod` 也会被拒绝；用测试虚拟机重启清理，禁止强制卸载 |
+| core 在 `tty_register_driver()` 前正确设置了 TTY owner | TTY 打开时取得模块引用，最终释放 TTY 对象时归还；打开或已挂断但尚未关闭的 FD 会阻止普通卸载 |
+
+`dummy_uart_guard_module_unload()` 只在初始化时读取 owner 来选择保护方式，不改写已注册的 TTY driver；这是针对 6.18 示例的兼容检查，而不是通用 serial core API。不能仅在 `startup()` / `shutdown()` 之间持有引用：挂断可能先调用 `shutdown()`，而 FD 仍未关闭。设备树版本的 platform 解绑只摘除端口，不注销整个 `uart_driver`。
+
+要在 Linux 6.18.62 上验证可卸载路径，在**测试内核源码副本**的根目录中使用 `examples/uart/serial-core-tty-owner.patch`（把下列路径换成补丁所在的实际绝对路径）：
+
+```sh
+patch_file=/path/to/serial-core-tty-owner.patch
+git apply --check "$patch_file" && git apply "$patch_file"
+```
+
+补丁在 TTY driver 发布前设置 owner。重新构建并在虚拟机启动该内核，再用同一构建树编译两个示例；不需要修改宿主内核。
 
 ## 最小接口及作用
 
@@ -149,7 +171,7 @@ ls -l /sys/bus/platform/drivers/kb_dummy_uart_of/
 ls -l /dev/ttyDUMMY0
 ```
 
-然后使用下方 Python 回环测试，完成后执行 `sudo rmmod dummy_uart_of`；不要同时加载 `dummy_uart.ko`。
+然后使用下方 Python 回环测试；不要同时加载 `dummy_uart.ko`。清理方式取决于上面的模块引用策略。
 
 ## 发送和接收实现
 
@@ -214,7 +236,9 @@ finally:
 PY
 ```
 
-自注册版本测试后执行 `sudo rmmod dummy_uart`；设备树版本执行 `sudo rmmod dummy_uart_of`。打不开节点时先检查模块日志、节点权限和是否存在 `ttyDUMMY0`；收到多余字节时检查 raw / echo 和是否有其他进程占用。卸载前关闭所有使用该设备的程序，否则 `rmmod` 可能因模块仍被使用而失败。超时或内容不一致均不是通过；`2` 秒只是实验超时，不是 UART 的性能指标。
+- **未修复的内核**：看到 `unload disabled until reboot` 日志时，不尝试强制卸载；重启测试虚拟机清理。
+- **已修复的内核**：普通 `rmmod` 在仍有 FD 时应失败。关闭所有 FD 并等模块引用归零，再卸载 `dummy_uart` 或 `dummy_uart_of`。引用可用 `/sys/module/<模块名>/refcnt` 观察；TTY 对象异步释放时，最后一次 `close()` 返回不代表计数已归零。
+- 打不开节点先检查模块日志、设备路径和权限；数据不符时检查 raw / echo 和其他进程占用。`2` 秒只是实验超时，不是 UART 的性能指标。
 
 ## 迁移到硬件
 
@@ -229,4 +253,5 @@ PY
 ## 参考
 
 - Linux 6.18.62：[串口驱动 API](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/serial/driver.rst)、[串口通用 binding](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/devicetree/bindings/serial/serial.yaml)、[TTY buffer](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/tty/tty_buffer.rst)、[`serial_core.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/serial_core.h)、[`serial_core.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/tty/serial/serial_core.c)。
+- TTY 模块引用：[`tty_io.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/tty/tty_io.c) 的 `tty_init_dev()`、`release_tty()` 与 `release_one_tty()`。
 - 蜗窝科技：[串口框架概述](https://www.wowotech.net/comm/serial_overview.html)、[TTY 软件架构](https://www.wowotech.net/tty_framework/tty_architecture.html)。

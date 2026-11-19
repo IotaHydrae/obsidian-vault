@@ -18,36 +18,16 @@ DTS / DTSI → 编译为 DTB → 启动加载并传给内核
 → compatible 等信息参与匹配 → 驱动 probe 获取资源并初始化
 ```
 
-可由 platform 总线处理的节点可能生成 `platform_device`；I²C、SPI 等总线下的子节点通常由相应总线控制器枚举为自己的设备类型。
+内核可为根节点下的设备和受支持的总线（如 `simple-bus`）下的节点创建 `platform_device`；I²C、SPI 控制器下的外设子节点则由各自的总线框架实例化。父设备出现在 `/sys/bus/platform/devices/`，不表示其 I²C 或 SPI 外设也会出现在这个目录。
 
-| 属性 / 机制 | 用途与边界 |
+## 区分实例化和绑定
+
+| 现象 | 应追踪的阶段 |
 | --- | --- |
-| `compatible` | 按 binding 声明硬件兼容性；驱动使用匹配表匹配，具体顺序见 [[platform_match]] |
-| `status` | `disabled` 节点通常不会作为可用设备创建；还要检查父节点和实际运行的 DTB |
-| `reg` / `ranges` | 总线地址和转换由父总线规则决定；驱动获取已解析资源，不能把原始单元格直接当 CPU 指针 |
-| `interrupts` / `interrupt-parent` | 指向中断控制器及其格式；取得 Linux IRQ 后再注册处理，见 [[Linux IRQ Domain 与中断控制器]] |
-| `clocks`、`resets`、`*-supply`、`pinctrl-*` | 描述资源或供应者；获取失败需区分可选资源、配置错误与延迟探测 |
+| 运行时有 DT 节点，但在相应总线上找不到设备 | 实例化。先确认节点和父总线可用，并检查父驱动是否已注册相应总线 |
+| 有 `platform_device`，但没有 `driver` 链接 | 绑定。核对 `compatible`、模块和 [[platform_match|Platform 匹配顺序]]，再区分匹配不到、probe 失败和延迟探测 |
 
-`-EPROBE_DEFER` 不证明依赖最终一定可用；排查时核对对应供应者驱动及设备树 binding。
-
-设备树 bindings 描述属性的约束和单位；新增或修改节点时应以 Linux 6.18 的 binding 与实际硬件为准。`devm_*` 的自动回收也不替代停止中断、DMA 和工作线程，见 [[Kernel API - devres]]。
-
-## 匹配、资源与依赖
-
-同一硬件节点通常包含可匹配的 `compatible` 和资源引用。匹配由对应总线完成；platform、I²C 和 SPI 驱动获得的设备对象类型不同。节点名称只是组织名称，不能替代 binding 规定的 `compatible`。
-
-`reg` 的地址和长度由父节点的 `#address-cells`、`#size-cells` 解释；经过必要的 `ranges` 转换后，驱动通过总线资源 API 获取。中断 specifier 的单元数和含义则由对应中断控制器的 `#interrupt-cells` 定义。
-
-对于 clock、reset、regulator、GPIO 等引用，驱动应调用所属框架的 consumer API，而不是自己解析供应者的寄存器。供应者未就绪时，资源获取可能返回 `-EPROBE_DEFER`；必须把该错误传播到 probe，不能把它一律当作“可选资源不存在”。
-
-## 排查设备没有 probe
-
-1. 确认 bootloader 实际加载的 DTB 和运行时 `/sys/firmware/devicetree/base/` 中的节点，而不只检查工程里的 DTS。
-2. 核对节点与父节点可用、`compatible` 匹配以及对应内核驱动已编译或加载。
-3. 查看所属总线的 sysfs 设备、驱动链接和内核日志；设备不存在与匹配后 probe 失败是不同阶段。
-4. 若为延迟探测，继续定位未就绪供应者和 binding 所需属性；开启 debugfs 时可查看 `devices_deferred`。
-
-设备树只是硬件描述，不负责验证板级电路是否接对；资源解析成功也不能证明时钟和电源已正确使能。
+属性约束、schema 校验和供应者排查见 [[Linux 设备树 Binding 与依赖排查]]。对应驱动的 `probe()` 应在拿齐所需资源以后再启动 I/O；`devm_*` 回收不代替同步 IRQ、DMA 与工作线程，见 [[Kernel API - devres]]。
 
 ## Linux 6.18 源码入口
 
@@ -56,8 +36,6 @@ DTS / DTSI → 编译为 DTB → 启动加载并传给内核
 | Platform | `drivers/of/platform.c` 的 `of_platform_populate()` | 按节点和总线规则创建 platform 设备，不遍历所有节点为同一种设备 |
 | I²C | `drivers/i2c/i2c-core-of.c` 的 `of_i2c_register_devices()` | I²C adapter 就绪后按其子节点创建设备 |
 | SPI | `drivers/spi/spi.c` 的 `of_register_spi_devices()` | 依托 SPI controller 创建其子设备 |
-
-对应 driver `probe()` 中，应先验证资源获取结果，再启用硬件；probe 中任何一步失败都要回收已取得的状态，并保留正确的错误码。
 
 ## 参考
 

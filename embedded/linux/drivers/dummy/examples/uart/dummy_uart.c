@@ -38,6 +38,7 @@ static int __init dummy_uart_init(void)
 	ret = uart_add_one_port(&dummy_uart_driver, &dummy_uart_port);
 	if (ret)
 		goto unregister_driver;
+	dummy_uart_guard_module_unload(&dummy_uart_driver);
 	pr_info("dummy UART: ttyDUMMY0\n");
 	return 0;
 

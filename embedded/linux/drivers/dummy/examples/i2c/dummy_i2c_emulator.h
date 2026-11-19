@@ -14,6 +14,12 @@ struct dummy_i2c_state {
 	u8 value;
 };
 
+static bool dummy_i2c_msg_matches(const struct i2c_msg *msg, u16 flags, u16 len)
+{
+	/* I2C_M_DMA_SAFE describes the buffer, not the wire protocol. */
+	return (msg->flags & ~I2C_M_DMA_SAFE) == flags && msg->len == len;
+}
+
 static int dummy_i2c_xfer(struct i2c_adapter *adapter,
 			  struct i2c_msg *msgs, int num)
 {
@@ -25,7 +31,7 @@ static int dummy_i2c_xfer(struct i2c_adapter *adapter,
 			return -ENXIO;
 	}
 
-	if (num == 1 && msgs[0].flags == 0 && msgs[0].len == 2) {
+	if (num == 1 && dummy_i2c_msg_matches(&msgs[0], 0, 2)) {
 		if (msgs[0].buf[0] == DUMMY_I2C_ID_REG)
 			return -EACCES;
 		if (msgs[0].buf[0] != DUMMY_I2C_VALUE_REG)
@@ -34,8 +40,8 @@ static int dummy_i2c_xfer(struct i2c_adapter *adapter,
 		return 1;
 	}
 
-	if (num == 2 && msgs[0].flags == 0 && msgs[0].len == 1 &&
-	    msgs[1].flags == I2C_M_RD && msgs[1].len == 1) {
+	if (num == 2 && dummy_i2c_msg_matches(&msgs[0], 0, 1) &&
+	    dummy_i2c_msg_matches(&msgs[1], I2C_M_RD, 1)) {
 		switch (msgs[0].buf[0]) {
 		case DUMMY_I2C_ID_REG:
 			msgs[1].buf[0] = DUMMY_I2C_ID;

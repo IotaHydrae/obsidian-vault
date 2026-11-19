@@ -148,6 +148,8 @@ sudo rmmod dummy_i2c_client
 
 第二种格式是一次调用内的两个 message，语义上对应写寄存器地址后 repeated START 再读取。它们不会在本例中产生电气信号。对 ID 写入返回 `-EACCES`，不存在的寄存器返回 `-EINVAL`；不支持多字节寄存器和其他协议格式。
 
+`I2C_M_DMA_SAFE` 只描述内核缓冲区，不改变线上事务。`i2c-dev` 的 `I2C_RDWR` 路径复制用户数据后会设置这个位；模拟器比较消息方向和长度时忽略该位，其他不支持的标志仍然拒绝。同一合法报文带或不带该位应得到相同的返回值和数据，不能把它当成启用 DMA 的命令。
+
 设备驱动读取时要检查完成的消息数量：
 
 ```c
@@ -209,4 +211,5 @@ sudo rmmod dummy_i2c_client
 ## 参考
 
 - Linux 6.18.62：[`i2c.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/i2c.h)、[I²C core 的 DT 枚举](https://github.com/gregkh/linux/blob/v6.18.62/drivers/i2c/i2c-core-of.c)、[I²C client 驱动](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/writing-clients.rst)、[DMA 注意事项](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/dma-considerations.rst)、[i2c-stub](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/i2c/i2c-stub.rst)。
+- [`i2c-dev.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/i2c/i2c-dev.c)：`i2cdev_ioctl_rdwr()` 处理用户态缓冲区和 `I2C_M_DMA_SAFE`。
 - 蜗窝科技：[I²C 软件架构](https://www.wowotech.net/comm/i2c_overview.html)、[I²C provider](https://www.wowotech.net/comm/i2c_provider.html)。

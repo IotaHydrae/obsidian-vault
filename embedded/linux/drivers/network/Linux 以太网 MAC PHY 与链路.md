@@ -6,7 +6,7 @@
 
 - 没有 carrier 先检查 PHY、MDIO、复位、时钟、供电和对端。
 - 有 carrier 但无法通信，再依次检查地址、路由、邻居表、防火墙和服务。
-- RGMII 的 PHY / MAC / PCB 延迟必须按各自责任配置，不能重复插入。
+- RGMII 的 DTS `phy-mode` 描述 PCB 已提供的延迟；传给 PHY 的接口模式描述它还要补哪一向。不要把两者混为一谈。
 
 适用范围：Linux 6.18 LTS。
 
@@ -27,8 +27,6 @@ PHY 接口模式、PHY 地址、复位、时钟、供电和时序由硬件与设
 
 MAC 驱动注册网络设备并与 PHY / phylink 等机制协作；MDIO 总线负责访问 PHY 寄存器，PHY 驱动解析能力、协商结果和链路状态。具体系统也可能使用固定链路、交换芯片或其他拓扑，不能假定每个网络接口都对应独立外置 PHY。
 
-对于常见 RGMII 配置，Linux 文档从 PHY 的角度说明延迟责任：`rgmii` 表示 PHY 不负责插入内部延迟，`rgmii-id` 表示 PHY 负责双向内部延迟，`rgmii-rxid` / `rgmii-txid` 分别指对应方向。MAC 驱动、PHY 驱动、板级走线及 binding 必须一起核对；方向名称不能仅凭网线的收发方向猜测。
-
 ## 分层验证
 
 | 检查点 | 典型命令或观察 | 结论边界 |
@@ -43,13 +41,16 @@ MAC 驱动注册网络设备并与 PHY / phylink 等机制协作；MDIO 总线�
 
 ## RGMII 延迟责任
 
-| PHY 接口模式 | Linux PHY 文档中的责任 |
-| --- | --- |
-| `rgmii` | PHY 不负责内部延迟，需要由 MAC、PCB 或其他硬件满足时序 |
-| `rgmii-id` | PHY 在两个方向插入内部延迟 |
-| `rgmii-rxid` / `rgmii-txid` | PHY 在对应方向插入内部延迟 |
+| 名称 | 用作 DTS `phy-mode`：PCB 已提供的延迟 | 传给 PHY 驱动的接口模式：PHY 要加的延迟 |
+| --- | --- | --- |
+| `rgmii` | RX、TX 两向都已提供 | 不额外加延迟 |
+| `rgmii-id` | 两向都未提供 | RX、TX 都加 |
+| `rgmii-rxid` | 只提供 TX | 只加 RX |
+| `rgmii-txid` | 只提供 RX | 只加 TX |
 
-以上描述 PHY 侧接口语义；最终配置仍要核对 MAC / PHY 驱动实现和硬件 binding。MAC 与 PHY 同时插入同一路延迟、两者都没有提供需要的延迟，或板级走线设计不匹配，都可能造成错误帧。应比较链路协商、错误统计和实测时序，不靠反复修改 `phy-mode` 碰运气。
+Linux 的 phylib / phylink 路径默认由 MAC 把 DTS 值传给 PHY 补齐延迟。如果 MAC 必须自行加延迟，DTS 仍按 PCB 填写，MAC 驱动须从传给 PHY 的模式里去掉已由 MAC 补偿的方向。例如 PCB 两向都没有延迟、MAC 硬件提供双向延迟时，DTS 仍是 `rgmii-id`，传给 PHY 的才是 `PHY_INTERFACE_MODE_RGMII`。如果 PCB 和 MAC 都有无法关闭的同向延迟，则该组合本身不受支持。
+
+RX / TX 指 RGMII 接口方向，不要按网线方向猜测；按原理图及走线、MAC / PHY binding、驱动实际配置和测量结果核对。少加或重复加入同一路延迟都可能造成错误帧，即使 PHY 已报告 carrier。
 
 ## 分辨链路与 IP 问题
 
@@ -65,4 +66,4 @@ MAC 驱动注册网络设备并与 PHY / phylink 等机制协作；MDIO 总线�
 ## 参考
 
 - 蜗窝科技：[PHY 与 MDIO 初始化](https://www.wowotech.net/linux_kenrel/470.html)、[以太网驱动 probe](https://www.wowotech.net/linux_kenrel/469.html)。
-- Linux 6.18.62：[PHY 驱动框架](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/networking/phy.rst)、[设备树以太网 PHY binding](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/devicetree/bindings/net/ethernet-phy.yaml)。
+- Linux 6.18.62：[PHY 驱动框架](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/networking/phy.rst)、[以太网控制器 binding 的 RGMII 说明](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/devicetree/bindings/net/ethernet-controller.yaml)、[以太网 PHY binding](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/devicetree/bindings/net/ethernet-phy.yaml)。

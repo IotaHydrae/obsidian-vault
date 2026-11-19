@@ -6,7 +6,7 @@
 
 - [[通过 dummy I2C adapter 驱动了解 i2c adapter 驱动框架]]：虚拟 I²C adapter、寄存器设备和 client 驱动。
 - [[Linux Dummy SPI 控制器与设备]]：虚拟 SPI controller、片选设备和同步回环传输。
-- [[Linux Dummy UART 驱动]]：基于 serial core 的单端口 TTY 软件回环。
+- [[Linux Dummy UART 驱动]]：基于 serial core 的单端口 TTY 软件回环；未修复 TTY owner 传递的内核上禁止普通模块卸载。
 - 每种示例都提供自注册版本和设备树版本；文章分别说明需要的接口、调用路径、DTS 节点和绑定方式。
 - `examples/` 的模块编译依赖目标内核构建树；设备树版本还需 `CONFIG_OF` 和包含相应节点的测试 DTB。加载前应在可恢复的环境确认内核和权限。
 
