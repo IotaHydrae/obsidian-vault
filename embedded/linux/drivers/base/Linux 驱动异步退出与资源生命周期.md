@@ -46,12 +46,23 @@ timer ────┘             ↑                           │
 
 ## 常见竞态
 
-- **IRQ 在 cancel 后重新排队 work**：先停止并同步 IRQ 生产者，再取消 work。
+- **IRQ 在 cancel 后重新排队 work**：先关闭设备侧事件源，再撤销或阻断该 action 的提交路径，最后取消 work。
 - **timer 与 work 互相重启**：阻止外部入口，用适当的 timer shutdown 和 work 同步拆除循环。
 - **DMA 超时后立刻 free**：超时不是终止成功；确认硬件和回调不会再访问 buffer 后再 unmap/free。
 - **`devm_kfree` / 自动回收被当作停机**：受管释放按设备资源生命周期执行，但不会自动理解硬件和异步依赖。
 
 具体 API 契约见 [[Kernel API - workqueue]]、[[Kernel API - timer_setup]]、[[Linux DMAEngine 数据传输]] 和 [[threaded-irq]]。
+
+### 共享 IRQ、timer 和 work 的退出例子
+
+假设共享 IRQ 和 timer 都能排队 work，work 也能重新 arm timer；没有必须依赖 IRQ 才能完成的停机握手。相应的 `remove()` 顺序是：
+
+1. 在提交者使用的锁或等价串行化机制下设置 `stopping`，让“检查仍可提交”和“实际排队”没有撤销间隙；退出这把锁后再等待回调。正在运行的 work 不应在停机后恢复设备中断。
+2. 在设备仍可访问时屏蔽并按器件要求清除自己的中断源。用 `free_irq(irq, dev_id)` 撤销本设备的 action；若本来由 `devm_request_threaded_irq()` 注册且需要在 `remove()` 中提前撤销，改用 `devm_free_irq()`，不要混用两套释放接口。
+3. `timer_shutdown_sync()` 阻止 work 将 timer 重新启动，然后 `cancel_work_sync()` 等 work 完成。`synchronize_irq()` 本身不会注销 action：只要还挂在共享线上，其他设备的中断仍可能进入本设备的 handler。
+4. 停用时钟、供电和映射，释放对象。已打开的用户接口若仍持有引用，应在解绑后拒绝新的 I/O，按该接口的生命周期等引用释放；注销节点不等于关闭现有 FD。
+
+如果停机必须等待设备 IRQ 或 DMA 完成，保留所需的回调到握手结束，再撤销；不要机械照搬屏蔽顺序。
 
 ## 验证
 

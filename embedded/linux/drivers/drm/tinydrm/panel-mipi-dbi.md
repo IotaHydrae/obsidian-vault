@@ -7,6 +7,7 @@
 - DBI 是控制器接口，DSI 是另一类显示链路；不要把 DBI 面板当作 DSI 面板配置。
 - 驱动通过第一个 `compatible` 加 `.bin` 加载初始化固件；文件名、格式和设备控制器必须匹配。
 - `panel-timing` 的分辨率及偏移、SPI、供电、reset、D/C、背光和像素格式都需要按实际硬件设置。
+- 6.18.62 的驱动实际只接受 `r5g6b5` 和 `b6x2g6x2r6x2`；不能只看 binding 的枚举选 `format`。
 - DRM 节点出现不代表面板已显示正确图像；需分别验证固件、供电、像素传输和画面。
 
 范围：Linux 6.18.62 的 `drivers/gpu/drm/tiny/panel-mipi-dbi.c` 和对应 DT binding。
@@ -23,20 +24,68 @@ SPI 设备匹配 → panel_mipi_dbi_spi_probe()
 
 Linux 6.18.62 的驱动在 `panel_mipi_dbi_commands_from_fw()` 读取 `compatible` 的第一个字符串并追加 `.bin`。固件由 `request_firmware()` 查找，失败时 probe 无法完成；固件路径与排查见 [[Kernel API - request_firmware]]。
 
-固件包含受驱动检查的头部和命令序列。命令、参数数量及延时格式必须符合驱动定义；初始化值应来自面板控制器和模块资料，不能把另一款屏的固件直接复用。不要把任意 DTS `compatible` 写成示例值后就假定绑定和固件兼容。
+### 初始化固件怎么读
+
+| 位置 | 6.18.62 驱动的解释 |
+| --- | --- |
+| 前 15 字节 | ASCII `MIPI DBI` 后补七个 `00` |
+| 第 16 字节 | 文件格式版本 `01` |
+| 此后每条记录 | `命令字节 参数数量 参数…`；参数数量不含命令自身 |
+| `00 01 78` | 特殊记录，等待 `0x78` = 120 ms，不向面板发送这三个字节 |
+
+例如 `11 00` 是无参数的 Sleep Out 命令。`od -Ax -tx1 -N 24 /实际路径/sainsmart18.bin` 可查看头部和首条记录；驱动用 `panel_mipi_dbi_check_commands()` 检查头部、长度和版本，但不能验证命令是否适用于实际屏幕。初始化值来自面板控制器和模块资料。这个 `.bin` 格式不是 DSI BSP 的 `panel-init-sequence`。
 
 ## 硬件和设备树
 
 | 项目 | 要核对什么 |
 | --- | --- |
 | `compatible` / `reg` | binding 允许的具体面板标识、通用 `panel-mipi-dbi-spi` 及片选 |
-| SPI 与 D/C | 独立 `dc-gpios` 的 8 位方式或适用的 9 位方式；控制器能力和接线一致 |
+| SPI 与 D/C | 有 `dc-gpios` 走 Type C Option 3；无此 GPIO 走 Option 1，D/C 编入第 9 位。控制器不支持 9 bit 时，驱动可打包成 8 bit SPI 传输 |
 | `reset-gpios`、供电与背光 | 有效极性、上电顺序、时序与电平匹配 |
 | `write-only` | 控制器读取线路未连接时按 binding 标记；不能用它掩盖其他通信故障 |
 | `panel-timing` | `hactive` / `vactive`，及 binding 中定义的可选偏移；不能当作普通视频面板 porch 模板 |
-| `format` | 面板支持的 RGB/BGR 位布局；与初始化命令和 framebuffer 格式一致 |
+| `format` | 目标线上的像素布局；与初始化命令一致。不写默认 `r5g6b5`，其他值须查 `panel_mipi_dbi_formats[]` |
 
-`dc-gpios`、SPI 三线/四线、位宽和速率都由控制器与线路共同约束；binding 中的示例值不是目标板的通用参数。面板 `hback-porch` / `vback-porch` 在此 binding 中用于显示区域偏移，检查驱动计算后再设定。
+### DTS 示例：有 D/C 引脚的 160 × 128 SPI 屏
+
+以下是基于 6.18.62 binding 的 `sainsmart18` 示例组织的板级片段。`spi0`、`gpio`、`backlight` 必须是目标 DTS 中的实际标签；引脚、频率、供电和屏幕型号必须对应电路。不要同时声明同片选的另一个设备。
+
+```dts
+#include <dt-bindings/gpio/gpio.h>
+
+&spi0 {
+    #address-cells = <1>;
+    #size-cells = <0>;
+    status = "okay";
+
+    display@0 {
+        compatible = "sainsmart18", "panel-mipi-dbi-spi";
+        reg = <0>;
+        spi-max-frequency = <40000000>;
+        dc-gpios = <&gpio 24 GPIO_ACTIVE_HIGH>;
+        reset-gpios = <&gpio 25 GPIO_ACTIVE_HIGH>;
+        write-only;
+        backlight = <&backlight>;
+        width-mm = <35>;
+        height-mm = <28>;
+        format = "r5g6b5";
+
+        panel-timing {
+            clock-frequency = <0>;
+            hactive = <160>;
+            vactive = <128>;
+            hfront-porch = <0>;
+            hback-porch = <0>;
+            hsync-len = <0>;
+            vfront-porch = <0>;
+            vback-porch = <0>;
+            vsync-len = <0>;
+        };
+    };
+};
+```
+
+`reg = <0>` 选 CS0，第二个兼容串绑定通用驱动，第一个兼容串决定请求 `sainsmart18.bin`。`hback-porch` / `vback-porch` 在这里是显存窗口的 x/y 偏移，不是视频信号的消隐长度。若电路有独立逻辑电源，按 binding 补 `power-supply` / `io-supply`。核对 reset 时看实际电平：本驱动的 `mipi_dbi_hw_reset()` 输出 GPIO 逻辑 `0` 再 `1`；按示例的 `GPIO_ACTIVE_HIGH` 且没有外部反相时，得到先拉低、再拉高的波形。
 
 ## 失败定位
 

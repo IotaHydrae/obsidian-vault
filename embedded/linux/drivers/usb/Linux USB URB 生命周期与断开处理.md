@@ -4,7 +4,7 @@
 
 ## TL;DR
 
-- `usb_submit_urb()` 成功表示请求已排队，不表示数据传输成功；成功提交后完成回调只执行一次。
+- `usb_submit_urb()` 成功不表示数据传输成功；一次成功提交对应一次完成。调用前就要发布回调所需状态，因为回调可能在提交函数返回前发生。
 - 回调检查 `urb->status` 和 `urb->actual_length`；它不能按可睡眠普通线程编写，重新提交须使用适当 GFP 标志和停止协议。
 - `usb_unlink_urb()` 异步取消；`usb_kill_urb()` 等待该 URB 的回调结束，可能睡眠，不能在回调或持有回调所需锁时调用。
 - disconnect 先阻止新提交和回调重提交，再同步取消在途请求、停止工作并释放对象；`usb_free_urb()` 不自动停止在途传输。
@@ -26,7 +26,7 @@ flowchart TD
     Idle --> Free["停止所有用户后 usb_free_urb 和释放 buffer"]
 ```
 
-一次成功提交对应一次完成；URB 在完成前，除接口允许的少数场景外，不应由驱动并发修改其字段或复用 buffer。一个 URB 可能由多个 USB 事务和数据包完成；usbmon 的软件请求记录不等于总线抓到的每个包。
+从调用 `usb_submit_urb()` 开始，不能在另一条路径无同步地改写 URB 或 buffer；USB core 在完成时把所有权交给回调，回调可按约定重新提交。任何由回调读取的状态和引用都应在首次提交前准备好，不要等成功返回才初始化。一个 URB 可能对应多个总线事务；usbmon 的软件请求记录不等于总线上的每个包。
 
 ## 关键接口
 
@@ -112,6 +112,15 @@ static void sample_rx_stop(struct sample_rx *ctx)
 
 多 URB 场景中先 anchor 再提交；提交失败时撤销该 URB 的 anchor，并按引用约定释放。`usb_kill_anchored_urbs()` 可同步处理 anchor 中的请求，但其他生产者仍可能继续添加新 URB，必须先停止它们。USB 接口绑定与协议见 [[USB 2.0 设备的枚举过程]]。
 
+| 断开时仍可能活跃的路径 | 收尾方法 |
+| --- | --- |
+| 文件操作、work 或完成回调会提交 URB | 用与提交路径一致的锁或串行化协议关闭入口；只检查一次停止标志不能消除“检查后、提交前”的竞态 |
+| 用 anchor 跟踪的异步请求 | 阻止新提交后调用 `usb_kill_anchored_urbs()`；不要用 `usb_anchor_empty()` 代替同步。6.18.62 的 giveback 会先从 anchor 摘掉请求、再执行回调，kill 还检查正在执行的 giveback |
+| 回调排队的 work | 在最后一个生产者退出后 `cancel_work_sync()`；等待时不持有回调或 work 所需的锁 |
+| `usb_bulk_msg()` / `usb_control_msg()` | 同步 helper 的内部 URB 不暴露给驱动；disconnect 需用自己的并发协议等调用结束，不能靠杀外部 anchor 取消 |
+
+若字符设备仍有打开的 FD，解绑后让新 I/O 返回设备已离线，同时保留 FD 和回调仍引用的对象。实际例子见 `usb-skeleton.c` 的 disconnect、请求同步和 `kref` 路径；一般驱动的同步顺序见 [[Linux 驱动异步退出与资源生命周期]]。
+
 ## 排查
 
 | 现象 | 优先检查 |
@@ -127,4 +136,5 @@ USB 传输错误码要结合提交/完成阶段和控制器日志；取消和断
 ## 参考
 
 - Linux 6.18.62：[`urb.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/usb/core/urb.c)、[`usb.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/usb.h)、[USB anchors](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/usb/anchors.rst)、[USB 错误码](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/usb/error-codes.rst)。
+- [USB URB 文档](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/usb/URB.rst)、[`hcd.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/usb/core/hcd.c) 的 giveback 与 anchor 唤醒同步。
 - [USB skeleton](https://github.com/gregkh/linux/blob/v6.18.62/drivers/usb/usb-skeleton.c)：参考真实驱动的提交、取消和 disconnect 同步；具体设备仍需自己的协议和生命周期设计。

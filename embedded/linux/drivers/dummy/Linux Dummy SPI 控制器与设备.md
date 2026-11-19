@@ -16,9 +16,10 @@
 
 ```text
 写入：value_store → dummy_spi_loopback → spi_sync_transfer
-     → SPI core 组织 message / transfer、排队并调度
-     → transfer_one → TX 字节复制到 RX → 返回 0
-     → core 完成 message → 客户端比较 TX / RX
+     → spi_sync 提交 message；core 可直走或排队
+     → spi_transfer_one_message 遍历 transfer
+     → transfer_one 将 TX 复制到 RX → 返回 0
+     → spi_finalize_current_message → 客户端比较 TX / RX
 读取：value_show → 返回最近一次接收值；本例读取属性本身不发起传输
 ```
 
@@ -95,7 +96,7 @@ spi-dummy {
 | 子设备 `reg = <0>` | 选择 CS0，不是寄存器物理地址；必须小于本例的 `num_chipselect` |
 | `spi-max-frequency` | 设备允许的最高 SPI 时钟；本例只保存参数，不产生时钟 |
 
-子节点没有 `spi-cpol` 和 `spi-cpha`，对应 mode 0，与虚拟 controller 能力一致。这里没有真实 GPIO 片选、MMIO、时钟或中断，不应虚构这些资源；实板属性需遵循具体 controller 和外设 binding。
+子节点没有 `spi-cpol` 和 `spi-cpha`，对应 mode 0，与虚拟 controller 能力一致。`spi-tx-bus-width` / `spi-rx-bus-width` 描述数据线数量，不是每字的位数；本例的 8 bit 由 controller 的 `bits_per_word_mask` 限定。这里没有真实 GPIO 片选、MMIO、时钟或中断；实板属性需遵循具体 controller 和外设 binding。
 
 `dummy_spi_of_probe()` 在注册之前关联控制器节点并填写能力；完整 platform 匹配和资源分配见对应源码：
 
@@ -160,6 +161,32 @@ return 0;
 `transfer_one()` 同步完成返回 `0`，失败返回负错误码；需要等待 IRQ / DMA 等异步完成时返回 `1`，并在完成时调用 `spi_finalize_current_transfer()`，异步失败需先设置 `SPI_TRANS_FAIL_IO`。这和自行实现 `transfer_one_message()`、使用 `spi_finalize_current_message()` 是不同的回调契约，不应混用。本例没有异步操作，不能额外调用完成接口。
 
 `spi_message` 可以包含多个 transfer，其片选保持、延时和设备协议由 API 配置与控制器能力决定。本例没有真正的 `set_cs`、时钟或片选信号；名义的 1 MHz 只是设备参数。驱动使用独立的动态 TX / RX 缓冲并在同步调用返回前保持有效；迁移到 DMA 控制器时还需遵循目标平台和 SPI API 的 DMA 缓冲要求。`spi_sync_transfer()` 可能睡眠，不应在硬中断或持有不可睡眠锁时调用。
+
+### 一个 message 内先写后读
+
+在已匹配的虚拟 `spi_device` 上，比较两种设计：单条全双工 transfer 的 RX 等于 TX；一条 TX-only 接一条 RX-only 的 RX 为 `ff ff`，因为本例不保存上一条 transfer 的内容。下面的片段以第二种设计为检查项；调用者从可睡眠上下文传入两个独立、至少两字节的 DMA 兼容缓冲区，并已填好 TX：
+
+```c
+static int dummy_spi_check_split(struct spi_device *spi, const u8 *tx, u8 *rx)
+{
+    struct spi_transfer xfers[] = {
+        { .tx_buf = tx, .len = 2 },
+        { .rx_buf = rx, .len = 2 },
+    };
+    struct spi_message msg;
+    int ret;
+
+    spi_message_init_with_transfers(&msg, xfers, ARRAY_SIZE(xfers));
+    ret = spi_sync(spi, &msg);
+    if (ret)
+        return ret;
+    if (msg.actual_length != 4 || rx[0] != 0xff || rx[1] != 0xff)
+        return -EIO;
+    return 0;
+}
+```
+
+默认 `cs_change = 0` 的两条 transfer 在普通硬件 host 上通常保持同一次片选，分成两次 `spi_sync()` 则不能要求片选保持或阻止其他消息插入。`actual_length` 是各 transfer 完成长度之和；一条 2 字节全双工 transfer 仍只记 2 字节，不把 TX 和 RX 相加。虚拟测试不验证片选波形。
 
 ## 构建和验证
 

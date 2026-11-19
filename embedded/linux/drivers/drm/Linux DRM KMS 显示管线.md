@@ -39,6 +39,13 @@ framebuffer 记录图像的尺寸、像素格式、stride、偏移和底层存�
 3. commit 后由驱动按同步和硬件要求更新状态；framebuffer、fence 和相关对象必须保持有效到允许释放的时机。
 4. 输出仍需经过 bridge / panel、供电和背光；显示控制器状态正常不等于物理链路已就绪。
 
+| 提交标志或属性 | 排查时的用途 |
+| --- | --- |
+| `DRM_MODE_ATOMIC_TEST_ONLY` | 检查这一组属性是否可用，不改变当前显示状态；不能据此证明画面已切换 |
+| `DRM_MODE_ATOMIC_ALLOW_MODESET` | 允许需要 modeset 的状态变化；对同一组属性带和不带它做 `TEST_ONLY` 可区分是否需要 modeset |
+| `DRM_MODE_ATOMIC_NONBLOCK` | 不等待完整的硬件提交完成；用户态根据请求的 page-flip 事件或 CRTC out-fence 判断完成，不用 ioctl 返回时间推断上屏 |
+| plane `IN_FENCE_FD` / CRTC `OUT_FENCE_PTR` | 支持时分别表达输入缓冲何时可用、这次输出提交何时完成；检查对象是否公开对应属性 |
+
 KMS 对象 ID、`/dev/dri/cardN` 编号和驱动提供的 debugfs 信息会因硬件与启动顺序变化；调试时结合设备拓扑，不硬编码数字。
 
 ## Linux 6.18 源码入口
@@ -66,7 +73,7 @@ EDID 只适用于提供该信息的连接方式；固定时序面板不一定有
 3. 花屏或颜色错误时检查分辨率、时序、格式、stride、总线位宽和 buffer 内容。
 4. 间歇问题再看 atomic 提交、buffer / fence 生命周期及 DMA 同步。
 
-工具和 debugfs 节点依内核配置、权限与驱动而异；具体 MIPI DSI / DBI 面板配置见 [[simple-panel-dsi]]、[[panel-mipi-dbi]]。
+有限制地读取 `dri/<DRM minor>/state`（若启用 debugfs 和 atomic 状态输出，通常在 `/sys/kernel/debug/` 下）；先确认对应的 DRM 设备，再对照 connector 的 `crtc`、CRTC 的 `active` / `mode` 和主 plane 的 `fb` / `crtc`。`status=connected` 但没有活动 CRTC 是路由或提交未成立；活动 CRTC 上没有有效 framebuffer 时，应查 plane，不能先归因于背光。这里读取的是软件状态，不触发 modeset。具体 MIPI DSI / DBI 配置见 [[simple-panel-dsi]]、[[panel-mipi-dbi]]。
 
 ## 参考
 

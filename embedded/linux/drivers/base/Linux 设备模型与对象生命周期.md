@@ -35,13 +35,25 @@ Platform 总线的匹配顺序见 [[platform_match]]；设备树如何产生对�
                              ├→ 成功：开放设备接口
                              └→ 失败 / -EPROBE_DEFER：尚未绑定
 
-停止新请求 → remove / 关闭硬件 → 回收受管理资源 → 最后引用释放对象
+驱动解绑：停止新请求 → remove / 关闭硬件 → 回收本次绑定的 devres
+设备注销：从模型移除设备 → 归还注册引用 → 最后一个引用触发 release
 ```
 
 - **match** 只回答驱动是否适合该设备；**probe** 还要完成供电、资源获取和硬件初始化，可能失败。
 - `-EPROBE_DEFER` 常用于供应者尚未就绪；内核会在合适的时机再次尝试，驱动不应把它转换为成功。
 - remove 完成不等于 `struct device` 立即释放。其他代码可能仍持有引用；release 回调负责对象最终释放。
 - `dev_set_drvdata()` 保存驱动私有指针，不自动延长该指针的生命周期，也不让并发读取自动安全。
+
+### 注册与引用怎样配对
+
+| 操作 | 能保证什么 |
+| --- | --- |
+| `device_initialize()` → `device_add()` | 建立初始引用，再把设备发布到模型；`device_add()` 失败也要 `put_device()`，不能直接 `kfree()` |
+| 驱动解绑 | 设备可以仍在总线上并重新绑定；之前的 `dev_get_drvdata()` 结果不能跨解绑复用 |
+| `device_unregister()` | 调 `device_del()` 移除设备，再 `put_device()` 归还初始引用；有其他引用时 `release` 延后 |
+| `get_device()` / `put_device()` | 只延长设备对象寿命，不延长当前驱动绑定、时钟或 `devm_*` 私有数据的寿命 |
+
+使用总线已有的创建设备接口时，按它的成对接口注销；不要再对同一设备额外执行 `device_del()` 或归还并不属于调用者的引用。
 
 ## sysfs、class 与引用
 

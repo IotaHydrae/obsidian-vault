@@ -35,12 +35,14 @@ DMA 地址不能用 CPU 虚拟地址或物理地址替代；DMA mask、映射方
 | --- | --- |
 | 请求通道 | `dma_request_chan()` 按设备和通道名获取；检查 `ERR_PTR`，不再使用后调用 `dma_release_channel()` |
 | 配置外设传输 | `dmaengine_slave_config()` 配置外设地址、宽度和突发等；值取自控制器及外设能力 |
-| 映射 scatterlist | 取 `dmaengine_get_dma_device(chan)`，使用对应 DMA 设备和方向映射 |
-| 准备事务 | `dmaengine_prep_slave_sg()` 接收映射后的有效段数；`NULL` 表示准备失败 |
-| 提交并启动 | 设置回调后 `dmaengine_submit()`，检查 cookie，再调用 `dma_async_issue_pending()` |
+| 映射 scatterlist | 取 `dmaengine_get_dma_device(chan)`，使用对应 DMA 设备和方向 `dma_map_sg()`；返回 `0` 是失败 |
+| 准备事务 | `dmaengine_prep_slave_sg()` 接收映射后的有效段数；`NULL` 表示准备失败，此时已成功的映射仍要撤销 |
+| 提交并启动 | 先设好 callback 与上下文，`dmaengine_submit()` 后用 `dma_submit_error()` 检查 cookie；成功才调用 `dma_async_issue_pending()` |
 | 完成或退出 | 完成后按映射契约同步 / unmap；终止路径先确保 DMA 和回调不再访问内存 |
 
 `dma_map_sg()` 可以合并相邻段：传给准备函数的是**返回的 DMA 段数**；`dma_unmap_sg()` 使用映射时的**原始输入段数**。映射方向 `DMA_TO_DEVICE` / `DMA_FROM_DEVICE` 与 DMAEngine 的 `DMA_MEM_TO_DEV` / `DMA_DEV_TO_MEM` 是不同枚举，语义必须一致。
+
+例如外设 RX 的原始 scatterlist 有 4 段，映射返回 2，则准备描述符时传 2；撤销时用相同 DMA device、scatterlist、`DMA_FROM_DEVICE` 和原始段数 4。回调只通知完成时可唤醒等待者；若还会在通知之后访问请求对象，等待者不能仅凭这次通知释放对象。
 
 ### 外设通道配置
 
@@ -56,15 +58,16 @@ DMAEngine client 回调由 DMAEngine 的 tasklet 调用，不是可睡眠的普�
 
 - 一次性传输：等待完成后读取结果，确认设备和回调结束，再处理缓冲区。
 - cyclic 传输：周期回调不代表整条流结束；停止数据源和通道后再回收环形缓冲区。
-- `dmaengine_terminate_sync()` 等待 DMA 及运行中的回调结束，应在允许睡眠的上下文调用。
+- `dmaengine_terminate_sync()` **成功**才证明通道及相关回调已同步；应在允许睡眠的上下文调用，不能在该通道完成回调中调用。不完整事务经终止后不会补发完成回调。
 - 必须从原子上下文发起停止时，可先异步终止，再在合适上下文同步；内存释放必须等同步完成。
 
-异步终止可使用 `dmaengine_terminate_async()`，再在允许等待的上下文调用 `dmaengine_synchronize()`。两者之间不能重新调用 `dma_async_issue_pending()`；同步完成前也不能释放回调上下文、描述符相关缓冲区或驱动对象。最终仍须检查终止接口的返回结果和 provider 支持情况。
+异步终止可使用 `dmaengine_terminate_async()`，成功后再在可睡眠上下文调用 `dmaengine_synchronize()`。两者之间不能重新调用 `dma_async_issue_pending()`。若终止失败，不能直接撤销映射或释放回调上下文；先按 provider 契约恢复或取得别的停机证据。
 
-排查超时时，依次核对通道绑定、方向与外设 FIFO 地址、请求线配置、映射设备、长度以及 completion / 回调；超时本身不能证明 DMA 已经停止。
+排查超时时，先区分没有启动（通道、方向、描述符、`issue_pending`）、没有设备请求（握手、FIFO 地址、水位）、传输后没有收到完成（IRQ、provider、回调）。`dmatest` 通过只说明测试的内存操作通道正常，不能证明 slave DMA 的外设握手或 cyclic 流工作。
 
 ## 参考
 
 - 蜗窝科技：[DMAEngine 概述](https://www.wowotech.net/linux_kenrel/dma_engine_overview.html)、[DMAEngine API](https://www.wowotech.net/linux_kenrel/dma_engine_api.html)。
 - Linux 6.18.62：[DMAEngine client](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/dmaengine/client.rst)、[DMA API HOWTO](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/core-api/dma-api-howto.rst)。
+- [dmatest 的覆盖范围](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/dmaengine/dmatest.rst)。
 - Linux 6.18.62：[`include/linux/dmaengine.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/dmaengine.h)：submit、issue pending、terminate 和 synchronize 的接口契约。
