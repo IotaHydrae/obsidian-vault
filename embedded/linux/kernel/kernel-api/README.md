@@ -9,6 +9,7 @@
 | 分配对象、数组或大块内存 | [kmalloc / kzalloc / kcalloc](Kernel%20API%20-%20kmalloc.md) | GFP 上下文、尺寸溢出、连续性和释放配对 |
 | 随设备绑定回收资源 | [devres](Kernel%20API%20-%20devres.md) | 逆序清理不替代停止设备和同步回调 |
 | 从嵌入成员找回外层对象 | [container_of](Kernel%20API%20-%20container_of.md) | 来源、生命周期和 const；新代码优先保留 const |
+| 在用户和内核之间复制数据 | [copy_from_user / copy_to_user](Kernel%20API%20-%20copy_user.md) | 未复制字节数、可睡眠上下文与不可信长度 |
 | 共享对象并在最后一次使用后释放 | [kref](Kernel%20API%20-%20kref.md) | 发布前取引用，lookup 与 get 之间不能失去保护 |
 | 加载并校验设备固件 | [request_firmware](Kernel%20API%20-%20request_firmware.md) | 数据长度、异步传输与释放时机 |
 

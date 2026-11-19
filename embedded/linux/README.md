@@ -11,7 +11,7 @@
 | 锁、RCU 与内存顺序 | [[Linux RCU 与内存顺序]]、[[Kernel API - spin_lock_irqsave]]、[[Kernel API - mutex]] |
 | 中断与异步处理 | [[Linux IRQ Domain 与中断控制器]]、[[threaded-irq]]、[[Kernel API - workqueue]] |
 | 时间 | [[Linux 时间子系统]]、[[Kernel API - timer_setup]] |
-| 内存和设备地址 | [[Kernel Address - Virtual and Physical]]、[[Linux 内存回收与 OOM]]、[[DRAM 组织与时序基础]]、[[virt to phy]]、[[VMA]]、[[Kernel API - dma_map_single]] |
+| 内存和设备地址 | [[Kernel Address - Virtual and Physical]]、[[Linux 内存回收与 OOM]]、[[Kernel API - copy_user]]、[[DRAM 组织与时序基础]]、[[virt to phy]]、[[VMA]]、[[Kernel API - dma_map_single]] |
 | 常用接口 | [Linux Kernel API 笔记索引](kernel/kernel-api/README.md) |
 
 ## 设备与外围

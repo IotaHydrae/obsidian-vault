@@ -11,8 +11,9 @@
 | [REA](https://github.com/morluto/rea) | 原生程序、JavaScript、.NET 和 Web 逆向分析 | MCP 服务、CLI 与配套技能 |
 | [frontend-design](https://github.com/anthropics/skills/tree/main/skills/frontend-design) | 前端界面的视觉方向、布局、字体与交互细节 | Anthropic 官方设计技能 |
 | [code-simplifier](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md) | 保持行为不变，简化近期修改的代码 | Anthropic 官方插件中的 Agent |
+| [wowotech](https://github.com/wowotech/wowotech.github.io/tree/main/skill/wowotech) | 检索蜗窝科技嵌入式 Linux 文章与评论 | 技能与本地文章检索脚本 |
 
-资料核对：2026-11-02。命令为上游提供的使用入口；安装选项、依赖与支持范围以对应仓库为准。
+除 `wowotech` 外的资料核对：2026-11-02。命令为上游提供的使用入口；安装选项、依赖与支持范围以对应仓库为准。
 
 ## brooks-lint：代码质量与可维护性
 
@@ -87,6 +88,22 @@ claude plugin install code-simplifier@claude-plugins-official --scope project
 ```
 
 该命令通过 Claude Code 的官方插件市场安装插件，项目级配置可供团队共享；仅当前用户在此项目使用时可选择 `--scope local`。具体格式见 [Agent 正文](https://github.com/anthropics/claude-plugins-official/blob/main/plugins/code-simplifier/agents/code-simplifier.md)，安装范围见 [Claude Code 插件说明](https://code.claude.com/docs/en/discover-plugins#install-plugins)。
+
+## wowotech：嵌入式 Linux 文章检索
+
+蜗窝科技的技能入口与 `search.py` 可检索内核、驱动、ARM 架构和通信等文章；支持关键词、分类、文章编号以及评论检索。技能内容与离线语料来自同一个 [wowotech 仓库](https://github.com/wowotech/wowotech.github.io)，参考日期为 2026-11-19。
+
+`search.py` 从脚本自身的真实路径向上定位仓库根目录，再读取 `content/posts/` 和 `data/comments/`。**只复制 `skill/wowotech/` 而不提供完整仓库，不能获得离线检索所需的文章和评论。** 无需全局安装，可先在项目外克隆仓库，然后直接运行：
+
+```sh
+git clone https://github.com/wowotech/wowotech.github.io.git /path/to/wowotech.github.io
+python3 /path/to/wowotech.github.io/skill/wowotech/search.py IRQ domain --limit 5
+python3 /path/to/wowotech.github.io/skill/wowotech/search.py --show 522
+```
+
+将 `/path/to/wowotech.github.io` 换成实际克隆路径；多个关键词按 AND 匹配。只需项目级启用时，可在目标项目的 `.agents/skills/` 下建立指向该仓库 `skill/wowotech` 的符号链接，让脚本通过真实路径找到同一仓库的语料；移动或删除克隆目录后需要调整链接。脚本仅用 Python 标准库，不要求 MCP。
+
+检索结果适合定位原文和讨论；引用时保留原文链接，内核接口与实现以目标版本的源码和官方文档为准。本知识库中已整理的主题见 [嵌入式 Linux 知识地图](../embedded/linux/README.md)。
 
 ## 安装范围与依赖
 
