@@ -19,7 +19,7 @@
 | `hrtimer_start()` | 指定 `ktime_t` 期限及 `HRTIMER_MODE_REL` / `ABS` 等模式 |
 | `HRTIMER_NORESTART` | 回调返回后不按该返回值继续周期运行 |
 | `HRTIMER_RESTART` | 按已更新的到期时间继续运行；驱动必须正确推进期限 |
-| `hrtimer_forward_now()` | 相对于当前时间推进周期期限，并返回推进的周期数 |
+| `hrtimer_forward_now()` | 从原到期点按周期推进到当前时刻之后，返回推进的次数；它本身不重新入队 |
 | `hrtimer_cancel()` | 等待回调并移除 timer；不能与回调所需锁形成等待环 |
 
 `CLOCK_MONOTONIC` 不计入系统 suspend 的时间；`CLOCK_BOOTTIME` 会计入。`CLOCK_REALTIME` 可能因时间设置而跳变，选择时钟要与业务的超时语义一致，见 [[Linux 时间子系统]]。
@@ -71,6 +71,8 @@ static void periodic_stop(struct periodic_sample *sample)
 ```
 
 `callbacks` 记录回调次数，不代表硬件事件数或按期完成的周期数；回调可能延迟并跨过多个周期。停止后才能释放 `sample`；不要对活动 timer 重复调用初始化。周期任务若要保存每个样本或处理过期周期，需要额外的队列和业务策略。
+
+例如周期 `10 ms`、原到期点 `10 ms`，回调实际在 `37 ms` 运行：`hrtimer_forward_now()` 将到期点推进 **3 次**到 `40 ms`，但只执行了**一次**回调。若每次改成 `now + period`，下一次是 `47 ms`，相位会随执行延迟漂移。回调若依靠同一个 `work_struct` 处理数据，`queue_work()` 在 work 已排队时会返回 false；要逐个保留样本，应单独管理计数或队列。
 
 ## 排查定时延迟
 

@@ -35,6 +35,52 @@
 
 如果读者需要在退出 RCU 读侧后保留对象，应在对象仍受到保护时通过适当的引用获取协议取得引用；“先退出读侧、再对旧指针加引用”存在对象已被释放的竞态。
 
+### 示例：只读配置整体替换
+
+读者只返回配置中的值，不把指针带出临界区。写者在可睡眠上下文传入已初始化、从未发布的 `kmalloc()` 对象，或用 `NULL` 撤下配置；一旦发布就不再原地改字段。示例中的 `0` 表示尚未配置。
+
+```c
+#include <linux/mutex.h>
+#include <linux/rcupdate.h>
+#include <linux/slab.h>
+
+struct queue_config {
+    unsigned int depth;
+};
+
+static struct queue_config __rcu *active_config;
+static DEFINE_MUTEX(config_lock);
+
+static unsigned int read_depth(void)
+{
+    struct queue_config *cfg;
+    unsigned int depth = 0;
+
+    rcu_read_lock();
+    cfg = rcu_dereference(active_config);
+    if (cfg)
+        depth = cfg->depth;
+    rcu_read_unlock();
+    return depth;
+}
+
+static void replace_config(struct queue_config *new)
+{
+    struct queue_config *old;
+
+    mutex_lock(&config_lock);
+    old = rcu_replace_pointer(active_config, new, lockdep_is_held(&config_lock));
+    mutex_unlock(&config_lock);
+
+    if (old) {
+        synchronize_rcu();
+        kfree(old);
+    }
+}
+```
+
+写锁保护“取旧指针并发布新指针”，宽限期保护已拿到旧指针的读者，两者不是同一层。只等待读者还不够完成模块退出：还必须按实际入口阻止新的调用和回调。
+
 ## 内存顺序的边界
 
 | 机制 | 能解决什么 | 不能单独解决什么 |

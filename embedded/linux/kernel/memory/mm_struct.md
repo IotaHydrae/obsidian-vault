@@ -33,9 +33,13 @@ task_struct B ─┘            → pgd   → 多级页表 / CPU 地址翻译
 
 ## 引用与同步
 
-通过 `get_task_mm()` 等接口取得另一个任务的 mm 时，应检查失败并在不再使用后 `mmput()`；实际访问 VMA 时另按操作需要获取 `mmap_lock` 或其他适用保护。不能只读取 `task->mm` 然后假定任务退出期间对象仍然存在。
+| 手头已有的对象 | 下一步操作 | 能保证什么 |
+| --- | --- | --- |
+| 持有有效 `task_struct` 引用，要访问该任务的地址空间 | `get_task_mm()`；非 `NULL` 时最终 `mmput()` | 在任务锁下取到 `mm_users` 引用，保护取到的 mm；`exec` 后该任务可能已换成另一个 mm |
+| 已有有效的 mm，只需保留 `mm_struct` 对象 | `mmgrab()` / `mmdrop()` | 持有 `mm_count`；`mm_users` 可归零，不能据此访问其用户映射 |
+| 只有 `mm_count` 引用，想使用尚未退出的地址空间 | `mmget_not_zero()` 成功后配对 `mmput()`；失败则停止访问 | 不会把已归零的 `mm_users` 重新复活 |
 
-`mmgrab()` / `mmdrop()` 操作的是 `mm_count`，不能简单替代需要保持完整用户地址空间可用的引用。锁和引用也分别解决并发访问与对象生命周期，不能互相代替。
+拿到 `mm_users` 也要按操作获取 `mmap_lock` 或其他适用保护，才能访问 VMA。不能裸读 `task->mm` 后直接加引用，也不能用对象引用替代映射同步。
 
 VMA 的查找、有效区间和锁见 [[VMA]]；ARM64 页表与地址转换见 [[virt to phy]]；缺页、COW 和实际物理页建立见 [[Linux 缺页与写时复制]]。
 
@@ -49,4 +53,5 @@ VMA 的查找、有效区间和锁见 [[VMA]]；ARM64 页表与地址转换见 [
 ## 参考
 
 - Linux 6.18.62：[`mm_types.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/mm_types.h)、[进程地址空间](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/mm/process_addrs.rst)、[`sched/mm.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/sched/mm.h)。
+- [`kernel/fork.c`](https://github.com/gregkh/linux/blob/v6.18.62/kernel/fork.c) 的 `get_task_mm()`、`mmput()`。
 - 蜗窝科技：[内存管理基本概念](https://www.wowotech.net/memory_management/concept.html)、[逆向映射](https://www.wowotech.net/memory_management/reverse_mapping.html)。

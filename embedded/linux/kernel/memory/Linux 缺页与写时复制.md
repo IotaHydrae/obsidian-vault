@@ -47,6 +47,57 @@ minor / major fault 是统计分类，不应单凭一次计数认定硬件错误
 
 共享映射、设备映射、固定用户页和特殊 VMA 有自己的规则；不能把“fork 后每一页立即完整复制”或“所有写入都会重新分配”当作通用事实。
 
+### 对照实验：子进程写入后父进程读到什么
+
+父进程先触碰一页匿名映射，把第一个字节写成 `0x11`；子进程写入 `0x22`，父进程等子进程正常退出再读。私有映射必须仍读到 `0x11`，共享映射应读到 `0x22`。把下面的用户态程序编译为 `cow-check`，执行时两行都应通过，无需访问 `/proc/pagemap`。
+
+```c
+#include <stdio.h>
+#include <sys/mman.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+static int check_mapping(int visibility, unsigned char expected, const char *name)
+{
+    long page_size = sysconf(_SC_PAGESIZE);
+    int status, ret = 1;
+    pid_t child;
+    void *map;
+    volatile unsigned char *byte;
+
+    if (page_size <= 0)
+        return 1;
+    map = mmap(NULL, page_size, PROT_READ | PROT_WRITE,
+               MAP_ANONYMOUS | visibility, -1, 0);
+    if (map == MAP_FAILED)
+        return 1;
+    byte = map;
+    *byte = 0x11;
+    child = fork();
+    if (child == 0) {
+        *byte = 0x22;
+        _exit(0);
+    }
+    if (child > 0 && waitpid(child, &status, 0) == child &&
+        WIFEXITED(status) && WEXITSTATUS(status) == 0) {
+        unsigned char observed = *byte;
+
+        printf("%s: parent=0x%02x expected=0x%02x\n", name, observed, expected);
+        ret = observed != expected;
+    }
+    munmap(map, page_size);
+    return ret;
+}
+
+int main(void)
+{
+    return check_mapping(MAP_PRIVATE, 0x11, "private") ||
+           check_mapping(MAP_SHARED, 0x22, "shared");
+}
+```
+
+实验只证明两个映射的**用户态可见语义**；不能由读值、相同虚拟地址或总缺页次数推定哪一张物理页已复制。要确认内核所走分支，需结合对应故障入口与映射类型追踪。
+
 ## Linux 6.18 源码入口
 
 | 位置 | 入口 | 观察 |

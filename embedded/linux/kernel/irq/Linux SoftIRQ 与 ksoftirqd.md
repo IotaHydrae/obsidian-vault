@@ -15,12 +15,12 @@
 
 ```text
 事件产生 / raise_softirq() → 当前 CPU 的 pending 位
-→ 合适的处理点执行 __do_softirq()
-→ 按 softirq 类型调用已注册的处理函数
-→ 若仍有工作或达到处理限制，交由后续处理 / ksoftirqd
+├→ IRQ 退出等路径：__do_softirq() → handle_softirqs(false)
+└→ 内核线程路径：run_ksoftirqd() → handle_softirqs(true)
+   → 读取 pending、按类型调用处理函数；不能把一次 raise 当成一次业务回调
 ```
 
-具体路径取决于触发上下文和配置，不是每个 softirq 都来自设备硬 IRQ。Linux 6.18 的 `kernel/softirq.c` 中可从 `raise_softirq()`、`__do_softirq()` 和 `run_ksoftirqd()` 定位；`MAX_SOFTIRQ_TIME` / `MAX_SOFTIRQ_RESTART` 是该实现中限制连续处理的因素，不是业务处理的实时期限保证。
+具体路径取决于触发上下文和配置，不是每个 softirq 都来自设备硬 IRQ。`handle_softirqs()` 在剩余 pending 存在时，结合时间、`need_resched()` 和重跑次数决定是否继续当前循环；不能继续时可唤醒 `ksoftirqd`。这些限制是在一轮处理后检查的，不能抢占已进入的 handler，也不是单个回调的实时期限保证。
 
 | 类型示例 | 用途边界 |
 | --- | --- |

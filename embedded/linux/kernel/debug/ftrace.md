@@ -43,6 +43,18 @@ sudo trace-cmd report -i irq-sched.dat
 
 `sched_wakeup` 到 `sched_switch` 的差值是可观察到的一段调度等待，不等于设备从物理触发到任务完成的全部延迟。线程已处于可运行状态时，不一定每次硬件事件都产生新的 wakeup；跨 CPU 时间戳需确认选择的 trace clock 可比较。线程化中断的完整路径见 [[threaded-irq]]。
 
+### 只匹配目标 IRQ 和线程
+
+先在 `/proc/interrupts` 识别 Linux IRQ，再用 `ps -eLo tid,psr,comm` 找线程 TID。以下用 IRQ 42、TID 913 作过滤表达式示例，实际值从目标机取得；字段以 tracefs 中各事件的 `format` 为准：
+
+| 事件 | 过滤字段 | 怎样配对 |
+| --- | --- | --- |
+| `irq_handler_entry` / `irq_handler_exit` | `irq == 42` | 同 CPU 上按相邻的匹配入口与退出计算 primary handler 时间；共享 IRQ 上可能有多个 action |
+| `sched_waking` / `sched_wakeup` | `pid == 913` | 前者在唤醒者上下文，后者表示目标实际变为 runnable；不能用记录行的 `common_pid` 当目标 TID |
+| `sched_switch` | `next_pid == 913` | 取对应唤醒后的首次切入；切出看 `prev_pid`，迁移时不要按 CPU 强行配对 |
+
+例如 `sched_wakeup` 在 `20.004122` 秒、切入在 `20.004289` 秒，差值为 **167 µs**，只覆盖可运行后的等待。若没有匹配的唤醒或中间丢了事件，不应补算；跨 CPU 计算须使用目标内核提供的可比较 trace clock。
+
 ## 缩小追踪范围
 
 - 函数追踪先检查 `available_filter_functions`，再通过 `set_ftrace_filter` 等限定函数；`set_graph_function` 可限定函数图的入口。
@@ -62,4 +74,5 @@ sudo trace-cmd report -i irq-sched.dat
 ## 参考
 
 - Linux 6.18.62：[ftrace](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/trace/ftrace.rst)、[事件追踪](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/trace/events.rst)、[IRQ tracepoint](https://github.com/gregkh/linux/blob/v6.18.62/include/trace/events/irq.h)。
+- [`sched` tracepoint 定义](https://github.com/gregkh/linux/blob/v6.18.62/include/trace/events/sched.h)。
 - 蜗窝科技：[ftrace 时钟精度问题](https://www.wowotech.net/linux_kenrel/ftrace-clock-issue.html)。

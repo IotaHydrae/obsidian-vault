@@ -23,6 +23,23 @@
 
 实际可能是多级 IRQ domain、MSI 或总线提供的 IRQ；不能把图当作所有架构唯一的调用栈。`platform_get_irq()` 的结果要检查负错误码，不要直接把设备树单元格当作参数。
 
+### GICv3：同一个中断的三个编号
+
+假设实际 GICv3 节点为 `&gic`、`#interrupt-cells = <3>`，以下是演算示例，不是目标板的中断分配：
+
+```dts
+#include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/interrupt-controller/irq.h>
+
+/* 放在设备自己的节点内；编号与触发类型来自硬件。 */
+interrupt-parent = <&gic>;
+interrupts = <GIC_SPI 42 IRQ_TYPE_LEVEL_HIGH>;
+```
+
+1. DTS 表达式编译为 `<0 42 4>`：类型 SPI、SPI 内的偏移 42、高电平触发。
+2. `gic_irq_domain_translate()` 对 `GIC_SPI` 加 32，所以 GIC 看到的 **INTID / hwirq 是 74**。PPI 属于另一种编码，不使用相同偏移。
+3. 驱动取得的是 IRQ core 分配或查到的 **Linux IRQ**，不保证是 42 或 74；把 `platform_get_irq()` 的非负结果用于注册和对照 `/proc/interrupts`。该表左侧是 Linux IRQ，芯片列是否显示 hwirq 取决于实现。
+
 ## 中断控制器与分派
 
 | 层次 | 负责什么 |
@@ -62,3 +79,4 @@ GPIO 控制器可以把多路 GPIO 汇总到一个父 IRQ。父 IRQ 到达后，
 - 蜗窝科技：[IRQ Domain](https://www.wowotech.net/irq_subsystem/irq-domain.html)、[IRQ number 和描述符](https://www.wowotech.net/irq_subsystem/interrupt_descriptor.html)。
 - Linux 6.18.62：[IRQ domain 文档](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/core-api/irq/irq-domain.rst)、[通用 IRQ](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/core-api/genericirq.rst)。
 - Linux 6.18.62：[`irqdomain.c`](https://github.com/gregkh/linux/blob/v6.18.62/kernel/irq/irqdomain.c)、[`chip.c`](https://github.com/gregkh/linux/blob/v6.18.62/kernel/irq/chip.c)、[`irqdesc.c`](https://github.com/gregkh/linux/blob/v6.18.62/kernel/irq/irqdesc.c)。
+- [GICv3 binding](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/devicetree/bindings/interrupt-controller/arm,gic-v3.yaml)、[`irq-gic-v3.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/irqchip/irq-gic-v3.c) 的 `gic_irq_domain_translate()`。
