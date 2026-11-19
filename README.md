@@ -42,6 +42,7 @@ rust/
 - [uConsole Linux 工程知识库](projects/uconsole-linux/README.md)
 - [RK3588 Ubuntu 镜像知识库](projects/rk3588-ubuntu/README.md)
 - [Linux 内核地址](embedded/linux/kernel/memory/Kernel%20Address%20-%20Virtual%20and%20Physical.md)
+- [嵌入式 Linux 知识地图](embedded/linux/README.md)
 - [Linux 线程化中断：原理、触发路径与接口示例](embedded/linux/kernel/irq/threaded-irq.md)
 - [Linux Kernel API 笔记索引](embedded/linux/kernel/kernel-api/README.md)
 - [USB 2.0 设备的枚举过程](embedded/linux/drivers/usb/USB%202.0%20设备的枚举过程.md)
