@@ -28,6 +28,16 @@ flowchart TD
 
 `/sys/power/state` 和 `/sys/power/mem_sleep` 显示内核与平台支持的状态；`mem` 对应的具体模式要查看实际选项，不能直接假定所有平台进入相同硬件状态。触发休眠前应确认任务和数据状态。
 
+### 先确认进入的是哪一种睡眠
+
+| 观察 | 如何解释 |
+| --- | --- |
+| `/sys/power/mem_sleep` 是 `[s2idle] deep` | 下一次请求 `mem` 时选中 suspend-to-idle；`deep` 可用但未选中。括号只说明选项，不证明设备已停止 |
+| `/sys/power/mem_sleep` 是 `s2idle [deep]` | `mem` 选择平台 suspend-to-RAM，唤醒通路可能需要平台固件、常供电域和控制器共同支持 |
+| 请求 `freeze` | 直接指定 suspend-to-idle，不由 `mem_sleep` 中的 `deep` 选项改变 |
+| `/sys/power/suspend_stats/last_failed_*` 有记录 | 若接口存在，可比较休眠前后的 `success` / `fail`、阶段和设备。旧失败字段可能一直保留，不能假定是最近一次尝试 |
+
+`/sys/power/wakeup_count` 是用户态与内核协调休眠入口的计数握手；读写之间发生新的唤醒事件时，写回原值会失败。遇到请求被中止或立即恢复，不能只看 `PM: suspend entry` 日志就断定硬件到达了低功耗状态。
 ## 唤醒 IRQ 与普通 IRQ
 
 | 配置 / 机制 | 作用 | 不能推断 |
@@ -62,4 +72,5 @@ flowchart TD
 ## 参考
 
 - Linux 6.18.62：[Suspend 与中断](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/power/suspend-and-interrupts.rst)、[设备 PM](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/pm/devices.rst)、[休眠流程](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/admin-guide/pm/suspend-flows.rst)、[`drivers/base/power/main.c`](https://github.com/gregkh/linux/blob/v6.18.62/drivers/base/power/main.c)。
+- [休眠状态](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/admin-guide/pm/sleep-states.rst)、[`/sys/power` ABI](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/ABI/testing/sysfs-power)。
 - 蜗窝科技：[Suspend 与 IRQ](https://www.wowotech.net/pm_subsystem/suspend-irq.html)、[IRQ wakeup](https://www.wowotech.net/pm_subsystem/491.html)。

@@ -21,7 +21,7 @@
 CPU 空闲 → CPUIdle governor / 驱动 → 选择支持的 idle state → 事件唤醒
 ```
 
-`schedutil` 可以使用调度器利用率信号；PELT 的含义和调度等待见 [[Linux 进程调度与等待]]。policy 的 `related_cpus` 等信息反映控制域，不应假定每个逻辑 CPU 都有完全独立的时钟和电压。
+`schedutil` 可以使用调度器利用率信号，见 [[Linux EEVDF PELT 与 schedutil]]。先将线程实际运行的 CPU 对应到 policy，不应假定每个逻辑 CPU 都有完全独立的时钟和电压。
 
 ## 各框架的职责
 
@@ -33,6 +33,18 @@ CPU 空闲 → CPUIdle governor / 驱动 → 选择支持的 idle state → 事�
 | CPUIdle | idle state 的进入条件、目标驻留时间和退出延迟 |
 
 调高 policy 上限不保证负载一定获得最高频率；温度、功耗、硬件、共享 policy 和任务是否可运行都会影响结果。禁用 thermal 保护也不能作为性能问题的通用修复。
+
+### 读对 policy 的频率字段
+
+从 `/sys/devices/system/cpu/cpufreq/policy*/` 中查 `related_cpus`，其中包含该 policy 的在线和离线 CPU；`affected_cpus` 列出当前在线成员。若负载会迁移，应把采样时刻、实际运行 CPU 与 policy 一起记录。
+
+| sysfs 字段 | 判断边界 |
+| --- | --- |
+| `scaling_max_freq` | 当前允许的上限（kHz），不是实际达到的频率 |
+| `scaling_cur_freq` | 多数驱动报告最近请求的 P-state 频率（kHz）；部分架构会提供更接近实际的读数 |
+| `cpuinfo_cur_freq` | 硬件取得的当前频率（kHz）；无法获得时该属性可不存在，而不是用 `scaling_cur_freq` 当实测值 |
+
+判别降频先看上限是否随 thermal/QoS 改变，再看请求值与硬件反馈是否不同，最后检查任务是否在这些 CPU 上持续运行。只看某个瞬间的 `scaling_cur_freq`，不能区分三者。
 
 ## 分析延迟和降频
 

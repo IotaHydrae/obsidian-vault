@@ -15,6 +15,7 @@
 
 | 回调族 | 用途 | 驱动侧问题 |
 | --- | --- | --- |
+| `prepare` / `complete` | 休眠前准备与配对收尾；不直接替代停硬件和恢复 | `prepare` 返回正数可能允许 direct-complete，不表示普通成功值 |
 | `runtime_suspend` / `runtime_resume` | 运行期降低功耗和恢复 | I/O 与 usage count 的配对、硬件访问是否已经结束 |
 | `suspend` / `resume` | 系统睡眠前停止设备、恢复后重启 | 用户请求、DMA、IRQ 和状态保存 |
 | `suspend_late` / `resume_early` | 常规阶段之后 / 之前的进一步处理 | 父子设备、供应者及总线的阶段约束 |
@@ -22,6 +23,10 @@
 | `freeze` / `thaw`、`poweroff` / `restore` | hibernation 等路径的设备状态 | 不应把所有状态迁移机械等同于 suspend-to-RAM |
 
 设备 PM core、PM domain、bus、type、class 和 driver 的协作由核心代码决定；具体回调是否执行、由哪一层调用以及顺序取决于设备配置。查看当前设备的实际绑定，不假定 `dev_pm_ops` 的每个函数都会无条件运行。
+
+### 为什么有 prepare 却没有 suspend
+
+合适的 `prepare()` 返回正数是在告诉 PM core：设备若已 runtime suspended，可以保持当前状态。只有设备及其后代满足状态、依赖和 PM 标志等条件时，core 才可能走 **direct-complete**，跳过常规 / late / noirq 的 suspend 与对应恢复回调，最终仍需 `complete()` 收尾。若必须执行 system suspend 才能配置唤醒或保存状态，不能用正数当普通成功值；可按 PM 契约用 `DPM_FLAG_NO_DIRECT_COMPLETE` 排除这条路径。
 
 ## 设备访问与退出
 

@@ -29,6 +29,24 @@
 | 软件上下文与硬件上下文 | blk-mq 将 CPU 侧提交与设备硬件队列关联 |
 | 完成路径 | 驱动报告成功或错误，块层完成请求并通知上层 |
 
+## 看 trace 时区分请求阶段
+
+| 事件 | 可观察的阶段 |
+| --- | --- |
+| `block_rq_insert` | 请求进入队列；直发路径可能没有这一事件 |
+| `block_rq_issue` | 请求从块层交给设备驱动处理；不等于已经写到介质 |
+| `block_rq_complete` | 驱动报告一部分或全部请求已完成；核对完成长度和错误码 |
+| `block_rq_requeue` | 请求重新排队；不要把随后的重发当成独立用户 I/O |
+
+`insert → issue` 只覆盖被观察到的块层排队，`issue → complete` 还包括驱动和设备服务时间。对同一设备有并发、合并、拆分或重发时，单凭相同 sector 不能把两条事件当成同一个请求；缺少可靠关联时，不应报告精确的单请求耗时。追踪基础见 [[ftrace]]。
+
+### 写缓存的两个边界
+
+- `REQ_PREFLUSH`：要求之前已完成的写先到非易失介质，再启动本次 I/O；它不保证本次带数据写完成时已经持久化。
+- `REQ_FUA`：要求本次写的数据到非易失介质后才报告完成；它不代替此前写入的 preflush。blk-mq 对声明有易失写缓存、但不支持原生 FUA 的驱动可用后置 flush 实现。
+
+设备和驱动需要如实报告写缓存及 FUA 能力。读到一次块请求完成，不能外推出整个应用事务已持久化。
+
 ## eMMC、MTD 与文件系统
 
 | 介质 / 层次 | 常见路径 | 关键边界 |
@@ -52,4 +70,5 @@
 ## 参考
 
 - Linux 6.18.62：[blk-mq](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/block/blk-mq.rst)、[写缓存控制](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/block/writeback_cache_control.rst)、[MTD](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/driver-api/mtd/index.rst)、[UBIFS](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/filesystems/ubifs.rst)。
+- [块层 tracepoint 定义](https://github.com/gregkh/linux/blob/v6.18.62/include/trace/events/block.h)。
 - 蜗窝科技：[eMMC 概述](https://www.wowotech.net/basic_tech/emmc_intro.html)、[MMC 架构](https://www.wowotech.net/comm/mmc_framework_arch.html)。
