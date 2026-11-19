@@ -73,7 +73,7 @@ EDID 只适用于提供该信息的连接方式；固定时序面板不一定有
 3. 花屏或颜色错误时检查分辨率、时序、格式、stride、总线位宽和 buffer 内容。
 4. 间歇问题再看 atomic 提交、buffer / fence 生命周期及 DMA 同步。
 
-有限制地读取 `dri/<DRM minor>/state`（若启用 debugfs 和 atomic 状态输出，通常在 `/sys/kernel/debug/` 下）；先确认对应的 DRM 设备，再对照 connector 的 `crtc`、CRTC 的 `active` / `mode` 和主 plane 的 `fb` / `crtc`。`status=connected` 但没有活动 CRTC 是路由或提交未成立；活动 CRTC 上没有有效 framebuffer 时，应查 plane，不能先归因于背光。这里读取的是软件状态，不触发 modeset。具体 MIPI DSI / DBI 配置见 [[simple-panel-dsi]]、[[panel-mipi-dbi]]。
+若目标内核提供 atomic 状态输出，可读取 debugfs 下的 `dri/<DRM minor>/state`。先确认对应的 DRM 设备，再对照 connector 的 `crtc`、CRTC 的 `active` / `mode` 和主 plane 的 `fb` / `crtc`。期望有画面时，`status=connected` 但没有活动 CRTC，应先查路由或提交；活动 CRTC 上没有有效 framebuffer 时，应查 plane，不能先归因于背光。这里读取的是软件状态，不触发 modeset。具体 MIPI DSI / DBI 配置见 [[simple-panel-dsi]]、[[panel-mipi-dbi]]。
 
 ## 参考
 

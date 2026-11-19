@@ -34,6 +34,16 @@ regulator 框架按 consumer 维护使用关系；provider 负责实际电压、
 
 probe 常按硬件要求获取资源、供电、使能时钟、释放复位、等待稳定后访问寄存器；**具体顺序不是框架统一规定**。失败路径只撤销已经成功执行的步骤，避免重复 disable 或在设备还运行时关电。
 
+### 共享 reset 不等同于主动打复位脉冲
+
+| reset 使用方式 | 哪些操作会改变硬件 |
+| --- | --- |
+| exclusive | 对本控制线直接 assert / deassert；用于驱动确实拥有控制权且需要确定复位时序的设备 |
+| shared，显式 assert / deassert | 第一次成功 deassert 解除复位，最后一份解除请求配对归还时才 assert。其他消费者仍持有请求时，本驱动的 assert 不保证线路发生变化 |
+| shared，自释放脉冲 | 使用 `reset_control_reset()` / `reset_control_rearm()` 协议；首次触发后，所有消费者重新 arm 前不会再实际发脉冲。不要和上一种共享计数语义混用 |
+
+例如两个设备共用一条复位线，设备 A、B 都已 deassert，此时 A 解绑并执行配对 assert，B 仍可继续使用硬件。若 A 必须独立得到自己的复位脉冲才能恢复，这条共享线不能当成独占线使用。optional reset 未描述可返回 `NULL`；`-EPROBE_DEFER` 仍要传播。
+
 ## PM domain 与 Runtime PM
 
 设备通过固件或平台关系关联到 PM domain 后，domain 参与设备电源状态管理；驱动继续使用 Runtime PM 和设备 PM 接口表达活动状态。多个设备共享 domain 时，一个设备进入 runtime suspend 不必然使整个 domain 断电。

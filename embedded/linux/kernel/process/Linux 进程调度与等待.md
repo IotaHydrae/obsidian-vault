@@ -39,12 +39,6 @@
 
 调度实体选择、PELT 与 CPUFreq 的详细关系见 [[Linux EEVDF PELT 与 schedutil]]。
 
-### PELT 与频率选择
-
-PELT 为任务、调度组和运行队列维护随时间衰减的负载 / 利用率统计。Linux 6.18 的 `schedutil` 文档描述其指数加权统计周期约为 1024 μs，最近约 32 个周期的权重合计占一半；因此短时间突发不会立即等同于长期满载，负载消失后的统计也不会瞬间归零。
-
-`schedutil` 可以使用调度器利用率信息参与频率决策；实际频率还受 policy、硬件、共享策略域和 thermal 等约束。排查“任务运行慢”时，应同时观察任务是否排队、统计随时间的变化和实际频率，而不是只调整 governor。
-
 ## 调度观察
 
 | 现象 | 优先区分 |
@@ -57,6 +51,14 @@ PELT 为任务、调度组和运行队列维护随时间衰减的负载 / 利用
 在适用平台上先用 `ps -eLo pid,tid,cls,rtprio,psr,stat,comm` 查看策略与状态，再根据问题选择 `top -H`、`pidstat -t` 或 `perf sched`。状态是瞬时观察，采样和工具权限会影响结论。
 
 等待一次事件可用 completion；等待持续变化的条件可用 wait queue。生产者应先安全发布条件再唤醒，消费者在同步保护下反复检查；超时不等于取消硬件或后台工作。详见 [[Kernel API - init_completion]]、[[Kernel API - wait_queue]]。
+
+### 用线程的 schedstat 区分运行与排队
+
+若目标内核提供且启用相应统计，在故障窗口两端读取同一线程的 `/proc/<pid>/task/<tid>/schedstat`。三个字段依次是 CPU 执行时间（ns）、运行队列等待时间（ns）和被调度执行次数。比较增量，不能用某一瞬间的状态代替整个窗口。
+
+- 执行时间增长、排队等待不明显：结合热点函数和有效 CPU 频率分析实际工作量。
+- 等待时间增长而执行少：结合 [[ftrace#只匹配目标 IRQ 和线程|TID 过滤与事件配对]] 检查 runnable 阶段、CPU 竞争和迁移。
+- 两项都没明显增长：可能在等待锁或 I/O，也可能统计未启用（6.18.62 可返回 `0 0 0`）。`schedstat` 不直接测量阻塞 I/O 时间。
 
 ## 验证延迟来自哪里
 
@@ -83,4 +85,5 @@ PELT 为任务、调度组和运行队列维护随时间衰减的负载 / 利用
 - 蜗窝科技：[CFS 基本原理](https://www.wowotech.net/process_management/447.html)、[Deadline 调度器](https://www.wowotech.net/process_management/deadline-scheduler-1.html)、[进程管理栏目](https://www.wowotech.net/sort/process_management/)。
 - Linux 6.18.62：[EEVDF](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/scheduler/sched-eevdf.rst)、[调度策略概览](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/scheduler/sched-design-CFS.rst)。
 - Linux 6.18.62：[PELT 与 schedutil](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/scheduler/schedutil.rst)。
+- [schedstat 字段](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/scheduler/sched-stats.rst)、[`fs/proc/base.c`](https://github.com/gregkh/linux/blob/v6.18.62/fs/proc/base.c) 的 `proc_pid_schedstat()`。
 - Linux 6.18.62：[`kernel/sched/core.c`](https://github.com/gregkh/linux/blob/v6.18.62/kernel/sched/core.c)、[`kernel/sched/fair.c`](https://github.com/gregkh/linux/blob/v6.18.62/kernel/sched/fair.c)。
