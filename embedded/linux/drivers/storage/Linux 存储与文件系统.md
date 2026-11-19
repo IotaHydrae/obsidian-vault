@@ -70,6 +70,8 @@ MMC 子系统负责 host、card 和请求调度等协作；host 控制器提供�
 3. 检查供电、时钟、总线模式、连接及温度；再按设备和文件系统的工具确认健康信息和完整性。
 4. 涉及修复、格式化或写入实验前，先保护需要的数据，并确保没有其他挂载或主机同时写入。
 
+进一步分析文件缓存与块层路径见 [[Linux VFS Page Cache 与写回]]、[[Linux 块层 BIO blk-mq 与闪存]]。
+
 ## 参考
 
 - 蜗窝科技：[MMC 框架](https://www.wowotech.net/comm/mmc_framework_arch.html)、[eMMC 与 Flash](https://www.wowotech.net/basic_tech/emmc_intro.html)、[F2FS](https://www.wowotech.net/filesystem/f2fs.html)、[文件系统栏目](https://www.wowotech.net/sort/filesystem/)。

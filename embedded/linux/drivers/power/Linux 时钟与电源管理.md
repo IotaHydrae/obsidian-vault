@@ -81,6 +81,8 @@ cpufreq 负责 CPU 频率策略，OPP 描述可用工作点，thermal 框架可�
 
 Runtime PM 的具体引用与错误处理见 [[Kernel API - pm_runtime]]；设备树资源见 [[platform|设备树与 Platform 设备]]。
 
+深入专题：[[Linux CCF 时钟框架]]、[[Linux Regulator 与电源域]]、[[Linux 系统休眠与中断唤醒]]、[[Linux CPUFreq OPP Thermal 与 CPUIdle]]。
+
 ## 参考
 
 - 蜗窝科技：[Common Clock Framework](https://www.wowotech.net/pm_subsystem/ccf-arch.html)、[系统休眠与中断](https://www.wowotech.net/pm_subsystem/suspend-irq.html)、[thermal 概述](https://www.wowotech.net/pm_subsystem/519.html)。

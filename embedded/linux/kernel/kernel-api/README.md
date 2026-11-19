@@ -29,6 +29,7 @@
 | --- | --- | --- |
 | 可睡眠的延时或调度等待 | [schedule_timeout](Kernel%20API%20-%20schedule_timeout.md) | 单位、任务状态和实际调度延迟 |
 | 在未来期限触发回调 | [timer_setup / mod_timer](Kernel%20API%20-%20timer_setup.md) | 绝对 jiffies、不可睡眠回调与 shutdown |
+| 使用高精度期限和周期回调 | [hrtimer](../time/Linux%20hrtimer%20高精度定时器.md) | 回调上下文、期限推进与取消后禁止外部重新启动 |
 | 运行专用事件循环 | [kthread_run](Kernel%20API%20-%20kthread_run.md) | 线程须协作停止并保证数据和 task 生命周期 |
 | 把工作交给后台执行池 | [workqueue](Kernel%20API%20-%20workqueue.md) | 普通与 BH 上下文不同，停止生产者后再取消 |
 | 维护旧式 softirq 下半部 | [tasklet](Kernel%20API%20-%20tasklet.md) | 已弃用、不可睡眠，重复请求可合并 |

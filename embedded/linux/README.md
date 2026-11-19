@@ -7,26 +7,28 @@
 | 主题 | 笔记入口 |
 | --- | --- |
 | ARM64 启动 | [[ARM64 Linux 启动与设备树]]、[[bootargs]] |
-| 调度与任务 | [[Linux 进程调度与等待]]、[[Kernel API - kthread_run]] |
+| 调度与任务 | [[Linux 进程调度与等待]]、[[Linux EEVDF PELT 与 schedutil]]、[[Kernel API - kthread_run]] |
 | 锁、RCU 与内存顺序 | [[Linux RCU 与内存顺序]]、[[Kernel API - spin_lock_irqsave]]、[[Kernel API - mutex]] |
-| 中断与异步处理 | [[Linux IRQ Domain 与中断控制器]]、[[threaded-irq]]、[[Kernel API - workqueue]] |
-| 时间 | [[Linux 时间子系统]]、[[Kernel API - timer_setup]] |
-| 内存和设备地址 | [[Kernel Address - Virtual and Physical]]、[[Linux 内存回收与 OOM]]、[[Kernel API - copy_user]]、[[DRAM 组织与时序基础]]、[[virt to phy]]、[[VMA]]、[[Kernel API - dma_map_single]] |
+| 中断与异步处理 | [[Linux IRQ Domain 与中断控制器]]、[[Linux SoftIRQ 与 ksoftirqd]]、[[threaded-irq]]、[[Linux 驱动异步退出与资源生命周期]] |
+| 时间 | [[Linux 时间子系统]]、[[Linux hrtimer 高精度定时器]]、[[Kernel API - timer_setup]] |
+| 内存与缺页 | [[mm_struct]]、[[VMA]]、[[Linux 缺页与写时复制]]、[[Linux 页面分配 SLUB 与 CMA]]、[[Linux 内存回收与 OOM]] |
+| 地址与 DMA | [[Kernel Address - Virtual and Physical]]、[[virt to phy]]、[[Kernel API - dma_map_single]]、[[Kernel API - copy_user]]、[[DRAM 组织与时序基础]] |
 | 常用接口 | [Linux Kernel API 笔记索引](kernel/kernel-api/README.md) |
 
 ## 设备与外围
 
 | 主题 | 笔记入口 |
 | --- | --- |
-| 设备树与设备模型 | [[Linux 设备模型与对象生命周期]]、[设备树与 Platform 设备](drivers/of/platform.md)、[[platform_match]]、[[Kernel API - devres]] |
-| 时钟和电源 | [[Linux 时钟与电源管理]]、[[Kernel API - pm_runtime]] |
+| 设备树与设备模型 | [[Linux 设备模型与对象生命周期]]、[设备树与 Platform 设备](drivers/of/platform.md)、[[Linux 设备树 Binding 与依赖排查]]、[[alias]]、[[platform_match]] |
+| 时钟与供电 | [[Linux 时钟与电源管理]]、[[Linux CCF 时钟框架]]、[[Linux Regulator 与电源域]] |
+| 系统电源管理 | [[Linux 系统休眠与中断唤醒]]、[[Linux CPUFreq OPP Thermal 与 CPUIdle]]、[[platform_pm]]、[[Kernel API - pm_runtime]] |
 | 引脚与 GPIO | [[Linux pinctrl 与 GPIO]]、[[Kernel API - gpiod]] |
 | DMA 引擎 | [[Linux DMAEngine 数据传输]]、[[Kernel API - dma_map_single]] |
-| I²C / IIO | [[如何实例化I2C设备]]、[[i2c-dev]]、[[Trigger]] |
-| 存储和文件系统 | [[Linux 存储与文件系统]] |
+| I²C / SPI / IIO | [[Linux I2C 与 SPI 驱动数据路径]]、[[如何实例化I2C设备]]、[[i2c-dev]]、[[Trigger]] |
+| 存储和文件系统 | [[Linux 存储与文件系统]]、[[Linux VFS Page Cache 与写回]]、[[Linux 块层 BIO blk-mq 与闪存]] |
 | 串口和 TTY | [[Linux 串口与 TTY 数据路径]]、[[g_serial - systemd getty@ttyGS0]] |
 | 显示 | [[Linux DRM KMS 显示管线]]、[[panel-mipi-dbi]]、[[simple-panel-dsi]] |
-| USB | [[USB 2.0 设备的枚举过程]]、[[USB 2.0 设备的传输过程]]、[[Create usb gadget via configfs]] |
+| USB | [[USB 2.0 设备的枚举过程]]、[[USB 2.0 设备的传输过程]]、[[Linux USB URB 生命周期与断开处理]]、[[Create usb gadget via configfs]] |
 | 以太网 | [[Linux 以太网 MAC PHY 与链路]] |
 | 蓝牙 | [[Linux 蓝牙协议栈与排查]] |
 | 排障 | [Linux 性能和内核调试工具入口](kernel/debug/intro.md)、[[ftrace]]、[[oops panic debug]] |

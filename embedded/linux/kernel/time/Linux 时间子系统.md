@@ -54,6 +54,7 @@ Linux 6.18 的实现可从 `kernel/time/timekeeping.c`、`kernel/time/hrtimer.c`
 - 日历时间用 realtime，并考虑系统时间被调整的影响。
 - 在可睡眠上下文等待，用合适的 sleep / timeout API；不要为了等待硬件完成持续 busy-wait。
 - 普通内核 timer 的启动、不可睡眠回调与安全停止见 [[Kernel API - timer_setup]]；延时等待见 [[Kernel API - schedule_timeout]]。
+- 高精度定时器的期限、周期推进及退出见 [[Linux hrtimer 高精度定时器]]。
 - 排查唤醒延迟时区分“期限已经到达”和“线程真正得到 CPU”；可结合 timer 与 sched tracepoint。
 
 ## 参考

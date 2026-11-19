@@ -1,20 +1,52 @@
 # Linux `mm_struct` 与进程地址空间
 
-> `mm_struct` 描述一个用户虚拟地址空间；多个任务可共享它，而 VMA 描述该地址空间中的各个区域。
+> `mm_struct` 描述一个用户虚拟地址空间；多个任务可以共享它。VMA 记录区域语义，页表记录地址翻译，两者不能互相替代。
 
-- 用户任务的 `task_struct->mm` 指向地址空间；使用 `CLONE_VM` 的线程可以共享同一个 `mm_struct`，不是每个任务都独占一个。
-- 内核线程通常没有自己的用户 `mm`，其 `mm` 为 `NULL`；`active_mm` 与地址空间切换有关，具体借用和切换行为依赖内核实现。
-- `pgd` 是内核持有的顶级页表指针；CPU 使用的页表基址和切换操作依赖架构。VMA 与页表分别描述映射属性和地址转换，不是一回事。
-- `start_code`、`end_code`、`start_data`、`end_data`、`start_brk`、`brk`、`start_stack` 等字段记录地址空间相关边界；`total_vm` 是虚拟内存页数统计。
+## TL;DR
 
-## 版本和边界
+- `task_struct->mm` 指向任务的用户地址空间；`CLONE_VM` 任务共享同一 `mm_struct`。
+- Linux 6.18 使用 `mm_mt` 保存 VMA 索引；`pgd` 指向内核持有的顶级页表对象。
+- `mm_users` 与 `mm_count` 对应不同层次的生命周期；持有对象引用不代表可以无锁访问 VMA。
+- 内核线程通常没有自己的用户 `mm`；`active_mm` 与调度时地址空间切换有关。
 
-Linux 4.19 使用 VMA 链表和红黑树；当前内核文档描述的是 Maple Tree。排查时查看目标版本的 `include/linux/mm_types.h` 和 `mm/` 源码，不要假设 `mmap` / `mm_rb` 字段存在。
+范围：Linux 6.18.62 LTS，启用 MMU 的常见系统。
 
-普通 `fork()` 通常为子进程建立独立的 `mm_struct`，并对适用的私有映射采用写时复制；页表项和映射类型的细节依赖实现。共享映射和 `CLONE_VM` 不能一概套用这个结论。
+## 对象关系
 
-ELF 的 `.bss` 不能简单等同于 `[end_data, start_brk]`：对齐、加载布局和随机化等会影响边界。定位时结合 ELF program headers、对应内核加载代码和 `/proc/<pid>/maps`；解析 `/proc/<pid>/stat` 时按接口说明核对字段号。
+```text
+task_struct A ─┐
+               ├→ mm_struct → mm_mt → VMA 区间与映射属性
+task_struct B ─┘            → pgd   → 多级页表 / CPU 地址翻译
+```
 
-相关条目：[[VMA]]、[[virt to phy]]。
+使用 `CLONE_VM` 的任务共享地址空间；普通 `fork()` 通常为子进程建立独立的 `mm_struct`，适用的私有映射采用写时复制。共享映射和 `CLONE_VM` 不应一概套用私有 COW 的结论。`exec` 和进程退出也会改变地址空间的关联和生命周期。
 
-参考：[Linux 进程地址空间与 VMA](https://docs.kernel.org/mm/process_addrs.html)。
+| 成员 | 含义与边界 |
+| --- | --- |
+| `mm_mt` | Maple Tree：组织该地址空间中的 VMA；访问需满足相应锁和生命周期规则 |
+| `mmap_lock` | 整个地址空间的读写同步之一；VMA / 页表还有其他细粒度锁 |
+| `pgd` | 内核持有的顶级页表指针；CPU 的物理页表基址由架构切换代码处理 |
+| `mm_users` | 用户地址空间的使用者计数；归零后释放地址空间相关资源 |
+| `mm_count` | `mm_struct` 对象的引用计数；`mm_users` 整体占一个引用 |
+| `total_vm` | 虚拟地址空间页数统计，不等于驻留物理页数 |
+| `start_code` / `end_code`、`start_data` / `end_data`、`start_brk` / `brk`、`start_stack` | 记录代码、数据、heap、stack 等边界，不替代读取实际映射 |
+
+## 引用与同步
+
+通过 `get_task_mm()` 等接口取得另一个任务的 mm 时，应检查失败并在不再使用后 `mmput()`；实际访问 VMA 时另按操作需要获取 `mmap_lock` 或其他适用保护。不能只读取 `task->mm` 然后假定任务退出期间对象仍然存在。
+
+`mmgrab()` / `mmdrop()` 操作的是 `mm_count`，不能简单替代需要保持完整用户地址空间可用的引用。锁和引用也分别解决并发访问与对象生命周期，不能互相代替。
+
+VMA 的查找、有效区间和锁见 [[VMA]]；ARM64 页表与地址转换见 [[virt to phy]]；缺页、COW 和实际物理页建立见 [[Linux 缺页与写时复制]]。
+
+## 观察与常见误解
+
+- `/proc/<pid>/maps` 展示 VMA 范围和权限，不能证明每个地址已对应驻留物理页。
+- 同一 VMA 内可能存在未分配页面、只读 COW 页面或尚未填充的文件页；访问结果取决于页表、权限和缺页处理。
+- ELF `.bss` 不能简单等同于 `[end_data, start_brk]`；对齐、加载布局和随机化会影响边界，应结合 ELF program headers 和实际 maps。解析 `/proc/<pid>/stat` 时应按接口说明核对字段号。
+- 内核线程的 `mm == NULL` 不表示 CPU 没有地址空间；`active_mm` 的具体切换遵循架构和内核调度实现。
+
+## 参考
+
+- Linux 6.18.62：[`mm_types.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/mm_types.h)、[进程地址空间](https://github.com/gregkh/linux/blob/v6.18.62/Documentation/mm/process_addrs.rst)、[`sched/mm.h`](https://github.com/gregkh/linux/blob/v6.18.62/include/linux/sched/mm.h)。
+- 蜗窝科技：[内存管理基本概念](https://www.wowotech.net/memory_management/concept.html)、[逆向映射](https://www.wowotech.net/memory_management/reverse_mapping.html)。

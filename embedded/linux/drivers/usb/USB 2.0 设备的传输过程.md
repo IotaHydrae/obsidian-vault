@@ -271,6 +271,7 @@ Linux 等时 URB 可包含多个包，应检查 `iso_frame_desc[]` 的逐包 `st
 
 - [[USB 2.0 设备的枚举过程]]：连接、寻址、配置和接口驱动绑定。
 - [[USB 3.0 设备的枚举过程]]：SuperSpeed 的适用边界。
+- [[Linux USB URB 生命周期与断开处理]]：主机驱动的请求提交、回调与断开同步。
 - [[Rust USB control transfer 例子]]：使用 `rusb` 发送自定义控制请求。
 - [USB 2.0 Specification](https://www.usb.org/document-library/usb-20-specification)：第 5 章传输模型、第 8 章协议层、第 9 章请求及描述符；规范与适用 ECN 是协议裁定依据。
 - Beyond Logic [USB Protocols](https://www.beyondlogic.org/usbnutshell/usb3.shtml)、[Endpoint Types](https://www.beyondlogic.org/usbnutshell/usb4.shtml)：包与事务图解；示例和包长数值应以规范为准。
